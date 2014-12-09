@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+
+	<name>COM_LUPO</name>
+	<!-- The following elements are optional and free of formatting conttraints -->
+	<creationDate>October 2014</creationDate>
+	<author>Stefan Bauer</author>
+	<authorEmail>stefan@databauer.ch</authorEmail>
+	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
+	<copyright>Copyright (C) 2014 databauer gmbh / Stefan Bauer</copyright>
+	<license>License GNU General Public License version 2 or later</license>
+	<!--  The version string is recorded in the components table -->
+	<version>1.5.0</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>COM_LUPO_XML_DESCRIPTION</description>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update> <!-- Runs on update; New in 1.6 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<!-- Site Main File Copy Section -->
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>lupo.php</filename>
+		<filename>controller.php</filename>
+		<filename>router.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+        <folder>css</folder>
+        <folder>uikit</folder>
+	</files>
+
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_lupo.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.com_lupo.ini</language>
+	</languages>	
+	
+	<media destination="com_lupo" folder="media">
+		<filename>index.html</filename>
+		<folder>images</folder>
+	</media>
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu img="../media/com_lupo/images/lupo16.png">COM_LUPO_MENU</menu>
+		<!-- Administration Main File Copy Section -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>lupo.php</filename>
+			<filename>controller.php</filename>
+            <filename>config.xml</filename>
+            <filename>changelog.md</filename>
+            <folder>views</folder>
+            <folder>models</folder>
+			<folder>sql</folder>
+			<!-- xml_upload folder -->
+            <folder>xml_upload</folder>
+		</files>
+		
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_lupo.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_lupo.sys.ini</language>
+			<language tag="de-DE">language/de-DE/de-DE.com_lupo.ini</language>
+			<language tag="de-DE">language/de-DE/de-DE.com_lupo.sys.ini</language>
+		</languages>
+	</administration>
+	
+</extension>
+

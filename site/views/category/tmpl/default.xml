@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+        <layout title="COM_LUPO_CATEGORY_VIEW_DEFAULT_TITLE">
+                <message>COM_LUPO_CATEGORY_VIEW_DEFAULT_DESC</message>
+        </layout>
+        <fields
+                name="request"
+                addfieldpath="/administrator/components/com_lupo/models/fields"
+        >
+                <fieldset name="request">
+                        <field
+                                name="id"
+                                type="lupo"
+                                label="COM_LUPO_CATEGORY"
+                                description=""
+                        />
+                </fieldset>
+        </fields>
+</metadata>

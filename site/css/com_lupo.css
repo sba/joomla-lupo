@@ -1,0 +1,49 @@
+/* lupo styles */
+
+/* categories view */
+ul.lupo_categories {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+/* category view */
+#lupo_category_table {
+
+}
+
+/* detail view */
+#lupo_detail_table tr td:last-child {
+    font-weight: bold;
+}
+
+.lupo_image {
+    float: right;
+    margin: 0 0 10px 10px;
+}
+
+.lupo_description {
+	margin-bottom: 10px;
+}
+
+/* pagenav (prev / next toy) */
+ul.pagenav {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    margin-left: 0;
+}
+ul.pagenav li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+ul.pagenav li {
+    line-height: 2em;
+}
+ul.pagenav li.pagenav-prev {
+    float: left;
+}
+ul.pagenav li.pagenav-next {
+    float: right;
+}
