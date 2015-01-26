@@ -37,6 +37,8 @@ CREATE TABLE `#__lupo_game` (
   `days` tinyint(4) DEFAULT NULL,
   `play_duration` char(35) DEFAULT NULL,
   `players` char(30) DEFAULT NULL,
+  `keywords` varchar(255) DEFAULT '',
+  `genres` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `game_catid` (`catid`),
   KEY `game_age_catid` (`age_catid`)
