@@ -4,7 +4,7 @@
  * @subpackage	LUPO
  * @copyright	Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
- * @link				http://www.ludothekprogramm.ch
+ * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -38,10 +38,10 @@ if($this->game == 'error'){
 				?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
 			} else {
 				?>
-				<a href="<?php echo $this->game['image']?>" data-uk-lightbox><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="Spiel <?php echo $this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+				<a href="<?php echo $this->game['image']?>" data-uk-lightbox><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
 				<div id="img-toy" class="uk-modal">
 					<div>
-						<img src="<?php echo $this->game['image']?>" alt="Spiel <?php echo $this->game['number']?>" />
+						<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
 					</div>
 				</div>
 				<?php
