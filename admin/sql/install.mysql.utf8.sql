@@ -42,7 +42,7 @@ CREATE TABLE `#__lupo_game` (
   PRIMARY KEY (`id`),
   KEY `game_catid` (`catid`),
   KEY `game_age_catid` (`age_catid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3488 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `#__lupo_game_editions` (
@@ -54,5 +54,5 @@ CREATE TABLE `#__lupo_game_editions` (
   `tax` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3965 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
