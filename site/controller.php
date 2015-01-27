@@ -28,8 +28,11 @@ class LupoController extends JControllerLegacy {
         if($uikit!=="0") {
             $document->addStyleSheet(JURI::base() . "components/com_lupo/uikit/css/".$uikit, 'text/css', "screen");
         }
-
         $document->addStyleSheet(JURI::base() . "components/com_lupo/css/com_lupo.css",'text/css',"screen");
+
+		//$document->addScript() will not work because
+		$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
+		$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
 
 		$view = JRequest::getVar('view');
 		$id = JRequest::getVar('id');
