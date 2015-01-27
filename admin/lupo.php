@@ -61,24 +61,27 @@ if(isset($_FILES['xmlfile'])){
 					$db =& JFactory::getDBO();
 					
 					$db->setQuery('TRUNCATE #__lupo_game');
-					$db->query();
+					$db->execute();
 						
 					$db->setQuery('TRUNCATE #__lupo_game_editions');
-					$db->query();
-					
+					$db->execute();
+
+					$db->setQuery('TRUNCATE #__lupo_game_categories');
+					$db->execute();
+
 					$db->setQuery('TRUNCATE #__lupo_categories');
-					$db->query();
+					$db->execute();
 
 					$db->setQuery('TRUNCATE #__lupo_agecategories');
-					$db->query();
-					
+					$db->execute();
+
 					foreach($xml->categories->category as $category){
 						$db->setQuery('INSERT INTO #__lupo_categories SET 
 										id='.$db->quote($category['id']).'
 										, title='.$db->quote($category['desc']).'
 										, alias='.$db->quote(JApplication::stringURLSafe($category['desc'])).'
 										, sort='.$db->quote($category['sort']));
-						$db->query();
+						$db->execute();
 					}
 					
 					foreach($xml->age_categories->category as $category){
@@ -87,7 +90,7 @@ if(isset($_FILES['xmlfile'])){
 										, title='.$db->quote($category['desc']).'
 										, alias='.$db->quote(JApplication::stringURLSafe($category['desc'])).'
 										, sort='.$db->quote($category['sort']));
-						$db->query();
+						$db->execute();
 					}
 					
 					$n=0;
@@ -103,21 +106,32 @@ if(isset($_FILES['xmlfile'])){
 										, play_duration='.$db->quote($game->play_duration).'
 										, players='.$db->quote($game->players)
 										);
-						$db->query();
+						$db->execute();
 						$gameid = $db->insertid();
 						
+						foreach($game->documents->document as $document){
+							$db->setQuery('INSERT INTO #__lupo_game_documents SET
+											gameid='.$db->quote($gameid).'
+											, `code`='.$db->quote($document['code']).'
+											, `type`='.$db->quote($document['type']).'
+											, `desc`='.$db->quote($document['desc']).'
+											, `value`='.$db->quote($document['value'])
+											);
+							$db->execute();
+						}		
+
 						foreach($game->editions->edition as $edition){
-							$n++;					
-							$db->setQuery('INSERT INTO #__lupo_game_editions SET 
+							$n++;
+							$db->setQuery('INSERT INTO #__lupo_game_editions SET
 											gameid='.$db->quote($gameid).'
 											, `index`='.$db->quote($edition['index']).'
 											, edition='.$db->quote($edition['edition']).'
 											, acquired_date='.$db->quote($edition['acquired_date']).'
 											, tax='.$db->quote($edition['tax'])
 											);
-							$db->query();
-						}		
-						
+							$db->execute();
+						}
+
 					}		
 					JFactory::getApplication()->enqueueMessage( $n . ' Spiele importiert' );		
 				}
