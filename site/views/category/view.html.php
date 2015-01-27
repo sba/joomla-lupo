@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) 2006 - 2014 databauer / Stefan Bauer
+ * @copyright	Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
  * @link				http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the HelloWorld Component
+ * HTML View class for the LUPO Component
  */
 class LupoViewCategory extends JViewLegacy
 {

@@ -18,7 +18,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
 ?>
 <article class="tm-article uk-article">
 <div class="tm-article-content ">
-<h2 class="contentheading"><?php echo $this->category['title']?></h2>
+<h2 class="contentheading"><?php echo $this->agecategory['title']?></h2>
 
 <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
 <?php if($componentParams->get('category_show_tableheader', '1')) { ?>
@@ -58,9 +58,9 @@ foreach($this->games as $game){
     <?php if($componentParams->get('category_show_tax', '1')) { ?>
         <td align="right"><?php echo number_format($game['tax'],2)?></td>
     <?php } ?>
-    <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
-        <td align="right"><?php echo $game['category']?></td>
-    <?php } ?>
+        <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
+            <td align="right"><?php echo $game['category']?></td>
+        <?php } ?>
     <?php if($componentParams->get('category_show_toy_age_category', '1')) { ?>
         <td align="right"><?php echo $game['age_category']?></td>
     <?php } ?>

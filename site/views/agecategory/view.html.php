@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
 /**
  * HTML View class for the LUPO Component
  */
-class LupoViewGame extends JViewLegacy
+class LupoViewAgecategory extends JViewLegacy
 {
 	// Overwriting JView display method
 	function display($tpl = null) 

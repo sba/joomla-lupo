@@ -100,6 +100,18 @@
         <field
                 type="radio"
                 class="btn-group btn-group-yesno"
+                name="category_show_toy_category"
+                id="category_show_toy_category"
+                label="COM_LUPO_OPTIONS_TOY_CATEGORY"
+                description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
                 name="category_show_toy_nbrdays"
                 id="category_show_toy_nbrdays"
                 label="COM_LUPO_OPTIONS_TOY_NBRDAYS"

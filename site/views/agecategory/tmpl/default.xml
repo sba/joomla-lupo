@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-        <layout title="COM_LUPO_CATEGORY_VIEW_DEFAULT_TITLE">
-                <message>COM_LUPO_CATEGORY_VIEW_DEFAULT_DESC</message>
+        <layout title="COM_LUPO_AGECATEGORY_VIEW_DEFAULT_TITLE">
+                <message>COM_LUPO_AGECATEGORY_VIEW_DEFAULT_DESC</message>
         </layout>
         <fields
                 name="request"
@@ -10,8 +10,8 @@
                 <fieldset name="request">
                         <field
                                 name="id"
-                                type="lupocategory"
-                                label="COM_LUPO_CATEGORY"
+                                type="lupoagecategory"
+                                label="COM_LUPO_AGECATEGORY"
                                 description=""
                         />
                 </fieldset>

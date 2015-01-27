@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) 2006 - 2014 databauer / Stefan Bauer
+ * @copyright	Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -49,8 +49,17 @@ function LupoParseRoute($segments) {
         case 'categories':
             $vars['view'] = 'categories';
             break;
+        case 'agecategories':
+            $vars['view'] = 'agecategories';
+            break;
         case 'category':
             $vars['view'] = 'category';
+            $id = explode( ':', $segments[1] );
+            $vars['id'] = $id[0];
+            $vars['Itemid'] = $itemid;
+            break;
+        case 'agecategory':
+            $vars['view'] = 'agecategory';
             $id = explode( ':', $segments[1] );
             $vars['id'] = $id[0];
             $vars['Itemid'] = $itemid;
