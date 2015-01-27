@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `#__lupo_agecategories`;
 DROP TABLE IF EXISTS `#__lupo_categories`;
 DROP TABLE IF EXISTS `#__lupo_game`;
 DROP TABLE IF EXISTS `#__lupo_game_editions`;
+DROP TABLE IF EXISTS `#__lupo_game_documents`;
 
 
 CREATE TABLE `#__lupo_agecategories` (
@@ -55,4 +56,16 @@ CREATE TABLE `#__lupo_game_editions` (
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `#__lupo_game_documents` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `gameid` int(11) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `documents_gameid` (`gameid`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
