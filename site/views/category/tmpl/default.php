@@ -25,14 +25,14 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
 <thead>
 <tr>
 	<th><?php echo JText::_('COM_LUPO_TOY'); ?></th>
-    <?php if($componentParams->get('category_show_tax', '1')) { ?>
-        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_TAX'); ?></div></th>
-    <?php } ?>
-    <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
+    <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
         <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
-    <?php } ?>
+    <?php } */ ?>
     <?php if($componentParams->get('category_show_toy_age_category', '1')) { ?>
         <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_AGE_CATEGORY'); ?></div></th>
+    <?php } ?>
+    <?php if($componentParams->get('category_show_tax', '1')) { ?>
+        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_TAX'); ?></div></th>
     <?php } ?>
     <?php if($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
         <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_DAYS'); ?></div></th>
@@ -55,14 +55,14 @@ foreach($this->games as $game){
 		<?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
 	<?php } ?>
 	</td>
-    <?php if($componentParams->get('category_show_tax', '1')) { ?>
-        <td align="right"><?php echo number_format($game['tax'],2)?></td>
-    <?php } ?>
-    <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
+    <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
         <td align="right"><?php echo $game['category']?></td>
-    <?php } ?>
+    <?php } */ ?>
     <?php if($componentParams->get('category_show_toy_age_category', '1')) { ?>
         <td align="right"><?php echo $game['age_category']?></td>
+    <?php } ?>
+    <?php if($componentParams->get('category_show_tax', '1')) { ?>
+        <td align="right"><?php echo number_format($game['tax'],2)?></td>
     <?php } ?>
     <?php if($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
         <td align="right"><?php echo $game['days']?></td>
