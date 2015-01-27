@@ -66,7 +66,7 @@ if(isset($_FILES['xmlfile'])){
 					$db->setQuery('TRUNCATE #__lupo_game_editions');
 					$db->execute();
 
-					$db->setQuery('TRUNCATE #__lupo_game_categories');
+					$db->setQuery('TRUNCATE #__lupo_game_documents');
 					$db->execute();
 
 					$db->setQuery('TRUNCATE #__lupo_categories');

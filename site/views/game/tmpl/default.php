@@ -24,7 +24,6 @@ if($this->game == 'error'){
 
 	?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
 
-
 	<?php
 	if($componentParams->get('show_toy_photo', '1')){
 		if($this->game['image_thumb']==null){
@@ -38,7 +37,7 @@ if($this->game == 'error'){
 				?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
 			} else {
 				?>
-				<a href="<?php echo $this->game['image']?>" data-uk-lightbox><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+				<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo $this->game['title']?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
 				<div id="img-toy" class="uk-modal">
 					<div>
 						<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
@@ -135,6 +134,64 @@ if($this->game == 'error'){
 		<?php }
 		}?>
 	</table>
+
+	<?php
+	// TODO: Move to model?
+	foreach($this->game['documents'] as $document) {
+		switch($document['code']){
+			case 'youtube':
+				$href='https://www.youtube.com/watch?v='.$document['value'];
+				$desc='YouTube';
+				$icon='youtube-play';
+				$lightbox=true;
+				break;
+			case 'vimeo':
+				$href='http://vimeo.com/'.$document['value'];
+				$desc='Vimeo';
+				$icon='vimeo-square';
+				$lightbox=true;
+				break;
+			case 'facebook':
+				$href=$document['value'];
+				$desc='Facebook';
+				$icon='facebook-square';
+				$lightbox=false;
+				break;
+			case 'wikipedia':
+				$href=$document['value'];
+				$desc='Wikipedia';
+				$icon='external-link';
+				$lightbox=false;
+				break;
+			case 'link_manual':
+				$href=$document['value'];
+				$desc='Spielanleitung';
+				$icon='file-pdf-o';
+				$lightbox=false;
+				break;
+ 			case 'link_review':
+ 			case 'website':
+			default:
+				$href=$document['value'];
+				$desc='Link';
+				$icon='external-link';
+				$lightbox=false;
+				break;
+		}
+		if($document['desc']!=""){
+			$desc=$document['desc'];
+		}
+		if($lightbox){
+			$lightbox="data-uk-lightbox=\"{group:'grp-docs'}\"";
+		} else {
+			$lightbox='target="_blank"';
+		}
+		?><a class="uk-button" href="<?=$href?>" <?=$lightbox?>><i class="uk-icon-<?=$icon?>"></i> <?=$desc?></a> <?php
+	}
+	if(count($this->game['documents'])>0 ){
+		?><br><br><?php
+	}
+	?>
 
 	<br />
 	<?php

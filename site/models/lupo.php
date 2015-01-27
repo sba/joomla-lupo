@@ -285,7 +285,14 @@ class LupoModelLupo extends JModelItem {
 			$res['image_thumb']=null;
 		}
 
-		
+		//Load documents
+		$db->setQuery("SELECT
+					    *
+					FROM
+					    #__lupo_game_documents
+					WHERE gameid = " .$id);
+		$res['documents'] = $db->loadAssocList();
+
 		//Load game editions
 		$db->setQuery("SELECT 
 					    *
