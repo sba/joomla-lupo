@@ -1,7 +1,10 @@
 DROP TABLE IF EXISTS `#__lupo_agecategories`;
 DROP TABLE IF EXISTS `#__lupo_categories`;
+DROP TABLE IF EXISTS `#__lupo_genres`;
 DROP TABLE IF EXISTS `#__lupo_game`;
 DROP TABLE IF EXISTS `#__lupo_game_editions`;
+DROP TABLE IF EXISTS `#__lupo_game_documents`;
+DROP TABLE IF EXISTS `#__lupo_game_genre`;
 DROP TABLE IF EXISTS `#__lupo_game_documents`;
 
 
@@ -68,4 +71,20 @@ CREATE TABLE `#__lupo_game_documents` (
   PRIMARY KEY (`id`),
   KEY `documents_gameid` (`gameid`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `#__lupo_genres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `genre` char(30) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `genre` (`genre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `#__lupo_game_genre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gameid` int(11) NOT NULL,
+  `genreid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
