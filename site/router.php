@@ -64,6 +64,12 @@ function LupoParseRoute($segments) {
             $vars['id'] = $id[0];
             $vars['Itemid'] = $itemid;
             break;
+        case 'genre':
+            $vars['view'] = 'genre';
+            $id = explode( ':', $segments[1] );
+            $vars['id'] = $id[0];
+            $vars['Itemid'] = $itemid;
+            break;
         case 'game':
             $vars['view'] = 'game';
             $id = explode( ':', $segments[1] );

@@ -142,6 +142,34 @@ class LupoModelLupo extends JModelItem {
 
 		return $res;
 	}
+	/**
+	 * Get the Lupo genres
+	 *
+	 * @return array the genres
+	 */
+	public function getGenres() {
+
+		$db =& JFactory::getDBO();
+
+		$db->setQuery("SELECT
+						  #__lupo_genres.id
+						  , #__lupo_genres.genre AS title
+						  , COUNT(#__lupo_game.id) AS number
+						FROM
+						  #__lupo_game
+						INNER JOIN #__lupo_game_genre ON #__lupo_game.id = #__lupo_game_genre.gameid
+						INNER JOIN #__lupo_genres ON #__lupo_game_genre.genreid = #__lupo_genres.id
+						GROUP BY #__lupo_genres.id
+						");
+
+		$res=$db->loadAssocList();
+
+		foreach($res as &$row){
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id='.$row['id']);
+		}
+
+		return $res;
+	}
 
 	/**
 	 * Get the genre
