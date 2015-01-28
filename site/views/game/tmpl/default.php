@@ -81,7 +81,7 @@ if($this->game == 'error'){
 		  <td><?php echo $this->game['age_category']?></td>
 		</tr>
 		<?php } ?>
-		<?php if($componentParams->get('detail_show_toy_genres', '1')){ ?>
+		<?php if($componentParams->get('detail_show_toy_genres', '1') && $this->game['genres']!=""){ ?>
 		<tr>
 		  <td><?php echo JText::_("COM_LUPO_GENRES")?>:</td>
 		  <td><?php echo $this->game['genres']?></td>
