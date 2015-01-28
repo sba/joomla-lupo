@@ -21,3 +21,11 @@ CREATE TABLE `#__lupo_genres` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `jom_lupo_game_genre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gameid` int(11) NOT NULL,
+  `genreid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
