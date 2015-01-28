@@ -232,10 +232,11 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Games in a category
 	 *
 	 * @id category-id
-	 * @field catid or age_catid
+	 * @param catid or age_catid
+	 * @param foto_prefix name of the prefix for the image
 	 * @return array with the games
 	 */
-	public function getGames($id, $field = 'catid') {
+	public function getGames($id, $field = 'catid', $foto_prefix = '') {
 		$componentParams = &JComponentHelper::getParams('com_lupo');
 		$new_games_age = (int)$componentParams->get('new_games_age', '90'); 
 		if($new_games_age==0){
@@ -247,7 +248,9 @@ class LupoModelLupo extends JModelItem {
 		if($id=='new'){
 			$db->setQuery("SELECT
 								#__lupo_game.id
+								, #__lupo_game.number
 								, #__lupo_game.title
+								, #__lupo_game.description
 								, #__lupo_game.days
 								, #__lupo_categories.title as category
 								, #__lupo_agecategories.title as age_category
@@ -264,7 +267,9 @@ class LupoModelLupo extends JModelItem {
 		} else {
 			$db->setQuery("SELECT
 								#__lupo_game.id
+								, #__lupo_game.number
 								, #__lupo_game.title
+								, #__lupo_game.description
 								, #__lupo_categories.title as category
 								, #__lupo_agecategories.title as age_category
 								, #__lupo_game.days
@@ -279,8 +284,12 @@ class LupoModelLupo extends JModelItem {
 							ORDER BY title, number");
 			$res = $db->loadAssocList();
 		}
-		$pos=0;					
+		$pos=0;
+
 		foreach($res as $key => &$row){
+			//add foto to game array
+			$row += $this->getGameFoto($row['number'], $foto_prefix);
+
 			$row['link']= JRoute::_('index.php?option=com_lupo&view=game&id='.$row['id'].'&pos='.$pos);
 			$pos++;
 		}
@@ -357,20 +366,9 @@ class LupoModelLupo extends JModelItem {
 		if($res==0){
 			return 'error';
 		}
-		
-		$game_image = 'images/spiele/'.$res['number'].'.jpg';		
-		if(file_exists($game_image)){
-			$res['image']=$game_image;
-		} else {
-			$res['image']=null;
-		}
-		
-		$game_image_thumb = 'images/spiele/'.$game_thumb_prefix.$res['number'].'.jpg';
-		if(file_exists($game_image_thumb)){
-			$res['image_thumb']=$game_image_thumb;
-		} else {
-			$res['image_thumb']=null;
-		}
+
+		//add foto to game array
+		$res += $this->getGameFoto($res['number'], $game_thumb_prefix);
 
 		//Load documents
 		$db->setQuery("SELECT
@@ -405,5 +403,34 @@ class LupoModelLupo extends JModelItem {
 		$res['link'] = JRoute::_('index.php?option=com_lupo&view=game&id='.$id);
 		
 		return $res;
-	}	
+	}
+
+
+	/**
+	 * Get the picture of a game
+	 *
+	 * @param number game-nbr
+	 * @param prefix of the thumb
+	 * @return array foto
+	 */
+	public function getGameFoto($number, $game_thumb_prefix="") {
+		$game_image = 'images/spiele/'.$number.'.jpg';
+		if(file_exists($game_image)){
+			$res['image']=$game_image;
+		} else {
+			$res['image']=null;
+		}
+
+		if($game_thumb_prefix!="") {
+			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
+			if (file_exists($game_image_thumb)) {
+				$res['image_thumb'] = $game_image_thumb;
+			} else {
+				$res['image_thumb'] = null;
+			}
+		}
+
+		return $res;
+	}
+
 }

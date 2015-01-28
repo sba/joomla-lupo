@@ -36,6 +36,8 @@ class LupoController extends JControllerLegacy {
 
 		$view = $app->input->getCmd('view');
 		$id = $app->input->getCmd('id', 0);
+		$foto_prefix = $app->input->getCmd('foto_prefix', 'thumb_');
+		$foto_show = $app->input->getCmd('foto_show', 0);
 
 		switch($view){
 			case 'game':
@@ -57,10 +59,11 @@ class LupoController extends JControllerLegacy {
 			case 'category':
 				$model = &$this->getModel();
 				$category = $model->getCategory($id);
-				$games = $model->getGames($id);
+				$games = $model->getGames($id, 'catid', $foto_prefix);
 				$view = &$this->getView('Category', 'html');
 				$view->category = $category;
 				$view->games = $games;
+				$view->foto_show = $foto_show;
 				$view->display();
 				break;
 			case 'agecategory':

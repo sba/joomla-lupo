@@ -13,7 +13,24 @@
                                 type="lupocategory"
                                 label="COM_LUPO_CATEGORY"
                                 description=""
-                        />
+                                />
+                        <field
+                                type="radio"
+                                class="btn-group btn-group-yesno"
+                                name="foto_show"
+                                label="Foto"
+                                description="Zeigt Foto"
+                                default="0">
+                                <option value="1">JYES</option>
+                                <option value="0">JNO</option>
+                        </field>
+                        <field
+                                name="foto_prefix"
+                                type="text"
+                                label="Foto-Prefix"
+                                description="Prefix der Foto-Datei"
+                                default="thumb_"
+                                />
                 </fieldset>
         </fields>
 </metadata>
