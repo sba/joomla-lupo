@@ -40,7 +40,7 @@ class LupoModelLupo extends JModelItem {
 
 		$db->setQuery("SELECT
 			    'new' AS id
-			    , 'Neue Spiele' AS title
+			    , '".JText::_("COM_LUPO_NEW_TOYS")."' AS title
 			    , COUNT(#__lupo_game.id) AS number 
 			FROM
 			    #__lupo_game
