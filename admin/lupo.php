@@ -18,6 +18,7 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_lupo'))
 }
 
 // Set some global property
+$app = JFactory::getApplication();
 $document = JFactory::getDocument();
 $document->addStyleDeclaration('.icon-generic:before {content: "" }'); //remove icon
 //$document->addStyleDeclaration('.strong {font-weight: bold;}');
@@ -29,7 +30,7 @@ jimport('joomla.application.component.controller');
 $controller = JControllerLegacy::getInstance('Lupo');
 
 // Perform the Request task
-$controller->execute(JRequest::getCmd('task'));
+$controller->execute($app->input->getCmd('task'));
 
 // Redirect if set by the controller
 $controller->redirect();
@@ -76,6 +77,9 @@ if(isset($_FILES['xmlfile'])){
 					$db->execute();
 
 					$db->setQuery('TRUNCATE #__lupo_genres');
+					$db->execute();
+
+					$db->setQuery('TRUNCATE #__lupo_game_genre');
 					$db->execute();
 
 					foreach($xml->categories->category as $category){
@@ -143,12 +147,40 @@ if(isset($_FILES['xmlfile'])){
 						}
 					}
 
+					//add all genres to genre table
 					$genres=array_unique($genres);
 					foreach($genres as $genre){
 						$db->setQuery('INSERT INTO #__lupo_genres SET
 											genre='.$db->quote($genre)
 						);
 						$db->execute();
+					}
+
+					//add game-genres to table #__lupo_game_genre
+					$db->setQuery("SELECT
+										*
+									FROM #__lupo_genres"
+					);
+					$res = $db->loadAssocList();
+					$genres=array();
+					foreach($res as $row){
+						$genres[$row['id']]=$row['genre']; //made key value-array
+					}
+					$db->setQuery("SELECT
+							id
+							, genres
+						FROM #__lupo_game
+						WHERE genres!=''"
+					);
+					$res = $db->loadAssocList();
+					foreach($res as $row){
+						$game_genres = explode(', ',$row['genres']);
+						foreach($game_genres as $game_genre){
+							$db->setQuery('INSERT INTO #__lupo_game_genre SET
+											gameid='.$row['id'].', genreid='.array_search($game_genre, $genres)
+							);
+							$db->execute();
+						}
 					}
 
 					JFactory::getApplication()->enqueueMessage( $n . ' Spiele importiert' );

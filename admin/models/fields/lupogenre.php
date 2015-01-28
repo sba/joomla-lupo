@@ -35,15 +35,15 @@ class JFormFieldLupoGenre extends JFormFieldList
 	protected function getOptions() {
 		$db =& JFactory::getDBO();
 		$db->setQuery("SELECT 
-				    genre
-				FROM
-				    #__lupo_genres
-				ORDER BY genre");
+							*
+						FROM
+							#__lupo_genres
+						ORDER BY genre");
 		
 		$res=$db->loadAssocList();
 	
 		foreach($res as $row) {
-			$options[] = JHtml::_('select.option', $row['genre'], $row['genre']);
+			$options[] = JHtml::_('select.option', $row['id'], $row['genre']);
 		}
 		
 		return $options;

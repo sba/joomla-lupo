@@ -81,6 +81,12 @@ if($this->game == 'error'){
 		  <td><?php echo $this->game['age_category']?></td>
 		</tr>
 		<?php } ?>
+		<?php if($componentParams->get('detail_show_toy_genres', '1')){ ?>
+		<tr>
+		  <td><?php echo JText::_("COM_LUPO_GENRES")?>:</td>
+		  <td><?php echo $this->game['genres']?></td>
+		</tr>
+		<?php } ?>
 		<?php if($componentParams->get('detail_show_toy_play_duration', '1') && $this->game['play_duration']!="") {?>
 		<tr>
 		  <td><?php echo JText::_("COM_LUPO_PLAY_DURATION")?>:</td>

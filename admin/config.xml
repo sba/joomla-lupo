@@ -182,6 +182,18 @@
 		<field
 				type="radio"
                 class="btn-group btn-group-yesno"
+				name="detail_show_toy_genres"
+				id="detail_show_toy_genres"
+				label="COM_LUPO_OPTIONS_TOY_GENRES"
+				description="COM_LUPO_OPTIONS_TOY_GENRES_DESC"
+				default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field
+				type="radio"
+                class="btn-group btn-group-yesno"
 				name="detail_show_toy_play_duration"
 				id="detail_show_toy_play_duration"
 				label="COM_LUPO_OPTIONS_TOY_PLAY_DURATION"

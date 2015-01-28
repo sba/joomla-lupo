@@ -144,6 +144,20 @@ class LupoModelLupo extends JModelItem {
 	}
 
 	/**
+	 * Get the genre
+	 *
+	 * @id genre-id
+	 * @return	array the genre
+	 */
+	public function getGenre($id) {
+		$db =& JFactory::getDBO();
+		$sql = "SELECT * FROM #__lupo_genres WHERE id=" .$db->quote($id);
+		$db->setQuery($sql);
+		$res = $db->loadAssoc();
+		return $res;
+	}	
+	
+	/**
 	 * Get the category
 	 *
 	 * @id category-id
@@ -160,8 +174,8 @@ class LupoModelLupo extends JModelItem {
 			$res = $db->loadAssoc();
 		}
 		return $res;
-	}	
-	
+	}
+
 	/**
 	 * Get the agecategory
 	 *
@@ -243,6 +257,46 @@ class LupoModelLupo extends JModelItem {
 		
 		return $res;
 	}	
+
+
+	/**
+	 * Get the Games per genre
+	 *
+	 * @id genre-id
+	 * @return array with the games
+	 */
+	public function getGamesByGenre($id) {
+
+		$db =& JFactory::getDBO();
+		$db->setQuery("SELECT
+							#__lupo_game.id
+							, #__lupo_game.title
+							, #__lupo_categories.title as category
+							, #__lupo_agecategories.title as age_category
+							, #__lupo_game.days
+							, #__lupo_game_editions.tax
+							, COUNT(#__lupo_game_editions.id) as nbr
+						FROM #__lupo_game
+						LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
+						LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
+						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
+						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
+						WHERE #__lupo_game_genre.genreid=".$db->quote($id)."
+						GROUP BY #__lupo_game.id
+						ORDER BY title, number");
+		$res = $db->loadAssocList();
+
+		$pos=0;
+		foreach($res as $key => &$row){
+			$row['link']= JRoute::_('index.php?option=com_lupo&view=game&id='.$row['id'].'&pos='.$pos);
+			$pos++;
+		}
+
+		$session = JFactory::getSession();
+		$session->set('lupo', $res);
+
+		return $res;
+	}
 
 
 	/**

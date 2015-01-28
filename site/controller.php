@@ -30,21 +30,37 @@ class LupoController extends JControllerLegacy {
         }
         $document->addStyleSheet(JURI::base() . "components/com_lupo/css/com_lupo.css",'text/css',"screen");
 
-		//$document->addScript() will not work because
+		//$document->addScript() will not work because its loaded before jquery / uikit
 		$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
 		$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
 
-		$view = JRequest::getVar('view');
-		$id = JRequest::getVar('id');
+		$view = $app->input->getCmd('view');
+		$id = $app->input->getCmd('id', 0);
 
 		switch($view){
+			case 'game':
+				$model = & $this->getModel();
+				$game = $model->getGame($id);
+				$view = & $this->getView('Game', 'html');
+				$view->game = $game;
+				$view->display();
+				break;
+			case 'genre':
+				$model = &$this->getModel();
+				$genre = $model->getGenre($id);
+				$games = $model->getGamesByGenre($id);
+				$view = &$this->getView('Genre', 'html');
+				$view->genre = $genre;
+				$view->games = $games;
+				$view->display();
+				break;
 			case 'category':
 				$model = &$this->getModel();
 				$category = $model->getCategory($id);
 				$games = $model->getGames($id);
 				$view = &$this->getView('Category', 'html');
-				$view->assignRef('category', $category);
-				$view->assignRef('games', $games);
+				$view->category = $category;
+				$view->games = $games;
 				$view->display();
 				break;
 			case 'agecategory':
@@ -52,22 +68,15 @@ class LupoController extends JControllerLegacy {
 				$agecategory = $model->getAgecategory($id);
 				$games = $model->getGames($id, 'age_catid');
 				$view = & $this->getView('Agecategory', 'html');
-				$view->assignRef('agecategory',$agecategory);
-				$view->assignRef('games',$games);
-				$view->display();
-				break;
-			case 'game':
-				$model = & $this->getModel();
-				$game = $model->getGame($id);
-				$view = & $this->getView('Game', 'html');
-				$view->assignRef('game',$game);
+				$view->agecategory = $agecategory;
+				$view->games = $games;
 				$view->display();
 				break;
 			case 'agecategories':
 				$view = & $this->getView('Agecategories', 'html');
 				$model = & $this->getModel();
 				$agecategories = $model->getAgecategories();
-				$view->assignRef('agecategories',$agecategories);
+				$view->agecategories = $agecategories;
 				$view->display();
 				break;
 			case 'categories':
@@ -75,7 +84,7 @@ class LupoController extends JControllerLegacy {
 				$view = & $this->getView('Categories', 'html');
 				$model = & $this->getModel();
 				$categories = $model->getCategories();
-				$view->assignRef('categories',$categories);
+				$view->categories = $categories;
 				$view->display();
 				break;
 		}
