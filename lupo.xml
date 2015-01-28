@@ -7,7 +7,7 @@
 	<author>Stefan Bauer</author>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
-	<copyright>Copyright (C) 2015 databauer gmbh / Stefan Bauer</copyright>
+	<copyright>Copyright (C) databauer gmbh / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<!--  The version string is recorded in the components table -->
 	<version>2.0.0</version>
