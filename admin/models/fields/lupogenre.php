@@ -18,14 +18,14 @@ JFormHelper::loadFieldClass('list');
 /**
  * Form Field class for the LUPO component
  */
-class JFormFieldLupoCategory extends JFormFieldList
+class JFormFieldLupoGenre extends JFormFieldList
 {
 	/**
 	 * The field type.
 	 *
 	 * @var		string
 	 */
-	protected $type = 'LupoCategory';
+	protected $type = 'LupoGenre';
 
 	/**
 	 * Method to get a list of options for a list input.
@@ -33,27 +33,19 @@ class JFormFieldLupoCategory extends JFormFieldList
 	 * @return	array		An array of JHtml options.
 	 */
 	protected function getOptions() {
-		$options = array();
-		$options[] = JHtml::_('select.option', 'new', JText::_('COM_LUPO_NEW_TOYS'));
-
 		$db =& JFactory::getDBO();
-
 		$db->setQuery("SELECT 
-				    COALESCE(#__lupo_categories.id,0) AS id
-				    , IF(ISNULL(#__lupo_categories.title),'".JText::_('COM_LUPO_VARIOUS_TOYS')."',#__lupo_categories.title) AS title
+				    genre
 				FROM
-				    #__lupo_game
-				    LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid)
-				GROUP BY catid
-				HAVING COUNT(#__lupo_game.id) > 0
-				ORDER BY #__lupo_categories.sort, #__lupo_categories.title");
-
+				    #__lupo_genres
+				ORDER BY genre");
+		
 		$res=$db->loadAssocList();
-
+	
 		foreach($res as $row) {
-			$options[] = JHtml::_('select.option', $row['id'], $row['title']);
+			$options[] = JHtml::_('select.option', $row['genre'], $row['genre']);
 		}
-
+		
 		return $options;
 	}
 }
