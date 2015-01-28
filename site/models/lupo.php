@@ -23,21 +23,19 @@ class LupoModelLupo extends JModelItem {
 	 */
 	protected $item;
 
+
 	/**
-	 * Get the Lupo categories
+	 * Get the Lupo category with new games
 	 *
-	 * @return array the categories
+	 * @return array the category
 	 */
-	public function getCategories() {
+	public function getCategoryNew() {
 		$componentParams = &JComponentHelper::getParams('com_lupo');
 		$new_games_age = (int)$componentParams->get('new_games_age', '90'); 
 		if($new_games_age==0){
 			$new_games_age=90;
 		}
 
-		$show_diverse = (int)$componentParams->get('show_diverse', '1'); 
-
-		
 		$db =& JFactory::getDBO();
 
 		$db->setQuery("SELECT
@@ -45,31 +43,52 @@ class LupoModelLupo extends JModelItem {
 			    , 'Neue Spiele' AS title
 			    , COUNT(#__lupo_game.id) AS number 
 			FROM
-			    #__lupo_categories 
-			    LEFT JOIN #__lupo_game ON (#__lupo_categories.id = #__lupo_game.catid)
-			    LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
+			    #__lupo_game
+			LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 			WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)");
 
 		$res=$db->loadAssocList();
-		
+
+		foreach($res as &$row){
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id='.$row['id']);
+		}
+
+		return $res;
+	}
+
+	/**
+	 * Get the Lupo categories
+	 *
+	 * @param show_new override component settings
+	 * @return array the categories
+	 */
+	public function getCategories($show_new=true) {
+		$componentParams = &JComponentHelper::getParams('com_lupo');
+		$db =& JFactory::getDBO();
+
+		$show_diverse = (int)$componentParams->get('show_diverse', '1');
 		$sql_clause='';
 		if($show_diverse==0){
 			$sql_clause = ' AND #__lupo_game.catid > 0';
 		}
-		
-		$db->setQuery("SELECT 
+
+		if($show_new) {
+			$res = $this->getCategoryNew();
+		}
+
+		$db->setQuery("SELECT
 				    #__lupo_categories.id
 				    , #__lupo_categories.title AS title
-				    , COUNT(#__lupo_game.id) AS number 
+				    , COUNT(#__lupo_game.id) AS number
 				FROM
 				    #__lupo_game
 				    LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid)
 					LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 				WHERE published=1 $sql_clause
-				GROUP BY catid 
+				GROUP BY catid
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY #__lupo_categories.sort, #__lupo_categories.title");
-			
+
 		if(is_array($res) && $res[0]['number']>0){
 			$res = array_merge($res,$db->loadAssocList());
 		} else {
@@ -79,42 +98,28 @@ class LupoModelLupo extends JModelItem {
 		foreach($res as &$row){
 			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id='.$row['id']);
 		}
-				
+
 		return $res;
 	}
 
 	/**
 	 * Get the Lupo agecategories
 	 *
+	 * @param show_new override component settings
 	 * @return array the agecategories
 	 */
-	public function getAgecategories() {
+	public function getAgecategories($show_new=true) {
 		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$new_games_age = (int)$componentParams->get('new_games_age', '90');
-		if($new_games_age==0){
-			$new_games_age=90;
-		}
-
-		$show_diverse = (int)$componentParams->get('show_diverse', '1');
-
-
 		$db =& JFactory::getDBO();
 
-		$db->setQuery("SELECT
-			    'new' AS id
-			    , 'Neue Spiele' AS title
-			    , COUNT(#__lupo_game.id) AS number
-			FROM
-			    #__lupo_agecategories
-			    LEFT JOIN #__lupo_game ON (#__lupo_agecategories.id = #__lupo_game.age_catid)
-			    LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-			WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)");
-
-		$res=$db->loadAssocList();
-
+		$show_diverse = (int)$componentParams->get('show_diverse', '1');
 		$sql_clause='';
 		if($show_diverse==0){
 			$sql_clause = ' AND #__lupo_game.catid > 0';
+		}
+
+		if($show_new) {
+			$res = $this->getCategoryNew();
 		}
 
 		$db->setQuery("SELECT
