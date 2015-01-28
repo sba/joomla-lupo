@@ -21,4 +21,3 @@ CREATE TABLE `#__lupo_genres` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
