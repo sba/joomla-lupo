@@ -15,21 +15,21 @@
                                 description=""
                                 />
                         <field
-                                type="radio"
-                                class="btn-group btn-group-yesno"
-                                name="foto_show"
+                                name="foto_list_show"
+                                type="list"
+                                default=""
                                 label="COM_LUPO_PHOTO"
-                                description="COM_LUPO_PHOTO_DESC"
-                                default="0">
-                                <option value="1">JYES</option>
-                                <option value="0">JNO</option>
+                                description="COM_LUPO_PHOTO_DESC">
+                                <option value="">JGLOBAL_USE_GLOBAL</option>
+                                <option value="1">JSHOW</option>
+                                <option value="0">JHIDE</option>
                         </field>
                         <field
-                                name="foto_prefix"
+                                name="foto_list_prefix"
                                 type="text"
                                 label="COM_LUPO_PHOTO_PREFIX"
                                 description="COM_LUPO_PHOTO_PREFIX_DESC"
-                                default="mini_"
+                                default=""
                                 />
                 </fieldset>
         </fields>

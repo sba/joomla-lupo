@@ -36,8 +36,24 @@ class LupoController extends JControllerLegacy {
 
 		$view = $app->input->getCmd('view');
 		$id = $app->input->getCmd('id', 0);
-		$foto_prefix = $app->input->getCmd('foto_prefix', 'thumb_');
-		$foto_show = $app->input->getCmd('foto_show', 0);
+
+		$com_foto_list_show = $params->get('foto_list_show', "0");
+		$com_foto_list_prefix = $params->get('foto_list_prefix', "mini_");
+
+		$menu_foto_list_show = $app->input->getCmd('foto_list_show', '');
+		$menu_foto_list_prefix = $app->input->getCmd('foto_list_prefix', 'mini_');
+
+		if($menu_foto_list_show == ''){
+			$foto_list_show = $com_foto_list_show;
+		} else {
+			$foto_list_show = $menu_foto_list_show;
+		}
+
+		if($menu_foto_list_prefix == ''){
+			$foto_list_prefix = $com_foto_list_prefix;
+		} else {
+			$foto_list_prefix = $menu_foto_list_prefix;
+		}
 
 		switch($view){
 			case 'game':
@@ -50,31 +66,31 @@ class LupoController extends JControllerLegacy {
 			case 'genre':
 				$model = &$this->getModel();
 				$genre = $model->getGenre($id);
-				$games = $model->getGamesByGenre($id, $foto_prefix);
+				$games = $model->getGamesByGenre($id, $foto_list_prefix);
 				$view = &$this->getView('Genre', 'html');
 				$view->genre = $genre;
 				$view->games = $games;
-				$view->foto = array('show'=>$foto_show, 'prefix'=>$foto_prefix);
+				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
 				$view->display();
 				break;
 			case 'category':
 				$model = &$this->getModel();
 				$category = $model->getCategory($id);
-				$games = $model->getGames($id, 'catid', $foto_prefix);
+				$games = $model->getGames($id, 'catid', $foto_list_prefix);
 				$view = &$this->getView('Category', 'html');
 				$view->category = $category;
 				$view->games = $games;
-				$view->foto = array('show'=>$foto_show, 'prefix'=>$foto_prefix);
+				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategory':
 				$model = & $this->getModel();
 				$agecategory = $model->getAgecategory($id);
-				$games = $model->getGames($id, 'age_catid', $foto_prefix);
+				$games = $model->getGames($id, 'age_catid', $foto_list_prefix);
 				$view = & $this->getView('Agecategory', 'html');
 				$view->agecategory = $agecategory;
 				$view->games = $games;
-				$view->foto = array('show'=>$foto_show, 'prefix'=>$foto_prefix);
+				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategories':
