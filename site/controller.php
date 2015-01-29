@@ -50,10 +50,11 @@ class LupoController extends JControllerLegacy {
 			case 'genre':
 				$model = &$this->getModel();
 				$genre = $model->getGenre($id);
-				$games = $model->getGamesByGenre($id);
+				$games = $model->getGamesByGenre($id, $foto_prefix);
 				$view = &$this->getView('Genre', 'html');
 				$view->genre = $genre;
 				$view->games = $games;
+				$view->foto = array('show'=>$foto_show, 'prefix'=>$foto_prefix);
 				$view->display();
 				break;
 			case 'category':
@@ -63,16 +64,17 @@ class LupoController extends JControllerLegacy {
 				$view = &$this->getView('Category', 'html');
 				$view->category = $category;
 				$view->games = $games;
-				$view->foto_show = $foto_show;
+				$view->foto = array('show'=>$foto_show, 'prefix'=>$foto_prefix);
 				$view->display();
 				break;
 			case 'agecategory':
 				$model = & $this->getModel();
 				$agecategory = $model->getAgecategory($id);
-				$games = $model->getGames($id, 'age_catid');
+				$games = $model->getGames($id, 'age_catid', $foto_prefix);
 				$view = & $this->getView('Agecategory', 'html');
 				$view->agecategory = $agecategory;
 				$view->games = $games;
+				$view->foto = array('show'=>$foto_show, 'prefix'=>$foto_prefix);
 				$view->display();
 				break;
 			case 'agecategories':

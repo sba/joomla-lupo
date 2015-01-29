@@ -232,8 +232,8 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Games in a category
 	 *
 	 * @id category-id
-	 * @param catid or age_catid
-	 * @param foto_prefix name of the prefix for the image
+	 * @field catid or age_catid
+	 * @foto_prefix name of the prefix for the image
 	 * @return array with the games
 	 */
 	public function getGames($id, $field = 'catid', $foto_prefix = '') {
@@ -305,14 +305,17 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Games per genre
 	 *
 	 * @id genre-id
+	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
-	public function getGamesByGenre($id) {
+	public function getGamesByGenre($id, $foto_prefix = '') {
 
 		$db =& JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
+							, #__lupo_game.number
 							, #__lupo_game.title
+							, #__lupo_game.description
 							, #__lupo_categories.title as category
 							, #__lupo_agecategories.title as age_category
 							, #__lupo_game.days
@@ -330,6 +333,9 @@ class LupoModelLupo extends JModelItem {
 
 		$pos=0;
 		foreach($res as $key => &$row){
+			//add foto to game array
+			$row += $this->getGameFoto($row['number'], $foto_prefix);
+
 			$row['link']= JRoute::_('index.php?option=com_lupo&view=game&id='.$row['id'].'&pos='.$pos);
 			$pos++;
 		}

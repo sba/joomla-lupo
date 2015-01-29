@@ -26,8 +26,8 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                 <tr>
                     <th><?php echo JText::_('COM_LUPO_TOY'); ?></th>
                     <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
-        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
-    <?php } */ ?>
+                        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
+                    <?php } */ ?>
                     <?php if($componentParams->get('category_show_toy_age_category', '1')) { ?>
                         <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_AGE_CATEGORY'); ?></div></th>
                     <?php } ?>
@@ -54,19 +54,21 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                     <?php } else { ?>
                         <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                     <?php } ?>
-                    <?php if($this->foto_show!='0') {
+                    <?php if($this->foto['show']!='0') {?>
+                        <a class="category" href="<?php echo $game['link']?>"><?php
                         if ($game['image_thumb'] != NULL) {
                             ?>
                             <img class="uk-align-left" src="<?php echo $game['image_thumb']?>">
                         <?php } else { ?>
-                            <img class="uk-align-left" src="http://placehold.it/100&text=.">
+                            <img class="uk-align-left" src="images/spiele/<?=$this->foto['prefix']?>dice-gray.jpg">
                         <?php }?>
+                        </a>
                         <br><?= $game['description']?>
                     <?php }?>
                 </td>
                 <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
-        <td align="right"><?php echo $game['category']?></td>
-    <?php } */ ?>
+                    <td align="right"><?php echo $game['category']?></td>
+                <?php } */ ?>
                 <?php if($componentParams->get('category_show_toy_age_category', '1')) { ?>
                     <td align="right"><?php echo $game['age_category']?></td>
                 <?php } ?>

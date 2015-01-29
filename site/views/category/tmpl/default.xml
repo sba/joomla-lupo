@@ -18,8 +18,8 @@
                                 type="radio"
                                 class="btn-group btn-group-yesno"
                                 name="foto_show"
-                                label="Foto"
-                                description="Zeigt Foto"
+                                label="COM_LUPO_PHOTO"
+                                description="COM_LUPO_PHOTO_DESC"
                                 default="0">
                                 <option value="1">JYES</option>
                                 <option value="0">JNO</option>
@@ -27,9 +27,9 @@
                         <field
                                 name="foto_prefix"
                                 type="text"
-                                label="Foto-Prefix"
-                                description="Prefix der Foto-Datei"
-                                default="thumb_"
+                                label="COM_LUPO_PHOTO_PREFIX"
+                                description="COM_LUPO_PHOTO_PREFIX_DESC"
+                                default="mini_"
                                 />
                 </fieldset>
         </fields>

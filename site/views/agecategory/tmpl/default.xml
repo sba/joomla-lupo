@@ -11,9 +11,26 @@
                         <field
                                 name="id"
                                 type="lupoagecategory"
-                                label="COM_LUPO_AGECATEGORY"
+                                label="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY"
                                 description=""
                         />
+                        <field
+                                type="radio"
+                                class="btn-group btn-group-yesno"
+                                name="foto_show"
+                                label="COM_LUPO_PHOTO"
+                                description="COM_LUPO_PHOTO_DESC"
+                                default="0">
+                                <option value="1">JYES</option>
+                                <option value="0">JNO</option>
+                        </field>
+                        <field
+                                name="foto_prefix"
+                                type="text"
+                                label="COM_LUPO_PHOTO_PREFIX"
+                                description="COM_LUPO_PHOTO_PREFIX_DESC"
+                                default="mini_"
+                                />
                 </fieldset>
         </fields>
 </metadata>
