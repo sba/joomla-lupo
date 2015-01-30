@@ -16,7 +16,7 @@ JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
 
 ?>
-<article class="tm-article uk-article">
+<article class="tm-article">
     <div class="tm-article-content ">
         <h2 class="contentheading"><?php echo $this->category['title']?></h2>
 

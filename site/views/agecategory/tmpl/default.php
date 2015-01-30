@@ -16,8 +16,8 @@ JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
 
 ?>
-<article class="tm-article uk-article">
-    <div class="tm-article-content ">
+<article class="tm-article">
+    <div class="tm-article-content">
         <h2 class="contentheading"><?php echo $this->agecategory['title']?></h2>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
