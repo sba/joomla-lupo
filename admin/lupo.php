@@ -123,15 +123,17 @@ if(isset($_FILES['xmlfile'])){
 							$genres = array_merge($genres, explode(', ', $game->genres));
 						}
 
-						foreach($game->documents->document as $document){
-							$db->setQuery('INSERT INTO #__lupo_game_documents SET
-											gameid='.$db->quote($gameid).'
-											, `code`='.$db->quote($document['code']).'
-											, `type`='.$db->quote($document['type']).'
-											, `desc`='.$db->quote($document['desc']).'
-											, `value`='.$db->quote($document['value'])
-							);
-							$db->execute();
+						if(isset($game->documents->document)){
+							foreach($game->documents->document as $document){
+								$db->setQuery('INSERT INTO #__lupo_game_documents SET
+												gameid='.$db->quote($gameid).'
+												, `code`='.$db->quote($document['code']).'
+												, `type`='.$db->quote($document['type']).'
+												, `desc`='.$db->quote($document['desc']).'
+												, `value`='.$db->quote($document['value'])
+								);
+								$db->execute();
+							}
 						}
 
 						foreach($game->editions->edition as $edition){
