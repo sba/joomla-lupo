@@ -25,38 +25,57 @@ if($this->game == 'error'){
 	?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
 
 	<?php
-	if($componentParams->get('show_toy_photo', '1')){
-		if($this->game['image_thumb']==null){
-			if(!$this->game['image']==null){
-				$image_size=getimagesize($this->game['image']);
-				?><img class="lupo_image"width="<?php echo $image_size[0]?>" height="<?php echo $image_size[1]?>"  src="<?php echo $this->game['image']?>"><?php
-			}
+	if($componentParams->get('show_toy_photo', '1') || $this->game['description']!=""){
+		if($componentParams->get('show_toy_photo', '1') && $this->game['image_thumb']!=NULL && $this->game['description']!=""){
+			$grid_width="2";
 		} else {
-			$image_thumb_size=getimagesize($this->game['image_thumb']);
-			if($this->game['image']==null){
-				?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
-			} else {
-				?>
-				<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo $this->game['title']?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
-				<div id="img-toy" class="uk-modal">
-					<div>
-						<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
-					</div>
-				</div>
-				<?php
-			}
+			$grid_width="1";
 		}
-	}
-	if($this->game['description']!="") {
+		?>
+		<div class="uk-grid">
+		<?php
+		if($this->game['description']!="") {?>
+			<div class="uk-width-1-<?=$grid_width?>">
+			<?php
+			//beautify some (german) strings...
+			$description = str_replace(
+								array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
+								,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
+								,$this->game['description']);
 
-		//beautify some (german) strings...
-		$description = str_replace(
-							array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
-							,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
-							,$this->game['description']);
-
-		?><div class="lupo_description"><?php echo $description;?></div><?php
-	} ?>
+			?><div class="lupo_description"><?php echo $description;?></div>
+			</div><?php
+		} ?>
+		<?php
+		if($componentParams->get('show_toy_photo', '1')){?>
+			<div class="uk-width-1-<?=$grid_width?>">
+			<?php
+			if($this->game['image_thumb']==null){
+				if(!$this->game['image']==null){
+					$image_size=getimagesize($this->game['image']);
+					?><img class="lupo_image"width="<?php echo $image_size[0]?>" height="<?php echo $image_size[1]?>"  src="<?php echo $this->game['image']?>"><?php
+				}
+			} else {
+				$image_thumb_size=getimagesize($this->game['image_thumb']);
+				if($this->game['image']==null){
+					?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
+				} else {
+					?>
+					<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo $this->game['title']?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+					<div id="img-toy" class="uk-modal">
+						<div>
+							<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
+						</div>
+					</div>
+					<?php
+				}
+			}?>
+			</div>
+		<?php
+		}?>
+		</div>
+	<?php
+	}?>
 
 	<table class="uk-table uk-table-striped uk-table-condensed" id="lupo_detail_table">
 		<colgroup>
