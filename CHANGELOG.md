@@ -1,5 +1,19 @@
 # Changelog
 
+### 2.0.3 (February 03, 2015)
+
+  - game view updated
+  - sql-update fixed
+  - xml upload compatibility enhancement
+
+### 2.0.2 (Januar 30, 2015)
+
+  - views updated
+
+### 2.0.1 (Januar 29, 2015)
+
+  - display photo in list (optional)
+
 ### 2.0.0 (Januar 28, 2015)
 
   - listing of agecategories added (view, menutype)
