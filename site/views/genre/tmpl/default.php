@@ -84,7 +84,5 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
             ?>
             </tbody>
         </table>
-        <br />
-        <br />
     </div>
 </article>
