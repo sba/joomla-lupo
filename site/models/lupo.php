@@ -246,46 +246,40 @@ class LupoModelLupo extends JModelItem {
 		$db =& JFactory::getDBO();
 
 		if($id=='new'){
-			$db->setQuery("SELECT
-								#__lupo_game.id
-								, #__lupo_game.number
-								, #__lupo_game.title
-								, #__lupo_game.description
-								, #__lupo_game.days
-								, #__lupo_categories.title as category
-								, #__lupo_agecategories.title as age_category
-								, #__lupo_game_editions.tax
-								, COUNT(#__lupo_game_editions.id) as nbr
-							FROM #__lupo_game
-							LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
-							LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
-							LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-							WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)
-							GROUP BY #__lupo_game.id 
-							ORDER BY title, number");
-			$res = $db->loadAssocList();
+			$where = "WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)";
 		} else {
-			$db->setQuery("SELECT
-								#__lupo_game.id
-								, #__lupo_game.number
-								, #__lupo_game.title
-								, #__lupo_game.description
-								, #__lupo_categories.title as category
-								, #__lupo_agecategories.title as age_category
-								, #__lupo_game.days
-								, #__lupo_game_editions.tax
-								, COUNT(#__lupo_game_editions.id) as nbr
-							FROM #__lupo_game
-							LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
-							LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
-							LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-							WHERE ".$field."=" .$db->quote($id)."
-							GROUP BY #__lupo_game.id 
-							ORDER BY title, number");
+			$where = "WHERE ".$field."=" .$db->quote($id);
+		}
+
+		$sql = "SELECT
+					#__lupo_game.id
+					, #__lupo_game.number
+					, #__lupo_game.title
+					, #__lupo_game.description
+					, #__lupo_categories.title as category
+					, #__lupo_agecategories.title as age_category
+					, #__lupo_game.days
+					, #__lupo_game_editions.tax
+					, COUNT(#__lupo_game_editions.id) as nbr
+				FROM #__lupo_game
+				LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
+				LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
+				LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
+				%%WHERE%%
+				GROUP BY #__lupo_game.id
+				ORDER BY title, number";
+		$db->setQuery(str_replace('%%WHERE%%',$where,$sql));
+		$res = $db->loadAssocList();
+
+		//if no new games were found for the last x days: show all games up from 3rd newest aquired date
+		if ($id=='new' && count($res)==0){
+			$where = "WHERE jom_lupo_game_editions.acquired_date = (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 3,1)";
+			$db->setQuery(str_replace('%%WHERE%%',$where,$sql));
 			$res = $db->loadAssocList();
 		}
-		$pos=0;
 
+
+		$pos=0;
 		foreach($res as $key => &$row){
 			//add foto to game array
 			$row += $this->getGameFoto($row['number'], $foto_prefix);
