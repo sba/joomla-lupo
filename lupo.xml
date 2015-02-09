@@ -3,7 +3,7 @@
 
 	<name>COM_LUPO</name>
 	<!-- The following elements are optional and free of formatting conttraints -->
-	<creationDate>January 2015</creationDate>
+	<creationDate>February 2015</creationDate>
 	<author>Stefan Bauer</author>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
@@ -54,7 +54,7 @@
 
 	<administration>
 		<!-- Administration Menu Section -->
-		<menu img="../media/com_lupo/images/lupo16.png">COM_LUPO_MENU</menu>
+		<menu>COM_LUPO_MENU</menu>
 		<!-- Administration Main File Copy Section -->
 		<files folder="admin">
 			<!-- Admin Main File Copy Section -->
