@@ -256,7 +256,9 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.number
 					, #__lupo_game.title
 					, #__lupo_game.description
+					, #__lupo_game.catid
 					, #__lupo_categories.title as category
+					, #__lupo_game.age_catid
 					, #__lupo_agecategories.title as age_category
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
@@ -278,13 +280,9 @@ class LupoModelLupo extends JModelItem {
 			$res = $db->loadAssocList();
 		}
 
-
 		$pos=0;
 		foreach($res as $key => &$row){
-			//add foto to game array
-			$row += $this->getGameFoto($row['number'], $foto_prefix);
-
-			$row['link']= JRoute::_('index.php?option=com_lupo&view=game&id='.$row['id'].'&pos='.$pos);
+			$row += $this->compileGame($row, $foto_prefix, $pos);
 			$pos++;
 		}
 
@@ -310,7 +308,9 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.number
 							, #__lupo_game.title
 							, #__lupo_game.description
+							, #__lupo_game.catid
 							, #__lupo_categories.title as category
+							, #__lupo_game.age_catid
 							, #__lupo_agecategories.title as age_category
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
@@ -327,10 +327,7 @@ class LupoModelLupo extends JModelItem {
 
 		$pos=0;
 		foreach($res as $key => &$row){
-			//add foto to game array
-			$row += $this->getGameFoto($row['number'], $foto_prefix);
-
-			$row['link']= JRoute::_('index.php?option=com_lupo&view=game&id='.$row['id'].'&pos='.$pos);
+			$row += $this->compileGame($row, $foto_prefix, $pos);
 			$pos++;
 		}
 
@@ -348,9 +345,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the game
 	 */
 	public function getGame($id) {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_'); 
-	
 		$db =& JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
@@ -366,9 +360,6 @@ class LupoModelLupo extends JModelItem {
 		if($res==0){
 			return 'error';
 		}
-
-		//add foto to game array
-		$res += $this->getGameFoto($res['number'], $game_thumb_prefix);
 
 		//Load documents
 		$db->setQuery("SELECT
@@ -400,10 +391,37 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		$res['link'] = JRoute::_('index.php?option=com_lupo&view=game&id='.$id);
-		
+		$componentParams = &JComponentHelper::getParams('com_lupo');
+		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_');
+
+		$res = $this->compileGame($res, $game_thumb_prefix);
+
 		return $res;
 	}
+
+	/**
+	 * complete game array
+	 *
+	 * @param array game
+	 * @param string thumb-prefix
+	 * @param string pos
+	 * @return array game
+	 */
+	public function compileGame($row, $game_thumb_prefix, $pos = '') {
+		//add foto to game array
+		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
+
+		if($pos!==''){
+			$pos = '&pos='.$pos;
+		}
+
+		$row['link'] = 		  JRoute::_('index.php?option=com_lupo&view=game&id='.$row['id'].$pos);
+		$row['link_cat'] =    JRoute::_('index.php?option=com_lupo&view=category&id='.$row['catid']);
+		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id='.$row['age_catid']);
+
+		return $row;
+	}
+
 
 
 	/**
