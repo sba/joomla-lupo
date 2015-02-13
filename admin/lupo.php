@@ -37,6 +37,8 @@ $controller->redirect();
 
 
 if(isset($_FILES['xmlfile'])){
+	set_time_limit ( 300 ); //5 Min
+
 	$xmlfile = 'lupospiele.xml';
 	$xmlpath = 'components/com_lupo/xml_upload/';
 	$gamespath = '../images/spiele/';
@@ -80,6 +82,9 @@ if(isset($_FILES['xmlfile'])){
 					$db->execute();
 
 					$db->setQuery('TRUNCATE #__lupo_game_genre');
+					$db->execute();
+
+					$db->setQuery('TRUNCATE #__lupo_game_related');
 					$db->execute();
 
 					foreach($xml->categories->category as $category){
@@ -134,6 +139,17 @@ if(isset($_FILES['xmlfile'])){
 								);
 								$db->execute();
 							}
+						}
+
+						if(isset($game->related->game)){
+							$related_games = $game->related;
+							$sql_insertvalues = "";
+							foreach($related_games->game as $related_game){
+								//create bulk inserts: faster execution
+								$sql_insertvalues .= '('.$db->quote($gameid).','.$db->quote($related_game).'),';
+							}
+							$db->setQuery('INSERT INTO #__lupo_game_related (`gameid`, `number`) VALUES '. substr($sql_insertvalues,0,-1));
+							$db->execute();
 						}
 
 						foreach($game->editions->edition as $edition){
