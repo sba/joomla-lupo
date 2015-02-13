@@ -90,7 +90,7 @@ CREATE TABLE `#__lupo_game_genre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `jom_lupo_game_related` (
+CREATE TABLE `#__lupo_game_related` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gameid` int(11) DEFAULT NULL,
   `number` int(11) DEFAULT NULL,
