@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.0.4 (February 13, 2015)
+
+  - several fixes
+  - added admin-button to reprocess xml-file
+
 ### 2.0.3 (February 03, 2015)
 
   - game view updated
