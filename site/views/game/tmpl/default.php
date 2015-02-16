@@ -14,6 +14,21 @@ defined('_JEXEC') or die('Restricted access');
 //load lupo styles
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
+
+//TODO: support Markdown-Syntax?
+//$github = new JGithub;
+//$description = $github->markdown->render($description);
+
+//TODO: remove? is not documented and nobody is using it..
+//beautify some (german) strings...
+/*$description = str_replace(
+					array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
+					,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
+					,$this->game['description']);
+*/
+
+$description = $this->game['description'];
+
 ?>
 <article class="tm-article">
     <div class="tm-article-content ">
@@ -37,11 +52,6 @@ if($this->game == 'error'){
 		if($this->game['description']!="") {?>
 			<div class="uk-width-1-<?=$grid_width?>">
 			<?php
-			//beautify some (german) strings...
-			$description = str_replace(
-								array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
-								,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
-								,$this->game['description']);
 
 			?><div class="lupo_description"><?php echo $description;?></div>
 			</div><?php
