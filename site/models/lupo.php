@@ -84,7 +84,7 @@ class LupoModelLupo extends JModelItem {
 				    #__lupo_game
 				    LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid)
 					LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-				WHERE published=1 $sql_clause
+				WHERE published=1  AND #__lupo_categories.title<>'' $sql_clause
 				GROUP BY catid
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY #__lupo_categories.sort, #__lupo_categories.title");
@@ -130,7 +130,7 @@ class LupoModelLupo extends JModelItem {
 				    #__lupo_game
 				    LEFT JOIN #__lupo_agecategories ON (#__lupo_agecategories.id = #__lupo_game.age_catid)
 					LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-				WHERE published=1 $sql_clause
+				WHERE published=1 AND #__lupo_agecategories.title<>'' $sql_clause
 				GROUP BY age_catid
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY #__lupo_agecategories.sort, #__lupo_agecategories.title");
