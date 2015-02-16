@@ -63,7 +63,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                                     <img class="uk-align-left" src="images/spiele/<?=$this->foto['prefix']?>dice-gray.jpg">
                                 <?php }?>
                             </a>
-                            <br><?= $game['description']?>
+                            <br><?= JHtmlString::truncateComplex($game['description'],150,true)?>
                         <?php }?>
 
                     </td>
