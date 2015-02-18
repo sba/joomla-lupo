@@ -228,15 +228,21 @@ if($this->game == 'error'){
 	}
 
     //related games
-    if(count($this->game['related'])>0){
-        echo JText::_("COM_LUPO_RELATED_TOYS");?>
-        <br><br>
-        <ul><?php
-        foreach($this->game['related'] as $related){?>
-            <li><a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a></li>
-        <?php }?>
-        </ul>
-    <?php }	?>
+    if($componentParams->get('detail_show_toy_related', '1')) {
+        if (count($this->game['related']) > 0) {?>
+            <br>
+            <?php echo JText::_("COM_LUPO_RELATED_TOYS");?>
+            <br>
+            <ul><?php
+                foreach ($this->game['related'] as $related) {
+                    ?>
+                    <li>
+                        <a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a>
+                    </li>
+                <?php }?>
+            </ul>
+        <?php }
+    }?>
 
 	<br />
 	<?php
