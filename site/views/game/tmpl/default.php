@@ -14,6 +14,21 @@ defined('_JEXEC') or die('Restricted access');
 //load lupo styles
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
+
+//TODO: support Markdown-Syntax?
+//$github = new JGithub;
+//$description = $github->markdown->render($description);
+
+//TODO: remove? is not documented and nobody is using it..
+//beautify some (german) strings...
+/*$description = str_replace(
+					array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
+					,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
+					,$this->game['description']);
+*/
+
+$description = $this->game['description'];
+
 ?>
 <article class="tm-article">
     <div class="tm-article-content ">
@@ -35,20 +50,15 @@ if($this->game == 'error'){
 		<div class="uk-grid">
 		<?php
 		if($this->game['description']!="") {?>
-			<div class="uk-width-1-<?=$grid_width?>">
+			<div class="uk-width-1-<?php echo $grid_width?>">
 			<?php
-			//beautify some (german) strings...
-			$description = str_replace(
-								array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
-								,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
-								,$this->game['description']);
 
 			?><div class="lupo_description"><?php echo $description;?></div>
 			</div><?php
 		} ?>
 		<?php
 		if($componentParams->get('show_toy_photo', '1')){?>
-			<div class="uk-width-1-<?=$grid_width?>">
+			<div class="uk-width-1-<?php echo $grid_width?>">
 			<?php
 			if($this->game['image_thumb']==null){
 				if(!$this->game['image']==null){
@@ -211,12 +221,22 @@ if($this->game == 'error'){
 		} else {
 			$lightbox='target="_blank"';
 		}
-		?><a class="uk-button" href="<?=$href?>" <?=$lightbox?>><i class="uk-icon-<?=$icon?>"></i> <?=$desc?></a> <?php
+		?><a class="uk-button" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
 	}
 	if(count($this->game['documents'])>0 ){
 		?><br><br><?php
 	}
-	?>
+
+    //related games
+    if(count($this->game['related'])>0){
+        echo JText::_("COM_LUPO_RELATED_TOYS");?>
+        <br><br>
+        <ul><?php
+        foreach($this->game['related'] as $related){?>
+            <li><a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a></li>
+        <?php }?>
+        </ul>
+    <?php }	?>
 
 	<br />
 	<?php
@@ -229,13 +249,13 @@ if($this->game == 'error'){
 		if($pos>=1){
 			$nav_game=$session_lupo[$pos-1]; ?>
 			<li class="pagenav-prev">
-				<a class="uk-button uk-button-primary" href="<?=JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos-1))?>"><i class="uk-icon-caret-left"></i> <?php echo JText::_('COM_LUPO_NAV_PREV_GAME'); ?></a>
+				<a class="uk-button uk-button-primary" accesskey="<?php echo JText::_('COM_LUPO_NAV_PREV_GAME')[0]; ?>" href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos-1))?>"><i class="uk-icon-caret-left"></i> <?php echo JText::_('COM_LUPO_NAV_PREV_GAME'); ?></a>
 			</li>
 		<?php }
 		if($pos+1<count($session_lupo)){
 			$nav_game=$session_lupo[$pos+1]; ?>
 			<li class="pagenav-next">
-				<a class="uk-button uk-button-primary" href="<?=JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos+1))?>"><?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?> <i class="uk-icon-caret-right"></i></a>
+				<a class="uk-button uk-button-primary" accesskey="<?php echo JText::_('COM_LUPO_NAV_NEXT_GAME')[0]; ?>" href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos+1))?>"><?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?> <i class="uk-icon-caret-right"></i></a>
 			</li>
 		<?php }?>
 		</ul><?php
