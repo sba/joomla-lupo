@@ -345,6 +345,8 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the game
 	 */
 	public function getGame($id) {
+        $componentParams = &JComponentHelper::getParams('com_lupo');
+
 		$db =& JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
@@ -391,9 +393,40 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_');
+        //related games
+        $db->setQuery("SELECT
+                          r.number
+                          , g.id
+                          , g.number
+                          , g.title
+                          , g.edition
+                          , g.catid
+                          , g.age_catid
+                        FROM
+                          `#__lupo_game_related` AS r
+                          LEFT JOIN
+                          (
+                            SELECT
+                              CONCAT(`number`, IF(INSTR(`number`, '.') = 0, CONCAT('.', `index`), '')) AS gameno
+                              , #__lupo_game.id
+                              , number
+                              , catid
+                              , age_catid
+                              , title
+                              , edition
+                            FROM
+                              `#__lupo_game`
+                              LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
+                          ) AS g ON g.gameno = CONCAT(r.`number` , IF(INSTR(r.number, '.')=0,'.0',''))
+                        WHERE r.gameid = ".$id ."
+                        ORDER BY r.id");
+        $res['related'] = $db->loadAssocList();
 
+        foreach($res['related'] as &$relatedgame){
+            $relatedgame = $this->compileGame($relatedgame, 'mini_');
+        }
+
+		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_');
 		$res = $this->compileGame($res, $game_thumb_prefix);
 
 		return $res;

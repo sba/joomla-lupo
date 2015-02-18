@@ -226,6 +226,14 @@ if($this->game == 'error'){
 	if(count($this->game['documents'])>0 ){
 		?><br><br><?php
 	}
+
+    //related games
+    if(count($this->game['related'])>0){
+        echo JText::_("COM_LUPO_RELATED_TOYS")."<br>";
+        foreach($this->game['related'] as $related){?>
+            <a href="<?=$related['link']?>"><?=$related['title']?> <?=$related['edition']?></a><br>
+        <?php }
+    }
 	?>
 
 	<br />
