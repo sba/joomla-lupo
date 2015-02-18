@@ -113,7 +113,15 @@ if($this->game == 'error'){
 		<?php if($componentParams->get('detail_show_toy_genres', '1') && $this->game['genres']!=""){ ?>
 		<tr>
 		  <td><?php echo JText::_("COM_LUPO_GENRES")?>:</td>
-		  <td><?php echo $this->game['genres']?></td>
+		  <td>
+              <?php //echo $this->game['genres']?>
+              <?php $separator = "";
+              foreach ($this->game['genres_list'] as $genre) {
+                  echo $separator ?><a href="<?php echo $genre['link']?>"><?php echo $genre['genre']?></a><?php
+                  $separator = ", ";
+              }
+              ?>
+          </td>
 		</tr>
 		<?php } ?>
 		<?php if($componentParams->get('detail_show_toy_play_duration', '1') && $this->game['play_duration']!="") {?>
