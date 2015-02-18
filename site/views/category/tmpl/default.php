@@ -60,10 +60,10 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                             ?>
                             <img class="uk-align-left" src="<?php echo $game['image_thumb']?>">
                         <?php } else { ?>
-                            <img class="uk-align-left" src="images/spiele/<?=$this->foto['prefix']?>dice-gray.jpg">
+                            <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
                         <?php }?>
                         </a>
-                        <br><?= JHtmlString::truncateComplex($game['description'],150,true)?>
+                        <br><?php echo JHtmlString::truncateComplex($game['description'],150,true)?>
                     <?php }?>
                 </td>
                 <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
