@@ -114,7 +114,7 @@ if($this->game == 'error'){
 		<tr>
 		  <td><?php echo JText::_("COM_LUPO_GENRES")?>:</td>
 		  <td>
-              <?php //echo $this->game['genres']?>
+              <?php //echo $this->game['genres'] /* use this to output genres without link */?>
               <?php $separator = "";
               foreach ($this->game['genres_list'] as $genre) {
                   echo $separator ?><a href="<?php echo $genre['link']?>"><?php echo $genre['genre']?></a><?php
