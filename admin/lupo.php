@@ -46,8 +46,9 @@ $gamespath = '../images/spiele/';
 
 
 if(isset($_POST['act']) && $_POST['act']=='processzip'){
-	unzipImages($xmlpath.$zipfile, $xmlpath, $xmlfile, $gamespath);
-	processXML($xmlpath.$xmlfile);
+	if(unzipImages($xmlpath.$zipfile, $xmlpath, $xmlfile, $gamespath)) {
+		processXML($xmlpath . $xmlfile);
+	}
 }
 
 
@@ -65,10 +66,11 @@ function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 		$zip->close();
 
 		unlink($gamespath . $xmlfile); //remove xmlfile from images folder
+		return true;
 	} else {
 		JFactory::getApplication()->enqueueMessage( JText::_( "Konnte hochgeladene Datei nicht entpacken! zip-Datei erwartet." ), 'error' );
 	}
-
+	return false;
 }
 
 
