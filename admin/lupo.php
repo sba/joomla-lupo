@@ -36,38 +36,41 @@ $controller->execute($app->input->getCmd('task'));
 $controller->redirect();
 
 
-set_time_limit ( 300 ); //5 Min
+set_time_limit ( 600 ); //10 Min
 
+$zipfile = 'lupo_spiele_export.zip';
 $xmlfile = 'lupospiele.xml';
 $xmlpath = 'components/com_lupo/xml_upload/';
 $gamespath = '../images/spiele/';
 
 
 
-if(isset($_FILES['xmlfile'])){
-	$zip = new ZipArchive;
-	if($_FILES['xmlfile']['tmp_name']==''){
-		JFactory::getApplication()->enqueueMessage( JText::_( "Keine Datei ausgewählt!" ), 'error' );
-	} else {
-		$res = $zip->open($_FILES['xmlfile']['tmp_name']);
-		if ($res === TRUE) {
-			$zip->extractTo($xmlpath, array($xmlfile)); //extract xml
-			$zip->extractTo($gamespath); //extract full archive
-			$zip->close();
-
-			unlink($gamespath . $xmlfile); //remove xmlfile from images folder
-
-			processXML($xmlpath .$xmlfile);
-
-		} else {
-			JFactory::getApplication()->enqueueMessage( JText::_( "Konnte hochgeladene Datei nicht entpacken! zip-Datei erwartet." ), 'error' );
-		}
+if(isset($_POST['act']) && $_POST['act']=='processzip'){
+	if(unzipImages($xmlpath.$zipfile, $xmlpath, $xmlfile, $gamespath)) {
+		processXML($xmlpath . $xmlfile);
 	}
 }
 
 
 if(isset($_POST['act']) && $_POST['act']=='processxml'){
 	processXML($xmlpath .$xmlfile);
+}
+
+
+function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
+	$zip = new ZipArchive;
+	$res = $zip->open($zipfile);
+	if ($res === TRUE) {
+		$zip->extractTo($xmlpath, array($xmlfile)); //extract xml
+		$zip->extractTo($gamespath); //extract full archive
+		$zip->close();
+
+		unlink($gamespath . $xmlfile); //remove xmlfile from images folder
+		return true;
+	} else {
+		JFactory::getApplication()->enqueueMessage( JText::_( "Konnte hochgeladene Datei nicht entpacken! zip-Datei erwartet." ), 'error' );
+	}
+	return false;
 }
 
 

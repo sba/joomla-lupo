@@ -15,6 +15,15 @@ defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
 
+//add uikit lightbox
+//JHTML::script('lightbox.min.js', 'components/com_lupo/uikit/js/components/');
+
+//$document = JFactory::getDocument();
+//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
+
+echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>';
+echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>';
+
 //TODO: support Markdown-Syntax?
 //$github = new JGithub;
 //$description = $github->markdown->render($description);
@@ -113,7 +122,15 @@ if($this->game == 'error'){
 		<?php if($componentParams->get('detail_show_toy_genres', '1') && $this->game['genres']!=""){ ?>
 		<tr>
 		  <td><?php echo JText::_("COM_LUPO_GENRES")?>:</td>
-		  <td><?php echo $this->game['genres']?></td>
+		  <td>
+              <?php //echo $this->game['genres'] /* use this to output genres without link */?>
+              <?php $separator = "";
+              foreach ($this->game['genres_list'] as $genre) {
+                  echo $separator ?><a href="<?php echo $genre['link']?>"><?php echo $genre['genre']?></a><?php
+                  $separator = ", ";
+              }
+              ?>
+          </td>
 		</tr>
 		<?php } ?>
 		<?php if($componentParams->get('detail_show_toy_play_duration', '1') && $this->game['play_duration']!="") {?>
@@ -228,15 +245,21 @@ if($this->game == 'error'){
 	}
 
     //related games
-    if(count($this->game['related'])>0){
-        echo JText::_("COM_LUPO_RELATED_TOYS");?>
-        <br><br>
-        <ul><?php
-        foreach($this->game['related'] as $related){?>
-            <li><a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a></li>
-        <?php }?>
-        </ul>
-    <?php }	?>
+    if($componentParams->get('detail_show_toy_related', '1')) {
+        if (count($this->game['related']) > 0) {?>
+            <br>
+            <?php echo JText::_("COM_LUPO_RELATED_TOYS");?>
+            <br>
+            <ul><?php
+                foreach ($this->game['related'] as $related) {
+                    ?>
+                    <li>
+                        <a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a>
+                    </li>
+                <?php }?>
+            </ul>
+        <?php }
+    }?>
 
 	<br />
 	<?php

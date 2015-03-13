@@ -26,13 +26,17 @@ class LupoController extends JControllerLegacy {
         $params = $app->getParams();
         $uikit = $params->get('lupo_load_uikit_css', "0");
         if($uikit!=="0") {
-            $document->addStyleSheet(JURI::base() . "components/com_lupo/uikit/css/".$uikit, 'text/css', "screen");
+            $document->addStyleSheet("components/com_lupo/uikit/css/".$uikit, 'text/css', "screen");
         }
-        $document->addStyleSheet(JURI::base() . "components/com_lupo/css/com_lupo.css",'text/css',"screen");
+        $document->addStyleSheet("components/com_lupo/css/com_lupo.css",'text/css',"screen");
 
 		//$document->addScript() will not work because its loaded before jquery / uikit
-		$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
-		$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
+		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
+		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
+
+		//JHTML::_('jquery.framework');
+		//JHTML::script('components/com_lupo/uikit/js/components/lightbox.min.js', false, false, false, false);
+
 
 		$view = $app->input->getCmd('view');
 		$id = $app->input->getCmd('id', 0);

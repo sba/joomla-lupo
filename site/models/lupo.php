@@ -273,9 +273,10 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery(str_replace('%%WHERE%%',$where,$sql));
 		$res = $db->loadAssocList();
 
-		//if no new games were found for the last x days: show all games up from 3rd newest aquired date
+		//if no new games were found for the last x days: show all games with the newest aquired date
 		if ($id=='new' && count($res)==0){
-			$where = "WHERE #__lupo_game_editions.acquired_date = (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 3,1)";
+			//$where = "WHERE #__lupo_game_editions.acquired_date >= (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 3,1)"; //all with 3rd date and newer
+			$where = "WHERE #__lupo_game_editions.acquired_date = (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 1)";
 			$db->setQuery(str_replace('%%WHERE%%',$where,$sql));
 			$res = $db->loadAssocList();
 		}
@@ -362,6 +363,19 @@ class LupoModelLupo extends JModelItem {
 		if($res==0){
 			return 'error';
 		}
+
+        //load genres
+        $db->setQuery("SELECT
+                        #__lupo_genres.id
+					    , genre
+					FROM
+					    #__lupo_game_genre
+                    LEFT JOIN #__lupo_genres ON #__lupo_genres.id = genreid
+					WHERE gameid = " .$id);
+        $res['genres_list'] = $db->loadAssocList();
+        foreach($res['genres_list'] as &$genre){
+            $genre['link']=JRoute::_('index.php?option=com_lupo&view=genre&id='.$genre['id']);;
+        }
 
 		//Load documents
 		$db->setQuery("SELECT

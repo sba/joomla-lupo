@@ -319,9 +319,23 @@
 			description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
 			default="thumb_"
 		>
-		</field>	
-		
-		<field type="spacer" name="spacer3" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE" />
+		</field>
+
+        <field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_related"
+                id="detail_show_toy_related"
+                label="COM_LUPO_OPTIONS_TOY_SHOW_RELATED"
+                description="COM_LUPO_OPTIONS_TOY_SHOW_RELATED_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field type="spacer" name="spacer4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE" />
 		
 		<field
 				type="radio"

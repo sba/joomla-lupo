@@ -63,9 +63,11 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                                     <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
                                 <?php }?>
                             </a>
-                            <br><?php echo JHtmlString::truncateComplex($game['description'],150,true)?>
+                            <br><?php
+                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description']); //replace <br/> with space
+                            echo JHtmlString::truncateComplex($desc,220,true);
+                            ?>
                         <?php }?>
-
                     </td>
                     <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
                         <td align="right"><?php echo $game['category']?></td>
