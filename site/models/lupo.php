@@ -273,9 +273,10 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery(str_replace('%%WHERE%%',$where,$sql));
 		$res = $db->loadAssocList();
 
-		//if no new games were found for the last x days: show all games up from 3rd newest aquired date
+		//if no new games were found for the last x days: show all games with the newest aquired date
 		if ($id=='new' && count($res)==0){
-			$where = "WHERE #__lupo_game_editions.acquired_date = (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 3,1)";
+			//$where = "WHERE #__lupo_game_editions.acquired_date >= (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 3,1)"; //all with 3rd date and newer
+			$where = "WHERE #__lupo_game_editions.acquired_date = (SELECT acquired_date FROM #__lupo_game_editions GROUP BY acquired_date ORDER BY acquired_date DESC LIMIT 1)";
 			$db->setQuery(str_replace('%%WHERE%%',$where,$sql));
 			$res = $db->loadAssocList();
 		}
