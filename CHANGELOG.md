@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.1.0 (March 13, 2015)
+  - uikit updated
+  - ajax uploader for lupo zipfile
+  - list layout improved
+
 ### 2.0.4 (February 13, 2015)
 
   - several fixes
