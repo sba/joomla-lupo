@@ -15,7 +15,8 @@ defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
 
-//add uikit lightbox
+//add uikit lightbox. uncomment if uikit is not loaded with template or in the controller
+//echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>';
 //echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>';
 //echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>';
 
