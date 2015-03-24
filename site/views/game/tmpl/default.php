@@ -233,7 +233,7 @@ if($this->game == 'error'){
 		} else {
 			$lightbox='target="_blank"';
 		}
-		?><a class="uk-button" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
+		?><a class="uk-button uk-margin-right" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
 	}
 	if(count($this->game['documents'])>0 ){
 		?><br><br><?php
