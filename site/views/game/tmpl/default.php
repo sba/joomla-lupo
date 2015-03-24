@@ -23,14 +23,6 @@ echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/
 //$github = new JGithub;
 //$description = $github->markdown->render($description);
 
-//TODO: remove? is not documented and nobody is using it..
-//beautify some (german) strings...
-/*$description = str_replace(
-					array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
-					,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
-					,$this->game['description']);
-*/
-
 $description = $this->game['description'];
 
 ?>
