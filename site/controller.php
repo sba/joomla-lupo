@@ -30,13 +30,11 @@ class LupoController extends JControllerLegacy {
         }
         $document->addStyleSheet("components/com_lupo/css/com_lupo.css",'text/css',"screen");
 
+		//load uikit. uncomment if uikit is not loaded with template
 		//$document->addScript() will not work because its loaded before jquery / uikit
 		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
+		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>');
 		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
-
-		//JHTML::_('jquery.framework');
-		//JHTML::script('components/com_lupo/uikit/js/components/lightbox.min.js', false, false, false, false);
-
 
 		$view = $app->input->getCmd('view');
 		$id = $app->input->getCmd('id', 0);
