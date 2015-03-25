@@ -46,3 +46,20 @@ ul.pagenav li.pagenav-prev {
 ul.pagenav li.pagenav-next {
     float: right;
 }
+
+/*fix uikit lightbox background */
+.uk-modal-dialog {
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+.uk-lightbox-content {
+    margin-top: -1px !important;
+}
+.uk-modal-dialog-lightbox > .uk-close:first-child {
+    float: none;
+    margin: 0;
+    position: absolute;
+    right: -2px;
+    top: -2px;
+}

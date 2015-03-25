@@ -15,26 +15,14 @@ defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = &JComponentHelper::getParams('com_lupo');
 
-//add uikit lightbox
-//JHTML::script('lightbox.min.js', 'components/com_lupo/uikit/js/components/');
-
-//$document = JFactory::getDocument();
-//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
-
-echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>';
-echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>';
+//add uikit lightbox. uncomment if uikit is not loaded with template or in the controller
+//echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>';
+//echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>';
+//echo '<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>';
 
 //TODO: support Markdown-Syntax?
 //$github = new JGithub;
 //$description = $github->markdown->render($description);
-
-//TODO: remove? is not documented and nobody is using it..
-//beautify some (german) strings...
-/*$description = str_replace(
-					array("Beschreibung:","Beschreibung:<br>","Aufgabe/Ziel:")
-					,array("<b>Beschreibung:</b>","<b>Beschreibung:</b>","<b>Aufgabe/Ziel:</b>")
-					,$this->game['description']);
-*/
 
 $description = $this->game['description'];
 
@@ -238,7 +226,7 @@ if($this->game == 'error'){
 		} else {
 			$lightbox='target="_blank"';
 		}
-		?><a class="uk-button" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
+		?><a class="uk-button uk-margin-right" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
 	}
 	if(count($this->game['documents'])>0 ){
 		?><br><br><?php

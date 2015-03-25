@@ -89,7 +89,7 @@ class LupoModelLupo extends JModelItem {
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY #__lupo_categories.sort, #__lupo_categories.title");
 
-		if(is_array($res) && $res[0]['number']>0){
+		if(isset($res) && $res[0]['number']>0){
 			$res = array_merge($res,$db->loadAssocList());
 		} else {
 			$res=$db->loadAssocList();
@@ -135,7 +135,7 @@ class LupoModelLupo extends JModelItem {
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY #__lupo_agecategories.sort, #__lupo_agecategories.title");
 
-		if(is_array($res) && $res[0]['number']>0){
+		if(isset($res) && $res[0]['number']>0){
 			$res = array_merge($res,$db->loadAssocList());
 		} else {
 			$res=$db->loadAssocList();
