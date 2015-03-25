@@ -1,6 +1,14 @@
 # Changelog
 
+### 2.1.1 (March 25, 2015)
+
+  - do not load uikit.js files
+  - uikit-lightbox layout fix
+  - bugfix annoying php notice
+  - codestyle / cleanup
+
 ### 2.1.0 (March 13, 2015)
+
   - uikit updated
   - ajax uploader for lupo zipfile
   - list layout improved
