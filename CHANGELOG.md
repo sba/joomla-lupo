@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.2.0 (March 26, 2015)
+
+  - joomla one click update added
+  - toy-library uploader improved
+  - code cleanup
+
 ### 2.1.1 (March 25, 2015)
 
   - do not load uikit.js files
