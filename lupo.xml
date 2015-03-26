@@ -59,6 +59,7 @@
 			<filename>lupo.php</filename>
 			<filename>controller.php</filename>
             <filename>config.xml</filename>
+            <filename>CHANGELOG.md</filename>
 			<folder>assets</folder>
 			<folder>models</folder>
 			<folder>sql</folder>
@@ -75,7 +76,7 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="LUPO">https://github.com/sba/com_lupo/blob/master/update_pkg_lupo.xml</server>
+		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/admin/update_pkg_lupo.xml</server>
 	</updateservers>
 	
 </extension>
