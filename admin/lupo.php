@@ -46,6 +46,9 @@ $gamespath = '../images/spiele/';
 
 
 if(isset($_POST['act']) && $_POST['act']=='processzip'){
+	if(file_exists($xmlpath.$xmlfile)) {
+		unlink($xmlpath . $xmlfile);
+	}
 	if(unzipImages($xmlpath.$zipfile, $xmlpath, $xmlfile, $gamespath)) {
 		processXML($xmlpath . $xmlfile);
 	}
@@ -75,7 +78,7 @@ function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 
 		return true;
 	} else {
-		JFactory::getApplication()->enqueueMessage( JText::_( "Konnte hochgeladene Datei nicht entpacken! zip-Datei erwartet." ), 'error' );
+		JFactory::getApplication()->enqueueMessage( JText::_( "COM_LUPO_ADMIN_MSG_ERROR_NO_ZIP_FILE" ), 'error' );
 	}
 	return false;
 }
@@ -85,7 +88,7 @@ function processXML($file){
 	if (file_exists($file)) {
 		$xml = simplexml_load_file($file);
 		if($xml==false){
-			JFactory::getApplication()->enqueueMessage( JText::_( "Fehler in XML Definition" ), 'error' );
+			JFactory::getApplication()->enqueueMessage( JText::_( "COM_LUPO_ADMIN_MSG_ERROR_XML_INVALID" ), 'error' );
 		} else {
 			$db =& JFactory::getDBO();
 
@@ -227,10 +230,10 @@ function processXML($file){
 				}
 			}
 
-			JFactory::getApplication()->enqueueMessage( $n . ' Spiele importiert' );
+			JFactory::getApplication()->enqueueMessage( JText::sprintf('COM_LUPO_ADMIN_MSG_SUCCESS_IMPORTED', $n));
 		}
 	} else {
-		JFactory::getApplication()->enqueueMessage( JText::_( "Konnte $file nicht öffnen." ), 'error' );
+		JFactory::getApplication()->enqueueMessage( JText::_( "COM_LUPO_ADMIN_MSG_ERROR_XML_NOT_FOUND" ), 'error' );
 	}
 
 }

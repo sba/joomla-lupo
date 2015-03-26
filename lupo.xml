@@ -10,7 +10,7 @@
 	<copyright>Copyright (C) databauer gmbh / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<!--  The version string is recorded in the components table -->
-	<version>2.1.1</version>
+	<version>2.2.0</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
@@ -59,7 +59,6 @@
 			<filename>lupo.php</filename>
 			<filename>controller.php</filename>
             <filename>config.xml</filename>
-            <filename>CHANGELOG.md</filename>
 			<folder>assets</folder>
 			<folder>models</folder>
 			<folder>sql</folder>
