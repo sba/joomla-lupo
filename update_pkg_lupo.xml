@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+   <update>
+      <name>LUPO Updates</name>
+      <description>LUPO Package</description>
+      <element>com_lupo</element>
+      <type>component</type>
+      <version>2.2.0</version>
+ 
+      <infourl title="Ludothekprogramm LUPO">https://github.com/sba/com_lupo/blob/master/CHANGELOG.md</infourl>
+      <downloads>
+         <downloadurl type="full" format="zip">https://github.com/sba/pkg_lupo/archive/master.zip</downloadurl>
+      </downloads>
+ 
+      <maintainer>Stefan Bauer</maintainer>
+      <maintainerurl>http://databauer.ch</maintainerurl>
+      <targetplatform name="joomla" version="3.4"/>
+   </update> 
+</updates>

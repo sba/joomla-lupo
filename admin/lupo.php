@@ -62,10 +62,17 @@ function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 	$res = $zip->open($zipfile);
 	if ($res === TRUE) {
 		$zip->extractTo($xmlpath, array($xmlfile)); //extract xml
-		$zip->extractTo($gamespath); //extract full archive
+
+		$jpgs = array();
+		for ($i = 0; $i < $zip->numFiles; $i++) {
+			$filename = $zip->getNameIndex($i);
+			if(pathinfo($filename, PATHINFO_EXTENSION)=='jpg'){
+				$jpgs[]=$filename;
+			}
+		}
+		$zip->extractTo($gamespath, $jpgs); //extract full archive
 		$zip->close();
 
-		unlink($gamespath . $xmlfile); //remove xmlfile from images folder
 		return true;
 	} else {
 		JFactory::getApplication()->enqueueMessage( JText::_( "Konnte hochgeladene Datei nicht entpacken! zip-Datei erwartet." ), 'error' );

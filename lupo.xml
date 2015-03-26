@@ -3,14 +3,14 @@
 
 	<name>COM_LUPO</name>
 	<!-- The following elements are optional and free of formatting conttraints -->
-	<creationDate>February 2015</creationDate>
+	<creationDate>March 2015</creationDate>
 	<author>Stefan Bauer</author>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer gmbh / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<!--  The version string is recorded in the components table -->
-	<version>2.0.3</version>
+	<version>2.1.1</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
@@ -32,7 +32,6 @@
 
 	<!-- Site Main File Copy Section -->
 	<files folder="site">
-		<filename>index.html</filename>
 		<filename>lupo.php</filename>
 		<filename>controller.php</filename>
 		<filename>router.php</filename>
@@ -48,7 +47,6 @@
 	</languages>	
 	
 	<media destination="com_lupo" folder="media">
-		<filename>index.html</filename>
 		<folder>images</folder>
 	</media>
 
@@ -58,14 +56,13 @@
 		<!-- Administration Main File Copy Section -->
 		<files folder="admin">
 			<!-- Admin Main File Copy Section -->
-			<filename>index.html</filename>
 			<filename>lupo.php</filename>
 			<filename>controller.php</filename>
             <filename>config.xml</filename>
-            <folder>views</folder>
-            <folder>models</folder>
+			<folder>assets</folder>
+			<folder>models</folder>
 			<folder>sql</folder>
-			<!-- xml_upload folder -->
+			<folder>views</folder>
             <folder>xml_upload</folder>
 		</files>
 		
@@ -76,6 +73,10 @@
 			<language tag="de-DE">language/de-DE/de-DE.com_lupo.sys.ini</language>
 		</languages>
 	</administration>
+
+	<updateservers>
+		<server type="extension" priority="1" name="LUPO">https://github.com/sba/com_lupo/blob/master/update_pkg_lupo.xml</server>
+	</updateservers>
 	
 </extension>
 

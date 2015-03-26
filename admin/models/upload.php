@@ -9,11 +9,6 @@
  * Contributing: http://www.plupload.com/contributing
  */
 
-#!! IMPORTANT: 
-#!! this file is just an example, it doesn't incorporate any security checks and 
-#!! is not recommended to be used in production environment as it is. Be sure to 
-#!! revise it and customize to your needs.
-
 
 // Make sure file is not cached (as it happens for example on iOS devices)
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -22,23 +17,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-/* 
-// Support CORS
-header("Access-Control-Allow-Origin: *");
-// other CORS headers if any...
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-	exit; // finish preflight CORS requests here
-}
-*/
 
 // 5 minutes execution time
 @set_time_limit(5 * 60);
 
-// Uncomment this one to fake upload time
-//usleep(5000);
 
 // Settings
-//$targetDir = ini_get("upload_tmp_dir") . DIRECTORY_SEPARATOR . "plupload";
 $targetDir = '../xml_upload/';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -49,16 +33,9 @@ if (!file_exists($targetDir)) {
 	@mkdir($targetDir);
 }
 
-// Get a file name
-if (isset($_REQUEST["name"])) {
-	$fileName = $_REQUEST["name"];
-} elseif (!empty($_FILES)) {
-	$fileName = $_FILES["file"]["name"];
-} else {
-	$fileName = uniqid("file_");
-}
-
+$fileName = "lupo_spiele_export.zip"; //always use default filename
 $filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
+
 
 // Chunking might be enabled
 $chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
