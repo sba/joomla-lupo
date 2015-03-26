@@ -46,6 +46,7 @@ $gamespath = '../images/spiele/';
 
 
 if(isset($_POST['act']) && $_POST['act']=='processzip'){
+	unlink($xmlpath.$xmlfile);
 	if(unzipImages($xmlpath.$zipfile, $xmlpath, $xmlfile, $gamespath)) {
 		processXML($xmlpath . $xmlfile);
 	}

@@ -50,7 +50,6 @@ JHtml::_('behavior.tooltip');
 				},
 
 				FilesAdded: function(up, files) {
-
 					var fileCount = up.files.length;
 					var ids = jQuery.map(up.files, function (item) { return item.id; });
 
@@ -60,6 +59,7 @@ JHtml::_('behavior.tooltip');
 
 					plupload.each(files, function(file) {
 						$('filelist').innerHTML = ' <span id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></span>';
+						jQuery('#upload_percent').html('');
 					});
 				},
 
@@ -68,7 +68,9 @@ JHtml::_('behavior.tooltip');
 				},
 
 				FileUploaded: function(up, file) {
-					jQuery('#upload_percent').html('100%  <span class="icon-ok"> </span>');
+					jQuery('#upload_percent').html('<b>100%</b>  <span class="icon-ok"> </span> ' + jQuery("#"+file.id).html());
+					$('filelist').innerHTML = '';
+					uploader.splice();
 				},
 
 				Error: function(up, err) {
