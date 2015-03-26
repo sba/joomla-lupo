@@ -75,7 +75,7 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="LUPO">http://localhost/update_com_lupo.xml</server>
+		<server type="extension" priority="1" name="LUPO">https://github.com/sba/com_lupo/blob/master/update_pkg_lupo.xml</server>
 	</updateservers>
 	
 </extension>
