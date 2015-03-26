@@ -38,9 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //usleep(5000);
 
 // Settings
-//$targetDir = ini_get("upload_tmp_dir") . DIRECTORY_SEPARATOR . "plupload";
 $targetDir = '../xml_upload/';
-$cleanupTargetDir = true; // Remove old files
+$cleanupTargetDir = false; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
 
 
@@ -50,13 +49,15 @@ if (!file_exists($targetDir)) {
 }
 
 // Get a file name
-if (isset($_REQUEST["name"])) {
+/*if (isset($_REQUEST["name"])) {
 	$fileName = $_REQUEST["name"];
 } elseif (!empty($_FILES)) {
 	$fileName = $_FILES["file"]["name"];
 } else {
 	$fileName = uniqid("file_");
-}
+}*/
+$fileName = "lupo_spiele_export.zip"; //always use default filename
+
 
 $filePath = $targetDir . DIRECTORY_SEPARATOR . $fileName;
 
