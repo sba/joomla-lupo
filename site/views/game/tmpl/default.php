@@ -24,7 +24,12 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
 //$github = new JGithub;
 //$description = $github->markdown->render($description);
 
-$description = $this->game['description'];
+//description-text
+$description_title = $this->game['description_title'];
+if($description_title!=""){
+	$description_title='<p><b>'.$description_title.'</b></p>';
+}
+$description = $description_title.$this->game['description'];
 
 //for navigation
 $pos=$_GET['pos'];
@@ -55,8 +60,8 @@ if($this->game == 'error'){
     <?php } ?>
 
 	<?php
-	if($componentParams->get('show_toy_photo', '1') || $this->game['description']!=""){
-		if($componentParams->get('show_toy_photo', '1') && $this->game['image_thumb']!=NULL && $this->game['description']!=""){
+	if($componentParams->get('show_toy_photo', '1') || $description!=""){
+		if($componentParams->get('show_toy_photo', '1') && $this->game['image_thumb']!=NULL && $description!=""){
 			$grid_width="2";
 		} else {
 			$grid_width="1";
@@ -64,7 +69,7 @@ if($this->game == 'error'){
 		?>
 		<div class="uk-grid">
 		<?php
-		if($this->game['description']!="") {?>
+		if($description!="") {?>
 			<div class="uk-width-1-<?php echo $grid_width?>">
 			<?php
 

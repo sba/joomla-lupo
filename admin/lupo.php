@@ -142,6 +142,7 @@ function processXML($file){
 										, catid='.$db->quote($game['catid']).'
 										, age_catid='.$db->quote($game['age_catid']).'
 										, title='.$db->quote($game->title).'
+										, description_title='.$db->quote($game->description_title).'
 										, description='.$db->quote($game->description).'
 										, days='.$db->quote($game['days']).'
 										, fabricator='.$db->quote($game->fabricator).'

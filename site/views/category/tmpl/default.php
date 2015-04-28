@@ -44,6 +44,13 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
             <?php
             $i=0;
             foreach($this->games as $game){
+                //description-text
+                $description_title = $game['description_title'];
+                if($description_title!=""){
+                    $description_title='<b>'.$description_title.'</b><br>';
+                }
+                $description = $description_title.$game['description'];
+
             ?>
             <tr>
                 <td>
@@ -64,7 +71,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                         <?php }?>
                         </a>
                         <br><?php
-                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description']); //replace <br/> with space
+                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $description); //replace <br/> with space
                             echo JHtmlString::truncateComplex($desc,220,true);
                             ?>
                     <?php }?>
