@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.3.0 (April 28, 2015)
+
+  - description-title added
+
 ### 2.2.1 (April 27, 2015)
 
   - game navigation changed from bottons to arrows
