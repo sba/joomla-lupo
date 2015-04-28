@@ -255,6 +255,7 @@ class LupoModelLupo extends JModelItem {
 					#__lupo_game.id
 					, #__lupo_game.number
 					, #__lupo_game.title
+					, #__lupo_game.description_title
 					, #__lupo_game.description
 					, #__lupo_game.catid
 					, #__lupo_categories.title as category
