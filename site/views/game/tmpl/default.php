@@ -26,6 +26,12 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
 
 $description = $this->game['description'];
 
+//for navigation
+$pos=$_GET['pos'];
+$session = JFactory::getSession();
+$session_lupo=$session->get('lupo');
+
+
 ?>
 <article class="tm-article">
     <div class="tm-article-content ">
@@ -35,6 +41,18 @@ if($this->game == 'error'){
 } else {
 
 	?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
+
+	<?php
+    //navigation
+    if($componentParams->get('detail_show_toy_nav', '1') && $session_lupo!=null && isset($_GET['pos'])){
+        $style = $pos+1<count($session_lupo)?'':'visibility: hidden';
+        $nav_game=$session_lupo[$pos+1]; ?>
+        <div style="<?=$style?>" class="uk-h3 uk-float-right"><a href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos+1))?>" title="<?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?>" class="uk-icon-hover uk-icon-chevron-right"></a></div>
+        <?php
+        $style = $pos>=1?'':'visibility: hidden;';
+        $nav_game=$session_lupo[$pos-1]; ?>
+        <div style="<?=$style?>" class="uk-h3 uk-float-right"><a href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos-1))?>" title="<?php echo JText::_('COM_LUPO_NAV_PREV_GAME'); ?>" class="uk-icon-hover uk-icon-chevron-left">&nbsp;&nbsp;</a></div>
+    <?php } ?>
 
 	<?php
 	if($componentParams->get('show_toy_photo', '1') || $this->game['description']!=""){
@@ -228,12 +246,13 @@ if($this->game == 'error'){
 		}
 		?><a class="uk-button uk-margin-right" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
 	}
-	if(count($this->game['documents'])>0 ){
-		?><br><br><?php
-	}
 
     //related games
     if($componentParams->get('detail_show_toy_related', '1')) {
+        if(count($this->game['documents'])>0 && count($this->game['related']) > 0 ){
+            ?><br><br><?php
+        }
+
         if (count($this->game['related']) > 0) {?>
             <br>
             <?php echo JText::_("COM_LUPO_RELATED_TOYS");?>
@@ -249,14 +268,12 @@ if($this->game == 'error'){
         <?php }
     }?>
 
-	<br />
 	<?php
 	//navigation
-	$session = JFactory::getSession();
-	$session_lupo=$session->get('lupo');
+    /*
+    ?>	<br /><?php
 	if($componentParams->get('detail_show_toy_nav', '1') && $session_lupo!=null && isset($_GET['pos'])){
 		?><ul class="pagenav"><?php
-		$pos=$_GET['pos'];
 		if($pos>=1){
 			$nav_game=$session_lupo[$pos-1]; ?>
 			<li class="pagenav-prev">
@@ -270,7 +287,8 @@ if($this->game == 'error'){
 			</li>
 		<?php }?>
 		</ul><?php
-	}
+	}*/
+
 }  // endif get_game=error?>
 
 </div>

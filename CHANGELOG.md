@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.2.1 (April 27, 2015)
+
+  - game navigation changed from bottons to arrows
+  - uikit updated to 2.19.0
+
 ### 2.2.0 (March 26, 2015)
 
   - joomla one click update added

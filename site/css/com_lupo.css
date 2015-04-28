@@ -63,3 +63,9 @@ ul.pagenav li.pagenav-next {
     right: -2px;
     top: -2px;
 }
+
+
+/*fix uikit underline */
+.uk-icon-hover:hover {
+    text-decoration: none;
+}
