@@ -447,6 +447,7 @@ class LupoModelLupo extends JModelItem {
 		return $res;
 	}
 
+
 	/**
 	 * complete game array
 	 *
@@ -469,7 +470,6 @@ class LupoModelLupo extends JModelItem {
 
 		return $row;
 	}
-
 
 
 	/**
@@ -498,5 +498,27 @@ class LupoModelLupo extends JModelItem {
 
 		return $res;
 	}
+
+
+    /**
+     * Get the menu itemid of a game by category
+     * @param number gameid
+     * @return number itemid
+     */
+    public function getCategoryItemId($gameid){
+        $db =& JFactory::getDBO();
+
+        $db->setQuery("SELECT catid FROM #__lupo_game WHERE id = " . $gameid);
+        $row = $db->loadRow();
+
+        $db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0]."'");
+        $row = $db->loadRow();
+
+        if(count($row)>0){
+            return $row[0];
+        } else {
+            return false;
+        }
+    }
 
 }
