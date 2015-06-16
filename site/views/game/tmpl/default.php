@@ -271,28 +271,7 @@ if($this->game == 'error'){
                 <?php }?>
             </ul>
         <?php }
-    }?>
-
-	<?php
-	//navigation
-    /*
-    ?>	<br /><?php
-	if($componentParams->get('detail_show_toy_nav', '1') && $session_lupo!=null && isset($_GET['pos'])){
-		?><ul class="pagenav"><?php
-		if($pos>=1){
-			$nav_game=$session_lupo[$pos-1]; ?>
-			<li class="pagenav-prev">
-				<a class="uk-button uk-button-primary" accesskey="<?php echo JText::_('COM_LUPO_NAV_PREV_GAME')[0]; ?>" href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos-1))?>"><i class="uk-icon-caret-left"></i> <?php echo JText::_('COM_LUPO_NAV_PREV_GAME'); ?></a>
-			</li>
-		<?php }
-		if($pos+1<count($session_lupo)){
-			$nav_game=$session_lupo[$pos+1]; ?>
-			<li class="pagenav-next">
-				<a class="uk-button uk-button-primary" accesskey="<?php echo JText::_('COM_LUPO_NAV_NEXT_GAME')[0]; ?>" href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos+1))?>"><?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?> <i class="uk-icon-caret-right"></i></a>
-			</li>
-		<?php }?>
-		</ul><?php
-	}*/
+    }
 
 }  // endif get_game=error?>
 
