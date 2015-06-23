@@ -484,15 +484,27 @@ class LupoModelLupo extends JModelItem {
 		if(file_exists($game_image)){
 			$res['image']=$game_image;
 		} else {
-			$res['image']=null;
+			//try to get file without index in name
+			$game_image = 'images/spiele/'.(int)$number.'.jpg';
+			if(file_exists($game_image)) {
+				$res['image'] = $game_image;
+			} else {
+				$res['image'] = null;
+			}
 		}
 
 		if($game_thumb_prefix!="") {
-			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
+			$game_image_thumb = 'images/spiele/'.$game_thumb_prefix.$number.'.jpg';
 			if (file_exists($game_image_thumb)) {
 				$res['image_thumb'] = $game_image_thumb;
 			} else {
-				$res['image_thumb'] = null;
+				//try to get file without index in name
+				$game_image = 'images/spiele/'.$game_thumb_prefix.(int)$number.'.jpg';
+				if(file_exists($game_image)) {
+					$res['image_thumb'] = $game_image;
+				} else {
+					$res['image_thumb'] = null;
+				}
 			}
 		}
 
