@@ -309,6 +309,7 @@ class LupoModelLupo extends JModelItem {
 							#__lupo_game.id
 							, #__lupo_game.number
 							, #__lupo_game.title
+							, #__lupo_game.description_title
 							, #__lupo_game.description
 							, #__lupo_game.catid
 							, #__lupo_categories.title as category
@@ -459,6 +460,13 @@ class LupoModelLupo extends JModelItem {
 	public function compileGame($row, $game_thumb_prefix, $pos = '') {
 		//add foto to game array
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
+
+		//description-text
+		if($row['description_title']!=""){
+			$row['description_full'] = '<b>'.$row['description_title'].'</b><br>'.$row['description'];
+		} else {
+			$row['description_full'] = $row['description'];
+		}
 
 		if($pos!==''){
 			$pos = '&pos='.$pos;
