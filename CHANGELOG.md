@@ -1,5 +1,13 @@
 # Changelog
 
+
+### 2.4.0 (June 24, 2015)
+
+  - description-title added to all views
+  - detect menu itemid in game view
+  - fix display of image if multi-toy
+  - uikit and plupload updated
+
 ### 2.3.0 (April 28, 2015)
 
   - description-title added
