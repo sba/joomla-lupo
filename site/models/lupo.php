@@ -309,6 +309,7 @@ class LupoModelLupo extends JModelItem {
 							#__lupo_game.id
 							, #__lupo_game.number
 							, #__lupo_game.title
+							, #__lupo_game.description_title
 							, #__lupo_game.description
 							, #__lupo_game.catid
 							, #__lupo_categories.title as category
@@ -460,6 +461,13 @@ class LupoModelLupo extends JModelItem {
 		//add foto to game array
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
 
+		//description-text
+		if($row['description_title']!=""){
+			$row['description_full'] = '<b>'.$row['description_title'].'</b><br>'.$row['description'];
+		} else {
+			$row['description_full'] = $row['description'];
+		}
+
 		if($pos!==''){
 			$pos = '&pos='.$pos;
 		}
@@ -484,15 +492,27 @@ class LupoModelLupo extends JModelItem {
 		if(file_exists($game_image)){
 			$res['image']=$game_image;
 		} else {
-			$res['image']=null;
+			//try to get file without index in name
+			$game_image = 'images/spiele/'.(int)$number.'.jpg';
+			if(file_exists($game_image)) {
+				$res['image'] = $game_image;
+			} else {
+				$res['image'] = null;
+			}
 		}
 
 		if($game_thumb_prefix!="") {
-			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
+			$game_image_thumb = 'images/spiele/'.$game_thumb_prefix.$number.'.jpg';
 			if (file_exists($game_image_thumb)) {
 				$res['image_thumb'] = $game_image_thumb;
 			} else {
-				$res['image_thumb'] = null;
+				//try to get file without index in name
+				$game_image = 'images/spiele/'.$game_thumb_prefix.(int)$number.'.jpg';
+				if(file_exists($game_image)) {
+					$res['image_thumb'] = $game_image;
+				} else {
+					$res['image_thumb'] = null;
+				}
 			}
 		}
 

@@ -64,7 +64,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                                 <?php }?>
                             </a>
                             <br><?php
-                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description']); //replace <br/> with space
+                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
                             echo JHtmlString::truncateComplex($desc,220,true);
                             ?>
                         <?php }?>
