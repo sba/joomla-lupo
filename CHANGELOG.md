@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.5.0 (WIP)
+  - uikit and plupload updated
+  - show wikipedia-w in link-button
 
 ### 2.4.0 (June 24, 2015)
 
