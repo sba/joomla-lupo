@@ -223,7 +223,7 @@ if($this->game == 'error'){
 			case 'wikipedia':
 				$href=$document['value'];
 				$desc='Wikipedia';
-				$icon='external-link';
+				$icon='wikipedia-w';
 				$lightbox=false;
 				break;
 			case 'link_manual':
