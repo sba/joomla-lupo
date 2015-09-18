@@ -292,7 +292,31 @@ class LupoModelLupo extends JModelItem {
 		$session->set('lupo', $res);
 		
 		return $res;
-	}	
+	}
+
+	/**
+	 * Helper-Function to get the games per category
+	 *
+	 * @id genre-id
+	 * @foto_prefix name of the prefix for the image*
+	 * @return array with the games
+	 */
+	public function getGamesByCategory($id, $foto_prefix = '') {
+		$games = $this->getGames($id, 'catid', $foto_prefix);
+		return $games;
+	}
+
+	/**
+	 * Helper-Function to get the games per agecategory
+	 *
+	 * @id genre-id
+	 * @foto_prefix name of the prefix for the image*
+	 * @return array with the games
+	 */
+	public function getGamesByAgeCategory($id, $foto_prefix = '') {
+		$games = $this->getGames($id, 'age_catid', $foto_prefix);
+		return $games;
+	}
 
 
 	/**
@@ -341,7 +365,40 @@ class LupoModelLupo extends JModelItem {
 	}
 
 
-	/**
+    /**
+     * Get the Games by game number
+     *
+     * @number public game number, multiple numbers seperated by ;
+     * @foto_prefix name of the prefix for the image*
+     * @return array with the game(s)
+     */
+    public function getGamesByNumber($number, $foto_prefix = '') {
+
+        $numbers = explode(";",$number);
+
+        $db =& JFactory::getDBO();
+
+        $games = false;
+
+        foreach($numbers as $item) {
+            $db->setQuery("SELECT
+                            #__lupo_game.id
+                        FROM
+                            #__lupo_game
+                        WHERE #__lupo_game.number = " . $db->quote($db->escape(trim($item))));
+            $res = $db->loadAssoc();
+
+            if ($res !== null) {
+                $games[] = $this->getGame($res['id']);
+            }
+        }
+
+        return $games;
+    }
+
+
+
+    /**
 	 * Get a game 
 	 *
 	 * @id game-id
