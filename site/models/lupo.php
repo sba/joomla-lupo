@@ -259,6 +259,7 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.description
 					, #__lupo_game.catid
 					, #__lupo_game.genres
+					, #__lupo_game.fabricator
 					, #__lupo_categories.title as category
 					, #__lupo_game.age_catid
 					, #__lupo_agecategories.title as age_category
@@ -338,6 +339,7 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.description
 							, #__lupo_game.catid
 							, #__lupo_game.genres
+							, #__lupo_game.fabricator
 							, #__lupo_categories.title as category
 							, #__lupo_game.age_catid
 							, #__lupo_agecategories.title as age_category
