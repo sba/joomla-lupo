@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.5.0 (September 30, 2015)
+  - game object extended for use with widgetkit
+  - uikit and plupload updated
+  - show wikipedia-w in link-button
 
 ### 2.4.0 (June 24, 2015)
 

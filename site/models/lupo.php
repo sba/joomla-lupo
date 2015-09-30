@@ -258,16 +258,23 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.description_title
 					, #__lupo_game.description
 					, #__lupo_game.catid
+					, #__lupo_game.genres
+					, #__lupo_game.fabricator
+					, #__lupo_game.play_duration
+					, #__lupo_game.players
+					, #__lupo_game.keywords
 					, #__lupo_categories.title as category
 					, #__lupo_game.age_catid
 					, #__lupo_agecategories.title as age_category
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
+					, t_userdefined.value as userdefined
 					, COUNT(#__lupo_game_editions.id) as nbr
 				FROM #__lupo_game
 				LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
 				LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 				LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
+				LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 				%%WHERE%%
 				GROUP BY #__lupo_game.id
 				ORDER BY title, number";
@@ -292,7 +299,31 @@ class LupoModelLupo extends JModelItem {
 		$session->set('lupo', $res);
 		
 		return $res;
-	}	
+	}
+
+	/**
+	 * Helper-Function to get the games per category
+	 *
+	 * @id genre-id
+	 * @foto_prefix name of the prefix for the image*
+	 * @return array with the games
+	 */
+	public function getGamesByCategory($id, $foto_prefix = '') {
+		$games = $this->getGames($id, 'catid', $foto_prefix);
+		return $games;
+	}
+
+	/**
+	 * Helper-Function to get the games per agecategory
+	 *
+	 * @id genre-id
+	 * @foto_prefix name of the prefix for the image*
+	 * @return array with the games
+	 */
+	public function getGamesByAgeCategory($id, $foto_prefix = '') {
+		$games = $this->getGames($id, 'age_catid', $foto_prefix);
+		return $games;
+	}
 
 
 	/**
@@ -312,16 +343,23 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.description_title
 							, #__lupo_game.description
 							, #__lupo_game.catid
+							, #__lupo_game.genres
+							, #__lupo_game.fabricator
+							, #__lupo_game.play_duration
+							, #__lupo_game.players
+							, #__lupo_game.keywords
 							, #__lupo_categories.title as category
 							, #__lupo_game.age_catid
 							, #__lupo_agecategories.title as age_category
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
+							, t_userdefined.value as userdefined
 							, COUNT(#__lupo_game_editions.id) as nbr
 						FROM #__lupo_game
 						LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
+						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
 						WHERE #__lupo_game_genre.genreid=".$db->quote($id)."
 						GROUP BY #__lupo_game.id
@@ -341,7 +379,40 @@ class LupoModelLupo extends JModelItem {
 	}
 
 
-	/**
+    /**
+     * Get the Games by game number
+     *
+     * @number public game number, multiple numbers seperated by ;
+     * @foto_prefix name of the prefix for the image*
+     * @return array with the game(s)
+     */
+    public function getGamesByNumber($number, $foto_prefix = '') {
+
+        $numbers = explode(";",$number);
+
+        $db =& JFactory::getDBO();
+
+        $games = false;
+
+        foreach($numbers as $item) {
+            $db->setQuery("SELECT
+                            #__lupo_game.id
+                        FROM
+                            #__lupo_game
+                        WHERE #__lupo_game.number = " . $db->quote($db->escape(trim($item))));
+            $res = $db->loadAssoc();
+
+            if ($res !== null) {
+                $games[] = $this->getGame($res['id']);
+            }
+        }
+
+        return $games;
+    }
+
+
+
+    /**
 	 * Get a game 
 	 *
 	 * @id game-id
@@ -354,11 +425,13 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
 					    , #__lupo_categories.title AS category 
-					    , #__lupo_agecategories.title AS age_category 
+					    , #__lupo_agecategories.title AS age_category
+					    , t_userdefined.value as userdefined
 					FROM
 					    #__lupo_game 
 						LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid) 
-						LEFT JOIN #__lupo_agecategories ON (#__lupo_agecategories.id = #__lupo_game.age_catid) 
+						LEFT JOIN #__lupo_agecategories ON (#__lupo_agecategories.id = #__lupo_game.age_catid)
+						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 					WHERE #__lupo_game.id = " .$id);
 		$res = $db->loadAssoc();
 		

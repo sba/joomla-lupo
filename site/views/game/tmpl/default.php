@@ -32,7 +32,7 @@ if($description_title!=""){
 $description = $description_title.$this->game['description'];
 
 //for navigation
-$pos=$_GET['pos'];
+$pos=isset($_GET['pos'])?$_GET['pos']:0;
 $session = JFactory::getSession();
 $session_lupo=$session->get('lupo');
 
@@ -223,7 +223,7 @@ if($this->game == 'error'){
 			case 'wikipedia':
 				$href=$document['value'];
 				$desc='Wikipedia';
-				$icon='external-link';
+				$icon='wikipedia-w';
 				$lightbox=false;
 				break;
 			case 'link_manual':
