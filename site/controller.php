@@ -59,53 +59,53 @@ class LupoController extends JControllerLegacy {
 
 		switch($view){
 			case 'game':
-				$model = & $this->getModel();
+				$model = $this->getModel();
 				$game = $model->getGame($id);
-				$view = & $this->getView('Game', 'html');
+				$view = $this->getView('Game', 'html');
 				$view->game = $game;
 				$view->display();
 				break;
 			case 'genre':
-				$model = &$this->getModel();
+				$model = $this->getModel();
 				$genre = $model->getGenre($id);
 				$games = $model->getGamesByGenre($id, $foto_list_prefix);
-				$view = &$this->getView('Genre', 'html');
+				$view = $this->getView('Genre', 'html');
 				$view->genre = $genre;
 				$view->games = $games;
 				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
 				$view->display();
 				break;
 			case 'category':
-				$model = &$this->getModel();
+				$model = $this->getModel();
 				$category = $model->getCategory($id);
 				$games = $model->getGames($id, 'catid', $foto_list_prefix);
-				$view = &$this->getView('Category', 'html');
+				$view = $this->getView('Category', 'html');
 				$view->category = $category;
 				$view->games = $games;
 				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategory':
-				$model = & $this->getModel();
+				$model = $this->getModel();
 				$agecategory = $model->getAgecategory($id);
 				$games = $model->getGames($id, 'age_catid', $foto_list_prefix);
-				$view = & $this->getView('Agecategory', 'html');
+				$view = $this->getView('Agecategory', 'html');
 				$view->agecategory = $agecategory;
 				$view->games = $games;
 				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategories':
-				$view = & $this->getView('Agecategories', 'html');
-				$model = & $this->getModel();
+				$view = $this->getView('Agecategories', 'html');
+				$model = $this->getModel();
 				$agecategories = $model->getAgecategories();
 				$view->agecategories = $agecategories;
 				$view->display();
 				break;
 			case 'categories':
 			default:
-				$view = & $this->getView('Categories', 'html');
-				$model = & $this->getModel();
+				$view = $this->getView('Categories', 'html');
+				$model = $this->getModel();
 				$categories = $model->getCategories();
 				$view->categories = $categories;
 				$view->display();
