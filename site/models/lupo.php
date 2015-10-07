@@ -295,8 +295,7 @@ class LupoModelLupo extends JModelItem {
 			$pos++;
 		}
 
-		$session = JFactory::getSession();
-		$session->set('lupo', $res);
+		$this->saveSearchResultToSession($res);
 		
 		return $res;
 	}
@@ -372,8 +371,7 @@ class LupoModelLupo extends JModelItem {
 			$pos++;
 		}
 
-		$session = JFactory::getSession();
-		$session->set('lupo', $res);
+		$this->saveSearchResultToSession($res);
 
 		return $res;
 	}
@@ -612,6 +610,23 @@ class LupoModelLupo extends JModelItem {
         } else {
             return false;
         }
+    }
+
+
+    /**
+     * Save search-result to session
+     * @param array games-object
+     * @return no return
+     */
+    public function saveSearchResultToSession($res){
+
+		$games=array();
+		foreach($res as $row){
+			$games[]['id'] = $row['id'];
+		}
+
+		$session = JFactory::getSession();
+		$session->set('lupo', $games);
     }
 
 }
