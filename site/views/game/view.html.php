@@ -32,18 +32,17 @@ class LupoViewGame extends JViewLegacy
 		}
 
 		// Check for empty title and add site name if param is set
-		$title = $this->game['title'];
-		if (empty($title))
-		{
+		if ($this->game !== 'error' ) {
+			$title = $this->game['title'];
+			if (empty($title)) {
+				$title = $app->get('sitename');
+			} elseif ($app->get('sitename_pagetitles', 0) == 1) {
+				$title = JText::sprintf('JPAGETITLE', $app->get('sitename'), $title);
+			} elseif ($app->get('sitename_pagetitles', 0) == 2) {
+				$title = JText::sprintf('JPAGETITLE', $title, $app->get('sitename'));
+			}
+		} else {
 			$title = $app->get('sitename');
-		}
-		elseif ($app->get('sitename_pagetitles', 0) == 1)
-		{
-			$title = JText::sprintf('JPAGETITLE', $app->get('sitename'), $title);
-		}
-		elseif ($app->get('sitename_pagetitles', 0) == 2)
-		{
-			$title = JText::sprintf('JPAGETITLE', $title, $app->get('sitename'));
 		}
 
 		JFactory::getDocument()->setTitle($title);

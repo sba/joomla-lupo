@@ -24,18 +24,6 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
 //$github = new JGithub;
 //$description = $github->markdown->render($description);
 
-//description-text
-$description_title = $this->game['description_title'];
-if($description_title!=""){
-	$description_title='<p><b>'.$description_title.'</b></p>';
-}
-$description = $description_title.$this->game['description'];
-
-//for navigation
-$pos=isset($_GET['pos'])?$_GET['pos']:0;
-$session = JFactory::getSession();
-$session_lupo=$session->get('lupo');
-
 
 ?>
 <article class="tm-article">
@@ -44,6 +32,18 @@ $session_lupo=$session->get('lupo');
 if($this->game == 'error'){
 	?><h2 class="contentheading">Fehler - Spiel nicht gefunden</h2><?php
 } else {
+	//description-text
+	$description_title = $this->game['description_title'];
+	if($description_title!=""){
+		$description_title='<p><b>'.$description_title.'</b></p>';
+	}
+	$description = $description_title.$this->game['description'];
+
+	//for navigation
+	$pos=isset($_GET['pos'])?$_GET['pos']:0;
+	$session = JFactory::getSession();
+	$session_lupo=$session->get('lupo');
+
 
 	?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
 
