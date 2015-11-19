@@ -91,7 +91,11 @@ if($this->game == 'error'){
 					?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
 				} else {
 					?>
+					<?php if($componentParams->get('detail_photo_lightbox', '1')){ ?>
 					<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo $this->game['title']?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+					<?php } else { ?>
+						<img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
+					<?php }?>
 					<div id="img-toy" class="uk-modal">
 						<div>
 							<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
