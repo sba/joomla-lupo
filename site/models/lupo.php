@@ -295,8 +295,7 @@ class LupoModelLupo extends JModelItem {
 			$pos++;
 		}
 
-		$session = JFactory::getSession();
-		$session->set('lupo', $res);
+		$this->saveSearchResultToSession($res);
 		
 		return $res;
 	}
@@ -372,8 +371,7 @@ class LupoModelLupo extends JModelItem {
 			$pos++;
 		}
 
-		$session = JFactory::getSession();
-		$session->set('lupo', $res);
+		$this->saveSearchResultToSession($res);
 
 		return $res;
 	}
@@ -432,7 +430,7 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid) 
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_agecategories.id = #__lupo_game.age_catid)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
-					WHERE #__lupo_game.id = " .$id);
+					WHERE #__lupo_game.id = " .$db->quote($id));
 		$res = $db->loadAssoc();
 		
 		if($res==0){
@@ -601,17 +599,36 @@ class LupoModelLupo extends JModelItem {
     public function getCategoryItemId($gameid){
         $db =& JFactory::getDBO();
 
-        $db->setQuery("SELECT catid FROM #__lupo_game WHERE id = " . $gameid);
+        $db->setQuery("SELECT catid FROM #__lupo_game WHERE id = " . $db->quote($gameid));
         $row = $db->loadRow();
 
-        $db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0]."'");
-        $row = $db->loadRow();
+		if(count($row)>0) {
+			$db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0] . "'");
+			$row = $db->loadRow();
+		}
 
         if(count($row)>0){
             return $row[0];
         } else {
             return false;
         }
+    }
+
+
+    /**
+     * Save search-result to session
+     * @param array games-object
+     * @return no return
+     */
+    public function saveSearchResultToSession($res){
+
+		$games=array();
+		foreach($res as $row){
+			$games[]['id'] = $row['id'];
+		}
+
+		$session = JFactory::getSession();
+		$session->set('lupo', $games);
     }
 
 }

@@ -296,10 +296,10 @@
         </field>
 
         <field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO" />
-		
+
 		<field
 				type="radio"
-                class="btn-group btn-group-yesno"
+				class="btn-group btn-group-yesno"
 				name="detail_show_toy_photo"
 				id="detail_show_toy_photo"
 				label="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO"
@@ -307,8 +307,20 @@
 				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>	
-		
+		</field>
+
+		<field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="detail_photo_lightbox"
+				id="detail_photo_lightbox"
+				label="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX"
+				description="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX_DESC"
+				default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
 		<field
 			name="game_thumb_prefix"
 			id="game_thumb_prefix"

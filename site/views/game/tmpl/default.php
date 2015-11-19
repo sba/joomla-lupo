@@ -24,18 +24,6 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
 //$github = new JGithub;
 //$description = $github->markdown->render($description);
 
-//description-text
-$description_title = $this->game['description_title'];
-if($description_title!=""){
-	$description_title='<p><b>'.$description_title.'</b></p>';
-}
-$description = $description_title.$this->game['description'];
-
-//for navigation
-$pos=isset($_GET['pos'])?$_GET['pos']:0;
-$session = JFactory::getSession();
-$session_lupo=$session->get('lupo');
-
 
 ?>
 <article class="tm-article">
@@ -44,6 +32,18 @@ $session_lupo=$session->get('lupo');
 if($this->game == 'error'){
 	?><h2 class="contentheading">Fehler - Spiel nicht gefunden</h2><?php
 } else {
+	//description-text
+	$description_title = $this->game['description_title'];
+	if($description_title!=""){
+		$description_title='<p><b>'.$description_title.'</b></p>';
+	}
+	$description = $description_title.$this->game['description'];
+
+	//for navigation
+	$pos=isset($_GET['pos'])?$_GET['pos']:0;
+	$session = JFactory::getSession();
+	$session_lupo=$session->get('lupo');
+
 
 	?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
 
@@ -91,7 +91,11 @@ if($this->game == 'error'){
 					?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
 				} else {
 					?>
+					<?php if($componentParams->get('detail_photo_lightbox', '1')){ ?>
 					<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo $this->game['title']?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+					<?php } else { ?>
+						<img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
+					<?php }?>
 					<div id="img-toy" class="uk-modal">
 						<div>
 							<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />

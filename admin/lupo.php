@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_lupo'))
 {
-	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+	throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'), 404);
 }
 
 // Set some global property
@@ -40,8 +40,8 @@ set_time_limit ( 600 ); //10 Min
 
 $zipfile = 'lupo_spiele_export.zip';
 $xmlfile = 'lupospiele.xml';
-$xmlpath = 'components/com_lupo/xml_upload/';
-$gamespath = '../images/spiele/';
+$xmlpath = JPATH_SITE.DIRECTORY_SEPARATOR.'tmp'.DIRECTORY_SEPARATOR;
+$gamespath = JPATH_SITE.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'spiele'.DIRECTORY_SEPARATOR;
 
 
 

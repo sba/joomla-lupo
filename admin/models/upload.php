@@ -23,7 +23,7 @@ header("Pragma: no-cache");
 
 
 // Settings
-$targetDir = '../xml_upload/';
+$targetDir = '../../../../tmp/'; //Joomla temp dir
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
 

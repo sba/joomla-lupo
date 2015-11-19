@@ -1,5 +1,13 @@
 # Changelog
 
+### 2.6.0 (November 19, 2015)
+  - option to disable lightbox added
+  - uikit updated
+  - upload folder moved from admin to tmp dir
+  - page-title according joomla-settings
+  - quote query params
+  - code quality updates
+
 ### 2.5.0 (September 30, 2015)
   - game object extended for use with widgetkit
   - uikit and plupload updated
