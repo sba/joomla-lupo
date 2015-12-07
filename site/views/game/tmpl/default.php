@@ -70,7 +70,7 @@ if($this->game == 'error'){
 		<div class="uk-grid">
 		<?php
 		if($description!="") {?>
-			<div class="uk-width-1-<?php echo $grid_width?>">
+			<div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width?> uk-margin-bottom">
 			<?php
 
 			?><div class="lupo_description"><?php echo $description;?></div>
@@ -78,12 +78,12 @@ if($this->game == 'error'){
 		} ?>
 		<?php
 		if($componentParams->get('show_toy_photo', '1')){?>
-			<div class="uk-width-1-<?php echo $grid_width?>">
+			<div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width?> uk-margin-bottom">
 			<?php
 			if($this->game['image_thumb']==null){
 				if(!$this->game['image']==null){
 					$image_size=getimagesize($this->game['image']);
-					?><img class="lupo_image"width="<?php echo $image_size[0]?>" height="<?php echo $image_size[1]?>"  src="<?php echo $this->game['image']?>"><?php
+					?><img class="lupo_image" width="<?php echo $image_size[0]?>" height="<?php echo $image_size[1]?>"  src="<?php echo $this->game['image']?>"><?php
 				}
 			} else {
 				$image_thumb_size=getimagesize($this->game['image_thumb']);
