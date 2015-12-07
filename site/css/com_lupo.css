@@ -18,52 +18,18 @@ ul.lupo_categories {
 }
 
 .lupo_image {
-    margin: 0 0 10px 10px;
+
 }
 
 .lupo_description {
-	margin-bottom: 10px;
-}
 
-/* pagenav (prev / next toy) */
-ul.pagenav {
-    list-style-type: none;
-    overflow: hidden;
-    padding: 0;
-    margin-left: 0;
-}
-ul.pagenav li {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-}
-ul.pagenav li {
-    line-height: 2em;
-}
-ul.pagenav li.pagenav-prev {
-    float: left;
-}
-ul.pagenav li.pagenav-next {
-    float: right;
 }
 
 /*fix uikit lightbox background */
 .uk-modal-dialog {
     background: none !important;
     box-shadow: none !important;
-    padding: 0 !important;
 }
-.uk-lightbox-content {
-    margin-top: -1px !important;
-}
-.uk-modal-dialog-lightbox > .uk-close:first-child {
-    float: none;
-    margin: 0;
-    position: absolute;
-    right: -2px;
-    top: -2px;
-}
-
 
 /*fix uikit underline */
 .uk-icon-hover:hover {
