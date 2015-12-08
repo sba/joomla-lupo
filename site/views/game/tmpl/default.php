@@ -60,8 +60,8 @@ if($this->game == 'error'){
     <?php } ?>
 
 	<?php
-	if($componentParams->get('show_toy_photo', '1') || $description!=""){
-		if($componentParams->get('show_toy_photo', '1') && $this->game['image_thumb']!=NULL && $description!=""){
+	if($componentParams->get('detail_show_toy_photo', '1') || $description!=""){
+		if($componentParams->get('detail_show_toy_photo', '1') && $this->game['image_thumb']!=NULL && $description!=""){
 			$grid_width="2";
 		} else {
 			$grid_width="1";
@@ -77,7 +77,7 @@ if($this->game == 'error'){
 			</div><?php
 		} ?>
 		<?php
-		if($componentParams->get('show_toy_photo', '1') && $this->game['image']!=null){?>
+		if($componentParams->get('detail_show_toy_photo', '1') && $this->game['image']!=null){?>
 			<div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width?> uk-margin-bottom">
 			<?php
 			if($this->game['image_thumb']==null){
@@ -257,34 +257,50 @@ if($this->game == 'error'){
 	}
 
     //related games
-    if($componentParams->get('detail_show_toy_related', '1')) {
-        if (count($this->game['related']) > 0) {
-			$infinite = count($this->game['related']) < 6?'{infinite: false}':'';?>
-            <p class="uk-margin-large-top"><?php echo JText::_("COM_LUPO_RELATED_TOYS");?></p>
-			<div class="uk-slidenav-position" data-uk-slider="<?=$infinite?>">
-				<div class="uk-slider-container">
-					<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
-						foreach ($this->game['related'] as $related) {
-							?>
-							<li data-uk-tooltip="" title="<?php echo $related['title']?> <?php echo $related['edition']?>">
-								<a href="<?php echo $related['link']?>">
-								<?php if ($related['image_thumb'] != NULL) {?>
-									<img class="uk-align-left" src="<?php echo $related['image_thumb']?>">
-								<?php } else { ?>
-									<img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
-								<?php }?>
-								</a>
-							</li>
-						<?php }?>
-					</ul>
-				</div>
+    if($componentParams->get('detail_show_toy_related', '1')) { ?>
+		<p class="uk-margin-large-top"><?php echo JText::_("COM_LUPO_RELATED_TOYS"); ?></p><?php
+		if (count($this->game['related']) > 0) {
+			if ($componentParams->get('detail_show_toy_photo', '1') == 0) { ?>
+				<ul><?php
+					foreach ($this->game['related'] as $related) {
+						?>
+						<li>
+							<a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a>
+						</li>
+					<?php }?>
+				</ul>
+			<?php } else {
+				$infinite = count($this->game['related']) < 6 ? '{infinite: false}' : ''; ?>
+				<div class="uk-slidenav-position" data-uk-slider="<?= $infinite ?>">
+					<div class="uk-slider-container">
+						<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
+							foreach ($this->game['related'] as $related) {
+								?>
+								<li data-uk-tooltip=""
+									title="<?php echo $related['title'] ?> <?php echo $related['edition'] ?>">
+									<a href="<?php echo $related['link'] ?>">
+										<?php if ($related['image_thumb'] != NULL) { ?>
+											<img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>">
+										<?php } else { ?>
+											<img class="uk-align-left"
+												 src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg">
+										<?php } ?>
+									</a>
+								</li>
+							<?php } ?>
+						</ul>
+					</div>
 
-				<?php if (count($this->game['related']) > 6) {?>
-					<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slider-item="previous"></a>
-					<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slider-item="next"></a>
-				<?php } ?>
-			</div>
-        <?php }
+					<?php if (count($this->game['related']) > 6) { ?>
+						<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous"
+						   data-uk-slider-item="previous"></a>
+						<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next"
+						   data-uk-slider-item="next"></a>
+					<?php } ?>
+				</div>
+			<?php
+			}
+		}
     }
 
 }  // endif get_game=error?>
