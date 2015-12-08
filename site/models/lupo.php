@@ -31,9 +31,9 @@ class LupoModelLupo extends JModelItem {
 	 */
 	public function getCategoryNew() {
 		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$new_games_age = (int)$componentParams->get('new_games_age', '90'); 
-		if($new_games_age==0){
-			$new_games_age=90;
+		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
+		if($nbr_new_games==0){
+			$nbr_new_games=30;
 		}
 
 		$db =& JFactory::getDBO();
@@ -45,7 +45,7 @@ class LupoModelLupo extends JModelItem {
 			FROM
 			    #__lupo_game
 			LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-			WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)");
+			WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)");
 
 		$res=$db->loadAssocList();
 
@@ -238,10 +238,6 @@ class LupoModelLupo extends JModelItem {
 	 */
 	public function getGames($id, $field = 'catid', $foto_prefix = '') {
 		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$new_games_age = (int)$componentParams->get('new_games_age', '90'); 
-		if($new_games_age==0){
-			$new_games_age=90;
-		}
 
 		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
 		if($nbr_new_games==0){
