@@ -77,7 +77,7 @@ if($this->game == 'error'){
 			</div><?php
 		} ?>
 		<?php
-		if($componentParams->get('show_toy_photo', '1')){?>
+		if($componentParams->get('show_toy_photo', '1') && $this->game['image']!=null){?>
 			<div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width?> uk-margin-bottom">
 			<?php
 			if($this->game['image_thumb']==null){
