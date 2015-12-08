@@ -535,10 +535,12 @@ class LupoModelLupo extends JModelItem {
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
 
 		//description-text
-		if($row['description_title']!=""){
-			$row['description_full'] = '<b>'.$row['description_title'].'</b><br>'.$row['description'];
-		} else {
-			$row['description_full'] = $row['description'];
+		if (isset($row['description_title'])) {
+			if ($row['description_title'] != "") {
+				$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
+			} else {
+				$row['description_full'] = $row['description'];
+			}
 		}
 
 		if($pos!==''){
