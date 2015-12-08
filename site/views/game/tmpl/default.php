@@ -276,14 +276,12 @@ if($this->game == 'error'){
 						<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
 							foreach ($this->game['related'] as $related) {
 								?>
-								<li data-uk-tooltip=""
-									title="<?php echo $related['title'] ?> <?php echo $related['edition'] ?>">
+								<li data-uk-tooltip title="<?php echo $related['title'] ?> <?php echo $related['edition'] ?>">
 									<a href="<?php echo $related['link'] ?>">
 										<?php if ($related['image_thumb'] != NULL) { ?>
-											<img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>">
+											<img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>" />
 										<?php } else { ?>
-											<img class="uk-align-left"
-												 src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg">
+											<img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg" />
 										<?php } ?>
 									</a>
 								</li>
