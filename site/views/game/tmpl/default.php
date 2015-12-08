@@ -258,22 +258,28 @@ if($this->game == 'error'){
 
     //related games
     if($componentParams->get('detail_show_toy_related', '1')) {
-        if(count($this->game['documents'])>0 && count($this->game['related']) > 0 ){
-            ?><br><br><?php
-        }
+        if (count($this->game['related']) > 0) {
+			$infinite = count($this->game['related']) < 6?'{infinite: false}':'';?>
+            <p class="uk-margin-large-top"><?php echo JText::_("COM_LUPO_RELATED_TOYS");?></p>
+			<div class="uk-slidenav-position" data-uk-slider="<?=$infinite?>">
+				<div class="uk-slider-container">
+					<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
+						foreach ($this->game['related'] as $related) {
+							?>
+							<li data-uk-tooltip="" title="<?php echo $related['title']?> <?php echo $related['edition']?>">
+								<a href="<?php echo $related['link']?>">
+									<img src="<?=$related['image_thumb']?>">
+								</a>
+							</li>
+						<?php }?>
+					</ul>
+				</div>
 
-        if (count($this->game['related']) > 0) {?>
-            <br>
-            <?php echo JText::_("COM_LUPO_RELATED_TOYS");?>
-            <br>
-            <ul><?php
-                foreach ($this->game['related'] as $related) {
-                    ?>
-                    <li>
-                        <a href="<?php echo $related['link']?>"><?php echo $related['title']?> <?php echo $related['edition']?></a>
-                    </li>
-                <?php }?>
-            </ul>
+				<?php if (count($this->game['related']) > 6) {?>
+					<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slider-item="previous"></a>
+					<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slider-item="next"></a>
+				<?php } ?>
+			</div>
         <?php }
     }
 
