@@ -243,10 +243,16 @@ class LupoModelLupo extends JModelItem {
 			$new_games_age=90;
 		}
 
+		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
+		if($nbr_new_games==0){
+			$nbr_new_games=30;
+		}
+
 		$db =& JFactory::getDBO();
 
 		if($id=='new'){
-			$where = "WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)";
+			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
+			$where = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
 		} else {
 			$where = "WHERE ".$field."=" .$db->quote($id);
 		}
