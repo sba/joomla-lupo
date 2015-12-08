@@ -268,7 +268,11 @@ if($this->game == 'error'){
 							?>
 							<li data-uk-tooltip="" title="<?php echo $related['title']?> <?php echo $related['edition']?>">
 								<a href="<?php echo $related['link']?>">
-									<img src="<?=$related['image_thumb']?>">
+								<?php if ($related['image_thumb'] != NULL) {?>
+									<img class="uk-align-left" src="<?php echo $related['image_thumb']?>">
+								<?php } else { ?>
+									<img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
+								<?php }?>
 								</a>
 							</li>
 						<?php }?>
