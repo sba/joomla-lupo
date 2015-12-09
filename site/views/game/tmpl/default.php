@@ -271,19 +271,28 @@ if($this->game == 'error'){
 				</ul>
 			<?php } else {
 				$infinite = count($this->game['related']) < 6 ? '{infinite: false}' : ''; ?>
+				<style type="text/css">
+					.uk-overlay:hover img {
+						transform: none;
+					}
+				</style>
 				<div class="uk-slidenav-position" data-uk-slider="<?= $infinite ?>">
 					<div class="uk-slider-container">
 						<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
 							foreach ($this->game['related'] as $related) {
 								?>
-								<li data-uk-tooltip title="<?php echo htmlspecialchars($related['title'].' '.$related['edition']) ?>">
-									<a href="<?php echo $related['link'] ?>"><?php
+								<li>
+									<a href="<?php echo $related['link'] ?>">
+										<figure class="uk-overlay uk-overlay-hover"><?php
 										if ($related['image_thumb'] != NULL) {
 											?><img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>" /><?php
 										} else {
-											?><img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg" /><?php
+											?>
+											<img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg" /><?php
 										}
-										?></a>
+										?><figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><?php echo htmlspecialchars($related['title'].' '.$related['edition']) ?></figcaption>
+										</figure>
+									</a>
 								</li>
 							<?php } ?>
 						</ul>
