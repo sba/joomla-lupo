@@ -51,6 +51,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                             $nbr_games = ($game['nbr']>1 && $componentParams->get('category_nbr_games', '1'))?'('.$game['nbr'].')':'';
                             ?>
                             <a class="category" href="<?php echo $game['link']?>"><?php echo $game['title']?> <?php echo $nbr_games?></a>
+                            <br class="uk-visible-small" />
                         <?php } else { ?>
                             <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                         <?php } ?>

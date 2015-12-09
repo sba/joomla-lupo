@@ -35,3 +35,9 @@ ul.lupo_categories {
 .uk-icon-hover:hover {
     text-decoration: none;
 }
+
+@media (max-width: 400px){
+    #lupo_category_table tr td:nth-of-type(2) ~ td, #lupo_category_table tr th:nth-of-type(2) ~ th {
+        display: none;
+    }
+}
