@@ -279,17 +279,17 @@ if($this->game == 'error'){
 					<div class="uk-slider-container">
 						<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
 							foreach ($this->game['related'] as $related) {
+								if ($related['image_thumb'] != NULL) {
+									$image = $related['image_thumb'];
+								} else {
+									$image = 'images/spiele/'.$this->foto['prefix'].'dice-gray.jpg';
+								}
 								?>
 								<li>
 									<a href="<?php echo $related['link'] ?>">
-										<figure class="uk-overlay uk-overlay-hover"><?php
-										if ($related['image_thumb'] != NULL) {
-											?><img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>" /><?php
-										} else {
-											?>
-											<img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg" /><?php
-										}
-										?><figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><?php echo htmlspecialchars($related['title'].' '.$related['edition']) ?></figcaption>
+										<figure class="uk-overlay uk-overlay-hover">
+											<img src="<?php echo $image; ?>" />
+											<figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><?php echo $related['title'].' '.$related['edition']?></figcaption>
 										</figure>
 									</a>
 								</li>
