@@ -30,13 +30,13 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the category
 	 */
 	public function getCategoryNew() {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
+		$componentParams = JComponentHelper::getParams('com_lupo');
 		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
 		if($nbr_new_games==0){
 			$nbr_new_games=30;
 		}
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
 			    'new' AS id
@@ -63,8 +63,8 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the categories
 	 */
 	public function getCategories($show_new=true) {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$db =& JFactory::getDBO();
+		$componentParams = JComponentHelper::getParams('com_lupo');
+		$db = JFactory::getDBO();
 
 		$show_diverse = (int)$componentParams->get('show_diverse', '1');
 		$sql_clause='';
@@ -109,8 +109,8 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the agecategories
 	 */
 	public function getAgecategories($show_new=true) {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$db =& JFactory::getDBO();
+		$componentParams = JComponentHelper::getParams('com_lupo');
+		$db = JFactory::getDBO();
 
 		$show_diverse = (int)$componentParams->get('show_diverse', '1');
 		$sql_clause='';
@@ -154,7 +154,7 @@ class LupoModelLupo extends JModelItem {
 	 */
 	public function getGenres() {
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
 						  #__lupo_genres.id
@@ -183,7 +183,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return	array the genre
 	 */
 	public function getGenre($id) {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$sql = "SELECT * FROM #__lupo_genres WHERE id=" .$db->quote($id);
 		$db->setQuery($sql);
 		$res = $db->loadAssoc();
@@ -197,7 +197,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return	array the category
 	 */
 	public function getCategory($id) {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		if($id=='new'){
 			$res = array('id'=>'new','title'=>JText::_('COM_LUPO_NEW_TOYS'));
@@ -216,7 +216,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return	array the agecategory
 	 */
 	public function getAgecategory($id) {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		if($id=='new'){
 			$res = array('id'=>'new','title'=>JText::_('COM_LUPO_NEW_TOYS'));
@@ -237,14 +237,14 @@ class LupoModelLupo extends JModelItem {
 	 * @return array with the games
 	 */
 	public function getGames($id, $field = 'catid', $foto_prefix = '') {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
+		$componentParams = JComponentHelper::getParams('com_lupo');
 
 		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
 		if($nbr_new_games==0){
 			$nbr_new_games=30;
 		}
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		if($id=='new'){
 			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
@@ -336,7 +336,7 @@ class LupoModelLupo extends JModelItem {
 	 */
 	public function getGamesByGenre($id, $foto_prefix = '') {
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
 							, #__lupo_game.number
@@ -390,7 +390,7 @@ class LupoModelLupo extends JModelItem {
 
         $numbers = explode(";",$number);
 
-        $db =& JFactory::getDBO();
+        $db = JFactory::getDBO();
 
         $games = false;
 
@@ -419,9 +419,9 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the game
 	 */
 	public function getGame($id) {
-        $componentParams = &JComponentHelper::getParams('com_lupo');
+        $componentParams = JComponentHelper::getParams('com_lupo');
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
 					    , #__lupo_categories.title AS category 
@@ -601,7 +601,7 @@ class LupoModelLupo extends JModelItem {
      * @return number itemid
      */
     public function getCategoryItemId($gameid){
-        $db =& JFactory::getDBO();
+        $db = JFactory::getDBO();
 
         $db->setQuery("SELECT catid FROM #__lupo_game WHERE id = " . $db->quote($gameid));
         $row = $db->loadRow();
@@ -630,6 +630,9 @@ class LupoModelLupo extends JModelItem {
 		foreach($res as $row){
 			$games[]['id'] = $row['id'];
 		}
+		echo '<pre style="display:none;" >';
+		print_r($games);
+		echo '</pre>';
 
 		$session = JFactory::getSession();
 		$session->set('lupo', $games);

@@ -44,7 +44,6 @@ if($this->game == 'error'){
 	$session = JFactory::getSession();
 	$session_lupo=$session->get('lupo');
 
-
 	?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
 
 	<?php
