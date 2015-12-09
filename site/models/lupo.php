@@ -563,6 +563,8 @@ class LupoModelLupo extends JModelItem {
                         ORDER BY r.id");
         $res['related'] = $db->loadAssocList();
 
+		shuffle($res['related']); //mischeln damit nicht immer das spiel mit den meisten ausleihen zuerst kommt
+
         foreach($res['related'] as &$relatedgame){
             $relatedgame = $this->compileGame($relatedgame, 'mini_');
         }
