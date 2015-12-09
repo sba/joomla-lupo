@@ -257,9 +257,9 @@ if($this->game == 'error'){
 	}
 
     //related games
-    if($componentParams->get('detail_show_toy_related', '1')) { ?>
-		<p class="uk-margin-large-top"><?php echo JText::_("COM_LUPO_RELATED_TOYS"); ?></p><?php
+    if($componentParams->get('detail_show_toy_related', '1')) {
 		if (count($this->game['related']) > 0) {
+		?><p class="uk-margin-large-top"><?php echo JText::_("COM_LUPO_RELATED_TOYS"); ?></p><?php
 			if ($componentParams->get('detail_show_toy_photo', '1') == 0) { ?>
 				<ul><?php
 					foreach ($this->game['related'] as $related) {
@@ -309,7 +309,6 @@ if($this->game == 'error'){
 			}
 		}
     }
-
 }  // endif get_game=error?>
 
 </div>
