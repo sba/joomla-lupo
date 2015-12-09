@@ -202,57 +202,10 @@ if($this->game == 'error'){
 	</table>
 
 	<?php
-	// TODO: Move to model?
-	foreach($this->game['documents'] as $document) {
-		switch($document['code']){
-			case 'youtube':
-				$href='https://www.youtube.com/watch?v='.$document['value'];
-				$desc='YouTube';
-				$icon='youtube-play';
-				$lightbox=true;
-				break;
-			case 'vimeo':
-				$href='http://vimeo.com/'.$document['value'];
-				$desc='Vimeo';
-				$icon='vimeo-square';
-				$lightbox=true;
-				break;
-			case 'facebook':
-				$href=$document['value'];
-				$desc='Facebook';
-				$icon='facebook-square';
-				$lightbox=false;
-				break;
-			case 'wikipedia':
-				$href=$document['value'];
-				$desc='Wikipedia';
-				$icon='wikipedia-w';
-				$lightbox=false;
-				break;
-			case 'link_manual':
-				$href=$document['value'];
-				$desc='Spielanleitung';
-				$icon='file-pdf-o';
-				$lightbox=false;
-				break;
- 			case 'link_review':
- 			case 'website':
-			default:
-				$href=$document['value'];
-				$desc='Link';
-				$icon='external-link';
-				$lightbox=false;
-				break;
-		}
-		if($document['desc']!=""){
-			$desc=$document['desc'];
-		}
-		if($lightbox){
-			$lightbox="data-uk-lightbox=\"{group:'grp-docs'}\"";
-		} else {
-			$lightbox='target="_blank"';
-		}
-		?><a class="uk-button uk-margin-right" href="<?php echo $href?>" <?php echo $lightbox?>><i class="uk-icon-<?php echo $icon?>"></i> <?php echo $desc?></a> <?php
+	//document links
+	foreach($this->game['documents'] as $document) {?>
+		<a class="uk-button uk-margin-right" href="<?php echo $document['href']?>" <?php echo $document['lightbox']?>><i class="uk-icon-<?php echo $document['icon']?>"></i> <?php echo $document['desc']?></a>
+		<?php
 	}
 
     //related games

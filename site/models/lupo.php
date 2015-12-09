@@ -460,6 +460,58 @@ class LupoModelLupo extends JModelItem {
 					WHERE gameid = " .$id);
 		$res['documents'] = $db->loadAssocList();
 
+		//parse document fields
+		foreach($res['documents'] as &$document) {
+			switch ($document['code']) {
+				case 'youtube':
+					$document['href'] = 'https://www.youtube.com/watch?v=' . $document['value'];
+					$document['icon'] = 'youtube-play';
+					$desc = 'YouTube';
+					$lightbox = true;
+					break;
+				case 'vimeo':
+					$document['href'] = 'http://vimeo.com/' . $document['value'];
+					$document['icon'] = 'vimeo-square';
+					$desc = 'Vimeo';
+					$lightbox = true;
+					break;
+				case 'facebook':
+					$document['href'] = $document['value'];
+					$document['icon'] = 'facebook-square';
+					$desc = 'Facebook';
+					$lightbox = false;
+					break;
+				case 'wikipedia':
+					$document['href'] = $document['value'];
+					$document['icon'] = 'wikipedia-w';
+					$desc = 'Wikipedia';
+					$lightbox = false;
+					break;
+				case 'link_manual':
+					$document['href'] = $document['value'];
+					$document['icon'] = 'file-pdf-o';
+					$desc = 'Spielanleitung';
+					$lightbox = false;
+					break;
+				case 'link_review':
+				case 'website':
+				default:
+					$document['href'] = $document['value'];
+					$document['icon'] = 'external-link';
+					$desc = 'Link';
+					$lightbox = false;
+					break;
+			}
+			if ($document['desc'] == "") {
+				$document['desc'] = $desc;
+			}
+			if ($lightbox) {
+				$document['lightbox'] = "data-uk-lightbox=\"{group:'grp-docs'}\"";
+			} else {
+				$document['lightbox'] = 'target="_blank"';
+			}
+		}
+
 		//Load game editions
 		$db->setQuery("SELECT 
 					    *
