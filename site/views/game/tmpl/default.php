@@ -92,7 +92,7 @@ if($this->game == 'error'){
 				} else {
 					?>
 					<?php if($componentParams->get('detail_photo_lightbox', '1')){ ?>
-					<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo $this->game['title']?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+					<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo htmlspecialchars($this->game['title'].' '.$this->game['edition'])?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
 					<?php } else { ?>
 						<img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
 					<?php }?>
@@ -276,14 +276,14 @@ if($this->game == 'error'){
 						<ul class="uk-slider uk-grid uk-grid-width-1-3 uk-grid-width-small-1-4 uk-grid-width-medium-1-4 uk-grid-width-large-1-5"><?php
 							foreach ($this->game['related'] as $related) {
 								?>
-								<li data-uk-tooltip title="<?php echo $related['title'] ?> <?php echo $related['edition'] ?>">
-									<a href="<?php echo $related['link'] ?>">
-										<?php if ($related['image_thumb'] != NULL) { ?>
-											<img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>" />
-										<?php } else { ?>
-											<img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg" />
-										<?php } ?>
-									</a>
+								<li data-uk-tooltip title="<?php echo htmlspecialchars($related['title'].' '.$related['edition']) ?>">
+									<a href="<?php echo $related['link'] ?>"><?php
+										if ($related['image_thumb'] != NULL) {
+											?><img class="uk-align-left" src="<?php echo $related['image_thumb'] ?>" /><?php
+										} else {
+											?><img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg" /><?php
+										}
+										?></a>
 								</li>
 							<?php } ?>
 						</ul>
