@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 
 //load lupo styles
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
-$componentParams = &JComponentHelper::getParams('com_lupo');
+$componentParams = JComponentHelper::getParams('com_lupo');
 
 ?>
 <article class="tm-article">
