@@ -84,7 +84,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <td align="right"><?php echo $game['days']?></td>
                     <?php } ?>
                 </tr>
-            <?php
+                <?php
             }
             ?>
             </tbody>

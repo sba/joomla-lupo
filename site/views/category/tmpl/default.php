@@ -57,17 +57,17 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <?php } ?>
                         <?php if($this->foto['show']!='0') {?>
                             <a class="category" href="<?php echo $game['link']?>"><?php
-                            if ($game['image_thumb'] != NULL) {
-                                ?>
-                                <img class="uk-align-left" src="<?php echo $game['image_thumb']?>">
-                            <?php } else { ?>
-                                <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
-                            <?php }?>
+                                if ($game['image_thumb'] != NULL) {
+                                    ?>
+                                    <img class="uk-align-left" src="<?php echo $game['image_thumb']?>">
+                                <?php } else { ?>
+                                    <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
+                                <?php }?>
                             </a>
                             <br><?php
-                                $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
-                                echo JHtmlString::truncateComplex($desc,220,true);
-                                ?>
+                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
+                            echo JHtmlString::truncateComplex($desc,220,true);
+                            ?>
                         <?php }?>
                     </td>
                     <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
@@ -83,7 +83,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <td align="right"><?php echo $game['days']?></td>
                     <?php } ?>
                 </tr>
-            <?php
+                <?php
             }
             ?>
             </tbody>
