@@ -30,13 +30,13 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the category
 	 */
 	public function getCategoryNew() {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$new_games_age = (int)$componentParams->get('new_games_age', '90'); 
-		if($new_games_age==0){
-			$new_games_age=90;
+		$componentParams = JComponentHelper::getParams('com_lupo');
+		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
+		if($nbr_new_games==0){
+			$nbr_new_games=30;
 		}
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
 			    'new' AS id
@@ -45,7 +45,7 @@ class LupoModelLupo extends JModelItem {
 			FROM
 			    #__lupo_game
 			LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-			WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)");
+			WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)");
 
 		$res=$db->loadAssocList();
 
@@ -63,8 +63,8 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the categories
 	 */
 	public function getCategories($show_new=true) {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$db =& JFactory::getDBO();
+		$componentParams = JComponentHelper::getParams('com_lupo');
+		$db = JFactory::getDBO();
 
 		$show_diverse = (int)$componentParams->get('show_diverse', '1');
 		$sql_clause='';
@@ -109,8 +109,8 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the agecategories
 	 */
 	public function getAgecategories($show_new=true) {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$db =& JFactory::getDBO();
+		$componentParams = JComponentHelper::getParams('com_lupo');
+		$db = JFactory::getDBO();
 
 		$show_diverse = (int)$componentParams->get('show_diverse', '1');
 		$sql_clause='';
@@ -154,7 +154,7 @@ class LupoModelLupo extends JModelItem {
 	 */
 	public function getGenres() {
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
 						  #__lupo_genres.id
@@ -183,7 +183,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return	array the genre
 	 */
 	public function getGenre($id) {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$sql = "SELECT * FROM #__lupo_genres WHERE id=" .$db->quote($id);
 		$db->setQuery($sql);
 		$res = $db->loadAssoc();
@@ -197,7 +197,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return	array the category
 	 */
 	public function getCategory($id) {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		if($id=='new'){
 			$res = array('id'=>'new','title'=>JText::_('COM_LUPO_NEW_TOYS'));
@@ -216,7 +216,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return	array the agecategory
 	 */
 	public function getAgecategory($id) {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		if($id=='new'){
 			$res = array('id'=>'new','title'=>JText::_('COM_LUPO_NEW_TOYS'));
@@ -237,16 +237,18 @@ class LupoModelLupo extends JModelItem {
 	 * @return array with the games
 	 */
 	public function getGames($id, $field = 'catid', $foto_prefix = '') {
-		$componentParams = &JComponentHelper::getParams('com_lupo');
-		$new_games_age = (int)$componentParams->get('new_games_age', '90'); 
-		if($new_games_age==0){
-			$new_games_age=90;
+		$componentParams = JComponentHelper::getParams('com_lupo');
+
+		$nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
+		if($nbr_new_games==0){
+			$nbr_new_games=30;
 		}
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		if($id=='new'){
-			$where = "WHERE #__lupo_game_editions.acquired_date > DATE_ADD(DATE(NOW()),INTERVAL -$new_games_age DAY)";
+			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
+			$where = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
 		} else {
 			$where = "WHERE ".$field."=" .$db->quote($id);
 		}
@@ -334,7 +336,7 @@ class LupoModelLupo extends JModelItem {
 	 */
 	public function getGamesByGenre($id, $foto_prefix = '') {
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
 							, #__lupo_game.number
@@ -388,7 +390,7 @@ class LupoModelLupo extends JModelItem {
 
         $numbers = explode(";",$number);
 
-        $db =& JFactory::getDBO();
+        $db = JFactory::getDBO();
 
         $games = false;
 
@@ -417,9 +419,9 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the game
 	 */
 	public function getGame($id) {
-        $componentParams = &JComponentHelper::getParams('com_lupo');
+        $componentParams = JComponentHelper::getParams('com_lupo');
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
 					    , #__lupo_categories.title AS category 
@@ -457,6 +459,58 @@ class LupoModelLupo extends JModelItem {
 					    #__lupo_game_documents
 					WHERE gameid = " .$id);
 		$res['documents'] = $db->loadAssocList();
+
+		//parse document fields
+		foreach($res['documents'] as &$document) {
+			switch ($document['code']) {
+				case 'youtube':
+					$document['href'] = 'https://www.youtube.com/watch?v=' . $document['value'];
+					$document['icon'] = 'youtube-play';
+					$desc = 'YouTube';
+					$lightbox = true;
+					break;
+				case 'vimeo':
+					$document['href'] = 'http://vimeo.com/' . $document['value'];
+					$document['icon'] = 'vimeo-square';
+					$desc = 'Vimeo';
+					$lightbox = true;
+					break;
+				case 'facebook':
+					$document['href'] = $document['value'];
+					$document['icon'] = 'facebook-square';
+					$desc = 'Facebook';
+					$lightbox = false;
+					break;
+				case 'wikipedia':
+					$document['href'] = $document['value'];
+					$document['icon'] = 'wikipedia-w';
+					$desc = 'Wikipedia';
+					$lightbox = false;
+					break;
+				case 'link_manual':
+					$document['href'] = $document['value'];
+					$document['icon'] = 'file-pdf-o';
+					$desc = 'Spielanleitung';
+					$lightbox = false;
+					break;
+				case 'link_review':
+				case 'website':
+				default:
+					$document['href'] = $document['value'];
+					$document['icon'] = 'external-link';
+					$desc = 'Link';
+					$lightbox = false;
+					break;
+			}
+			if ($document['desc'] == "") {
+				$document['desc'] = $desc;
+			}
+			if ($lightbox) {
+				$document['lightbox'] = "data-uk-lightbox=\"{group:'grp-docs'}\"";
+			} else {
+				$document['lightbox'] = 'target="_blank"';
+			}
+		}
 
 		//Load game editions
 		$db->setQuery("SELECT 
@@ -509,6 +563,8 @@ class LupoModelLupo extends JModelItem {
                         ORDER BY r.id");
         $res['related'] = $db->loadAssocList();
 
+		shuffle($res['related']); //mischeln damit nicht immer das spiel mit den meisten ausleihen zuerst kommt
+
         foreach($res['related'] as &$relatedgame){
             $relatedgame = $this->compileGame($relatedgame, 'mini_');
         }
@@ -533,10 +589,12 @@ class LupoModelLupo extends JModelItem {
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
 
 		//description-text
-		if($row['description_title']!=""){
-			$row['description_full'] = '<b>'.$row['description_title'].'</b><br>'.$row['description'];
-		} else {
-			$row['description_full'] = $row['description'];
+		if (isset($row['description_title'])) {
+			if ($row['description_title'] != "") {
+				$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
+			} else {
+				$row['description_full'] = $row['description'];
+			}
 		}
 
 		if($pos!==''){
@@ -597,7 +655,7 @@ class LupoModelLupo extends JModelItem {
      * @return number itemid
      */
     public function getCategoryItemId($gameid){
-        $db =& JFactory::getDBO();
+        $db = JFactory::getDBO();
 
         $db->setQuery("SELECT catid FROM #__lupo_game WHERE id = " . $db->quote($gameid));
         $row = $db->loadRow();
@@ -626,6 +684,9 @@ class LupoModelLupo extends JModelItem {
 		foreach($res as $row){
 			$games[]['id'] = $row['id'];
 		}
+		echo '<pre style="display:none;" >';
+		print_r($games);
+		echo '</pre>';
 
 		$session = JFactory::getSession();
 		$session->set('lupo', $games);

@@ -78,7 +78,7 @@ function LupoParseRoute($segments) {
             if (!class_exists( 'LupoModelLupo' )){
                 JLoader::import( 'lupo', JPATH_BASE . '/components/com_lupo/models' );
             }
-            $model = & new LupoModelLupo();
+            $model = new LupoModelLupo();
             $cat_itemid = $model->getCategoryItemId($id[0]);
             if($cat_itemid!==false){
                 $itemid = $cat_itemid;

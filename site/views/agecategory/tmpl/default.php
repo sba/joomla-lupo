@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 
 //load lupo styles
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
-$componentParams = &JComponentHelper::getParams('com_lupo');
+$componentParams = JComponentHelper::getParams('com_lupo');
 
 ?>
 <article class="tm-article">
@@ -51,6 +51,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                             $nbr_games = ($game['nbr']>1 && $componentParams->get('category_nbr_games', '1'))?'('.$game['nbr'].')':'';
                             ?>
                             <a class="category" href="<?php echo $game['link']?>"><?php echo $game['title']?> <?php echo $nbr_games?></a>
+                            <br class="uk-visible-small" />
                         <?php } else { ?>
                             <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                         <?php } ?>
@@ -82,7 +83,7 @@ $componentParams = &JComponentHelper::getParams('com_lupo');
                         <td align="right"><?php echo $game['days']?></td>
                     <?php } ?>
                 </tr>
-            <?php
+                <?php
             }
             ?>
             </tbody>

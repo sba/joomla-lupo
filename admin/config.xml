@@ -18,14 +18,14 @@
 		</field>	
 		
 		<field
-			name="new_games_age"
-			id="lupo_new_games_age"
-			type="text"
+			name="nbr_new_games"
+			id="lupo_nbr_new_games"
+			type="number"
 			maxLenght="5"
 			size="4"
 			label="COM_LUPO_OPTIONS_CATS_NBR_DAYS"
 			description="COM_LUPO_OPTIONS_CATS_NBR_DAYS_DESC"
-			default="90"
+			default="30"
 		>
 		</field>		
 		
