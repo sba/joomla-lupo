@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.7.0 (January 04, 2016)
+  - show related toys in slider
+  - shuffle list of related toys
+  - changed behavior to fetch new toys
+  - uikit updated
+  - make detail-view more responsive
+  - do not show photo if set in options
+  - toy document logic moved to model
+  - fix notice php-error
+  - code cleanup
+  - code quality updates
+
 ### 2.6.0 (November 19, 2015)
   - option to disable lightbox added
   - uikit updated
