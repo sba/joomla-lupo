@@ -270,6 +270,7 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_agecategories.title as age_category
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
+					, #__lupo_game_editions.acquired_date
 					, t_userdefined.value as userdefined
 					, COUNT(#__lupo_game_editions.id) as nbr
 				FROM #__lupo_game
@@ -354,6 +355,7 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_agecategories.title as age_category
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
+							, #__lupo_game_editions.acquired_date
 							, t_userdefined.value as userdefined
 							, COUNT(#__lupo_game_editions.id) as nbr
 						FROM #__lupo_game
