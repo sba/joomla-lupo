@@ -333,21 +333,7 @@
 		>
 		</field>
 
-		<field type="spacer" name="spacer5" class="text strong" label="COM_LUPO_OPTIONS_TOY_RESERVATION" />
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_res"
-				id="detail_show_toy_res"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
+        <field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
 
         <field
                 type="radio"
@@ -373,7 +359,8 @@
 				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>
+		</field>	
+			
 	</fieldset>
 
     <fieldset
