@@ -198,6 +198,79 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 				<?php
 			}
 
+			//reservation
+			if($componentParams->get('detail_show_toy_res', '1')) {?>
+				<a class="uk-button uk-margin-right" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+
+				<script type="text/javascript">
+					jQuery( document ).ready(function( $ ) {
+						$('#submitres').click(function () {
+
+							$.ajax({
+									method: "POST",
+									url: "index.php?option=com_lupo&task=sendres&format=raw",
+									data: {
+										clientname: $('#clientname').val(),
+										clientemail: $('#clientemail').val(),
+										clientnr: $('#clientnr').val(),
+										comment: $('#comment').val(),
+										toynr: '<?php echo $this->game['number']?>',
+										toyname: '<?php echo $this->game['title']?>'
+									}
+								})
+								.done(function( msg ) {
+									if(msg=='ok'){
+										var modal = UIkit.modal("#resform");
+										modal.hide();
+										$('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
+									} else {
+										$('#modal-msg').html('<div class="uk-alert uk-alert-danger">'+msg+'</div>');
+									}
+								});
+						})
+					})
+				</script>
+				<div id="resform" class="uk-modal">
+					<div class="uk-modal-dialog" style="background: #ffffff none repeat scroll 0 0 !important;">
+						<button class="uk-modal-close uk-close" type="button"></button>
+						<div class="uk-modal-header"><h2><?php echo JText::_("COM_LUPO_RES_TOYS"); ?></h2></div>
+						<table style="width:600px">
+							<tbody><tr><td colspan="2"></td></tr>
+							<tr>
+								<td style="width:150px;">Spiel</td>
+								<td><input type="text" disabled maxlength="100" size="40" value="<?php echo $this->game['title']?>" id="toy"></td>
+							</tr>
+							<tr>
+								<td style="width:150px;">Name:*</td>
+								<td><input type="text" required maxlength="100" size="40" value="" id="clientname" name="clientname"></td>
+							</tr>
+							<tr>
+								<td style="width:150px;">E-Mail Adresse:*<br></td>
+								<td><input type="email" required maxlength="100" size="40" value="" id="clientemail" name="clientemail" ></td>
+							</tr>
+							<tr>
+								<td style="width:150px;">Kundennummer:</td>
+								<td><input type="text" maxlength="50" size="40" value="" id="clientnr" name="clientnr"> <span style="color:#444;">(Falls vorhanden)</span></td>
+							</tr>
+							<tr>
+								<td style="width:150px;">Zusätzliche Angaben</td>
+								<td><textarea rows="10" cols="70" id="comment" name="comment" style="height: 87px; width: 312px;"></textarea></td>
+							</tr>
+							<tr>
+								<td style="width:150px">&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							</tbody>
+						</table>
+						<div class="uk-modal-footer">
+							<button id="submitres" class="uk-button uk-button-primary">Abschicken</button>
+							<div id="modal-msg" style="margin-top: 10px"></div>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
+
 			//related games
 			if($componentParams->get('detail_show_toy_related', '1')) {
 				if (count($this->game['related']) > 0) {
