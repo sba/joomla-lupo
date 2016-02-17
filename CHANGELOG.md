@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.8.0 (February 17, 2016)
+  - toy reservation form added
+  - access.xml added for minimal ACL
+  - wrong language variable fixed
+  - field aquired_date added to game object  
+
 ### 2.7.0 (January 04, 2016)
   - show related toys in slider
   - shuffle list of related toys
