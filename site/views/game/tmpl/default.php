@@ -199,7 +199,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 			}
 
 			//reservation
-			if($componentParams->get('detail_show_toy_res', '1')) {?>
+			if($componentParams->get('detail_show_toy_res', '0')) {?>
 				<a class="uk-button uk-margin-right" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
 
 				<script type="text/javascript">
