@@ -1,4 +1,4 @@
-/*! UIkit 2.24.3 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.26.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 (function(UI) {
 
     "use strict";
@@ -86,6 +86,7 @@
 
                         if (element.data('scrollspy-idle')) {
                             clearTimeout(element.data('scrollspy-idle'));
+                            element.data('scrollspy-idle', false);
                         }
 
                         element.removeClass("uk-scrollspy-inview").toggleClass(toggle);
@@ -170,7 +171,7 @@
                         scrollTop = $win.scrollTop(),
                         target = (function(){
                             for(var i=0; i< inviews.length;i++){
-                                if(inviews[i].offset().top >= scrollTop){
+                                if(inviews[i].offset().top + inviews[i].outerHeight() >= scrollTop){
                                     return inviews[i];
                                 }
                             }
