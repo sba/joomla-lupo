@@ -24,7 +24,7 @@ JHtml::_('behavior.tooltip');
 			browse_button : 'pickfiles',
 			container: 'container',
 
-			max_file_size : '100mb',
+			max_file_size : '150mb',
 			multi_selection: false,
 			max_file_count: 1,
 
