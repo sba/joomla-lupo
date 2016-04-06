@@ -74,7 +74,15 @@ JHtml::_('behavior.tooltip');
 				},
 
 				Error: function(up, err) {
-					jQuery('#upload_percent').html += "\nError #" + err.code + ": " + err.message;
+					var errorMsg;
+					if(err.code==-600){
+						errorMsg = "FEHLER: Die Datei " + err.file.name + " ist zu gross.";
+						errorMsg = '<span style="color:red"><b>' + errorMsg + '</b></span>';
+						jQuery('#filelist').html(errorMsg);
+					} else {
+						errorMsg = "\nError #" + err.code + ": " + err.message;
+						jQuery('#upload_percent').html(errorMsg);
+					}
 				}
 			}
 		});
@@ -101,7 +109,6 @@ JHtml::_('behavior.tooltip');
 		<a id="uploadfiles" href="javascript:;"><button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE")?></button></a>
 		<span id="upload_percent"></span>
 	</div>
-
 
 	<br />
 
