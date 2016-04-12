@@ -536,6 +536,12 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
+		if(count($res['editions'])==1){
+			$res['edition']=$res['editions'][0]['edition'];
+		} else {
+			$res['edition']='';
+		}
+
         //related games
         $db->setQuery("SELECT
                           r.number

@@ -34,7 +34,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 			$session = JFactory::getSession();
 			$session_lupo=$session->get('lupo');
 
-			?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
+			?><h2 class="contentheading"><?php echo $this->game['title'].' '.$this->game['edition']?></h2>
 
 			<?php
 			//navigation
