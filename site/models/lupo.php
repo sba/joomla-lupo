@@ -536,12 +536,6 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		if(count($res['editions'])==1){
-			$res['edition']=$res['editions'][0]['edition'];
-		} else {
-			$res['edition']='';
-		}
-
         //related games
         $db->setQuery("SELECT
                           r.number
@@ -603,6 +597,12 @@ class LupoModelLupo extends JModelItem {
 			} else {
 				$row['description_full'] = $row['description'];
 			}
+		}
+
+		if(count($row['editions'])==1){
+			$row['edition']=$row['editions'][0]['edition'];
+		} else {
+			$row['edition']='';
 		}
 
 		if($pos!==''){
