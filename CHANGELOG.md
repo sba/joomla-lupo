@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.9.0 (April 19, 2016)
+  - increase max upload fileseize to 250MB
+  - show XML-reprocess button only to superadmins
+  - sort list with new games first by acquiredate, then by title
+  - show edition-text in title if only one toy in toy-family
+  - uploader: fix error when showing upload errormessage
+  - do not show reservation-form by default
+  - uikit updated to 2.26.2
+
 ### 2.8.0 (February 17, 2016)
   - toy reservation form added
   - access.xml added for minimal ACL
