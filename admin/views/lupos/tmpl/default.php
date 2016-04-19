@@ -118,6 +118,13 @@ JHtml::_('behavior.tooltip');
 		<input type="submit" name="submit" class="btn btn-large" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
 	</form>
 
+	<?php
+	//show this buttons only to me (if user is superadmin)
+	$user = JFactory::getUser();
+	$isroot = $user->authorise('core.admin');
+	if($isroot){
+	?>
+
 	<br />
 	<hr />
 	<br />
@@ -128,5 +135,7 @@ JHtml::_('behavior.tooltip');
 
 		<input type="submit" name="submit" class="btn btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
 	</form>
+
+	<?php } ?>
 </div>
 
