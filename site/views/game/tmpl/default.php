@@ -34,7 +34,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 			$session = JFactory::getSession();
 			$session_lupo=$session->get('lupo');
 
-			?><h2 class="contentheading"><?php echo $this->game['title']?></h2>
+			?><h2 class="contentheading"><?php echo $this->game['title'].' '.$this->game['edition']?></h2>
 
 			<?php
 			//navigation
@@ -194,13 +194,13 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 			<?php
 			//document links
 			foreach($this->game['documents'] as $document) {?>
-				<a class="uk-button uk-margin-right" href="<?php echo $document['href']?>" <?php echo $document['lightbox']?>><i class="uk-icon-<?php echo $document['icon']?>"></i> <?php echo $document['desc']?></a>
+				<a class="uk-button uk-margin-right uk-margin-bottom" href="<?php echo $document['href']?>" <?php echo $document['lightbox']?>><i class="uk-icon-<?php echo $document['icon']?>"></i> <?php echo $document['desc']?></a>
 				<?php
 			}
 
 			//reservation
-			if($componentParams->get('detail_show_toy_res', '1')) {?>
-				<a class="uk-button uk-margin-right" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+			if($componentParams->get('detail_show_toy_res', '0')) {?>
+				<a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
 
 				<script type="text/javascript">
 					jQuery( document ).ready(function( $ ) {

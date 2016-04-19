@@ -24,7 +24,7 @@ JHtml::_('behavior.tooltip');
 			browse_button : 'pickfiles',
 			container: 'container',
 
-			max_file_size : '100mb',
+			max_file_size : '250mb',
 			multi_selection: false,
 			max_file_count: 1,
 
@@ -74,7 +74,15 @@ JHtml::_('behavior.tooltip');
 				},
 
 				Error: function(up, err) {
-					jQuery('#upload_percent').html += "\nError #" + err.code + ": " + err.message;
+					var errorMsg;
+					if(err.code==-600){
+						errorMsg = "FEHLER: Die Datei " + err.file.name + " ist zu gross.";
+						errorMsg = '<span style="color:red"><b>' + errorMsg + '</b></span>';
+						jQuery('#filelist').html(errorMsg);
+					} else {
+						errorMsg = "\nError #" + err.code + ": " + err.message;
+						jQuery('#upload_percent').html(errorMsg);
+					}
 				}
 			}
 		});
@@ -102,7 +110,6 @@ JHtml::_('behavior.tooltip');
 		<span id="upload_percent"></span>
 	</div>
 
-
 	<br />
 
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processZIPForm">
@@ -110,6 +117,13 @@ JHtml::_('behavior.tooltip');
 
 		<input type="submit" name="submit" class="btn btn-large" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
 	</form>
+
+	<?php
+	//show this buttons only to me (if user is superadmin)
+	$user = JFactory::getUser();
+	$isroot = $user->authorise('core.admin');
+	if($isroot){
+	?>
 
 	<br />
 	<hr />
@@ -121,5 +135,7 @@ JHtml::_('behavior.tooltip');
 
 		<input type="submit" name="submit" class="btn btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
 	</form>
+
+	<?php } ?>
 </div>
 
