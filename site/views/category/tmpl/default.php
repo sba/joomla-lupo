@@ -70,7 +70,8 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
                                 <?php }?>
                             </a>
-                            <br><?php
+                            <br>
+                            <?php
                             $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
                             echo JHtmlString::truncateComplex($desc,220,true);
                             ?>

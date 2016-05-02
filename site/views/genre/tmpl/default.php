@@ -17,7 +17,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
 ?>
 <article class="tm-article">
-    <div class="tm-article-content ">
+    <div class="tm-article-content">
         <h2 class="contentheading"><?php echo $this->title?></h2>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
