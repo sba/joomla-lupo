@@ -113,6 +113,9 @@ class LupoController extends JControllerLegacy {
 		}
 	}
 
+	/**
+	 * sends reservation email
+	 */
 	public function sendres(){
 		$jinput = JFactory::getApplication()->input;
 		$clientname = $jinput->get('clientname', '', 'STRING');
@@ -167,4 +170,129 @@ class LupoController extends JControllerLegacy {
 		return;
 
 	}
+
+	/**
+	 * LUPO API - update toy rental state and client-table
+	 */
+	public function api() {
+		$jinput = JFactory::getApplication()->input;
+		$act = $jinput->get('act', '', 'STRING');
+		$token = $jinput->get('token', '', 'STRING');
+		$data = $jinput->get('data', '', 'STRING');
+
+		switch($act){
+			case 'authorize':
+				if($this->autohorize($token)){
+					echo "ok";
+				} else {
+					echo 'error_token';
+				}
+				break;
+			case 'adr':
+				if(!$this->autohorize($token)){
+					echo 'error_token';
+					return;
+				}
+
+				$data = urldecode($data);
+				$data = utf8_encode($data);
+				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
+				$arr = json_decode($data);
+
+				foreach($arr as $row){
+					$client = new stdClass();
+					$client->adrnr = $row->nr;
+					$client->username = $row->un;
+					$client->firstname = $row->vn;
+					$client->lastname = $row->nn;
+					$client->aboenddat = $row->ae;
+					$client->abotype = $row->at;
+
+					// wäre schöner so, sollte updaten on duplicate key: GEHT ABER NICHT
+					//$result = JFactory::getDbo()->insertObject('#__lupo_clients', $client, 'adrnr');
+
+					try {
+						$result = JFactory::getDbo()->insertObject('#__lupo_clients', $client);
+					}
+					catch (Exception $e){
+						$result = JFactory::getDbo()->updateObject('#__lupo_clients', $client, 'adrnr');
+					}
+				}
+
+				echo $result;
+
+			case 'aus':
+				if(!$this->autohorize($token)){
+					echo 'error_token';
+					return;
+				}
+
+				$data = urldecode($data);
+				$data = utf8_encode($data);
+				$arr = json_decode($data);
+
+				//delete all records
+				$db = JFactory::getDbo();
+				$query = $db->getQuery(true);
+				$query->delete($db->quoteName('#__lupo_borrowed'));
+				$db->setQuery($query);
+				$result = $db->execute();
+
+				//insert into
+				foreach($arr as $row){
+					//get edition_id
+
+					//get Number and Index
+					if(strpos($row->nr,".")==0){
+						$game_nr = $row->nr;
+						$game_index = 0;
+					} else {
+						list($game_nr, $game_index) = explode(".", $row->nr);
+					}
+
+					$query = $db->getQuery(true);
+					$query->select('#__lupo_game_editions.id')
+						->from('#__lupo_game_editions')
+						->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
+						->where('#__lupo_game.number = '.$game_nr.' AND #__lupo_game_editions.index = '.$game_index);
+					$db->setQuery($query);
+					$edition_row = $db->loadObject();
+					
+					$client = new stdClass();
+					$client->adrnr = $row->adr;
+					$client->edition_id = $edition_row->id;
+					$client->return_date = $row->rd;
+					$client->return_extended = $row->re;
+
+					try {
+						$result = JFactory::getDbo()->insertObject('#__lupo_borrowed', $client);
+					}
+					catch (Exception $e){
+						echo "error"; //todo
+					}
+				}
+
+				echo $result;
+
+		}
+
+		return;
+	}
+
+	/**
+	 * authorize request
+	 *
+	 * @param $token
+	 *
+	 * @return string ok or error_token
+	 */
+	public function autohorize($token) {
+		if($token == md5('luposalz+Ludothek Zofingen')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
 }

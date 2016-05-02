@@ -588,7 +588,7 @@ class LupoModelLupo extends JModelItem {
 	 * @return array game
 	 */
 	public function compileGame($row, $game_thumb_prefix, $pos = '') {
-		//add foto to game array
+		//add photo to game array
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
 
 		//description-text
@@ -600,7 +600,7 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		if(count($row['editions'])==1){
+		if(isset($row['editions']) && count($row['editions'])==1){
 			$row['edition']=$row['editions'][0]['edition'];
 		} else {
 			$row['edition']='';
