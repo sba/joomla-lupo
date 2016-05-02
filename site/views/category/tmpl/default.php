@@ -44,6 +44,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             <?php
             $i=0;
             foreach($this->games as $game){
+                if($game['return_date']==null) {
+                    $availability = '<i class="uk-icon uk-icon-circle green uk-float-right availability_dot" title="'.JText::_("COM_LUPO_AVAILABLE").'"></i>';
+                } else {
+                    $availability = '<i class="uk-icon uk-icon-circle red uk-float-right availability_dot" title="'.JText::_("COM_LUPO_BORROWED").'"></i>';
+                }
                 ?>
                 <tr>
                     <td>
@@ -55,6 +60,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <?php } else { ?>
                             <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                         <?php } ?>
+                        <?php echo $availability ?>
                         <?php if($this->foto['show']!='0') {?>
                             <a class="category" href="<?php echo $game['link']?>"><?php
                                 if ($game['image_thumb'] != NULL) {

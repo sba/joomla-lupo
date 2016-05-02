@@ -25,6 +25,18 @@ ul.lupo_categories {
 
 }
 
+.availability_dot {
+    margin-top: 5px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
 /*fix uikit lightbox background */
 .uk-modal-dialog {
     background: none !important;

@@ -189,6 +189,19 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						</tr>
 					<?php }
 				}?>
+				<?php if($componentParams->get('detail_show_toy_nbrdays', '1') || 1==1){ ?>
+					<tr>
+						<td><?php echo JText::_("COM_LUPO_AVAILABILITY")?>:</td>
+						<td><?php
+							if($this->game['return_date']==null) {
+								echo '<i class="uk-icon uk-icon-circle green availability_dot"></i> '.JText::_("COM_LUPO_AVAILABLE");
+							} else {
+								echo '<i class="uk-icon uk-icon-circle red availability_dot"></i> '.JText::_("COM_LUPO_BORROWED");
+							}
+						?></td>
+					</tr>
+				<?php } ?>
+
 			</table>
 
 			<?php
