@@ -18,7 +18,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 ?>
 <article class="tm-article">
     <div class="tm-article-content ">
-        <h2 class="contentheading"><?php echo $this->genre['genre']?></h2>
+        <h2 class="contentheading"><?php echo $this->title?></h2>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
             <?php if($componentParams->get('category_show_tableheader', '1')) { ?>

@@ -70,6 +70,7 @@ class LupoController extends JControllerLegacy {
 				$genre = $model->getGenre($id);
 				$games = $model->getGamesByGenre($id, $foto_list_prefix);
 				$view = $this->getView('Genre', 'html');
+				$view->title = $genre['genre'];
 				$view->genre = $genre;
 				$view->games = $games;
 				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
@@ -80,6 +81,7 @@ class LupoController extends JControllerLegacy {
 				$category = $model->getCategory($id);
 				$games = $model->getGames($id, 'catid', $foto_list_prefix);
 				$view = $this->getView('Category', 'html');
+				$view->title = $category['title'];
 				$view->category = $category;
 				$view->games = $games;
 				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
@@ -90,6 +92,7 @@ class LupoController extends JControllerLegacy {
 				$agecategory = $model->getAgecategory($id);
 				$games = $model->getGames($id, 'age_catid', $foto_list_prefix);
 				$view = $this->getView('Agecategory', 'html');
+				$view->title = $agecategory['title'];
 				$view->agecategory = $agecategory;
 				$view->games = $games;
 				$view->foto = array('show'=>$foto_list_show, 'prefix'=>$foto_list_prefix);
