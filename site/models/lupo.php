@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -708,4 +708,37 @@ class LupoModelLupo extends JModelItem {
 		$session->set('lupo', $games);
     }
 
+
+	public function clientLogin($adrnr, $password)
+	{
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('#__lupo_clients.*')
+			->from('#__lupo_clients')
+			->where('#__lupo_clients.adrnr = '.$db->quote($adrnr).' AND #__lupo_clients.username = '.$db->quote($password));
+		$db->setQuery($query);
+		$row = $db->loadObject();
+		
+		if($row){
+			$session = JFactory::getSession();
+			$session->set('lupo_client', $row);			
+			return $row;
+		} else {
+			return false;
+		}
+
+	}
+
+	public function clientLogout()
+	{
+		$session = JFactory::getSession();
+		$session->clear('lupo_client');
+	}
+
+
+	public function getClient()
+	{
+		return "hallo Du";
+	}
+	
 }
