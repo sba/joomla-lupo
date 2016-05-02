@@ -4,7 +4,7 @@
  * @subpackage	LUPO
  * @copyright	Copyright (C) 2006 - 2014 databauer / Stefan Bauer
  * @author		Stefan Bauer
- * @link				http://www.ludothekprogramm.ch
+ * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
