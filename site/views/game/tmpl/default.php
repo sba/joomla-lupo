@@ -108,7 +108,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 				<?php if($componentParams->get('detail_show_toy_no', '1')){ ?>
 					<tr>
 						<td><?php echo JText::_("COM_LUPO_ART_NR")?>:</td>
-						<td><?php echo $this->game['number']?></td>
+						<td><?php echo (substr($this->game['number'],-2,2)=='.0')?(int)$this->game['number']:$this->game['number']?></td>
 					</tr>
 				<?php } ?>
 				<?php if($componentParams->get('detail_show_toy_category', '1')){ ?>
