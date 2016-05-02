@@ -252,6 +252,7 @@ class LupoModelLupo extends JModelItem {
 			$order_by_acquire_date = 'acquired_date DESC, ';
 		} else {
 			$where = "WHERE ".$field."=" .$db->quote($id);
+			$order_by_acquire_date = '';
 		}
 
 		$sql = "SELECT
