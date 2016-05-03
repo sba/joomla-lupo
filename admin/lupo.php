@@ -149,7 +149,8 @@ function processXML($file){
 										, play_duration='.$db->quote($game->play_duration).'
 										, players='.$db->quote($game->players).'
 										, keywords='.$db->quote($game->keywords).'
-										, genres='.$db->quote($game->genres)
+										, genres='.$db->quote($game->genres).'
+										, prolongable='.$db->quote($game->prolongable)
 				);
 				$db->execute();
 				$gameid = $db->insertid();

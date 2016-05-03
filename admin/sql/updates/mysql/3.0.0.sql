@@ -1,0 +1,1 @@
+ALTER TABLE `joomla`.`jom_lupo_game` ADD COLUMN `prolongable` TINYINT DEFAULT 1 NULL AFTER `genres`;

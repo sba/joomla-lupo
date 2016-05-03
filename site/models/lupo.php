@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright   Copyright (C) databauer / Stefan Bauer 
+ * @copyright   Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -273,15 +273,15 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
 					, #__lupo_game_editions.acquired_date
-					, #__lupo_borrowed.return_date
-                    , #__lupo_borrowed.return_extended
+					, #__lupo_clients_borrowed.return_date
+                    , #__lupo_clients_borrowed.return_extended
 					, t_userdefined.value as userdefined
 					, COUNT(#__lupo_game_editions.id) as nbr
 				FROM #__lupo_game
 				LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
 				LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 				LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-				LEFT JOIN #__lupo_borrowed ON (#__lupo_game_editions.id = #__lupo_borrowed.edition_id)
+				LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
 				LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 				%%WHERE%%
 				GROUP BY #__lupo_game.id
@@ -361,15 +361,15 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
 							, #__lupo_game_editions.acquired_date
-							, #__lupo_borrowed.return_date
-  							, #__lupo_borrowed.return_extended
+							, #__lupo_clients_borrowed.return_date
+  							, #__lupo_clients_borrowed.return_extended
 							, t_userdefined.value as userdefined
 							, COUNT(#__lupo_game_editions.id) as nbr
 						FROM #__lupo_game
 						LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-						LEFT JOIN #__lupo_borrowed ON (#__lupo_game_editions.id = #__lupo_borrowed.edition_id)
+						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
 						WHERE #__lupo_game_genre.genreid=".$db->quote($id)."
@@ -707,8 +707,22 @@ class LupoModelLupo extends JModelItem {
 		$session = JFactory::getSession();
 		$session->set('lupo', $games);
     }
+	
+}
 
 
+
+class LupoModelLupoClient extends LupoModelLupo {
+
+	/**
+	 * do client login and save values in session
+	 * 
+	 * @param $adrnr
+	 * @param $password
+	 *
+	 * @return bool true if login successful
+	 */
+	
 	public function clientLogin($adrnr, $password)
 	{
 		$db = JFactory::getDBO();
@@ -718,17 +732,22 @@ class LupoModelLupo extends JModelItem {
 			->where('#__lupo_clients.adrnr = '.$db->quote($adrnr).' AND #__lupo_clients.username = '.$db->quote($password));
 		$db->setQuery($query);
 		$row = $db->loadObject();
-		
+
 		if($row){
 			$session = JFactory::getSession();
-			$session->set('lupo_client', $row);			
-			return $row;
+			$session->set('lupo_client', $row);
+			return true;
 		} else {
 			return false;
 		}
 
 	}
 
+	/**
+	 * kills client session vars
+	 * 
+	 * @return void
+	 */
 	public function clientLogout()
 	{
 		$session = JFactory::getSession();
@@ -736,9 +755,23 @@ class LupoModelLupo extends JModelItem {
 	}
 
 
-	public function getClient()
+	public function getClientToys($adrnr)
 	{
-		return "hallo Du";
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('*')
+			->from('#__lupo_clients_borrowed')
+			->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
+			->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
+			->where('#__lupo_clients_borrowed.adrnr = '.$db->quote($adrnr));
+		$db->setQuery($query);
+		$res = $db->loadObjectList();
+		
+		foreach ($res as &$row){
+			$row->link = JRoute::_('index.php?option=com_lupo&view=game&id='.$row->id);
+		}
+		
+		return $res;
 	}
-	
+
 }

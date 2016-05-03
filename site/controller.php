@@ -174,6 +174,64 @@ class LupoController extends JControllerLegacy {
 
 	}
 
+
+	/**
+	 * prolongation of toy retour date
+	 *
+	 * task is called by ajax-call
+	 * only update if session client-id is equal with toy-recordset
+	 *
+	 * returns 'error' if failed or new retour-date
+	 */
+	public function prolong(){
+		$jinput = JFactory::getApplication()->input;
+		$lupo_id = $jinput->get('lupo_id', '', 'STRING');
+
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$session = JFactory::getSession();
+		$client = $session->get('lupo_client');
+		if(!$client){
+			echo 'error';
+			return ;
+		}
+
+		// Fields to update.
+		$fields = array(
+			$db->quoteName('return_extended') . ' = 1',
+			$db->quoteName('return_date') . ' = DATE_ADD('.$db->quoteName('return_date').', INTERVAL 14 DAY)'
+		);
+		$conditions = array(
+			$db->quoteName('adrnr') . ' = ' . $db->quote($client->adrnr),
+			$db->quoteName('lupo_id') . ' = ' . $db->quote($lupo_id)
+		);
+
+		$query->update($db->quoteName('#__lupo_clients_borrowed'))->set($fields)->where($conditions);
+		$db->setQuery($query);
+		$result = $db->execute();
+
+		if($result && $db->getAffectedRows()==1) {
+			//query to get new date
+			$query = $db->getQuery(true);
+			$query->select('return_date')
+				->from('#__lupo_clients_borrowed')
+				->where($db->quoteName('lupo_id').' = '.$db->quote($lupo_id));
+			$db->setQuery($query);
+			$row = $db->loadObject();
+			if($row) {
+				echo date('d.m.Y', strtotime($row->return_date));
+			} else {
+				echo "error";
+			}
+		} else {
+			echo "error";
+		}
+
+		return;
+	}
+
+
 	/**
 	 * LUPO API - update toy rental state and client-table
 	 */
@@ -237,7 +295,7 @@ class LupoController extends JControllerLegacy {
 				//delete all records
 				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
-				$query->delete($db->quoteName('#__lupo_borrowed'));
+				$query->delete($db->quoteName('#__lupo_clients_borrowed'));
 				$db->setQuery($query);
 				$result = $db->execute();
 
@@ -245,30 +303,30 @@ class LupoController extends JControllerLegacy {
 				foreach($arr as $row){
 					//get edition_id
 
-					//get Number and Index
+					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if(strpos($row->nr,".")==0){
-						$game_nr = $row->nr;
-						$game_index = 0;
+						$game_nr = $row->nr . '.0';
 					} else {
-						list($game_nr, $game_index) = explode(".", $row->nr);
+						$game_nr = $row->nr;
 					}
 
 					$query = $db->getQuery(true);
 					$query->select('#__lupo_game_editions.id')
 						->from('#__lupo_game_editions')
 						->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
-						->where('#__lupo_game.number = '.$game_nr.' AND #__lupo_game_editions.index = '.$game_index);
+						->where('#__lupo_game.number = '. $db->quote($game_nr));
 					$db->setQuery($query);
 					$edition_row = $db->loadObject();
-					
+
 					$client = new stdClass();
+					$client->lupo_id = $row->id;
 					$client->adrnr = $row->adr;
 					$client->edition_id = $edition_row->id;
 					$client->return_date = $row->rd;
 					$client->return_extended = $row->re;
 
 					try {
-						$result = JFactory::getDbo()->insertObject('#__lupo_borrowed', $client);
+						$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
 					}
 					catch (Exception $e){
 						echo "error"; //todo
