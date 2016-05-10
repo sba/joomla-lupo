@@ -200,6 +200,7 @@ class LupoController extends JControllerLegacy {
 		// Fields to update.
 		$fields = array(
 			$db->quoteName('return_extended') . ' = 1',
+			$db->quoteName('return_extended_online') . ' = 1',
 			$db->quoteName('return_date') . ' = DATE_ADD('.$db->quoteName('return_date').', INTERVAL 14 DAY)'
 		);
 		$conditions = array(
@@ -219,6 +220,7 @@ class LupoController extends JControllerLegacy {
 				->where($db->quoteName('lupo_id').' = '.$db->quote($lupo_id));
 			$db->setQuery($query);
 			$row = $db->loadObject();
+
 			if($row) {
 				echo date('d.m.Y', strtotime($row->return_date));
 			} else {
@@ -240,6 +242,8 @@ class LupoController extends JControllerLegacy {
 		$act = $jinput->get('act', '', 'STRING');
 		$token = $jinput->get('token', '', 'STRING');
 		$data = $jinput->get('data', '', 'STRING');
+
+		$db = JFactory::getDbo();
 
 		switch($act){
 			case 'authorize':
@@ -281,6 +285,7 @@ class LupoController extends JControllerLegacy {
 				}
 
 				echo $result;
+				break;
 
 			case 'aus':
 				if(!$this->autohorize($token)){
@@ -293,7 +298,6 @@ class LupoController extends JControllerLegacy {
 				$arr = json_decode($data);
 
 				//delete all records
-				$db = JFactory::getDbo();
 				$query = $db->getQuery(true);
 				$query->delete($db->quoteName('#__lupo_clients_borrowed'));
 				$db->setQuery($query);
@@ -335,6 +339,25 @@ class LupoController extends JControllerLegacy {
 
 				echo $result;
 
+			case 'prolong':
+				if(!$this->autohorize($token)){
+					echo 'error_token';
+					return;
+				}
+
+				$query = $db->getQuery(true);
+				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr')
+					->from('#__lupo_clients_borrowed')
+					->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
+					->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
+					->where('#__lupo_clients_borrowed.return_extended_online = 1');
+				$db->setQuery($query);
+
+				$res = $db->loadObjectList();
+
+				$json = json_encode($res);
+				echo $json;
+				break;
 		}
 
 		return;
