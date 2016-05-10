@@ -66,6 +66,7 @@ function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 	if ($res === TRUE) {
 		$zip->extractTo($xmlpath, array($xmlfile)); //extract xml
 
+		array_map('unlink', glob($gamespath."*.jpg")); //delete all image files before extracting from uploaded ziü
 		$jpgs = array();
 		for ($i = 0; $i < $zip->numFiles; $i++) {
 			$filename = $zip->getNameIndex($i);
