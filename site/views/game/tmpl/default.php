@@ -189,7 +189,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						</tr>
 					<?php }
 				}?>
-				<?php if($componentParams->get('detail_show_toy_nbrdays', '1') || 1==1){ ?>
+				<?php if($componentParams->get('lupo_show_toystatus', '0')) { ?>
 					<tr>
 						<td><?php echo JText::_("COM_LUPO_AVAILABILITY")?>:</td>
 						<td><?php

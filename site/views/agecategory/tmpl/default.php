@@ -44,10 +44,14 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             <?php
             $i=0;
             foreach($this->games as $game){
-                if($game['return_date']==null) {
-                    $availability = '<i class="uk-icon uk-icon-circle green uk-float-right availability_dot" title="'.JText::_("COM_LUPO_AVAILABLE").'"></i>';
+                if($componentParams->get('lupo_show_toystatus', '0')) {
+                    if ($game['return_date'] == null) {
+                        $availability = '<i class="uk-icon uk-icon-circle green uk-float-right availability_dot" title="' . JText::_("COM_LUPO_AVAILABLE") . '"></i>';
+                    } else {
+                        $availability = '<i class="uk-icon uk-icon-circle red uk-float-right availability_dot" title="' . JText::_("COM_LUPO_BORROWED") . '"></i>';
+                    }
                 } else {
-                    $availability = '<i class="uk-icon uk-icon-circle red uk-float-right availability_dot" title="'.JText::_("COM_LUPO_BORROWED").'"></i>';
+                    $availability = '';
                 }
                 ?>
                 <tr>
