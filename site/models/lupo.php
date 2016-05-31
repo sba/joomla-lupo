@@ -437,11 +437,15 @@ class LupoModelLupo extends JModelItem {
 					    , #__lupo_categories.title AS category 
 					    , #__lupo_agecategories.title AS age_category
 					    , t_userdefined.value as userdefined
+						, #__lupo_clients_borrowed.return_date
+                        , #__lupo_clients_borrowed.return_extended
 					FROM
 					    #__lupo_game 
 						LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid) 
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_agecategories.id = #__lupo_game.age_catid)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
+						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
+						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
 					WHERE #__lupo_game.id = " .$db->quote($id));
 		$res = $db->loadAssoc();
 		
