@@ -259,8 +259,6 @@ class LupoController extends JControllerLegacy {
 					return;
 				}
 
-				$data = urldecode($data);
-				$data = utf8_encode($data);
 				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
 				$arr = json_decode($data);
 
@@ -293,8 +291,6 @@ class LupoController extends JControllerLegacy {
 					return;
 				}
 
-				$data = urldecode($data);
-				$data = utf8_encode($data);
 				$arr = json_decode($data);
 
 				//delete all records
@@ -303,7 +299,11 @@ class LupoController extends JControllerLegacy {
 				$db->setQuery($query);
 				$result = $db->execute();
 
-				//insert into
+				//cache query-result. min 3x faster
+				$query = $db->setQuery('SELECT jom_lupo_game_editions.id, `number` FROM jom_lupo_game_editions LEFT JOIN jom_lupo_game ON jom_lupo_game_editions.gameid = jom_lupo_game.id');
+				$game_ids = $db->loadAssocList('number', 'id');
+
+
 				foreach($arr as $row){
 					//get edition_id
 
@@ -314,19 +314,12 @@ class LupoController extends JControllerLegacy {
 						$game_nr = $row->nr;
 					}
 
-					$query = $db->getQuery(true);
-					$query->select('#__lupo_game_editions.id')
-						->from('#__lupo_game_editions')
-						->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
-						->where('#__lupo_game.number = '. $db->quote($game_nr));
-					$db->setQuery($query);
-					$edition_row = $db->loadObject();
-
 					$client = new stdClass();
 					$client->lupo_id = $row->id;
 					$client->adrnr = $row->adr;
-					$client->edition_id = $edition_row->id;
-					$client->return_date = $row->rd;
+					$client->edition_id = $game_ids[$game_nr];
+					$client->return_date = $row->rd; //rd = returdate
+					$client->return_date_extended = $row->vd; //vd = verlängerungs-datum
 					$client->return_extended = $row->re;
 
 					try {
@@ -337,7 +330,7 @@ class LupoController extends JControllerLegacy {
 					}
 				}
 
-				echo $result;
+				echo 'ok';
 
 			case 'prolong':
 				if(!$this->autohorize($token)){
