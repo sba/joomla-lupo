@@ -377,6 +377,37 @@
 	</fieldset>
 
     <fieldset
+            name="LUPO_ONLINESERVICE"
+            label="COM_LUPO_ONLINESERVICE"
+            >
+        <field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="lupo_show_toystatus"
+				id="lupo_show_toystatus"
+				label="COM_LUPO_SHOW_TOYSTATUS"
+				description="COM_LUPO_SHOW_TOYSTATUS_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+        </field>
+
+        <field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="lupo_prolongation_enabled"
+				id="lupo_prolongation_enabled"
+				label="COM_LUPO_PROLONGATION_ENABLED"
+				description="COM_LUPO_PROLONGATION_ENABLED_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+        </field>
+
+
+    </fieldset>
+
+    <fieldset
             name="LUPO_INTEGRATION"
             label="COM_LUPO_INTEGRATION"
             >
