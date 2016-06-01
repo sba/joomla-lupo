@@ -18,8 +18,8 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 
-// 5 minutes execution time
-@set_time_limit(5 * 60);
+// 15 minutes execution time
+@set_time_limit(15 * 60);
 
 
 // Settings
