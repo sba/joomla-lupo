@@ -201,7 +201,7 @@ class LupoController extends JControllerLegacy {
 		$fields = array(
 			$db->quoteName('return_extended') . ' = 1',
 			$db->quoteName('return_extended_online') . ' = 1',
-			$db->quoteName('return_date') . ' = DATE_ADD('.$db->quoteName('return_date').', INTERVAL 14 DAY)'
+			$db->quoteName('return_date') . ' = ' . $db->quoteName('return_date_extended')
 		);
 		$conditions = array(
 			$db->quoteName('adrnr') . ' = ' . $db->quote($client->adrnr),
@@ -292,7 +292,8 @@ class LupoController extends JControllerLegacy {
 				}
 
 				$arr = json_decode($data);
-
+//echo $data;
+//print_r($arr);
 				//delete all records
 				$query = $db->getQuery(true);
 				$query->delete($db->quoteName('#__lupo_clients_borrowed'));
@@ -315,12 +316,13 @@ class LupoController extends JControllerLegacy {
 					}
 
 					$client = new stdClass();
-					$client->lupo_id = $row->id;
-					$client->adrnr = $row->adr;
+					$client->lupo_id = $row->id; //LFDAUSLEIHNR
+					$client->adrnr = $row->adr; //ADRNR
 					$client->edition_id = $game_ids[$game_nr];
 					$client->return_date = $row->rd; //rd = returdate
-					$client->return_date_extended = $row->vd; //vd = verlängerungs-datum
-					$client->return_extended = $row->re;
+					$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
+					$client->return_extended = $row->ex; //is extended (spiel wurde verlängert)
+					$client->reminder_sent =  $row->re;
 
 					try {
 						$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
@@ -333,13 +335,14 @@ class LupoController extends JControllerLegacy {
 				echo 'ok';
 
 			case 'prolong':
+				// reads online prolongations to store them in LUPO
 				if(!$this->autohorize($token)){
 					echo 'error_token';
 					return;
 				}
 
 				$query = $db->getQuery(true);
-				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr')
+				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended')
 					->from('#__lupo_clients_borrowed')
 					->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
 					->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
