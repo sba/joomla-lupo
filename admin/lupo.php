@@ -121,7 +121,7 @@ function processXML($file){
 				$db->setQuery('INSERT INTO #__lupo_categories SET
 										id='.$db->quote($category['id']).'
 										, title='.$db->quote($category['desc']).'
-										, alias='.$db->quote(JApplication::stringURLSafe($category['desc'])).'
+										, alias='.$db->quote(JApplicationHelper::stringURLSafe($category['desc'])).'
 										, sort='.$db->quote($category['sort']));
 				$db->execute();
 			}
@@ -130,7 +130,7 @@ function processXML($file){
 				$db->setQuery('INSERT INTO #__lupo_agecategories SET
 										id='.$db->quote($category['id']).'
 										, title='.$db->quote($category['desc']).'
-										, alias='.$db->quote(JApplication::stringURLSafe($category['desc'])).'
+										, alias='.$db->quote(JApplicationHelper::stringURLSafe($category['desc'])).'
 										, sort='.$db->quote($category['sort']));
 				$db->execute();
 			}
