@@ -41,6 +41,8 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery("SELECT
 			    'new' AS id
 			    , '".JText::_("COM_LUPO_NEW_TOYS")."' AS title
+			    , '' AS description
+				, '' AS samples				    
 			    , COUNT(#__lupo_game.id) AS number 
 			FROM
 			    #__lupo_game
@@ -99,6 +101,13 @@ class LupoModelLupo extends JModelItem {
 
 		foreach($res as &$row){
 			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id='.$row['id']);
+
+			//add photo to game array
+			if($row['samples']!="") {
+				$row += $this->getGameFoto($row['samples'], 'mini_');
+			} else {
+				$row += array('image' => null, 'image_thumb' => null);
+			}
 		}
 
 		return $res;
@@ -147,6 +156,13 @@ class LupoModelLupo extends JModelItem {
 
 		foreach($res as &$row){
 			$row['link'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id='.$row['id']);
+
+			//add photo to game array
+			if($row['samples']!="") {
+				$row += $this->getGameFoto($row['samples'], 'mini_');
+			} else {
+				$row += array('image' => null, 'image_thumb' => null);
+			}
 		}
 
 		return $res;
