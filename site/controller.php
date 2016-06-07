@@ -101,7 +101,7 @@ class LupoController extends JControllerLegacy {
 			case 'agecategories':
 				$view = $this->getView('Agecategories', 'html');
 				$model = $this->getModel();
-				$agecategories = $model->getAgecategories();
+				$agecategories = $model->getAgecategories(false);
 				$view->agecategories = $agecategories;
 				$view->display();
 				break;
@@ -109,7 +109,7 @@ class LupoController extends JControllerLegacy {
 			default:
 				$view = $this->getView('Categories', 'html');
 				$model = $this->getModel();
-				$categories = $model->getCategories();
+				$categories = $model->getCategories(false);
 				$view->categories = $categories;
 				$view->display();
 				break;
