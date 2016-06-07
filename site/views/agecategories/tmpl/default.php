@@ -26,13 +26,13 @@ $menu =JSite::getMenu()->getActive();
 
 		<ul class="lupo lupo_categories">
 			<?php
-			foreach($this->agecategories as $agecategory){
-				?><li><a href="<?php echo $agecategory['link']?>"><?php echo $agecategory['title']?></a>
+			foreach($this->agecategories as $agecategory){ ?>
+				<li><a href="<?php echo $agecategory['link']?>"><?php echo $agecategory['title']?></a>
 				<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
-					(<?php echo $agecategory['number']?>)</li><?php
-				}
-			}
-			?>
+					(<?php echo $agecategory['number']?>)
+				<?php } ?>
+				</li>
+			<?php } ?>
 		</ul>
 
 	</div>
