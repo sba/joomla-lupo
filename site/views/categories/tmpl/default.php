@@ -21,7 +21,7 @@ $menu = JSite::getMenu()->getActive();
 	<div class="tm-article-content ">
 
 		<?php if ($menu->params->get('show_page_heading', 1)) : ?>
-			<h2><?php echo $menu->params->get('page_heading')?></h2>
+			<h2 class="contentheading"><?php echo $menu->params->get('page_heading')?></h2>
 		<?php endif; ?>
 
 		<ul class="lupo lupo_categories">
