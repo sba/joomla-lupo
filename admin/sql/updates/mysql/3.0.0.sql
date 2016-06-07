@@ -1,4 +1,6 @@
 ALTER TABLE `joomla`.`jom_lupo_game` ADD COLUMN `prolongable` TINYINT DEFAULT 1 NULL AFTER `genres`;
+ALTER TABLE `joomla`.`jom_lupo_categories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
+ALTER TABLE `joomla`.`jom_lupo_agecategories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
 
 CREATE TABLE `jom_lupo_clients` (
   `adrnr` int(10) unsigned NOT NULL,
