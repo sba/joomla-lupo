@@ -79,6 +79,8 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery("SELECT
 				    #__lupo_categories.id
 				    , #__lupo_categories.title AS title
+				    , #__lupo_categories.description AS description
+				    , #__lupo_categories.samples AS samples				    
 				    , COUNT(#__lupo_game.id) AS number
 				FROM
 				    #__lupo_game
@@ -125,6 +127,8 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery("SELECT
 				    #__lupo_agecategories.id
 				    , #__lupo_agecategories.title AS title
+				    , #__lupo_agecategories.description AS description
+				    , #__lupo_agecategories.samples AS samples
 				    , COUNT(#__lupo_game.id) AS number
 				FROM
 				    #__lupo_game
