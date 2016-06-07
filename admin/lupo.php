@@ -122,6 +122,8 @@ function processXML($file){
 										id='.$db->quote($category['id']).'
 										, title='.$db->quote($category['desc']).'
 										, alias='.$db->quote(JApplicationHelper::stringURLSafe($category['desc'])).'
+										, description='.$db->quote($category['explanation']).'
+										, samples='.$db->quote($category['samples']).'
 										, sort='.$db->quote($category['sort']));
 				$db->execute();
 			}
@@ -131,6 +133,8 @@ function processXML($file){
 										id='.$db->quote($category['id']).'
 										, title='.$db->quote($category['desc']).'
 										, alias='.$db->quote(JApplicationHelper::stringURLSafe($category['desc'])).'
+										, description='.$db->quote($category['explanation']).'
+										, samples='.$db->quote($category['samples']).'
 										, sort='.$db->quote($category['sort']));
 				$db->execute();
 			}
