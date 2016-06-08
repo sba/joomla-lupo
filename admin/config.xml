@@ -30,16 +30,29 @@
 		</field>		
 		
 		<field
-			name="cats_nbr_games"
-			id="lupo_cats_nbr_games"
-			type="radio"
-            class="btn-group btn-group-yesno"
-			label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
-			description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
-			default="1">
+				name="cats_nbr_games"
+				id="lupo_cats_nbr_games"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
+				description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
+				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>		
+		</field>
+
+		<field
+				name="cats_show_table_with_details"
+				id="cats_show_table_with_details"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_OPTIONS_SHOW_TABLE"
+				description="COM_LUPO_OPTIONS_SHOW_TABLE_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
 	</fieldset>
 
 	<fieldset
