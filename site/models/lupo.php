@@ -724,9 +724,6 @@ class LupoModelLupo extends JModelItem {
 		foreach($res as $row){
 			$games[]['id'] = $row['id'];
 		}
-		echo '<pre style="display:none;" >';
-		print_r($games);
-		echo '</pre>';
 
 		$session = JFactory::getSession();
 		$session->set('lupo', $games);
