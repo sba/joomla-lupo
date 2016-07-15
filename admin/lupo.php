@@ -195,7 +195,7 @@ function processXML($file){
 											, `index`='.$db->quote($edition['index']).'
 											, edition='.$db->quote($edition['edition']).'
 											, acquired_date='.$db->quote($edition['acquired_date']).'
-											, tax='.$db->quote($edition['tax'])
+											, tax='.$db->quote(str_replace(',', '.', $edition['tax']))
 					);
 					$db->execute();
 				}
