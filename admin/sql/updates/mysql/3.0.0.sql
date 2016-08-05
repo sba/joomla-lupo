@@ -1,8 +1,8 @@
-ALTER TABLE `joomla`.`jom_lupo_game` ADD COLUMN `prolongable` TINYINT DEFAULT 1 NULL AFTER `genres`;
-ALTER TABLE `joomla`.`jom_lupo_categories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
-ALTER TABLE `joomla`.`jom_lupo_agecategories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
+ALTER TABLE `#__lupo_game` ADD COLUMN `prolongable` TINYINT DEFAULT 1 NULL AFTER `genres`;
+ALTER TABLE `#__lupo_categories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
+ALTER TABLE `#__lupo_agecategories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
 
-CREATE TABLE `jom_lupo_clients` (
+CREATE TABLE `#__lupo_clients` (
   `adrnr` int(10) unsigned NOT NULL,
   `username` char(20) DEFAULT NULL,
   `firstname` varchar(50) DEFAULT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE `jom_lupo_clients` (
   UNIQUE KEY `adrnr` (`adrnr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `jom_lupo_clients_borrowed` (
+CREATE TABLE `#__lupo_clients_borrowed` (
   `lupo_id` int(10) unsigned NOT NULL,
   `edition_id` int(11) DEFAULT NULL,
   `return_date` date DEFAULT NULL,
