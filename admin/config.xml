@@ -102,6 +102,7 @@
 				label="COM_LUPO_PHOTO_PREFIX"
 				description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
 				default="mini_"
+				showon="foto_list_show:1"
 				/>
 
 
@@ -329,7 +330,9 @@
 				id="detail_photo_lightbox"
 				label="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX"
 				description="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX_DESC"
-				default="1">
+				default="1"
+				showon="detail_show_toy_photo:1"
+		>
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
@@ -343,6 +346,7 @@
 			label="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX"
 			description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
 			default="thumb_"
+			showon="detail_show_toy_photo:1"
 		>
 		</field>
 
