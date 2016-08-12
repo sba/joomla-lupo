@@ -765,7 +765,7 @@ class LupoModelLupoClient extends LupoModelLupo {
 	}
 
 	/**
-	 * kills client session vars
+	 * kill client session vars
 	 * 
 	 * @return void
 	 */
@@ -784,7 +784,8 @@ class LupoModelLupoClient extends LupoModelLupo {
 			->from('#__lupo_clients_borrowed')
 			->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
 			->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
-			->where('#__lupo_clients_borrowed.adrnr = '.$db->quote($adrnr));
+			->where('#__lupo_clients_borrowed.adrnr = '.$db->quote($adrnr))
+			->order('return_date, title');
 		$db->setQuery($query);
 		$res = $db->loadObjectList();
 		
