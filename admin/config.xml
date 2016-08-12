@@ -417,6 +417,19 @@
 			<option value="0">JNO</option>
         </field>
 
+		<field
+				name="lupo_websynctoken"
+				id="lupo_websynctoken"
+				type="text"
+				maxLenght="32"
+				size="32"
+				label="COM_LUPO_OPTIONS_WEBSYNCTOKEN"
+				description="COM_LUPO_OPTIONS_WEBSYNCTOKEN_DESC"
+				default=""
+				required="true"
+				>
+		</field>
+
 
     </fieldset>
 
