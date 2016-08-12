@@ -292,8 +292,17 @@ class LupoController extends JControllerLegacy {
 				}
 
 				$arr = json_decode($data);
-//echo $data;
-//print_r($arr);
+
+				//preserve online prolongations
+				$query = $db->getQuery(true);
+				$query->select('*')
+					->from('#__lupo_clients_borrowed')
+					->where($db->quoteName('return_extended_online').' = 1');
+				$db->setQuery($query);
+				$sql = $query->__toString();
+				$preserved_prolongations = $db->loadObjectList();
+
+
 				//delete all records
 				$query = $db->getQuery(true);
 				$query->delete($db->quoteName('#__lupo_clients_borrowed'));
@@ -315,23 +324,47 @@ class LupoController extends JControllerLegacy {
 						$game_nr = $row->nr;
 					}
 
-					$client = new stdClass();
-					$client->lupo_id = $row->id; //LFDAUSLEIHNR
-					$client->adrnr = $row->adr; //ADRNR
-					$client->edition_id = $game_ids[$game_nr];
-					$client->return_date = $row->rd; //rd = returdate
-					$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
-					$client->return_extended = $row->ex; //is extended (spiel wurde verlängert)
-					$client->reminder_sent =  $row->re;
 
-					try {
-						$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
-					}
-					catch (Exception $e){
-						echo "error"; //todo
+					if(isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
+						$client                       = new stdClass();
+						$client->lupo_id              = $row->id; //LFDAUSLEIHNR
+						$client->adrnr                = $row->adr; //ADRNR
+						$client->edition_id           = $game_ids[$game_nr];
+						$client->return_date          = $row->rd; //rd = returdate
+						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
+						$client->return_extended      = $row->ex; //is extended (spiel wurde verlängert)
+						$client->reminder_sent        = $row->re;
+
+						try {
+							$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
+
+							if (is_array($preserved_prolongations)) {
+								foreach ($preserved_prolongations as $preserved_prolongation) {
+									if ($client->lupo_id == $preserved_prolongation->lupo_id && $client->return_extended == 0) {
+										// Fields to update.
+										$fields     = array(
+											$db->quoteName('return_extended') . ' = 1',
+											$db->quoteName('return_extended_online') . ' = 1',
+											$db->quoteName('return_date') . ' = ' . $db->quoteName('return_date_extended')
+										);
+										$conditions = array(
+											$db->quoteName('lupo_id') . ' = ' . $db->quote($client->lupo_id)
+										);
+
+										$query = $db->getQuery(true);
+										$query->update($db->quoteName('#__lupo_clients_borrowed'))->set($fields)->where($conditions);
+
+										$db->setQuery($query);
+										$db->execute();
+									}
+								}
+							}
+						}
+						catch (Exception $e) {
+							echo "error"; //todo
+						}
 					}
 				}
-
 				echo 'ok';
 
 			case 'prolong':
@@ -367,7 +400,10 @@ class LupoController extends JControllerLegacy {
 	 * @return string ok or error_token
 	 */
 	public function autohorize($token) {
-		if($token == md5('luposalz+Ludothek Zofingen')) {
+		$params = JComponentHelper::getParams('com_lupo');
+		$config_token = $params->get('lupo_websynctoken');
+
+		if($token == $config_token) {
 			return true;
 		} else {
 			return false;
