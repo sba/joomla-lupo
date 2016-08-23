@@ -1,4 +1,5 @@
 ALTER TABLE `#__lupo_game` ADD COLUMN `prolongable` TINYINT DEFAULT 1 NULL AFTER `genres`;
+ALTER TABLE `#__lupo_game` ADD INDEX `game_number` (`number`);
 ALTER TABLE `#__lupo_categories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
 ALTER TABLE `#__lupo_agecategories` ADD COLUMN `samples` VARCHAR(255) DEFAULT '' NOT NULL AFTER `description`;
 
