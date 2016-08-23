@@ -62,7 +62,7 @@ if ($cleanupTargetDir) {
 		}
 	}
 	closedir($dir);
-}	
+}
 
 
 // Open temp file
@@ -79,7 +79,7 @@ if (!empty($_FILES)) {
 	if (!$in = @fopen($_FILES["file"]["tmp_name"], "rb")) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
 	}
-} else {	
+} else {
 	if (!$in = @fopen("php://input", "rb")) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
 	}

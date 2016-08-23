@@ -18,17 +18,15 @@ jimport('joomla.application.component.controller');
 /**
  * General Controller of LUPO component
  */
-class LupoController extends JControllerLegacy
-{
+class LupoController extends JControllerLegacy {
 	/**
 	 * display task
 	 *
 	 * @return void
 	 */
-	function display($cachable = false) 
-	{
+	function display($cachable = false) {
 		// set default view if not set
-		$app = JFactory::getApplication();
+		$app         = JFactory::getApplication();
 		$defaultview = $app->input->get->get('view', 'Lupos');
 		$app->input->set('view', $defaultview);
 
