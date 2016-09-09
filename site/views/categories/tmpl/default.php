@@ -2,9 +2,9 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link				http://www.ludothekprogramm.ch
+ * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -21,19 +21,49 @@ $menu = JSite::getMenu()->getActive();
 	<div class="tm-article-content ">
 
 		<?php if ($menu->params->get('show_page_heading', 1)) : ?>
-			<h2><?php echo $menu->params->get('page_heading')?></h2>
+			<h2 class="contentheading"><?php echo $menu->params->get('page_heading')?></h2>
 		<?php endif; ?>
+		
+		<?php if($componentParams->get('cats_show_table_with_details', 0)=='0'){ ?>
 
 		<ul class="lupo lupo_categories">
 			<?php
-			foreach($this->categories as $category){
-				?><li><a href="<?php echo $category['link']?>"><?php echo $category['title']?></a>
+			foreach($this->categories as $category){?>
+				<li><a href="<?php echo $category['link']?>"><?php echo $category['title']?></a>
 				<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
-					(<?php echo $category['number']?>)</li><?php
-				}
-			}
-			?>
+					(<?php echo $category['number']?>)
+				<?php } ?>
+				</li>
+			<?php } ?>
 		</ul>
+
+		<?php } else { ?>
+
+		<table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
+			<?php
+			foreach($this->categories as $category){ ?>
+				<tr>
+					<td width="100">
+						<a href="<?php echo $category['link']?>">
+							<?php if($category['image_thumb']!=null) { ?>
+							<img class="uk-align-left" src="<?php echo $category['image_thumb']?>">
+							<?php } else { ?>
+							<img class="uk-align-left" src="images/spiele/mini_dice-gray.jpg">
+							<?php } ?>
+						</a>
+					</td>
+					<td>
+						<a href="<?php echo $category['link']?>"><?php echo $category['title']?></a>
+						<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
+							(<?php echo $category['number']?>)
+						<?php } ?>
+						<p class="uk-margin-remove"><?php echo $category['description']?></p>
+					</td>
+				</tr>
+			<?php } ?>
+		</table>
+
+		<?php } ?>
 
 	</div>
 </article>

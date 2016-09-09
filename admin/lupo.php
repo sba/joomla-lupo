@@ -2,9 +2,9 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link				http://www.ludothekprogramm.ch
+ * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -66,6 +66,7 @@ function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 	if ($res === TRUE) {
 		$zip->extractTo($xmlpath, array($xmlfile)); //extract xml
 
+		//array_map('unlink', glob($gamespath."*.jpg")); //delete all image files before extracting from uploaded zip
 		$jpgs = array();
 		for ($i = 0; $i < $zip->numFiles; $i++) {
 			$filename = $zip->getNameIndex($i);
@@ -84,11 +85,11 @@ function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 }
 
 
-function processXML($file){
+function processXML($file) {
 	if (file_exists($file)) {
 		$xml = simplexml_load_file($file);
-		if($xml==false){
-			JFactory::getApplication()->enqueueMessage( JText::_( "COM_LUPO_ADMIN_MSG_ERROR_XML_INVALID" ), 'error' );
+		if ($xml == false) {
+			JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_XML_INVALID"), 'error');
 		} else {
 			$db =& JFactory::getDBO();
 
@@ -116,90 +117,95 @@ function processXML($file){
 			$db->setQuery('TRUNCATE #__lupo_game_related');
 			$db->execute();
 
-			foreach($xml->categories->category as $category){
+			foreach ($xml->categories->category as $category) {
 				$db->setQuery('INSERT INTO #__lupo_categories SET
-										id='.$db->quote($category['id']).'
-										, title='.$db->quote($category['desc']).'
-										, alias='.$db->quote(JApplication::stringURLSafe($category['desc'])).'
-										, sort='.$db->quote($category['sort']));
+										id=' . $db->quote($category['id']) . '
+										, title=' . $db->quote($category['desc']) . '
+										, alias=' . $db->quote(JApplicationHelper::stringURLSafe($category['desc'])) . '
+										, description=' . $db->quote($category['explanation']) . '
+										, samples=' . $db->quote($category['samples']) . '
+										, sort=' . $db->quote($category['sort']));
 				$db->execute();
 			}
 
-			foreach($xml->age_categories->category as $category){
+			foreach ($xml->age_categories->category as $category) {
 				$db->setQuery('INSERT INTO #__lupo_agecategories SET
-										id='.$db->quote($category['id']).'
-										, title='.$db->quote($category['desc']).'
-										, alias='.$db->quote(JApplication::stringURLSafe($category['desc'])).'
-										, sort='.$db->quote($category['sort']));
+										id=' . $db->quote($category['id']) . '
+										, title=' . $db->quote($category['desc']) . '
+										, alias=' . $db->quote(JApplicationHelper::stringURLSafe($category['desc'])) . '
+										, description=' . $db->quote($category['explanation']) . '
+										, samples=' . $db->quote($category['samples']) . '
+										, sort=' . $db->quote($category['sort']));
 				$db->execute();
 			}
 
-			$n=0;
-			$genres=array();
-			foreach($xml->games->game as $game){
+			$n      = 0;
+			$genres = array();
+			foreach ($xml->games->game as $game) {
 				$db->setQuery('INSERT INTO #__lupo_game SET
-										number='.$db->quote($game['number']).'
-										, catid='.$db->quote($game['catid']).'
-										, age_catid='.$db->quote($game['age_catid']).'
-										, title='.$db->quote($game->title).'
-										, description_title='.$db->quote($game->description_title).'
-										, description='.$db->quote($game->description).'
-										, days='.$db->quote($game['days']).'
-										, fabricator='.$db->quote($game->fabricator).'
-										, play_duration='.$db->quote($game->play_duration).'
-										, players='.$db->quote($game->players).'
-										, keywords='.$db->quote($game->keywords).'
-										, genres='.$db->quote($game->genres)
+										number=' . $db->quote($game['number']) . '
+										, catid=' . $db->quote($game['catid']) . '
+										, age_catid=' . $db->quote($game['age_catid']) . '
+										, title=' . $db->quote($game->title) . '
+										, description_title=' . $db->quote($game->description_title) . '
+										, description=' . $db->quote($game->description) . '
+										, days=' . $db->quote($game['days']) . '
+										, fabricator=' . $db->quote($game->fabricator) . '
+										, play_duration=' . $db->quote($game->play_duration) . '
+										, players=' . $db->quote($game->players) . '
+										, keywords=' . $db->quote($game->keywords) . '
+										, genres=' . $db->quote($game->genres) . '
+										, prolongable=' . $db->quote($game->prolongable)
 				);
 				$db->execute();
 				$gameid = $db->insertid();
 
-				if($game->genres!="") {
+				if ($game->genres != "") {
 					$genres = array_merge($genres, explode(', ', $game->genres));
 				}
 
-				if(isset($game->documents->document)){
-					foreach($game->documents->document as $document){
+				if (isset($game->documents->document)) {
+					foreach ($game->documents->document as $document) {
 						$db->setQuery('INSERT INTO #__lupo_game_documents SET
-												gameid='.$db->quote($gameid).'
-												, `code`='.$db->quote($document['code']).'
-												, `type`='.$db->quote($document['type']).'
-												, `desc`='.$db->quote($document['desc']).'
-												, `value`='.$db->quote($document['value'])
+												gameid=' . $db->quote($gameid) . '
+												, `code`=' . $db->quote($document['code']) . '
+												, `type`=' . $db->quote($document['type']) . '
+												, `desc`=' . $db->quote($document['desc']) . '
+												, `value`=' . $db->quote($document['value'])
 						);
 						$db->execute();
 					}
 				}
 
-				if(isset($game->related->game)){
-					$related_games = $game->related;
+				if (isset($game->related->game)) {
+					$related_games    = $game->related;
 					$sql_insertvalues = "";
-					foreach($related_games->game as $related_game){
+					foreach ($related_games->game as $related_game) {
 						//create bulk inserts: faster execution
-						$sql_insertvalues .= '('.$db->quote($gameid).','.$db->quote($related_game).'),';
+						$sql_insertvalues .= '(' . $db->quote($gameid) . ',' . $db->quote($related_game) . '),';
 					}
-					$db->setQuery('INSERT INTO #__lupo_game_related (`gameid`, `number`) VALUES '. substr($sql_insertvalues,0,-1));
+					$db->setQuery('INSERT INTO #__lupo_game_related (`gameid`, `number`) VALUES ' . substr($sql_insertvalues, 0, -1));
 					$db->execute();
 				}
 
-				foreach($game->editions->edition as $edition){
+				foreach ($game->editions->edition as $edition) {
 					$n++;
 					$db->setQuery('INSERT INTO #__lupo_game_editions SET
-											gameid='.$db->quote($gameid).'
-											, `index`='.$db->quote($edition['index']).'
-											, edition='.$db->quote($edition['edition']).'
-											, acquired_date='.$db->quote($edition['acquired_date']).'
-											, tax='.$db->quote($edition['tax'])
+											gameid=' . $db->quote($gameid) . '
+											, `index`=' . $db->quote($edition['index']) . '
+											, edition=' . $db->quote($edition['edition']) . '
+											, acquired_date=' . $db->quote($edition['acquired_date']) . '
+											, tax=' . $db->quote(str_replace(',', '.', $edition['tax']))
 					);
 					$db->execute();
 				}
 			}
 
 			//add all genres to genre table
-			$genres=array_unique($genres);
-			foreach($genres as $genre){
+			$genres = array_unique($genres);
+			foreach ($genres as $genre) {
 				$db->setQuery('INSERT INTO #__lupo_genres SET
-											genre='.$db->quote($genre)
+											genre=' . $db->quote($genre)
 				);
 				$db->execute();
 			}
@@ -209,10 +215,10 @@ function processXML($file){
 										*
 									FROM #__lupo_genres"
 			);
-			$res = $db->loadAssocList();
-			$genres=array();
-			foreach($res as $row){
-				$genres[$row['id']]=$row['genre']; //made key value-array
+			$res    = $db->loadAssocList();
+			$genres = array();
+			foreach ($res as $row) {
+				$genres[$row['id']] = $row['genre']; //made key value-array
 			}
 			$db->setQuery("SELECT
 							id
@@ -221,20 +227,20 @@ function processXML($file){
 						WHERE genres!=''"
 			);
 			$res = $db->loadAssocList();
-			foreach($res as $row){
-				$game_genres = explode(', ',$row['genres']);
-				foreach($game_genres as $game_genre){
+			foreach ($res as $row) {
+				$game_genres = explode(', ', $row['genres']);
+				foreach ($game_genres as $game_genre) {
 					$db->setQuery('INSERT INTO #__lupo_game_genre SET
-											gameid='.$row['id'].', genreid='.array_search($game_genre, $genres)
+											gameid=' . $row['id'] . ', genreid=' . array_search($game_genre, $genres)
 					);
 					$db->execute();
 				}
 			}
 
-			JFactory::getApplication()->enqueueMessage( JText::sprintf('COM_LUPO_ADMIN_MSG_SUCCESS_IMPORTED', $n));
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_LUPO_ADMIN_MSG_SUCCESS_IMPORTED', $n));
 		}
 	} else {
-		JFactory::getApplication()->enqueueMessage( JText::_( "COM_LUPO_ADMIN_MSG_ERROR_XML_NOT_FOUND" ), 'error' );
+		JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_XML_NOT_FOUND"), 'error');
 	}
 
 }

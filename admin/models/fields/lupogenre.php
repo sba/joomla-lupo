@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -18,19 +18,18 @@ JFormHelper::loadFieldClass('list');
 /**
  * Form Field class for the LUPO component
  */
-class JFormFieldLupoGenre extends JFormFieldList
-{
+class JFormFieldLupoGenre extends JFormFieldList {
 	/**
 	 * The field type.
 	 *
-	 * @var		string
+	 * @var        string
 	 */
 	protected $type = 'LupoGenre';
 
 	/**
 	 * Method to get a list of options for a list input.
 	 *
-	 * @return	array		An array of JHtml options.
+	 * @return    array        An array of JHtml options.
 	 */
 	protected function getOptions() {
 		$db =& JFactory::getDBO();
@@ -39,13 +38,13 @@ class JFormFieldLupoGenre extends JFormFieldList
 						FROM
 							#__lupo_genres
 						ORDER BY genre");
-		
-		$res=$db->loadAssocList();
-	
-		foreach($res as $row) {
+
+		$res = $db->loadAssocList();
+
+		foreach ($res as $row) {
 			$options[] = JHtml::_('select.option', $row['id'], $row['genre']);
 		}
-		
+
 		return $options;
 	}
 }

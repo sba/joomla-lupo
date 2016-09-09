@@ -1,4 +1,4 @@
-/*! UIkit 2.26.2 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
+/*! UIkit 2.27.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 (function(UI) {
 
     "use strict";
@@ -7,7 +7,7 @@
 
     UI.$win.on("resize orientationchange", UI.Utils.debounce(function(){
         UI.$('.uk-modal.uk-open').each(function(){
-            UI.$(this).data('modal').resize();
+            return UI.$(this).data('modal') && UI.$(this).data('modal').resize();
         });
     }, 150));
 
@@ -53,9 +53,7 @@
                 }
             });
 
-            UI.domObserve(this.element, function(e) {
-                $this.resize();
-            });
+            UI.domObserve(this.element, function(e) { $this.resize(); });
         },
 
         toggle: function() {
@@ -75,7 +73,7 @@
             }
 
             this.element.removeClass("uk-open").show();
-            this.resize();
+            this.resize(true);
 
             if (this.options.modal) {
                 active = this;
@@ -89,9 +87,11 @@
                 this.hasTransitioned = false;
                 this.element.one(UI.support.transition.end, function(){
                     $this.hasTransitioned = true;
+                    UI.Utils.focus($this.dialog, 'a[href]');
                 }).addClass("uk-open");
             } else {
                 this.element.addClass("uk-open");
+                UI.Utils.focus(this.dialog, 'a[href]');
             }
 
             $html.addClass("uk-modal-page").height(); // force browser engine redraw
@@ -124,7 +124,9 @@
             return this;
         },
 
-        resize: function() {
+        resize: function(force) {
+
+            if (!this.isActive() && !force) return;
 
             var bodywidth  = body.width();
 
@@ -188,13 +190,13 @@
                 body.css(this.paddingdir, "");
             }
 
-            if(active===this) active = false;
+            if (active===this) active = false;
 
             this.trigger('hide.uk.modal');
         },
 
         isActive: function() {
-            return this.active;
+            return this.element.hasClass('uk-open');
         }
 
     });
@@ -334,12 +336,6 @@
             if (onsubmit(input.val())!==false){
                 modal.hide();
             }
-        });
-
-        modal.on('show.uk.modal', function(){
-            setTimeout(function(){
-                input.focus();
-            }, 50);
         });
 
         return modal.show();

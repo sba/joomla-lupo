@@ -2,9 +2,9 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link				http://www.ludothekprogramm.ch
+ * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -17,32 +17,25 @@ jimport('joomla.application.component.view');
 /**
  * HTML View class for the LUPO Component
  */
-class LupoViewAgecategory extends JViewLegacy
-{
+class LupoViewAgecategory extends JViewLegacy {
 	// Overwriting JView display method
-	function display($tpl = null) 
-	{
+	function display($tpl = null) {
 		$app = JFactory::getApplication();
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) 
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
+
 			return false;
 		}
 
 		// Check for empty title and add site name if param is set
 		$title = $this->agecategory['title'];
-		if (empty($title))
-		{
+		if (empty($title)) {
 			$title = $app->get('sitename');
-		}
-		elseif ($app->get('sitename_pagetitles', 0) == 1)
-		{
+		} elseif ($app->get('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->get('sitename'), $title);
-		}
-		elseif ($app->get('sitename_pagetitles', 0) == 2)
-		{
+		} elseif ($app->get('sitename_pagetitles', 0) == 2) {
 			$title = JText::sprintf('JPAGETITLE', $title, $app->get('sitename'));
 		}
 

@@ -1,5 +1,16 @@
 # Changelog
 
+### 3.0.0 (August 31, 2016)
+  - show availbility of toys
+  - client login implemented
+  - online prolongation added
+  - added possibility to output toy categories with details
+  - do not show ".0" in game-number
+  - use of "showon" in config
+  - uikit updated to 2.27.1
+  - plupload updated to 2.1.9 (security update)
+  - various other codestyle fixes and improvements
+
 ### 2.9.0 (April 19, 2016)
   - increase max upload fileseize to 250MB
   - show XML-reprocess button only to superadmins

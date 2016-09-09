@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -41,51 +41,52 @@ function LupoBuildRoute(&$query) {
  * @return	array	The URL attributes to be used by the application.
  */
 function LupoParseRoute($segments) {
-    $params = JComponentHelper::getParams('com_lupo');
-    $itemid = $params->get('lupomenuitem');
+	$params = JComponentHelper::getParams('com_lupo');
+	$itemid = $params->get('lupomenuitem');
 
-    $vars = array();
-    switch($segments[0]) {
-        case 'categories':
-            $vars['view'] = 'categories';
-            break;
-        case 'agecategories':
-            $vars['view'] = 'agecategories';
-            break;
-        case 'category':
-            $vars['view'] = 'category';
-            $id = explode( ':', $segments[1] );
-            $vars['id'] = $id[0];
-            $vars['Itemid'] = $itemid;
-            break;
-        case 'agecategory':
-            $vars['view'] = 'agecategory';
-            $id = explode( ':', $segments[1] );
-            $vars['id'] = $id[0];
-            $vars['Itemid'] = $itemid;
-            break;
-        case 'genre':
-            $vars['view'] = 'genre';
-            $id = explode( ':', $segments[1] );
-            $vars['id'] = $id[0];
-            $vars['Itemid'] = $itemid;
-            break;
-        case 'game':
-            $vars['view'] = 'game';
-            $id = explode( ':', $segments[1] );
-            $vars['id'] = $id[0];
+	$vars = array();
+	switch ($segments[0]) {
+		case 'categories':
+			$vars['view'] = 'categories';
+			break;
+		case 'agecategories':
+			$vars['view'] = 'agecategories';
+			break;
+		case 'category':
+			$vars['view']   = 'category';
+			$id             = explode(':', $segments[1]);
+			$vars['id']     = $id[0];
+			$vars['Itemid'] = $itemid;
+			break;
+		case 'agecategory':
+			$vars['view']   = 'agecategory';
+			$id             = explode(':', $segments[1]);
+			$vars['id']     = $id[0];
+			$vars['Itemid'] = $itemid;
+			break;
+		case 'genre':
+			$vars['view']   = 'genre';
+			$id             = explode(':', $segments[1]);
+			$vars['id']     = $id[0];
+			$vars['Itemid'] = $itemid;
+			break;
+		case 'game':
+			$vars['view'] = 'game';
+			$id           = explode(':', $segments[1]);
+			$vars['id']   = $id[0];
 
-            if (!class_exists( 'LupoModelLupo' )){
-                JLoader::import( 'lupo', JPATH_BASE . '/components/com_lupo/models' );
-            }
-            $model = new LupoModelLupo();
-            $cat_itemid = $model->getCategoryItemId($id[0]);
-            if($cat_itemid!==false){
-                $itemid = $cat_itemid;
-            }
-            $vars['Itemid'] = $itemid;
-            break;
-    }
-    return $vars;
+			if (!class_exists('LupoModelLupo')) {
+				JLoader::import('lupo', JPATH_BASE . '/components/com_lupo/models');
+			}
+			$model      = new LupoModelLupo();
+			$cat_itemid = $model->getCategoryItemId($id[0]);
+			if ($cat_itemid !== false) {
+				$itemid = $cat_itemid;
+			}
+			$vars['Itemid'] = $itemid;
+			break;
+	}
+
+	return $vars;
 }
 

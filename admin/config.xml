@@ -30,16 +30,29 @@
 		</field>		
 		
 		<field
-			name="cats_nbr_games"
-			id="lupo_cats_nbr_games"
-			type="radio"
-            class="btn-group btn-group-yesno"
-			label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
-			description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
-			default="1">
+				name="cats_nbr_games"
+				id="lupo_cats_nbr_games"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
+				description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
+				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>		
+		</field>
+
+		<field
+				name="cats_show_table_with_details"
+				id="cats_show_table_with_details"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_OPTIONS_SHOW_TABLE"
+				description="COM_LUPO_OPTIONS_SHOW_TABLE_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
 	</fieldset>
 
 	<fieldset
@@ -89,6 +102,7 @@
 				label="COM_LUPO_PHOTO_PREFIX"
 				description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
 				default="mini_"
+				showon="foto_list_show:1"
 				/>
 
 
@@ -316,7 +330,9 @@
 				id="detail_photo_lightbox"
 				label="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX"
 				description="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX_DESC"
-				default="1">
+				default="1"
+				showon="detail_show_toy_photo:1"
+		>
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
@@ -330,6 +346,7 @@
 			label="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX"
 			description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
 			default="thumb_"
+			showon="detail_show_toy_photo:1"
 		>
 		</field>
 
@@ -375,6 +392,50 @@
 			<option value="0">JNO</option>
 		</field>
 	</fieldset>
+
+    <fieldset
+            name="LUPO_ONLINESERVICE"
+            label="COM_LUPO_ONLINESERVICE"
+            >
+        <field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="lupo_show_toystatus"
+				id="lupo_show_toystatus"
+				label="COM_LUPO_SHOW_TOYSTATUS"
+				description="COM_LUPO_SHOW_TOYSTATUS_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+        </field>
+
+        <field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="lupo_prolongation_enabled"
+				id="lupo_prolongation_enabled"
+				label="COM_LUPO_PROLONGATION_ENABLED"
+				description="COM_LUPO_PROLONGATION_ENABLED_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+        </field>
+
+		<field
+				name="lupo_websynctoken"
+				id="lupo_websynctoken"
+				type="text"
+				maxLenght="32"
+				size="32"
+				label="COM_LUPO_OPTIONS_WEBSYNCTOKEN"
+				description="COM_LUPO_OPTIONS_WEBSYNCTOKEN_DESC"
+				default=""
+				required="true"
+				>
+		</field>
+
+
+    </fieldset>
 
     <fieldset
             name="LUPO_INTEGRATION"

@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -108,7 +108,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 				<?php if($componentParams->get('detail_show_toy_no', '1')){ ?>
 					<tr>
 						<td><?php echo JText::_("COM_LUPO_ART_NR")?>:</td>
-						<td><?php echo $this->game['number']?></td>
+						<td><?php echo (substr($this->game['number'],-2,2)=='.0')?(int)$this->game['number']:$this->game['number']?></td>
 					</tr>
 				<?php } ?>
 				<?php if($componentParams->get('detail_show_toy_category', '1')){ ?>
@@ -189,6 +189,19 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						</tr>
 					<?php }
 				}?>
+				<?php if($componentParams->get('lupo_show_toystatus', '0')) { ?>
+					<tr>
+						<td><?php echo JText::_("COM_LUPO_AVAILABILITY")?>:</td>
+						<td><?php
+							if($this->game['return_date']==null) {
+								echo '<i class="uk-icon uk-icon-circle green availability_dot"></i> '.JText::_("COM_LUPO_AVAILABLE");
+							} else {
+								echo '<i class="uk-icon uk-icon-circle red availability_dot"></i> '.JText::_("COM_LUPO_BORROWED");
+							}
+						?></td>
+					</tr>
+				<?php } ?>
+
 			</table>
 
 			<?php

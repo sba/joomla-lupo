@@ -2,9 +2,9 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright	Copyright (C) databauer / Stefan Bauer
+ * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link				http://www.ludothekprogramm.ch
+ * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -18,7 +18,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 ?>
 <article class="tm-article">
     <div class="tm-article-content">
-        <h2 class="contentheading"><?php echo $this->agecategory['title']?></h2>
+        <h2 class="contentheading"><?php echo $this->title?></h2>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
             <?php if($componentParams->get('category_show_tableheader', '1')) { ?>
@@ -44,6 +44,15 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             <?php
             $i=0;
             foreach($this->games as $game){
+                if($componentParams->get('lupo_show_toystatus', '0')) {
+                    if ($game['return_date'] == null) {
+                        $availability = '<i class="uk-icon uk-icon-circle green uk-float-right availability_dot" title="' . JText::_("COM_LUPO_AVAILABLE") . '"></i>';
+                    } else {
+                        $availability = '<i class="uk-icon uk-icon-circle red uk-float-right availability_dot" title="' . JText::_("COM_LUPO_BORROWED") . '"></i>';
+                    }
+                } else {
+                    $availability = '';
+                }
                 ?>
                 <tr>
                     <td>
@@ -55,6 +64,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <?php } else { ?>
                             <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                         <?php } ?>
+                        <?php echo $availability ?>
                         <?php if($this->foto['show']!='0') {?>
                             <a class="category" href="<?php echo $game['link']?>"><?php
                                 if ($game['image_thumb'] != NULL) {
@@ -64,7 +74,8 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
                                 <?php }?>
                             </a>
-                            <br><?php
+                            <br>
+                            <?php
                             $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
                             echo JHtmlString::truncateComplex($desc,220,true);
                             ?>
