@@ -16,8 +16,10 @@ CREATE TABLE `#__lupo_clients` (
 CREATE TABLE `#__lupo_clients_borrowed` (
   `lupo_id` int(10) unsigned NOT NULL,
   `edition_id` int(11) DEFAULT NULL,
+  `adrnr` int(10) unsigned DEFAULT NULL,
   `return_date` date DEFAULT NULL,
+  `return_date_extended` date DEFAULT NULL,
   `return_extended` tinyint(4) DEFAULT NULL,
   `return_extended_online` tinyint(4) DEFAULT '0',
-  `adrnr` int(10) unsigned DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `reminder_sent` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

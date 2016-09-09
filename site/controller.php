@@ -314,7 +314,7 @@ class LupoController extends JControllerLegacy {
 				$result = $db->execute();
 
 				//cache query-result. min 3x faster
-				$query    = $db->setQuery('SELECT jom_lupo_game_editions.id, `number` FROM jom_lupo_game_editions LEFT JOIN jom_lupo_game ON jom_lupo_game_editions.gameid = jom_lupo_game.id');
+				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');
 				$game_ids = $db->loadAssocList('number', 'id');
 
 
