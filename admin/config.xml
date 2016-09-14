@@ -430,7 +430,6 @@
 				label="COM_LUPO_OPTIONS_WEBSYNCTOKEN"
 				description="COM_LUPO_OPTIONS_WEBSYNCTOKEN_DESC"
 				default=""
-				required="true"
 				>
 		</field>
 
