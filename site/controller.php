@@ -297,6 +297,11 @@ class LupoController extends JControllerLegacy {
 
 				$arr = json_decode($data);
 
+				if($arr==false){
+					echo "nodata";
+					return;
+				}
+
 				//preserve online prolongations
 				$query = $db->getQuery(true);
 				$query->select('*')
