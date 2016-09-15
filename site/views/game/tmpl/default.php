@@ -250,23 +250,23 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						<table style="width:600px">
 							<tbody><tr><td colspan="2"></td></tr>
 							<tr>
-								<td style="width:150px;">Spiel</td>
+								<td style="width:150px;"><?php echo JText::_("COM_LUPO_TOY"); ?>:</td>
 								<td><input type="text" disabled maxlength="100" size="40" value="<?php echo $this->game['title']?>" id="toy"></td>
 							</tr>
 							<tr>
-								<td style="width:150px;">Name:*</td>
+								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_NAME"); ?>:*</td>
 								<td><input type="text" required maxlength="100" size="40" value="" id="clientname" name="clientname"></td>
 							</tr>
 							<tr>
-								<td style="width:150px;">E-Mail Adresse:*<br></td>
+								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_EMAIL"); ?>:*<br></td>
 								<td><input type="email" required maxlength="100" size="40" value="" id="clientemail" name="clientemail" ></td>
 							</tr>
 							<tr>
-								<td style="width:150px;">Kundennummer:</td>
-								<td><input type="text" maxlength="50" size="40" value="" id="clientnr" name="clientnr"> <span style="color:#444;">(Falls vorhanden)</span></td>
+								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO"); ?>:</td>
+								<td><input type="text" maxlength="50" size="40" value="" id="clientnr" name="clientnr"> <span style="color:#444;"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO_IF_AVAILABLE"); ?></span></td>
 							</tr>
 							<tr>
-								<td style="width:150px;">Zusätzliche Angaben</td>
+								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
 								<td><textarea rows="10" cols="70" id="comment" name="comment" style="height: 87px; width: 312px;"></textarea></td>
 							</tr>
 							<tr>
@@ -276,7 +276,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 							</tbody>
 						</table>
 						<div class="uk-modal-footer">
-							<button id="submitres" class="uk-button uk-button-primary">Abschicken</button>
+							<button id="submitres" class="uk-button uk-button-primary"><?php echo JText::_("COM_LUPO_RES_SUBMIT"); ?></button>
 							<div id="modal-msg" style="margin-top: 10px"></div>
 						</div>
 					</div>
