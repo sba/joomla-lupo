@@ -24,7 +24,12 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             <?php if($componentParams->get('category_show_tableheader', '1')) { ?>
                 <thead>
                 <tr>
-                    <th><?php echo JText::_('COM_LUPO_TOY'); ?></th>
+                    <th>
+		                <?php echo JText::_('COM_LUPO_TOY'); ?>
+		                <?php if($componentParams->get('lupo_show_toystatus', '0')) {?>
+                            <span class="uk-float-right">Ausleihstatus</span>
+		                <?php } ?>
+                    </th>
                     <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
                         <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
                     <?php } ?>
