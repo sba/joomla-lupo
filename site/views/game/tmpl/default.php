@@ -248,6 +248,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 								})
 								.done(function( msg ) {
 									if(msg=='ok'){
+                                        grecaptcha.reset();
 										var modal = UIkit.modal("#resform");
 										modal.hide();
 										$('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
