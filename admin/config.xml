@@ -304,7 +304,8 @@
                 id="detail_show_toy_tax_not_null"
                 label="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL"
                 description="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL_DESC"
-                default="1">
+                default="1"
+				showon="detail_show_toy_tax:1">
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
