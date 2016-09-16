@@ -121,6 +121,7 @@ class LupoController extends JControllerLegacy {
 	 */
 	public function sendres() {
 		$jinput      = JFactory::getApplication()->input;
+		$recaptcha_response  = $jinput->get('g-recaptcha-response', '', 'STRING');
 		$clientname  = $jinput->get('clientname', '', 'STRING');
 		$clientnr    = $jinput->get('clientnr', '', 'STRING');
 		$clientemail = $jinput->get('clientemail', '', 'STRING');
@@ -128,6 +129,14 @@ class LupoController extends JControllerLegacy {
 		$comment     = $jinput->get('comment', '', 'STRING');
 		$toynr       = $jinput->get('toynr', '', 'STRING');
 		$toyname     = $jinput->get('toyname', '', 'STRING');
+
+		//check captcha
+		JPluginHelper::importPlugin('captcha');
+		$dispatcher = JDispatcher::getInstance();
+		$result = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
+		if(!$result[0]){
+			die('Invalid Captcha Code');
+		}
 
 		$mailer = JFactory::getMailer();
 

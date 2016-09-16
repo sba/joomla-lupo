@@ -236,7 +236,8 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 									method: "POST",
 									url: "index.php?option=com_lupo&task=sendres&format=raw",
 									data: {
-										clientname: $('#clientname').val(),
+                                        'g-recaptcha-response': grecaptcha.getResponse(),
+									    clientname: $('#clientname').val(),
 										clientemail: $('#clientemail').val(),
 										clientnr: $('#clientnr').val(),
                                         resdate: ($('#resnow').prop('checked')?'sofort':$('#resdate').val()),
@@ -302,6 +303,17 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 							<tr>
 								<td><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
 								<td><textarea rows="10" cols="70" id="comment" name="comment" style="height: 87px; width: 312px;"></textarea></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>
+                                    <div id="recaptcha"></div>
+                                    <?php
+									JPluginHelper::importPlugin('captcha');
+									$dispatcher = JDispatcher::getInstance();
+									$dispatcher->trigger('onInit','recaptcha');
+									?>
+                                </td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>
