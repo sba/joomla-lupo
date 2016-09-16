@@ -213,10 +213,23 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
 			//reservation
 			if($componentParams->get('detail_show_toy_res', '0')) {?>
-				<a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+                <?php $session = JFactory::getSession();
+                $client = $session->get('lupo_client');
+				$clientname = ($client) ? $client->firstname . ' ' . $client->lastname : '';
+				$clientnr = ($client) ? $client->adrnr : '';
+                ?>
+                <a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
 
 				<script type="text/javascript">
 					jQuery( document ).ready(function( $ ) {
+					    $('#resnow').click(function(){
+                            if($(this).prop('checked')){
+                                $('#row_resdate').hide();
+                            } else {
+                                $('#row_resdate').show();
+                            }
+                        });
+
 						$('#submitres').click(function () {
 
 							$.ajax({
@@ -226,6 +239,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 										clientname: $('#clientname').val(),
 										clientemail: $('#clientemail').val(),
 										clientnr: $('#clientnr').val(),
+                                        resdate: ($('#resnow').prop('checked')?'sofort':$('#resdate').val()),
 										comment: $('#comment').val(),
 										toynr: '<?php echo $this->game['number']?>',
 										toyname: '<?php echo $this->game['title']?>'
@@ -247,30 +261,50 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 					<div class="uk-modal-dialog" style="background: #ffffff none repeat scroll 0 0 !important;">
 						<button class="uk-modal-close uk-close" type="button"></button>
 						<div class="uk-modal-header"><h2><?php echo JText::_("COM_LUPO_RES_TOYS"); ?></h2></div>
-						<table style="width:600px">
+                        <style>
+                            .res-table {
+                                width:600px;
+                            }
+                            .res-table td:nth-child(1) {
+                                width:150px;
+                                vertical-align: top;
+                            }
+                            #row_resdate {
+                                display: none;
+                            }
+                        </style>
+						<table class="res-table">
 							<tbody><tr><td colspan="2"></td></tr>
 							<tr>
-								<td style="width:150px;"><?php echo JText::_("COM_LUPO_TOY"); ?>:</td>
+								<td><?php echo JText::_("COM_LUPO_TOY"); ?>:</td>
 								<td><input type="text" disabled maxlength="100" size="40" value="<?php echo $this->game['title']?>" id="toy"></td>
 							</tr>
 							<tr>
-								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_NAME"); ?>:*</td>
-								<td><input type="text" required maxlength="100" size="40" value="" id="clientname" name="clientname"></td>
+								<td><?php echo JText::_("COM_LUPO_RES_NAME"); ?>:*</td>
+								<td><input type="text" required maxlength="100" size="40" value="<?=$clientname?>" id="clientname" name="clientname"></td>
 							</tr>
 							<tr>
-								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_EMAIL"); ?>:*<br></td>
+								<td><?php echo JText::_("COM_LUPO_RES_EMAIL"); ?>:*<br></td>
 								<td><input type="email" required maxlength="100" size="40" value="" id="clientemail" name="clientemail" ></td>
 							</tr>
 							<tr>
-								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO"); ?>:</td>
-								<td><input type="text" maxlength="50" size="40" value="" id="clientnr" name="clientnr"> <span style="color:#444;"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO_IF_AVAILABLE"); ?></span></td>
+								<td><?php echo JText::_("COM_LUPO_RES_CLIENT_NO"); ?>:</td>
+								<td><input type="text" maxlength="50" size="40" value="<?=$clientnr?>" id="clientnr" name="clientnr"> <span class="uk-text-muted"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO_IF_AVAILABLE"); ?></span></td>
 							</tr>
 							<tr>
-								<td style="width:150px;"><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
+								<td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
+								<td><input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked" style="margin-bottom: 10px"> Sofort <span class="uk-text-muted"> - sobald das Spiel eingetroffen ist, werden Sie informiert</span></td>
+							</tr>
+                            <tr id="row_resdate">
+                                <td></td>
+                                <td><input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate" placeholder="ab Datum" ></td>
+                            </tr>
+							<tr>
+								<td><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
 								<td><textarea rows="10" cols="70" id="comment" name="comment" style="height: 87px; width: 312px;"></textarea></td>
 							</tr>
 							<tr>
-								<td style="width:150px">&nbsp;</td>
+								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 							</tr>
 							</tbody>
