@@ -15,7 +15,17 @@ defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = JComponentHelper::getParams('com_lupo');
 
+//check if captcha is enabled
+$captchaEnabled = false;
+$captchaSet = JFactory::getApplication()->get('captcha', '0');
+
+if ($captchaSet != "0") {
+    $captchaEnabled = true;
+}
+
 ?>
+
+
 <article class="tm-article">
 	<div class="tm-article-content ">
 		<?php
@@ -236,7 +246,9 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 									method: "POST",
 									url: "index.php?option=com_lupo&task=sendres&format=raw",
 									data: {
+										<?php if($captchaEnabled){ ?>
                                         'g-recaptcha-response': grecaptcha.getResponse(),
+                                        <?php } ?>
 									    clientname: $('#clientname').val(),
 										clientemail: $('#clientemail').val(),
 										clientnr: $('#clientnr').val(),
@@ -305,6 +317,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 								<td><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
 								<td><textarea rows="10" cols="70" id="comment" name="comment" style="height: 87px; width: 312px;"></textarea></td>
 							</tr>
+                            <?php if($captchaEnabled){ ?>
 							<tr>
 								<td>&nbsp;</td>
 								<td>
@@ -316,6 +329,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 									?>
                                 </td>
 							</tr>
+                            <?php } ?>
 							<tr>
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
