@@ -168,7 +168,7 @@ class LupoController extends JControllerLegacy {
 		$mailer->addRecipient($recipient);
 		$mailer->addReplyTo($clientemail);
 
-		$body = sprintf("Eine Spielreservation ist auf der Webseite %s eingegangen.", $config->get( 'sitename' ))."\n\n";
+		$body = sprintf("Eine Spielreservation ist auf der Webseite '%s' eingegangen.", $config->get( 'sitename' ))."\n\n";
 		$body .= "Spiel-Nr:      $toynr\n";
 		$body .= "Spiel:         $toyname\n";
 		$body .= "Reserviert ab: $resdate\n\n";
