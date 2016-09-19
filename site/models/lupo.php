@@ -432,12 +432,14 @@ class LupoModelLupo extends JModelItem {
 
 		$games = false;
 
-		foreach ($numbers as $item) {
+		foreach ($numbers as $number) {
+			$number = (strpos($number,'.')==0?$number.'.0':$number);
 			$db->setQuery("SELECT
                             #__lupo_game.id
                         FROM
                             #__lupo_game
-                        WHERE #__lupo_game.number = " . $db->quote($db->escape(trim($item))));
+                        LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
+                        WHERE CONCAT(`number`, IF(INSTR(`number`, '.') = 0, CONCAT('.', `index`), '')) = " . $db->quote($db->escape(trim($number))));
 			$res = $db->loadAssoc();
 
 			if ($res !== null) {
