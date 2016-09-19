@@ -235,6 +235,12 @@ if ($captchaSet != "0") {
 
                     <script type="text/javascript">
                         jQuery(document).ready(function ($) {
+                            $('#resform').on({
+                                'show.uk.modal': function(){
+                                    $('#modal-msg').html(""); //remove old messages
+                                }
+                            });
+
                             $('#resnow').click(function () {
                                 if ($(this).prop('checked')) {
                                     $('#row_resdate').hide();
@@ -244,7 +250,6 @@ if ($captchaSet != "0") {
                             });
 
                             $('#submitres').click(function () {
-
                                 $.ajax({
                                     method: "POST",
                                     url: "index.php?option=com_lupo&task=sendres&format=raw",
@@ -271,7 +276,7 @@ if ($captchaSet != "0") {
                                                 $('#modal-msg').html('<div class="uk-alert uk-alert-danger">' + msg + '</div>');
                                             }
                                         });
-                            })
+                            });
                             $('#cancelres').click(function(){
                                 UIkit.modal("#resform").hide();
                             })
