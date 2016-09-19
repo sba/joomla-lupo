@@ -576,6 +576,7 @@ class LupoModelLupo extends JModelItem {
 				$res['tax_max'] = $max = $arr['tax'];
 			}
 		}
+		$res['tax'] = $res['tax_min']; //tax = alias for tax_min
 
 		//related games
 		$db->setQuery("SELECT
