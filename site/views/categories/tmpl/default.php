@@ -53,7 +53,7 @@ $menu = JSite::getMenu()->getActive();
 						</a>
 					</td>
 					<td>
-						<a href="<?php echo $category['link']?>"><?php echo $category['title']?></a>
+						<b><a href="<?php echo $category['link']?>"><?php echo $category['title']?></a></b>
 						<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
 							(<?php echo $category['number']?>)
 						<?php } ?>

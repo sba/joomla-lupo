@@ -365,6 +365,20 @@
 			<option value="0">JNO</option>
 		</field>
 
+		<field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="detail_show_toy_res_only_logged_in"
+				id="detail_show_toy_res_only_logged_in"
+				label="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN"
+				description="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN_DESC"
+				default="0"
+				showon="detail_show_toy_res:1"
+		>
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
 		<field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
 
         <field
