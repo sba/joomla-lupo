@@ -307,11 +307,11 @@ if ($captchaSet != "0") {
 							</tr>
 							<tr>
 								<td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
-								<td><input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked" style="margin-bottom: 10px"> Sofort <span class="uk-text-muted"> - sobald das Spiel eingetroffen ist, werden Sie informiert</span></td>
+								<td><input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked" style="margin-bottom: 10px"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?> <span class="uk-text-muted"> - <?php echo JText::_("COM_LUPO_RES_FROM_INFO"); ?></span></td>
 							</tr>
                             <tr id="row_resdate">
                                 <td></td>
-                                <td><input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate" placeholder="ab Datum" ></td>
+                                <td><input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate" placeholder="<?php echo JText::_("COM_LUPO_RES_FROM_DATE"); ?>" ></td>
                             </tr>
 							<tr>
 								<td><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
