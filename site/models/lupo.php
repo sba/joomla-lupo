@@ -178,6 +178,19 @@ class LupoModelLupo extends JModelItem {
 			} else {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
+
+			//load sample games
+			$samples = explode(",", $row['samples']);
+			$sample_games = false;
+			if(is_array($samples)) {
+				foreach ($samples as $sample_nr) {
+					$sample_game = $this->getGamesByNumber($sample_nr);
+					if(is_array($sample_game)) {
+						$sample_games[] = $sample_game[0];
+					}
+				}
+				$row['sample_games'] = $sample_games;
+			}
 		}
 
 		return $res;
