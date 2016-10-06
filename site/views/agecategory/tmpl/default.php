@@ -31,16 +31,16 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 		                <?php } ?>
                     </th>
                     <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
-                        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
+                        <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
                     <?php } ?>
                     <?php /* if($componentParams->get('category_show_toy_age_category', '1')) { ?>
-                        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_AGE_CATEGORY'); ?></div></th>
+                        <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_AGE_CATEGORY'); ?></div></th>
                     <?php } */ ?>
                     <?php if($componentParams->get('category_show_tax', '1')) { ?>
-                        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_TAX'); ?></div></th>
+                        <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_TAX'); ?></div></th>
                     <?php } ?>
                     <?php if($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
-                        <th nowrap="nowrap"><div align="right"><?php echo JText::_('COM_LUPO_DAYS'); ?></div></th>
+                        <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_DAYS'); ?></div></th>
                     <?php } ?>
                 </tr>
                 </thead>
@@ -91,16 +91,16 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         </p>
                     </td>
                     <?php if($componentParams->get('category_show_toy_category', '1')) { ?>
-                        <td align="right"><?php echo $game['category']?></td>
+                        <td align="right" class="uk-hidden-small"><?php echo $game['category']?></td>
                     <?php } ?>
                     <?php /* if($componentParams->get('category_show_toy_age_category', '1')) { ?>
-                        <td align="right"><?php echo $game['age_category']?></td>
+                        <td align="right" class="uk-hidden-small"><?php echo $game['age_category']?></td>
                     <?php } */ ?>
                     <?php if($componentParams->get('category_show_tax', '1')) { ?>
-                        <td align="right"><?php echo number_format($game['tax'],2)?></td>
+                        <td align="right" class="uk-hidden-small"><?php echo number_format($game['tax'],2)?></td>
                     <?php } ?>
                     <?php if($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
-                        <td align="right"><?php echo $game['days']?></td>
+                        <td align="right" class="uk-hidden-small"><?php echo $game['days']?></td>
                     <?php } ?>
                 </tr>
                 <?php
