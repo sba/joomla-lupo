@@ -105,6 +105,17 @@
 				showon="foto_list_show:1"
 				/>
 
+		<field
+				name="foto_list_show_placeholder"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_PHOTO_SHOW_PLACEHOLDER"
+				description="COM_LUPO_PHOTO_SHOW_PLACEHOLDER_DESC"
+				default="1"
+				showon="foto_list_show:1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
 
 		<field
 			type="radio"
@@ -116,7 +127,6 @@
 			default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		>
 		</field>
 
         <field

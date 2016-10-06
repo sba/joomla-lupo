@@ -61,30 +61,34 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                 ?>
                 <tr>
                     <td>
+	                    <?php if($this->foto['show']!='0') {?>
+                            <a class="category" href="<?php echo $game['link']?>"><?php
+			                    if ($game['image_thumb'] != NULL) {
+				                    ?>
+                                    <img class="uk-align-left" src="<?php echo $game['image_thumb']?>">
+			                    <?php } else { ?>
+                                    <?php if($componentParams->get('foto_list_show_placeholder', '1')) { ?>
+                                        <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
+                                    <?php } ?>
+			                    <?php }?>
+                            </a>
+	                    <?php }?>
+	                    <?php echo $availability ?>
                         <?php if($componentParams->get('category_show_detail_link', '1')) {
                             $nbr_games = ($game['nbr']>1 && $componentParams->get('category_nbr_games', '1'))?'('.$game['nbr'].')':'';
                             ?>
-                            <a class="category" href="<?php echo $game['link']?>"><?php echo $game['title']?> <?php echo $nbr_games?></a>
-                            <br class="uk-visible-small" />
+                            <p>
+                                <a class="category" href="<?php echo $game['link']?>"><?php echo $game['title']?> <?php echo $nbr_games?></a>
+                            </p>
                         <?php } else { ?>
                             <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                         <?php } ?>
-                        <?php echo $availability ?>
-                        <?php if($this->foto['show']!='0') {?>
-                            <a class="category" href="<?php echo $game['link']?>"><?php
-                                if ($game['image_thumb'] != NULL) {
-                                    ?>
-                                    <img class="uk-align-left" src="<?php echo $game['image_thumb']?>">
-                                <?php } else { ?>
-                                    <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix']?>dice-gray.jpg">
-                                <?php }?>
-                            </a>
-                            <br>
-                            <?php
-                            $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
-                            echo JHtmlString::truncateComplex($desc,220,true);
-                            ?>
-                        <?php }?>
+                        <p>
+		                    <?php
+		                    $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
+		                    echo JHtmlString::truncateComplex($desc,220,true);
+		                    ?>
+                        </p>
                     </td>
                     <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
                         <td align="right"><?php echo $game['category']?></td>
