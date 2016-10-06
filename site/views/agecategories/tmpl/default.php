@@ -57,7 +57,7 @@ $menu =JSite::getMenu()->getActive();
 						<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
 							(<?php echo $agecategory['number']?>)
 						<?php } ?>
-						<p class="uk-margin-remove"><?php echo $agecategory['description']?></p>
+						<p class="uk-margin-remove uk-padding-remove"><?php echo $agecategory['description']?></p>
 					</td>
 				</tr>
 			<?php } ?>
