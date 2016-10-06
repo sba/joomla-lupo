@@ -57,7 +57,7 @@ $menu = JSite::getMenu()->getActive();
 						<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
 							(<?php echo $category['number']?>)
 						<?php } ?>
-						<p class="uk-margin-remove">
+						<p class="uk-margin-remove uk-padding-remove">
                             <?php echo $category['description']?>
                             <?php if($category['sample_games']){ ?>
                                 <br>
