@@ -741,7 +741,7 @@ class LupoModelLupo extends JModelItem {
 		$row = $db->loadRow();
 
 		if (count($row) > 0) {
-			$db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0] . "'");
+			$db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0] . "'  AND published=1");
 			$row = $db->loadRow();
 		}
 
