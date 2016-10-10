@@ -14,8 +14,14 @@ defined('_JEXEC') or die('Restricted access');
 //load lupo styles
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = JComponentHelper::getParams('com_lupo');
+if($this->foto['show']=='1') {?>
+    <style>
+        #lupo_category_table tr td > p {
+            padding-left: 115px
+        }
+    </style>
+<?php } ?>
 
-?>
 <article class="tm-article">
     <div class="tm-article-content">
         <h2 class="contentheading"><?php echo $this->title?></h2>
@@ -40,7 +46,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_TAX'); ?></div></th>
                     <?php } ?>
                     <?php if($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
-                        <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_DAYS'); ?></div></th>
+                        <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo str_replace(" ", "<br>", JText::_('COM_LUPO_DAYS')); ?></div></th>
                     <?php } ?>
                 </tr>
                 </thead>
