@@ -89,12 +89,14 @@ if($this->foto['show']=='1') {?>
                         <?php } else { ?>
                             <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
                         <?php } ?>
+                        <?php if($componentParams->get('foto_list_show_description', '1')) { ?>
                         <p>
 		                    <?php
 		                    $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
 		                    echo JHtmlString::truncateComplex($desc,220,true);
 		                    ?>
                         </p>
+                        <?php } ?>
                     </td>
                     <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
                         <td align="right" class="uk-hidden-small"><?php echo $game['category']?></td>
