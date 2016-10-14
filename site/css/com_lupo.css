@@ -17,6 +17,20 @@ ul.lupo_categories {
     font-weight: bold;
 }
 
+#lupo_category_table tr td > p {
+    margin: 0;
+}
+
+#lupo_category_table tr td > p:last-child {
+    margin-bottom: 5px;
+}
+
+#lupo_category_table tr td img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
 .lupo_image {
 
 }
@@ -36,6 +50,7 @@ ul.lupo_categories {
 .red {
     color: red;
 }
+
 
 /*fix uikit lightbox background */
 .uk-modal-dialog {

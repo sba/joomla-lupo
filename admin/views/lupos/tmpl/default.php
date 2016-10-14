@@ -45,6 +45,7 @@ JHtml::_('behavior.tooltip');
 
 					$('uploadfiles').onclick = function() {
 						uploader.start();
+                        jQuery('#processzip').prop('disabled', true);
 						return false;
 					};
 				},
@@ -69,6 +70,7 @@ JHtml::_('behavior.tooltip');
 
 				FileUploaded: function(up, file) {
 					jQuery('#upload_percent').html('<b>100%</b>  <span class="icon-ok"> </span> ' + jQuery("#"+file.id).html());
+					jQuery('#processzip').prop('disabled', false);
 					$('filelist').innerHTML = '';
 					uploader.splice();
 				},
@@ -115,7 +117,7 @@ JHtml::_('behavior.tooltip');
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processZIPForm">
 		<input type="hidden" name="act" value="processzip" />
 
-		<input type="submit" name="submit" class="btn btn-large" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
+		<input type="submit" name="submit" class="btn btn-large"  id="processzip" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
 	</form>
 
 	<?php

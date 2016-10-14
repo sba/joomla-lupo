@@ -15,7 +15,17 @@ defined('_JEXEC') or die('Restricted access');
 JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = JComponentHelper::getParams('com_lupo');
 
+//check if captcha is enabled
+$captchaEnabled = false;
+$captchaSet = JFactory::getApplication()->get('captcha', '0');
+
+if ($captchaSet != "0") {
+    $captchaEnabled = true;
+}
+
 ?>
+
+
 <article class="tm-article">
 	<div class="tm-article-content ">
 		<?php
@@ -213,76 +223,157 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
 			//reservation
 			if($componentParams->get('detail_show_toy_res', '0')) {?>
-				<a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+                <?php $session = JFactory::getSession();
+                $client = $session->get('lupo_client');
+				$show_only_to_logged_in = $componentParams->get('detail_show_toy_res_only_logged_in', '0');
+				if(!$show_only_to_logged_in || ($show_only_to_logged_in && $client)) {
+                    $clientname = ($client) ? $client->firstname . ' ' . $client->lastname : '';
+                    $clientnr   = ($client) ? $client->adrnr : '';
+                    ?>
+                    <a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i
+                                class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
 
-				<script type="text/javascript">
-					jQuery( document ).ready(function( $ ) {
-						$('#submitres').click(function () {
+                    <script type="text/javascript">
+                        jQuery(document).ready(function ($) {
+                            $('#resform').on({
+                                'show.uk.modal': function(){
+                                    $('#modal-msg').html(""); //remove old messages
+                                }
+                            });
 
-							$.ajax({
-									method: "POST",
-									url: "index.php?option=com_lupo&task=sendres&format=raw",
-									data: {
-										clientname: $('#clientname').val(),
-										clientemail: $('#clientemail').val(),
-										clientnr: $('#clientnr').val(),
-										comment: $('#comment').val(),
-										toynr: '<?php echo $this->game['number']?>',
-										toyname: '<?php echo $this->game['title']?>'
-									}
-								})
-								.done(function( msg ) {
-									if(msg=='ok'){
-										var modal = UIkit.modal("#resform");
-										modal.hide();
-										$('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
-									} else {
-										$('#modal-msg').html('<div class="uk-alert uk-alert-danger">'+msg+'</div>');
-									}
-								});
-						})
-					})
-				</script>
-				<div id="resform" class="uk-modal">
-					<div class="uk-modal-dialog" style="background: #ffffff none repeat scroll 0 0 !important;">
-						<button class="uk-modal-close uk-close" type="button"></button>
-						<div class="uk-modal-header"><h2><?php echo JText::_("COM_LUPO_RES_TOYS"); ?></h2></div>
-						<table style="width:600px">
-							<tbody><tr><td colspan="2"></td></tr>
-							<tr>
-								<td style="width:150px;">Spiel</td>
-								<td><input type="text" disabled maxlength="100" size="40" value="<?php echo $this->game['title']?>" id="toy"></td>
-							</tr>
-							<tr>
-								<td style="width:150px;">Name:*</td>
-								<td><input type="text" required maxlength="100" size="40" value="" id="clientname" name="clientname"></td>
-							</tr>
-							<tr>
-								<td style="width:150px;">E-Mail Adresse:*<br></td>
-								<td><input type="email" required maxlength="100" size="40" value="" id="clientemail" name="clientemail" ></td>
-							</tr>
-							<tr>
-								<td style="width:150px;">Kundennummer:</td>
-								<td><input type="text" maxlength="50" size="40" value="" id="clientnr" name="clientnr"> <span style="color:#444;">(Falls vorhanden)</span></td>
-							</tr>
-							<tr>
-								<td style="width:150px;">Zusätzliche Angaben</td>
-								<td><textarea rows="10" cols="70" id="comment" name="comment" style="height: 87px; width: 312px;"></textarea></td>
-							</tr>
-							<tr>
-								<td style="width:150px">&nbsp;</td>
-								<td>&nbsp;</td>
-							</tr>
-							</tbody>
-						</table>
-						<div class="uk-modal-footer">
-							<button id="submitres" class="uk-button uk-button-primary">Abschicken</button>
-							<div id="modal-msg" style="margin-top: 10px"></div>
-						</div>
-					</div>
-				</div>
-				<?php
+                            $('#resnow').click(function () {
+                                if ($(this).prop('checked')) {
+                                    $('#row_resdate').hide();
+                                } else {
+                                    $('#row_resdate').show();
+                                }
+                            });
+
+                            $('#submitres').click(function () {
+                                $.ajax({
+                                    method: "POST",
+                                    url: "index.php?option=com_lupo&task=sendres&format=raw",
+                                    data: {
+                                        <?php if($captchaEnabled){ ?>
+                                        'g-recaptcha-response': grecaptcha.getResponse(),
+                                        <?php } ?>
+                                        clientname: $('#clientname').val(),
+                                        clientemail: $('#clientemail').val(),
+                                        clientnr: $('#clientnr').val(),
+                                        resdate: ($('#resnow').prop('checked') ? 'sofort' : $('#resdate').val()),
+                                        comment: $('#comment').val(),
+                                        toynr: '<?php echo $this->game['number']?>',
+                                        toyname: '<?php echo $this->game['title']?>'
+                                    }
+                                })
+                                        .done(function (msg) {
+                                            if (msg == 'ok') {
+                                                grecaptcha.reset();
+                                                var modal = UIkit.modal("#resform");
+                                                modal.hide();
+                                                $('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
+                                            } else {
+                                                $('#modal-msg').html('<div class="uk-alert uk-alert-danger">' + msg + '</div>');
+                                            }
+                                        });
+                            });
+                            $('#cancelres').click(function(){
+                                UIkit.modal("#resform").hide();
+                            })
+                        })
+                    </script>
+                    <div id="resform" class="uk-modal">
+                        <div class="uk-modal-dialog" style="background: #ffffff none repeat scroll 0 0 !important;">
+                            <button class="uk-modal-close uk-close" type="button"></button>
+                            <div class="uk-modal-header"><h2><?php echo JText::_("COM_LUPO_RES_TOYS"); ?></h2></div>
+                            <style>
+                                .res-table {
+                                    width: 600px;
+                                }
+
+                                .res-table td:nth-child(1) {
+                                    width: 150px;
+                                    vertical-align: top;
+                                }
+
+                                #row_resdate {
+                                    display: none;
+                                }
+                            </style>
+                            <table class="res-table">
+                                <tbody>
+                                <tr>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_TOY"); ?>:</td>
+                                    <td><input type="text" disabled maxlength="100" size="40"
+                                               value="<?php echo $this->game['title'] ?>" id="toy"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_CLIENT_NO"); ?>:</td>
+                                    <td><input type="text" maxlength="50" size="40" value="<?= $clientnr ?>" id="clientnr"
+                                               name="clientnr"> <span
+                                                class="uk-text-muted"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO_IF_AVAILABLE"); ?></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_NAME"); ?>:*</td>
+                                    <td><input type="text" required maxlength="100" size="40" value="<?= $clientname ?>"
+                                               id="clientname" name="clientname"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_EMAIL"); ?>:*<br></td>
+                                    <td><input type="email" required maxlength="100" size="40" value="" id="clientemail"
+                                               name="clientemail"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
+                                    <td><input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"
+                                               style="margin-bottom: 10px"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
+                                        <span class="uk-text-muted"> - <?php echo JText::_("COM_LUPO_RES_FROM_INFO"); ?></span>
+                                    </td>
+                                </tr>
+                                <tr id="row_resdate">
+                                    <td></td>
+                                    <td><input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate"
+                                               placeholder="<?php echo JText::_("COM_LUPO_RES_FROM_DATE"); ?>"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
+                                    <td><textarea rows="10" cols="70" id="comment" name="comment"
+                                                  style="height: 87px; width: 312px;"></textarea></td>
+                                </tr>
+                                <?php if ($captchaEnabled) { ?>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <div id="recaptcha"></div>
+                                            <?php
+                                            JPluginHelper::importPlugin('captcha');
+                                            $dispatcher = JDispatcher::getInstance();
+                                            $dispatcher->trigger('onInit', 'recaptcha');
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="uk-modal-footer">
+                                <button id="cancelres" class="uk-button"><?php echo JText::_("JCANCEL"); ?></button>
+                                <button id="submitres" class="uk-button uk-button-primary"><?php echo JText::_("COM_LUPO_RES_SUBMIT"); ?></button>
+                                <div id="modal-msg" style="margin-top: 10px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+		        }
 			}
+
 
 			//related games
 			if($componentParams->get('detail_show_toy_related', '1')) {

@@ -109,6 +109,19 @@ class LupoModelLupo extends JModelItem {
 			} else {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
+
+			//load sample games
+			$samples = explode(",", $row['samples']);
+			$sample_games = false;
+			if(is_array($samples)) {
+				foreach ($samples as $sample_nr) {
+					$sample_game = $this->getGamesByNumber($sample_nr);
+					if(is_array($sample_game)) {
+						$sample_games[] = $sample_game[0];
+					}
+				}
+				$row['sample_games'] = $sample_games;
+			}
 		}
 
 		return $res;
@@ -165,6 +178,19 @@ class LupoModelLupo extends JModelItem {
 			} else {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
+
+			//load sample games
+			$samples = explode(",", $row['samples']);
+			$sample_games = false;
+			if(is_array($samples)) {
+				foreach ($samples as $sample_nr) {
+					$sample_game = $this->getGamesByNumber($sample_nr);
+					if(is_array($sample_game)) {
+						$sample_games[] = $sample_game[0];
+					}
+				}
+				$row['sample_games'] = $sample_games;
+			}
 		}
 
 		return $res;
@@ -188,6 +214,7 @@ class LupoModelLupo extends JModelItem {
 						INNER JOIN #__lupo_game_genre ON #__lupo_game.id = #__lupo_game_genre.gameid
 						INNER JOIN #__lupo_genres ON #__lupo_game_genre.genreid = #__lupo_genres.id
 						GROUP BY #__lupo_genres.id
+						ORDER BY genre
 						");
 
 		$res = $db->loadAssocList();
@@ -432,12 +459,14 @@ class LupoModelLupo extends JModelItem {
 
 		$games = false;
 
-		foreach ($numbers as $item) {
+		foreach ($numbers as $number) {
+			$number = (strpos($number,'.')==0?$number.'.0':$number);
 			$db->setQuery("SELECT
                             #__lupo_game.id
                         FROM
                             #__lupo_game
-                        WHERE #__lupo_game.number = " . $db->quote($db->escape(trim($item))));
+                        LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
+                        WHERE CONCAT(`number`, IF(INSTR(`number`, '.') = 0, CONCAT('.', `index`), '')) = " . $db->quote($db->escape(trim($number))));
 			$res = $db->loadAssoc();
 
 			if ($res !== null) {
@@ -574,6 +603,7 @@ class LupoModelLupo extends JModelItem {
 				$res['tax_max'] = $max = $arr['tax'];
 			}
 		}
+		$res['tax'] = $res['tax_min']; //tax = alias for tax_min
 
 		//related games
 		$db->setQuery("SELECT
@@ -694,6 +724,12 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
+		//fix if only thumb is uploaded
+		if($game_thumb_prefix!='mini_' && $res['image']==null && $res['image_thumb'] !== null){
+			$res['image']=$res['image_thumb'];
+			$res['image_thumb']=null;
+		}
+
 		return $res;
 	}
 
@@ -712,7 +748,7 @@ class LupoModelLupo extends JModelItem {
 		$row = $db->loadRow();
 
 		if (count($row) > 0) {
-			$db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0] . "'");
+			$db->setQuery("SELECT id FROM #__menu WHERE link = 'index.php?option=com_lupo&view=category&id=" . $row[0] . "'  AND published=1");
 			$row = $db->loadRow();
 		}
 

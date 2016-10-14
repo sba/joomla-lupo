@@ -105,6 +105,29 @@
 				showon="foto_list_show:1"
 				/>
 
+		<field
+				name="foto_list_show_placeholder"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_PHOTO_SHOW_PLACEHOLDER"
+				description="COM_LUPO_PHOTO_SHOW_PLACEHOLDER_DESC"
+				default="1"
+				showon="foto_list_show:1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field
+				name="foto_list_show_description"
+				type="radio"
+				class="btn-group btn-group-yesno"
+				label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
+				description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
+				default="1"
+				showon="foto_list_show:0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
 
 		<field
 			type="radio"
@@ -116,7 +139,6 @@
 			default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		>
 		</field>
 
         <field
@@ -304,7 +326,8 @@
                 id="detail_show_toy_tax_not_null"
                 label="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL"
                 description="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL_DESC"
-                default="1">
+                default="1"
+				showon="detail_show_toy_tax:1">
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
@@ -360,6 +383,20 @@
 				label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
 				description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
 				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="detail_show_toy_res_only_logged_in"
+				id="detail_show_toy_res_only_logged_in"
+				label="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN"
+				description="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN_DESC"
+				default="0"
+				showon="detail_show_toy_res:1"
+		>
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
@@ -430,7 +467,6 @@
 				label="COM_LUPO_OPTIONS_WEBSYNCTOKEN"
 				description="COM_LUPO_OPTIONS_WEBSYNCTOKEN_DESC"
 				default=""
-				required="true"
 				>
 		</field>
 

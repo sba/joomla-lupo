@@ -53,11 +53,22 @@ $menu = JSite::getMenu()->getActive();
 						</a>
 					</td>
 					<td>
-						<a href="<?php echo $category['link']?>"><?php echo $category['title']?></a>
+						<b><a href="<?php echo $category['link']?>"><?php echo $category['title']?></a></b>
 						<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
 							(<?php echo $category['number']?>)
 						<?php } ?>
-						<p class="uk-margin-remove"><?php echo $category['description']?></p>
+						<p class="uk-margin-remove uk-padding-remove">
+                            <?php echo $category['description']?>
+                            <?php if($category['sample_games']){ ?>
+                                <br>
+                                <?php
+	                            unset($gamelinks);
+                                foreach ($category['sample_games'] as $sample_game){
+                                    $gamelinks[] = '<a href="'.$sample_game['link'].'">'.$sample_game['title'].'</a>';
+                                }
+                                echo implode(", ", $gamelinks);
+                            }; ?>
+                        </p>
 					</td>
 				</tr>
 			<?php } ?>

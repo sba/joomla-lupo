@@ -42,24 +42,35 @@ $menu =JSite::getMenu()->getActive();
 		<table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
 			<?php
 			foreach($this->agecategories as $agecategory){ ?>
-				<tr>
-					<td width="100">
-						<a href="<?php echo $agecategory['link']?>">
+                <tr>
+                    <td width="100">
+                        <a href="<?php echo $agecategory['link']?>">
 							<?php if($agecategory['image_thumb']!=null) { ?>
-								<img class="uk-align-left" src="<?php echo $agecategory['image_thumb']?>">
+                                <img class="uk-align-left" src="<?php echo $agecategory['image_thumb']?>">
 							<?php } else { ?>
-								<img class="uk-align-left" src="images/spiele/mini_dice-gray.jpg">
+                                <img class="uk-align-left" src="images/spiele/mini_dice-gray.jpg">
 							<?php } ?>
-						</a>
-					</td>
-					<td>
-						<a href="<?php echo $agecategory['link']?>"><?php echo $agecategory['title']?></a>
+                        </a>
+                    </td>
+                    <td>
+                        <b><a href="<?php echo $agecategory['link']?>"><?php echo $agecategory['title']?></a></b>
 						<?php if($componentParams->get('cats_nbr_games', '1')) { ?>
-							(<?php echo $agecategory['number']?>)
+                            (<?php echo $agecategory['number']?>)
 						<?php } ?>
-						<p class="uk-margin-remove"><?php echo $agecategory['description']?></p>
-					</td>
-				</tr>
+                        <p class="uk-margin-remove uk-padding-remove">
+							<?php echo $agecategory['description']?>
+							<?php if($agecategory['sample_games']){ ?>
+                                <br>
+								<?php
+								unset($gamelinks);
+								foreach ($agecategory['sample_games'] as $sample_game){
+									$gamelinks[] = '<a href="'.$sample_game['link'].'">'.$sample_game['title'].'</a>';
+								}
+								echo implode(", ", $gamelinks);
+							}; ?>
+                        </p>
+                    </td>
+                </tr>
 			<?php } ?>
 		</table>
 

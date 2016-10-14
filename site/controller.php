@@ -121,12 +121,25 @@ class LupoController extends JControllerLegacy {
 	 */
 	public function sendres() {
 		$jinput      = JFactory::getApplication()->input;
+		$recaptcha_response  = $jinput->get('g-recaptcha-response', '', 'STRING');
 		$clientname  = $jinput->get('clientname', '', 'STRING');
 		$clientnr    = $jinput->get('clientnr', '', 'STRING');
 		$clientemail = $jinput->get('clientemail', '', 'STRING');
+		$resdate     = $jinput->get('resdate', '', 'STRING');
 		$comment     = $jinput->get('comment', '', 'STRING');
 		$toynr       = $jinput->get('toynr', '', 'STRING');
 		$toyname     = $jinput->get('toyname', '', 'STRING');
+
+		//check captcha
+		$captchaSet = JFactory::getApplication()->get('captcha', '0');
+		if($captchaSet != "0") {
+			JPluginHelper::importPlugin('captcha');
+			$dispatcher = JDispatcher::getInstance();
+			$result     = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
+			if (!$result[0]) {
+				die('Invalid Captcha Code');
+			}
+		}
 
 		$mailer = JFactory::getMailer();
 
@@ -155,11 +168,13 @@ class LupoController extends JControllerLegacy {
 		$mailer->addRecipient($recipient);
 		$mailer->addReplyTo($clientemail);
 
-		$body = "Spiel-Nr:     $toynr\n";
-		$body .= "Spiel:        $toyname\n\n";
-		$body .= "Kundenname:   $clientname\n";
-		$body .= "Kundennummer: $clientnr\n";
-		$body .= "Email:        $clientemail\n\n";
+		$body = sprintf("Eine Spielreservation ist auf der Webseite '%s' eingegangen.", $config->get( 'sitename' ))."\n\n";
+		$body .= "Spiel-Nr:      $toynr\n";
+		$body .= "Spiel:         $toyname\n";
+		$body .= "Reserviert ab: $resdate\n\n";
+		$body .= "Kundenname:    $clientname\n";
+		$body .= "Kundennummer:  $clientnr\n";
+		$body .= "Email:         $clientemail\n\n";
 		$body .= "Bemerkungen:\n$comment\n\n";
 		$mailer->setSubject($config->get('sitename') . ' Spielreservation ' . $toynr . ' - ' . $toyname);
 		$mailer->setBody($body);
@@ -296,6 +311,11 @@ class LupoController extends JControllerLegacy {
 				}
 
 				$arr = json_decode($data);
+
+				if($arr==false){
+					echo "nodata";
+					return;
+				}
 
 				//preserve online prolongations
 				$query = $db->getQuery(true);
