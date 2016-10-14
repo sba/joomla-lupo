@@ -1,5 +1,16 @@
 # Changelog
 
+### 3.1.0 (October 14, 2016)
+  - new option to show reservation form only to registered users
+  - show captcha in reservation form
+  - make view tables more responsive
+  - optional placeholder image
+  - output sample games in categories list
+  - show thumb-pic if full pic is not uploaded
+  - sort genres alphabetical
+  - added option to hide toy description in list
+  - various other codestyle fixes and improvements
+
 ### 3.0.0 (August 31, 2016)
   - show availbility of toys
   - client login implemented
