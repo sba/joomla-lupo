@@ -214,6 +214,7 @@ class LupoModelLupo extends JModelItem {
 						INNER JOIN #__lupo_game_genre ON #__lupo_game.id = #__lupo_game_genre.gameid
 						INNER JOIN #__lupo_genres ON #__lupo_game_genre.genreid = #__lupo_genres.id
 						GROUP BY #__lupo_genres.id
+						ORDER BY genre
 						");
 
 		$res = $db->loadAssocList();
