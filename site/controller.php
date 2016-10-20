@@ -390,6 +390,7 @@ class LupoController extends JControllerLegacy {
 					}
 				}
 				echo 'ok';
+				break;
 
 			case 'prolong':
 				// reads online prolongations to store them in LUPO
