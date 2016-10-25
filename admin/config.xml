@@ -53,6 +53,15 @@
 			<option value="0">JNO</option>
 		</field>
 
+		<field
+				name="cats_sort"
+				type="list"
+				label="COM_LUPO_CATEGORIES_SORT"
+				default="0"
+		>
+			<option value="0">COM_LUPO_CATEGORIES_SORT_ALPHA</option>
+			<option value="1">COM_LUPO_CATEGORIES_SORT_LUPO</option>
+		</field>
 	</fieldset>
 
 	<fieldset

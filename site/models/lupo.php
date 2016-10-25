@@ -75,6 +75,12 @@ class LupoModelLupo extends JModelItem {
 			$sql_clause = ' AND #__lupo_game.catid > 0';
 		}
 
+		if((int) $componentParams->get('cats_sort', '0')==0){
+			$sql_sort = '#__lupo_categories.title, #__lupo_categories.sort';
+		} else {
+			$sql_sort = '#__lupo_categories.sort, #__lupo_categories.title';
+		}
+
 		if ($show_new) {
 			$res = $this->getCategoryNew();
 		}
@@ -92,7 +98,7 @@ class LupoModelLupo extends JModelItem {
 				WHERE published=1  AND #__lupo_categories.title<>'' $sql_clause
 				GROUP BY catid
 				HAVING COUNT(#__lupo_game.id) > 0
-				ORDER BY #__lupo_categories.sort, #__lupo_categories.title");
+				ORDER BY $sql_sort");
 
 		if (isset($res) && $res[0]['number'] > 0) {
 			$res = array_merge($res, $db->loadAssocList());
