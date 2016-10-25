@@ -254,9 +254,7 @@ if ($captchaSet != "0") {
                                     method: "POST",
                                     url: "index.php?option=com_lupo&task=sendres&format=raw",
                                     data: {
-                                        <?php if($captchaEnabled){ ?>
-                                        'g-recaptcha-response': grecaptcha.getResponse(),
-                                        <?php } ?>
+                                        <?php if($captchaEnabled){ ?>'g-recaptcha-response': grecaptcha.getResponse(),<?php } ?>
                                         clientname: $('#clientname').val(),
                                         clientemail: $('#clientemail').val(),
                                         clientnr: $('#clientnr').val(),
@@ -268,7 +266,7 @@ if ($captchaSet != "0") {
                                 })
                                         .done(function (msg) {
                                             if (msg == 'ok') {
-                                                grecaptcha.reset();
+	                                            <?php if($captchaEnabled){ ?>grecaptcha.reset();<?php } ?>
                                                 var modal = UIkit.modal("#resform");
                                                 modal.hide();
                                                 $('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
@@ -357,10 +355,6 @@ if ($captchaSet != "0") {
                                         </td>
                                     </tr>
                                 <?php } ?>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
                                 </tbody>
                             </table>
                             <div class="uk-modal-footer">
