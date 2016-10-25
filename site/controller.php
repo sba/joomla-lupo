@@ -323,7 +323,6 @@ class LupoController extends JControllerLegacy {
 					->from('#__lupo_clients_borrowed')
 					->where($db->quoteName('return_extended_online') . ' = 1');
 				$db->setQuery($query);
-				$sql                     = $query->__toString();
 				$preserved_prolongations = $db->loadObjectList();
 
 
@@ -353,6 +352,7 @@ class LupoController extends JControllerLegacy {
 						$client                       = new stdClass();
 						$client->lupo_id              = $row->id; //LFDAUSLEIHNR
 						$client->adrnr                = $row->adr; //ADRNR
+						$client->tax_extended         = $row->tx; //tx = gebühr für verlängerung
 						$client->edition_id           = $game_ids[$game_nr];
 						$client->return_date          = $row->rd; //rd = returdate
 						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
