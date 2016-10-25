@@ -22,4 +22,4 @@ CREATE TABLE `#__lupo_clients_borrowed` (
   `return_extended` tinyint(4) DEFAULT NULL,
   `return_extended_online` tinyint(4) DEFAULT '0',
   `reminder_sent` tinyint(4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
