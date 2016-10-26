@@ -401,7 +401,7 @@ class LupoController extends JControllerLegacy {
 				}
 
 				$query = $db->getQuery(true);
-				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended')
+				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended, #__lupo_clients_borrowed.tax_extended')
 					->from('#__lupo_clients_borrowed')
 					->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
 					->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
