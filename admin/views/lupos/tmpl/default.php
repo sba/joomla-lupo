@@ -130,13 +130,19 @@ JHtml::_('behavior.tooltip');
 	<br />
 	<hr />
 	<br />
+	<br />
 
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processXMLForm">
 		<input type="hidden" name="act" value="processxml" />
-		<br>
-
 		<input type="submit" name="submit" class="btn btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
 	</form>
+
+    <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="deleteImagesForm">
+        <input type="hidden" name="act" value="deleteimages" />
+
+        <input type="submit" name="submit" class="btn btn-danger" value="<?php echo JText::_("COM_LUPO_ADMIN_DELETE_IMAGES")?>" />
+    </form>
+
 
 	<?php } ?>
 </div>

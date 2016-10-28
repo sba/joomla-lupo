@@ -59,6 +59,22 @@ if(isset($_POST['act']) && $_POST['act']=='processxml'){
 	processXML($xmlpath .$xmlfile);
 }
 
+if(isset($_POST['act']) && $_POST['act']=='deleteimages'){
+	$files = glob($gamespath.'*.jpg'); // get all file names
+	$n=0;
+	foreach($files as $file) {
+		if(is_file($file)){
+			unlink($file);
+			$n++;
+		}
+	}
+	JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_LUPO_ADMIN_DELETE_IMAGES_MSG', $n));
+
+	$uri = JUri::getInstance();
+	$app->redirect($uri->toString());
+}
+
+
 
 function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath){
 	$zip = new ZipArchive;
