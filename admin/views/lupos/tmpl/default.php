@@ -134,7 +134,7 @@ JHtml::_('behavior.tooltip');
 
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processXMLForm">
 		<input type="hidden" name="act" value="processxml" />
-		<input type="submit" name="submit" class="btn btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
+		<input type="submit" name="submit" class="btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
 	</form>
 
     <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="deleteImagesForm">
