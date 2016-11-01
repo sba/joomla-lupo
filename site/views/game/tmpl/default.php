@@ -327,9 +327,11 @@ if ($captchaSet != "0") {
                                 </tr>
                                 <tr>
                                     <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
-                                    <td><input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"
-                                               style="margin-bottom: 10px"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
+                                    <td>
+                                        <div style="margin-bottom: 10px">
+                                        <input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
                                         <span class="uk-text-muted"> - <?php echo JText::_("COM_LUPO_RES_FROM_INFO"); ?></span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr id="row_resdate">

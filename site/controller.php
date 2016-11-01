@@ -137,7 +137,7 @@ class LupoController extends JControllerLegacy {
 			$dispatcher = JDispatcher::getInstance();
 			$result     = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
 			if (!$result[0]) {
-				die('Invalid Captcha Code');
+				die('Das Captcha zum Schutz gegen Spam wurde nicht gelöst.');
 			}
 		}
 
