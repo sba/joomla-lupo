@@ -410,6 +410,19 @@
 			<option value="0">JNO</option>
 		</field>
 
+		<field
+				type="text"
+				name="detail_toy_res_costs"
+				id="detail_toy_res_costs"
+				label="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS"
+				description="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS_DESC"
+				default=""
+				filter="safehtml"
+				showon="detail_show_toy_res:1"
+		>
+		</field>
+
+
 		<field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
 
         <field

@@ -344,6 +344,14 @@ if ($captchaSet != "0") {
                                     <td><textarea rows="10" cols="70" id="comment" name="comment"
                                                   style="height: 87px; width: 312px;"></textarea></td>
                                 </tr>
+                                <?php if($componentParams->get('detail_toy_res_costs', '')!="") {?>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_COSTS"); ?>:</td>
+                                    <td>
+                                        <?= $componentParams->get('detail_toy_res_costs', ''); ?>
+                                    </td>
+                                </tr>
+                                <?php } ?>
                                 <?php if ($captchaEnabled) { ?>
                                     <tr>
                                         <td>&nbsp;</td>
