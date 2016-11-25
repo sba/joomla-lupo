@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.2.1 (November 07, 2016)
+  + Option added to display infos about reservation costs 
+
 ### 3.2.0 (November 01, 2016)
   - Show tax for prelong toys
   - add option to sort categories alphabetical
