@@ -53,6 +53,15 @@
 			<option value="0">JNO</option>
 		</field>
 
+		<field
+				name="cats_sort"
+				type="list"
+				label="COM_LUPO_CATEGORIES_SORT"
+				default="0"
+		>
+			<option value="0">COM_LUPO_CATEGORIES_SORT_ALPHA</option>
+			<option value="1">COM_LUPO_CATEGORIES_SORT_LUPO</option>
+		</field>
 	</fieldset>
 
 	<fieldset
@@ -400,6 +409,19 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
+
+		<field
+				type="text"
+				name="detail_toy_res_costs"
+				id="detail_toy_res_costs"
+				label="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS"
+				description="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS_DESC"
+				default=""
+				filter="safehtml"
+				showon="detail_show_toy_res:1"
+		>
+		</field>
+
 
 		<field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
 

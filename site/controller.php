@@ -137,7 +137,7 @@ class LupoController extends JControllerLegacy {
 			$dispatcher = JDispatcher::getInstance();
 			$result     = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
 			if (!$result[0]) {
-				die('Invalid Captcha Code');
+				die('Das Captcha zum Schutz gegen Spam wurde nicht gelöst.');
 			}
 		}
 
@@ -323,7 +323,6 @@ class LupoController extends JControllerLegacy {
 					->from('#__lupo_clients_borrowed')
 					->where($db->quoteName('return_extended_online') . ' = 1');
 				$db->setQuery($query);
-				$sql                     = $query->__toString();
 				$preserved_prolongations = $db->loadObjectList();
 
 
@@ -353,6 +352,7 @@ class LupoController extends JControllerLegacy {
 						$client                       = new stdClass();
 						$client->lupo_id              = $row->id; //LFDAUSLEIHNR
 						$client->adrnr                = $row->adr; //ADRNR
+						$client->tax_extended         = $row->tx; //tx = gebühr für verlängerung
 						$client->edition_id           = $game_ids[$game_nr];
 						$client->return_date          = $row->rd; //rd = returdate
 						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
@@ -390,6 +390,7 @@ class LupoController extends JControllerLegacy {
 					}
 				}
 				echo 'ok';
+				break;
 
 			case 'prolong':
 				// reads online prolongations to store them in LUPO
@@ -400,7 +401,7 @@ class LupoController extends JControllerLegacy {
 				}
 
 				$query = $db->getQuery(true);
-				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended')
+				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended, #__lupo_clients_borrowed.tax_extended')
 					->from('#__lupo_clients_borrowed')
 					->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
 					->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')

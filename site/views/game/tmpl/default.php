@@ -254,9 +254,7 @@ if ($captchaSet != "0") {
                                     method: "POST",
                                     url: "index.php?option=com_lupo&task=sendres&format=raw",
                                     data: {
-                                        <?php if($captchaEnabled){ ?>
-                                        'g-recaptcha-response': grecaptcha.getResponse(),
-                                        <?php } ?>
+                                        <?php if($captchaEnabled){ ?>'g-recaptcha-response': grecaptcha.getResponse(),<?php } ?>
                                         clientname: $('#clientname').val(),
                                         clientemail: $('#clientemail').val(),
                                         clientnr: $('#clientnr').val(),
@@ -268,7 +266,7 @@ if ($captchaSet != "0") {
                                 })
                                         .done(function (msg) {
                                             if (msg == 'ok') {
-                                                grecaptcha.reset();
+	                                            <?php if($captchaEnabled){ ?>grecaptcha.reset();<?php } ?>
                                                 var modal = UIkit.modal("#resform");
                                                 modal.hide();
                                                 $('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
@@ -329,9 +327,11 @@ if ($captchaSet != "0") {
                                 </tr>
                                 <tr>
                                     <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
-                                    <td><input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"
-                                               style="margin-bottom: 10px"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
+                                    <td>
+                                        <div style="margin-bottom: 10px">
+                                        <input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
                                         <span class="uk-text-muted"> - <?php echo JText::_("COM_LUPO_RES_FROM_INFO"); ?></span>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr id="row_resdate">
@@ -344,6 +344,14 @@ if ($captchaSet != "0") {
                                     <td><textarea rows="10" cols="70" id="comment" name="comment"
                                                   style="height: 87px; width: 312px;"></textarea></td>
                                 </tr>
+                                <?php if($componentParams->get('detail_toy_res_costs', '')!="") {?>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_COSTS"); ?>:</td>
+                                    <td>
+                                        <?= $componentParams->get('detail_toy_res_costs', ''); ?>
+                                    </td>
+                                </tr>
+                                <?php } ?>
                                 <?php if ($captchaEnabled) { ?>
                                     <tr>
                                         <td>&nbsp;</td>
@@ -357,10 +365,6 @@ if ($captchaSet != "0") {
                                         </td>
                                     </tr>
                                 <?php } ?>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
                                 </tbody>
                             </table>
                             <div class="uk-modal-footer">
