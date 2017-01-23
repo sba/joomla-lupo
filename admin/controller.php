@@ -24,7 +24,7 @@ class LupoController extends JControllerLegacy {
 	 *
 	 * @return void
 	 */
-	function display($cachable = false) {
+	function display($cachable = false, $urlparams = array()) {
 		// set default view if not set
 		$app         = JFactory::getApplication();
 		$defaultview = $app->input->get->get('view', 'Lupos');
