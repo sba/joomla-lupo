@@ -1,7 +1,11 @@
 # Changelog
 
+### 3.x.x (xxx, 2017)
+  - Fix php warning
+  - Remove unnessesary css include
+
 ### 3.2.1 (November 07, 2016)
-  + Option added to display infos about reservation costs 
+  - Option added to display infos about reservation costs 
 
 ### 3.2.0 (November 01, 2016)
   - Show tax for prelong toys
