@@ -1,7 +1,12 @@
 # Changelog
 
+### 3.3.0 (March 06, 2017)
+  - show delete photos button in admin to all users
+  - Fix php warning
+  - Remove unnessesary css include
+
 ### 3.2.1 (November 07, 2016)
-  + Option added to display infos about reservation costs 
+  - Option added to display infos about reservation costs 
 
 ### 3.2.0 (November 01, 2016)
   - Show tax for prelong toys

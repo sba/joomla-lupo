@@ -32,7 +32,7 @@ class JFormFieldLupoGenre extends JFormFieldList {
 	 * @return    array        An array of JHtml options.
 	 */
 	protected function getOptions() {
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 							*
 						FROM

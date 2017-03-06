@@ -35,7 +35,7 @@ class JFormFieldLupoCategory extends JFormFieldList {
 		$options   = array();
 		$options[] = JHtml::_('select.option', 'new', JText::_('COM_LUPO_NEW_TOYS'));
 
-		$db =& JFactory::getDBO();
+		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT 
 				    COALESCE(#__lupo_categories.id,0) AS id

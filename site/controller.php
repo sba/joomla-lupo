@@ -20,7 +20,7 @@ jimport('joomla.application.component.helper');
  * Lupo Component Controller
  */
 class LupoController extends JControllerLegacy {
-	function display() {
+	function display($cachable = false, $urlparams = array()) {
 		$document = JFactory::getDocument();
 		$app      = JFactory::getApplication();
 		$params   = $app->getParams();
