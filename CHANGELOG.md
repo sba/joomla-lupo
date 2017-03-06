@@ -1,6 +1,7 @@
 # Changelog
 
-### 3.x.x (xxx, 2017)
+### 3.3.0 (March 06, 2017)
+  - show delete photos button in admin to all users
   - Fix php warning
   - Remove unnessesary css include
 
