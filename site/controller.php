@@ -178,7 +178,6 @@ Bei Spielen oder Geräten, welche auf ein bestimmtes Datum reserviert werden, me
 
 Bitte beachten Sie, dass dieses automatische E-Mail gleichzeitig eine Bestätigung darstellt.
 
-
 Freundliche Grüsse
 Ihr Ludotheks-Team
 
