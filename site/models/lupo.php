@@ -784,6 +784,21 @@ class LupoModelLupo extends JModelItem {
 		$session->set('lupo', $games);
 	}
 
+
+	/**
+	 * Returns Number of toys
+	 *
+	 * @return int number of toys
+	 */
+	public function totalToys() {
+		$db = JFactory::getDBO();
+
+		$db->setQuery("SELECT COUNT(id) AS total FROM #__lupo_game_editions");
+		$row = $db->loadResult();
+
+		return $row;
+	}
+
 }
 
 
