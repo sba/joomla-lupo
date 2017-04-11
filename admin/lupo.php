@@ -167,6 +167,8 @@ function processXML($file) {
 										, description=' . $db->quote($game->description) . '
 										, days=' . $db->quote($game['days']) . '
 										, fabricator=' . $db->quote($game->fabricator) . '
+										, author=' . $db->quote($game->author) . '
+										, artist=' . $db->quote($game->artist) . '
 										, play_duration=' . $db->quote($game->play_duration) . '
 										, players=' . $db->quote($game->players) . '
 										, keywords=' . $db->quote($game->keywords) . '
