@@ -107,7 +107,7 @@ function processXML($file) {
 		if ($xml == false) {
 			JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_XML_INVALID"), 'error');
 		} else {
-			$db =& JFactory::getDBO();
+			$db = JFactory::getDBO();
 
 			$db->setQuery('TRUNCATE #__lupo_game');
 			$db->execute();
