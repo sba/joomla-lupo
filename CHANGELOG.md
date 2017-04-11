@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.4.0 (April 11, 2017)
+  - author/artist added to toy
+  - Fix php notices
+
 ### 3.3.0 (March 06, 2017)
   - show delete photos button in admin to all users
   - Fix php warning
