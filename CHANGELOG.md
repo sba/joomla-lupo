@@ -1,6 +1,7 @@
 # Changelog
 
-### 3.4.0 (April 11, 2017)
+### 3.4.0 (May 30, 2017)
+  - update installer SQL, change engine to InnoDB
   - author/artist added to toy
   - Fix php notices
 
