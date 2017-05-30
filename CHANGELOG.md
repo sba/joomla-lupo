@@ -1,6 +1,7 @@
 # Changelog
 
 ### 3.4.0 (May 30, 2017)
+  - added content plugin to show nubmer of total toys 
   - update installer SQL, change engine to InnoDB
   - author/artist added to toy
   - Fix php notices
