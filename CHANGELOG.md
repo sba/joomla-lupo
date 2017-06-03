@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.5.0 (June 02, 2017)
+  - error in php 7 with assignment by reference
+  - added option to hide photo in search result 
+
 ### 3.4.0 (May 30, 2017)
   - added content plugin to show nubmer of total toys 
   - update installer SQL, change engine to InnoDB
