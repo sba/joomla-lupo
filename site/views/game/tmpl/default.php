@@ -163,6 +163,18 @@ if ($captchaSet != "0") {
 						<td><?php echo $this->game['fabricator']?></td>
 					</tr>
 				<?php } ?>
+				<?php if($componentParams->get('detail_show_toy_author', '1') && $this->game['author']!="") {?>
+					<tr>
+						<td><?php echo JText::_("COM_LUPO_AUTHOR")?>:</td>
+						<td><?php echo $this->game['author']?></td>
+					</tr>
+				<?php } ?>
+				<?php if($componentParams->get('detail_show_toy_artist', '1') && $this->game['artist']!="") {?>
+					<tr>
+						<td><?php echo JText::_("COM_LUPO_ARTIST")?>:</td>
+						<td><?php echo $this->game['artist']?></td>
+					</tr>
+				<?php } ?>
 				<?php if($componentParams->get('detail_show_toy_nbrdays', '1')){ ?>
 					<tr>
 						<td><?php echo JText::_("COM_LUPO_DAYS")?>:</td>

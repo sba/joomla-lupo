@@ -107,7 +107,7 @@ function processXML($file) {
 		if ($xml == false) {
 			JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_XML_INVALID"), 'error');
 		} else {
-			$db =& JFactory::getDBO();
+			$db = JFactory::getDBO();
 
 			$db->setQuery('TRUNCATE #__lupo_game');
 			$db->execute();
@@ -167,6 +167,8 @@ function processXML($file) {
 										, description=' . $db->quote($game->description) . '
 										, days=' . $db->quote($game['days']) . '
 										, fabricator=' . $db->quote($game->fabricator) . '
+										, author=' . $db->quote($game->author) . '
+										, artist=' . $db->quote($game->artist) . '
 										, play_duration=' . $db->quote($game->play_duration) . '
 										, players=' . $db->quote($game->players) . '
 										, keywords=' . $db->quote($game->keywords) . '

@@ -3,14 +3,14 @@
 
 	<name>COM_LUPO</name>
 	<!-- The following elements are optional and free of formatting conttraints -->
-	<creationDate>March 2017</creationDate>
+	<creationDate>May 2017</creationDate>
 	<author>Stefan Bauer</author>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<!--  The version string is recorded in the components table -->
-	<version>3.3.0</version>
+	<version>3.4.0</version>
 	<!-- The description is optional and defaults to the name -->
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 

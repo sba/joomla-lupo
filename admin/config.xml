@@ -295,6 +295,30 @@
 		<field
 				type="radio"
                 class="btn-group btn-group-yesno"
+				name="detail_show_toy_author"
+				id="detail_show_toy_author"
+				label="COM_LUPO_OPTIONS_TOY_AUTHOR"
+				description="COM_LUPO_OPTIONS_TOY_AUTHOR_DESC"
+				default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="detail_show_toy_artist"
+				id="detail_show_toy_artist"
+				label="COM_LUPO_OPTIONS_TOY_ARTIST"
+				description="COM_LUPO_OPTIONS_TOY_ARTIST_DESC"
+				default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field
+				type="radio"
+                class="btn-group btn-group-yesno"
 				name="detail_show_toy_nbrdays"
 				id="detail_show_toy_nbrdays"
 				label="COM_LUPO_OPTIONS_TOY_NBRDAYS"

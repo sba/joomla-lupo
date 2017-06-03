@@ -17,7 +17,7 @@ CREATE TABLE `#__lupo_agecategories` (
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `#__lupo_categories` (
@@ -28,7 +28,7 @@ CREATE TABLE `#__lupo_categories` (
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `#__lupo_game` (
@@ -47,7 +47,7 @@ CREATE TABLE `#__lupo_game` (
   PRIMARY KEY (`id`),
   KEY `game_catid` (`catid`),
   KEY `game_age_catid` (`age_catid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `#__lupo_game_editions` (
@@ -59,7 +59,7 @@ CREATE TABLE `#__lupo_game_editions` (
   `tax` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `#__lupo_game_documents` (
@@ -71,7 +71,7 @@ CREATE TABLE `#__lupo_game_documents` (
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `documents_gameid` (`gameid`)
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `#__lupo_genres` (

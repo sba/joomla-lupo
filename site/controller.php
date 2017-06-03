@@ -168,7 +168,23 @@ class LupoController extends JControllerLegacy {
 		$mailer->addRecipient($recipient);
 		$mailer->addReplyTo($clientemail);
 
-		$body = sprintf("Eine Spielreservation ist auf der Webseite '%s' eingegangen.", $config->get( 'sitename' ))."\n\n";
+		$email_text = 'Liebe Kundin, lieber Kunde
+
+Vielen Dank für Ihre Reservation.
+
+Sobald das von Ihnen gewünschte Spiel bei uns eingetroffen ist, werden Sie von uns benachrichtigt.
+
+Bei Spielen oder Geräten, welche auf ein bestimmtes Datum reserviert werden, melden wir uns nur, wenn es zum gewünschten Zeitpunkt nicht erhältlich sein sollte.
+
+Bitte beachten Sie, dass dieses automatische E-Mail gleichzeitig eine Bestätigung darstellt.
+
+Freundliche Grüsse
+Ihr Ludotheks-Team
+
+-----------------------------------------------------------
+';
+
+		$body = $email_text."\n\n";
 		$body .= "Spiel-Nr:      $toynr\n";
 		$body .= "Spiel:         $toyname\n";
 		$body .= "Reserviert ab: $resdate\n\n";
@@ -280,7 +296,13 @@ class LupoController extends JControllerLegacy {
 				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
 				$arr = json_decode($data);
 
-				foreach ($arr as $row) {
+				if(!is_array($arr)){
+					echo "nodata";
+					return;
+				}
+
+				foreach ( $arr as $row )
+				{
 					$client            = new stdClass();
 					$client->adrnr     = $row->nr;
 					$client->username  = $row->un;
@@ -292,13 +314,16 @@ class LupoController extends JControllerLegacy {
 					// wäre schöner so, sollte updaten on duplicate key: GEHT ABER NICHT
 					//$result = JFactory::getDbo()->insertObject('#__lupo_clients', $client, 'adrnr');
 
-					try {
-						$result = JFactory::getDbo()->insertObject('#__lupo_clients', $client);
+					try
+					{
+						$result = JFactory::getDbo()->insertObject( '#__lupo_clients', $client );
 					}
-					catch (Exception $e) {
-						$result = JFactory::getDbo()->updateObject('#__lupo_clients', $client, 'adrnr');
+					catch ( Exception $e )
+					{
+						$result = JFactory::getDbo()->updateObject( '#__lupo_clients', $client, 'adrnr' );
 					}
 				}
+
 
 				echo $result;
 				break;
@@ -312,7 +337,7 @@ class LupoController extends JControllerLegacy {
 
 				$arr = json_decode($data);
 
-				if($arr==false){
+				if(!is_array($arr)){
 					echo "nodata";
 					return;
 				}
