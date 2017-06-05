@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.5.1 (June 04, 2017)
+  - error in php 7 static function call
+
 ### 3.5.0 (June 02, 2017)
   - error in php 7 with assignment by reference
   - added option to hide photo in search result 
