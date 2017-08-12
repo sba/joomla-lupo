@@ -416,7 +416,7 @@ if ($captchaSet != "0") {
 										if ($related['image_thumb'] != NULL) {
 											$image = $related['image_thumb'];
 										} else {
-											$image = 'images/spiele/'.$this->foto['prefix'].'dice-gray.jpg';
+											$image = 'images/spiele/mini_dice-gray.jpg';
 										}
 										?>
 										<li>
