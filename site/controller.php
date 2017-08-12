@@ -27,14 +27,17 @@ class LupoController extends JControllerLegacy {
 		$uikit    = $params->get('lupo_load_uikit_css', "0");
 		if ($uikit !== "0") {
 			$document->addStyleSheet("components/com_lupo/uikit/css/" . $uikit, 'text/css', "screen");
+			$document->addStyleSheet("components/com_lupo/uikit/css/components/slider." . str_replace('uikit.','', $uikit), 'text/css', "screen");
+			$document->addStyleSheet("components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.','', $uikit), 'text/css', "screen");
+
+			//load uikit
+			//$document->addScript() will not work because its loaded before jquery / uikit
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>');
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/slider.min.js" type="text/javascript"></script>');
 		}
 		$document->addStyleSheet("components/com_lupo/css/com_lupo.css", 'text/css', "screen");
-
-		//load uikit. uncomment if uikit is not loaded with template
-		//$document->addScript() will not work because its loaded before jquery / uikit
-		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
-		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>');
-		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
 
 		$view = $app->input->getCmd('view');
 		$id   = $app->input->getCmd('id', 0);
