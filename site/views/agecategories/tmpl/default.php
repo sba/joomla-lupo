@@ -12,7 +12,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 $componentParams = JComponentHelper::getParams('com_lupo');
-$menu =JSite::getMenu()->getActive();
+$menu = JFactory::getApplication()->getMenu()->getActive();
 ?>
 
 <article class="tm-article">
