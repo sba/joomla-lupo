@@ -87,6 +87,7 @@ class LupoModelLupo extends JModelItem {
 
 		$db->setQuery("SELECT
 				    #__lupo_categories.id
+				    , #__lupo_categories.alias AS alias
 				    , #__lupo_categories.title AS title
 				    , #__lupo_categories.description AS description
 				    , #__lupo_categories.samples AS samples				    
@@ -107,7 +108,7 @@ class LupoModelLupo extends JModelItem {
 		}
 
 		foreach ($res as &$row) {
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['id']);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['alias']);
 
 			//add photo to game array
 			if ($row['samples'] != "") {
@@ -156,6 +157,7 @@ class LupoModelLupo extends JModelItem {
 
 		$db->setQuery("SELECT
 				    #__lupo_agecategories.id
+				    , #__lupo_agecategories.alias AS alias
 				    , #__lupo_agecategories.title AS title
 				    , #__lupo_agecategories.description AS description
 				    , #__lupo_agecategories.samples AS samples
@@ -176,7 +178,7 @@ class LupoModelLupo extends JModelItem {
 		}
 
 		foreach ($res as &$row) {
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['id']);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['alias']);
 
 			//add photo to game array
 			if ($row['samples'] != "") {
@@ -250,7 +252,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the category
 	 *
-	 * @id category-id
+	 * @id category-alias
 	 * @return    array the category
 	 */
 	public function getCategory($id) {
@@ -259,7 +261,7 @@ class LupoModelLupo extends JModelItem {
 		if ($id == 'new') {
 			$res = array('id' => 'new', 'title' => JText::_('COM_LUPO_NEW_TOYS'));
 		} else {
-			$sql = "SELECT * FROM #__lupo_categories WHERE id=" . $db->quote($id);
+			$sql = "SELECT * FROM #__lupo_categories WHERE alias=" . $db->quote($id);
 			$db->setQuery($sql);
 			$res = $db->loadAssoc();
 		}
@@ -270,7 +272,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the agecategory
 	 *
-	 * @id agecategory-id
+	 * @id agecategory-alias
 	 * @return    array the agecategory
 	 */
 	public function getAgecategory($id) {
@@ -279,7 +281,7 @@ class LupoModelLupo extends JModelItem {
 		if ($id == 'new') {
 			$res = array('id' => 'new', 'title' => JText::_('COM_LUPO_NEW_TOYS'));
 		} else {
-			$sql = "SELECT * FROM #__lupo_agecategories WHERE id=" . $db->quote($id);
+			$sql = "SELECT * FROM #__lupo_agecategories WHERE alias=" . $db->quote($id);
 			$db->setQuery($sql);
 			$res = $db->loadAssoc();
 		}
@@ -290,7 +292,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the Games in a category
 	 *
-	 * @id          category-id
+	 * @id          category-alias
 	 * @field       catid or age_catid
 	 * @foto_prefix name of the prefix for the image
 	 * @return array with the games
@@ -310,7 +312,8 @@ class LupoModelLupo extends JModelItem {
 			$where                 = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
 			$order_by_acquire_date = 'acquired_date DESC, ';
 		} else {
-			$where                 = "WHERE " . $field . "=" . $db->quote($id);
+			$cat_table = ($field == 'catid')?'#__lupo_categories':'#__lupo_agecategories';
+			$where                 = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote($id) .")";
 			$order_by_acquire_date = '';
 		}
 
