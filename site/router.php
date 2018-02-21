@@ -54,14 +54,14 @@ function LupoParseRoute($segments) {
 			break;
 		case 'category':
 			$vars['view']   = 'category';
-			$alias = str_replace(":","-", $segments[1]); //bugfix to support alias-routing... TODO: find propper solution
-			$vars['id']     = $alias;
+			$id             = explode(':', $segments[1]);
+			$vars['id']     = $id[0];
 			$vars['Itemid'] = $itemid;
 			break;
 		case 'agecategory':
 			$vars['view']   = 'agecategory';
-			$alias = str_replace(":","-", $segments[1]); //bugfix to support alias-routing... TODO: find propper solution
-			$vars['id']     = $alias;
+			$id             = explode(':', $segments[1]);
+			$vars['id']     = $id[0];
 			$vars['Itemid'] = $itemid;
 			break;
 		case 'genre':
