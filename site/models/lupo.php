@@ -487,7 +487,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get a game
 	 *
-	 * @id game-id
+	 * @id game-number
 	 * @return array the game
 	 */
 	public function getGame($id) {
@@ -508,7 +508,7 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
-					WHERE #__lupo_game.id = " . $db->quote($id));
+					WHERE #__lupo_game.number = " . $db->quote($id));
 		$res = $db->loadAssoc();
 
 		if ($res == 0) {
@@ -685,7 +685,9 @@ class LupoModelLupo extends JModelItem {
 			$pos = '&pos=' . $pos;
 		}
 
-		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['id'] . $pos);
+		//Attention: For SEO id exchanged with number, but get-field is still named with id
+		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['number'] . $pos);
+
 		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['catid']);
 		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['age_catid']);
 
