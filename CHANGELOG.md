@@ -1,5 +1,12 @@
 # Changelog
 
+### 3.6.0 (February 21, 2018)
+  - new SEO optimized routing for game and category URLs
+  - fix bug with placeholder photo thumbnail 
+  - updated language strings
+  - deprecated code updated
+  - plupload updated to version 2.3.6
+
 ### 3.5.1 (June 04, 2017)
   - error in php 7 static function call
 
