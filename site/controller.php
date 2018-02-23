@@ -76,7 +76,7 @@ class LupoController extends JControllerLegacy {
 				$view->title = $genre['genre'];
 				$view->genre = $genre;
 				$view->games = $games;
-				$view->foto  = array('show' => $foto_list_show, 'prefix' => $foto_list_prefix);
+				$view->foto  = array('show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix);
 				$view->display();
 				break;
 			case 'category':
@@ -87,7 +87,7 @@ class LupoController extends JControllerLegacy {
 				$view->title    = $category['title'];
 				$view->category = $category;
 				$view->games    = $games;
-				$view->foto     = array('show' => $foto_list_show, 'prefix' => $foto_list_prefix);
+				$view->foto     = array('show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategory':
@@ -98,7 +98,7 @@ class LupoController extends JControllerLegacy {
 				$view->title       = $agecategory['title'];
 				$view->agecategory = $agecategory;
 				$view->games       = $games;
-				$view->foto        = array('show' => $foto_list_show, 'prefix' => $foto_list_prefix);
+				$view->foto        = array('show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategories':

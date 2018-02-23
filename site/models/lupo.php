@@ -359,12 +359,7 @@ class LupoModelLupo extends JModelItem {
 			$res = $db->loadAssocList();
 		}
 
-		$pos = 0;
-		foreach ($res as $key => &$row) {
-			$row += $this->compileGame($row, $foto_prefix, $pos);
-			$pos++;
-		}
-
+		$res = $this->compileGames($res, $foto_prefix);
 		$this->saveSearchResultToSession($res);
 
 		return $res;
@@ -441,12 +436,7 @@ class LupoModelLupo extends JModelItem {
 						ORDER BY title, number");
 		$res = $db->loadAssocList();
 
-		$pos = 0;
-		foreach ($res as $key => &$row) {
-			$row += $this->compileGame($row, $foto_prefix, $pos);
-			$pos++;
-		}
-
+		$res = $this->compileGames($res, $foto_prefix);
 		$this->saveSearchResultToSession($res);
 
 		return $res;
@@ -653,6 +643,42 @@ class LupoModelLupo extends JModelItem {
 		$res               = $this->compileGame($res, $game_thumb_prefix);
 
 		return $res;
+	}
+
+
+	/**
+	 * check games array if one or more foto exists
+	 *
+	 * @param array games
+	 *
+	 * @return boolean true if one or more fotos exists
+	 */
+	public function hasFoto($games) {
+		$hasOneFotoOrMore = false;
+		foreach ($games as $key => $row) {
+			if($row['image'] !== null){
+				$hasOneFotoOrMore = true;
+			}
+		}
+		return $hasOneFotoOrMore;
+	}
+
+
+	/**
+	 * complete games array
+	 *
+	 * @param array games
+	 *
+	 * @return array completed games
+	 */
+	public function compileGames($games, $foto_prefix) {
+		$pos = 0;
+		foreach ($games as $key => &$row) {
+			$row += $this->compileGame($row, $foto_prefix, $pos);
+			$pos++;
+		}
+
+		return $games;
 	}
 
 
