@@ -2,6 +2,7 @@
 
 ### 3.6.0 (February 21, 2018)
   - new SEO optimized routing for game and category URLs
+  - only show photo-column if at least one foto exists
   - fix bug with placeholder photo thumbnail 
   - updated language strings
   - deprecated code updated
