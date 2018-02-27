@@ -591,12 +591,14 @@ class LupoModelLupo extends JModelItem {
 
 		//Find min/max tax
 		$min = 9999;
+		$res['tax_min'] = 0;
 		foreach ($res['editions'] as $arr) {
 			if ($arr['tax'] < $min) {
 				$res['tax_min'] = $min = $arr['tax'];
 			}
 		}
 		$max = 0;
+		$res['tax_max'] = 0;
 		foreach ($res['editions'] as $arr) {
 			if ($arr['tax'] > $max) {
 				$res['tax_max'] = $max = $arr['tax'];
