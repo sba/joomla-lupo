@@ -329,8 +329,10 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.play_duration
 					, #__lupo_game.players
 					, #__lupo_game.keywords
+					, #__lupo_categories.alias AS category_alias 
 					, #__lupo_categories.title as category
 					, #__lupo_game.age_catid
+					, #__lupo_agecategories.alias AS agecategory_alias 
 					, #__lupo_agecategories.title as age_category
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
@@ -414,8 +416,10 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.play_duration
 							, #__lupo_game.players
 							, #__lupo_game.keywords
+							, #__lupo_categories.alias AS category_alias 
 							, #__lupo_categories.title AS category
 							, #__lupo_game.age_catid
+							, #__lupo_agecategories.alias AS agecategory_alias 
 							, #__lupo_agecategories.title AS age_category
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
@@ -489,7 +493,9 @@ class LupoModelLupo extends JModelItem {
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
+					    , #__lupo_categories.alias AS category_alias 
 					    , #__lupo_categories.title AS category 
+					    , #__lupo_agecategories.alias AS agecategory_alias
 					    , #__lupo_agecategories.title AS age_category
 					    , t_userdefined.value AS userdefined
 						, #__lupo_clients_borrowed.return_date
@@ -717,8 +723,8 @@ class LupoModelLupo extends JModelItem {
 		//Attention: For SEO id exchanged with number, but get-field is still named with id
 		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['number'] . $pos);
 
-		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['catid']);
-		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['age_catid']);
+		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['category_alias']);
+		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
 		return $row;
 	}
