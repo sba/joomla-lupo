@@ -3,7 +3,8 @@
 ### 3.6.0 (February 21, 2018)
   - new SEO optimized routing for game and category URLs
   - only show photo-column if at least one foto exists
-  - fix bug with placeholder photo thumbnail 
+  - fix bug with placeholder photo thumbnail
+  - support search by toy-number  
   - updated language strings
   - deprecated code updated
   - plupload updated to version 2.3.6
