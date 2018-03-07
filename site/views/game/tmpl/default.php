@@ -49,11 +49,11 @@ if ($captchaSet != "0") {
 			if($componentParams->get('detail_show_toy_nav', '1') && $session_lupo!=null && isset($_GET['pos'])){
 				$style = $pos+1<count($session_lupo)?'':'visibility: hidden';
 				$nav_game=isset($session_lupo[$pos+1])?$session_lupo[$pos+1]:array('id'=>null); ?>
-				<div style="<?=$style?>" class="uk-h3 uk-float-right"><a href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['number'].'&pos='.($pos+1))?>" title="<?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?>" class="uk-icon-hover uk-icon-chevron-right"></a></div>
+				<div style="<?=$style?>" class="uk-h3 uk-float-right"><a href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos+1))?>" title="<?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?>" class="uk-icon-hover uk-icon-chevron-right"></a></div>
 				<?php
 				$style = $pos>=1?'':'visibility: hidden;';
 				$nav_game=isset($session_lupo[$pos-1])?$session_lupo[$pos-1]:array('id'=>null); ?>
-				<div style="<?=$style?>" class="uk-h3 uk-float-right"><a href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['number'].'&pos='.($pos-1))?>" title="<?php echo JText::_('COM_LUPO_NAV_PREV_GAME'); ?>" class="uk-icon-hover uk-icon-chevron-left">&nbsp;&nbsp;</a></div>
+				<div style="<?=$style?>" class="uk-h3 uk-float-right"><a href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id='.$nav_game['id'].'&pos='.($pos-1))?>" title="<?php echo JText::_('COM_LUPO_NAV_PREV_GAME'); ?>" class="uk-icon-hover uk-icon-chevron-left">&nbsp;&nbsp;</a></div>
 			<?php } ?>
 
 			<?php
