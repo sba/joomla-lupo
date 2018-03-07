@@ -2,6 +2,7 @@
 <extension type="component" version="2.5.0" method="upgrade">
 
 	<name>COM_LUPO</name>
+	<author>Stefan Bauer</author>
 	<creationDate>February 2018</creationDate>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
