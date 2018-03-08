@@ -465,7 +465,7 @@ class LupoModelLupo extends JModelItem {
 		foreach ($numbers as $number) {
 			$number = (strpos($number,'.')==0?$number.'.0':$number);
 			$db->setQuery("SELECT
-                            #__lupo_game.id
+                            #__lupo_game.number
                         FROM
                             #__lupo_game
                         LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
@@ -473,7 +473,7 @@ class LupoModelLupo extends JModelItem {
 			$res = $db->loadAssoc();
 
 			if ($res !== null) {
-				$games[] = $this->getGame($res['id']);
+				$games[] = $this->getGame($res['number']);
 			}
 		}
 
