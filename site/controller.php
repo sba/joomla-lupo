@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright   Copyright (C) databauer / Stefan Bauer 
+ * @copyright   Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -140,7 +140,7 @@ class LupoController extends JControllerLegacy {
 			$dispatcher = JDispatcher::getInstance();
 			$result     = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
 			if (!$result[0]) {
-				die('Das Captcha zum Schutz gegen Spam wurde nicht gelöst.');
+				die(JText::_('COM_LUPO_RES_FORM_INVALIV_CAPTCHA'));
 			}
 		}
 
@@ -148,10 +148,10 @@ class LupoController extends JControllerLegacy {
 
 		$formerror = false;
 		if (!$mailer->ValidateAddress($clientemail)) {
-			$formerror = 'Ungültige Email';
+			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($clientname == "") {
-			$formerror = 'Name erforderlich';
+			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($formerror !== false) {
 			echo $formerror;
@@ -171,31 +171,17 @@ class LupoController extends JControllerLegacy {
 		$mailer->addRecipient($recipient);
 		$mailer->addReplyTo($clientemail);
 
-		$email_text = 'Liebe Kundin, lieber Kunde
-
-Vielen Dank für Ihre Reservation.
-
-Sobald das von Ihnen gewünschte Spiel bei uns eingetroffen ist, werden Sie von uns benachrichtigt.
-
-Bei Spielen oder Geräten, welche auf ein bestimmtes Datum reserviert werden, melden wir uns nur, wenn es zum gewünschten Zeitpunkt nicht erhältlich sein sollte.
-
-Bitte beachten Sie, dass dieses automatische E-Mail gleichzeitig eine Bestätigung darstellt.
-
-Freundliche Grüsse
-Ihr Ludotheks-Team
-
------------------------------------------------------------
-';
+		$email_text = JText::_('COM_LUPO_RES_EMAIL_BODY');
 
 		$body = $email_text."\n\n";
-		$body .= "Spiel-Nr:      $toynr\n";
-		$body .= "Spiel:         $toyname\n";
-		$body .= "Reserviert ab: $resdate\n\n";
-		$body .= "Kundenname:    $clientname\n";
-		$body .= "Kundennummer:  $clientnr\n";
-		$body .= "Email:         $clientemail\n\n";
-		$body .= "Bemerkungen:\n$comment\n\n";
-		$mailer->setSubject($config->get('sitename') . ' Spielreservation ' . $toynr . ' - ' . $toyname);
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_NR'), 15) . "$toynr\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toyname\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . "$clientnr\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL'), 15) . "$clientemail\n\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_COMMENTS'), 15) . "\n$comment\n\n";
+		$mailer->setSubject(sprintf(JText::_('COM_LUPO_RES_EMAIL_SUBJECT'), $config->get('sitename'), $toynr, $toyname));
 		$mailer->setBody($body);
 
 		$send = $mailer->Send();
