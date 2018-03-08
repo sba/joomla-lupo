@@ -28,7 +28,7 @@ if ($captchaSet != "0") {
 	<div class="tm-article-content ">
 		<?php
 		if($this->game == 'error'){
-			?><h2 class="contentheading">Fehler - Spiel nicht gefunden</h2><?php
+			?><h2 class="contentheading"><?php echo JText::_("COM_LUPO_ERROR_NOT_FOUND")?></h2><?php
 		} else {
 			//description-text
 			$description_title = $this->game['description_title'];
@@ -279,7 +279,7 @@ if ($captchaSet != "0") {
 	                                            <?php if($captchaEnabled){ ?>grecaptcha.reset();<?php } ?>
                                                 var modal = UIkit.modal("#resform");
                                                 modal.hide();
-                                                $('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
+                                                $('#btnres').after('<div class="uk-alert uk-alert-success"><?php echo JText::_("COM_LUPO_RES_SUBMIT_SUCCESS_MSG"); ?></div>');
                                             } else {
                                                 $('#modal-msg').html('<div class="uk-alert uk-alert-danger">' + msg + '</div>');
                                             }
