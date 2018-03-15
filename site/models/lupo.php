@@ -313,7 +313,7 @@ class LupoModelLupo extends JModelItem {
 			$order_by_acquire_date = 'acquired_date DESC, ';
 		} else {
 			$cat_table = ($field == 'catid')?'#__lupo_categories':'#__lupo_agecategories';
-			$where                 = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote($id) .")";
+			$where                 = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote($id) ." LIMIT 1)";
 			$order_by_acquire_date = '';
 		}
 
