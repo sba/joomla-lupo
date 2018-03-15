@@ -618,7 +618,9 @@ class LupoModelLupo extends JModelItem {
                           , g.title
                           , g.edition
                           , g.catid
+                          , '' as category_alias
                           , g.age_catid
+                          , '' as agecategory_alias
                         FROM
                           `#__lupo_game_related` AS r
                           LEFT JOIN
