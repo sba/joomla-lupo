@@ -1,12 +1,15 @@
 # Changelog
 
-### 3.6.0 (February 21, 2018)
+### 3.6.0 (March 21, 2018)
   - new SEO optimized routing for game and category URLs
   - only show photo-column if at least one foto exists
   - fix bug with placeholder photo thumbnail
+  - use main image instead of thumb_
+  - optimize database query performance 
   - support search by toy-number  
   - updated language strings
   - deprecated code updated
+  - uikit updated to 2.27.5  
   - plupload updated to version 2.3.6
 
 ### 3.5.1 (June 04, 2017)
