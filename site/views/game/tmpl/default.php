@@ -77,15 +77,14 @@ if ($captchaSet != "0") {
 					if($componentParams->get('detail_show_toy_photo', '1') && $this->game['image']!=null){?>
 						<div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width?> uk-margin-bottom">
 							<?php
-                            $image_thumb_size=getimagesize($this->game['image_thumb']);
                             if($this->game['image']==null){
-                                ?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
+                                ?><img class="lupo_image" src="<?php echo $this->game['image_thumb']?>"><?php
                             } else {
                                 ?>
                                 <?php if($componentParams->get('detail_photo_lightbox', '1')){ ?>
-                                    <a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo htmlspecialchars($this->game['title'].' '.$this->game['edition'])?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+                                    <a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo htmlspecialchars($this->game['title'].' '.$this->game['edition'])?>"><img class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
                                 <?php } else { ?>
-                                    <img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
+                                    <img class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
                                 <?php }?>
                                 <div id="img-toy" class="uk-modal">
                                     <div>
