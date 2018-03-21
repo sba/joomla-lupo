@@ -63,7 +63,7 @@ class LupoController extends JControllerLegacy {
 		switch ($view) {
 			case 'game':
 				$model      = $this->getModel();
-				$game       = $model->getGame($id);
+				$game       = $model->getGame($id, true);
 				$view       = $this->getView('Game', 'html');
 				$view->game = $game;
 				$view->display();

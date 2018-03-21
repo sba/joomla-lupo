@@ -485,9 +485,11 @@ class LupoModelLupo extends JModelItem {
 	 * Get a game
 	 *
 	 * @id game-number
+	 * @load_related bool
+	 *
 	 * @return array the game
 	 */
-	public function getGame($id) {
+	public function getGame($id, $load_related = false) {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 
 		$db = JFactory::getDBO();
@@ -611,7 +613,8 @@ class LupoModelLupo extends JModelItem {
 		$res['tax'] = $res['tax_min']; //tax = alias for tax_min
 
 		//related games
-		$db->setQuery("SELECT
+		if($load_related) {
+			$db->setQuery( "SELECT
                           r.number
                           , g.id
                           , g.number
@@ -638,14 +641,18 @@ class LupoModelLupo extends JModelItem {
                               LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
                           ) AS g ON g.gameno = CONCAT(r.`number` , IF(INSTR(r.number, '.')=0,'.0',''))
                         WHERE r.gameid = (SELECT id FROM #__lupo_game WHERE number=" . $id . ")
-                        ORDER BY r.id");
-		$res['related'] = $db->loadAssocList();
+                        ORDER BY r.id" );
 
-		shuffle($res['related']); //mischen damit nicht immer das spiel mit den meisten ausleihen zuerst kommt
+			$res['related'] = $db->loadAssocList();
+			shuffle($res['related']); //mischen damit nicht immer das spiel mit den meisten ausleihen zuerst kommt
 
-		foreach ($res['related'] as &$relatedgame) {
-			$relatedgame = $this->compileGame($relatedgame, 'mini_');
+			foreach ($res['related'] as &$relatedgame) {
+				$relatedgame = $this->compileGame($relatedgame, 'mini_');
+			}
+		} else {
+			$res['related'] = null;
 		}
+
 
 		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_');
 		$res               = $this->compileGame($res, $game_thumb_prefix);
