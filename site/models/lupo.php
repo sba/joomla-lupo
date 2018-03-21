@@ -62,10 +62,11 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Lupo categories
 	 *
 	 * @param show_new override component settings
+	 * @param load_samples bool load sample games to array
 	 *
 	 * @return array the categories
 	 */
-	public function getCategories($show_new = true) {
+	public function getCategories($show_new = true, $load_samples = true) {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 		$db              = JFactory::getDBO();
 
@@ -117,17 +118,18 @@ class LupoModelLupo extends JModelItem {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
 
-			//load sample games
-			$samples = explode(",", $row['samples']);
-			$sample_games = false;
-			if(is_array($samples)) {
-				foreach ($samples as $sample_nr) {
-					$sample_game = $this->getGamesByNumber($sample_nr);
-					if(is_array($sample_game)) {
-						$sample_games[] = $sample_game[0];
+			if ($load_samples) {
+				$samples      = explode( ",", $row['samples'] );
+				$sample_games = false;
+				if ( is_array( $samples ) ) {
+					foreach ( $samples as $sample_nr ) {
+						$sample_game = $this->getGamesByNumber( $sample_nr );
+						if ( is_array( $sample_game ) ) {
+							$sample_games[] = $sample_game[0];
+						}
 					}
+					$row['sample_games'] = $sample_games;
 				}
-				$row['sample_games'] = $sample_games;
 			}
 		}
 
@@ -138,10 +140,11 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Lupo agecategories
 	 *
 	 * @param show_new override component settings
+	 * @param load_samples bool load sample games to array
 	 *
 	 * @return array the agecategories
 	 */
-	public function getAgecategories($show_new = true) {
+	public function getAgecategories($show_new = true, $load_samples = true) {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 		$db              = JFactory::getDBO();
 
@@ -187,17 +190,18 @@ class LupoModelLupo extends JModelItem {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
 
-			//load sample games
-			$samples = explode(",", $row['samples']);
-			$sample_games = false;
-			if(is_array($samples)) {
-				foreach ($samples as $sample_nr) {
-					$sample_game = $this->getGamesByNumber($sample_nr);
-					if(is_array($sample_game)) {
-						$sample_games[] = $sample_game[0];
+			if ($load_samples) {
+				$samples      = explode( ",", $row['samples'] );
+				$sample_games = false;
+				if ( is_array( $samples ) ) {
+					foreach ( $samples as $sample_nr ) {
+						$sample_game = $this->getGamesByNumber( $sample_nr );
+						if ( is_array( $sample_game ) ) {
+							$sample_games[] = $sample_game[0];
+						}
 					}
+					$row['sample_games'] = $sample_games;
 				}
-				$row['sample_games'] = $sample_games;
 			}
 		}
 
