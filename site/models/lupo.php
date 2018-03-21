@@ -657,10 +657,7 @@ class LupoModelLupo extends JModelItem {
 			$res['related'] = null;
 		}
 
-
-		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_');
-		$res               = $this->compileGame($res, $game_thumb_prefix);
-
+		$res               = $this->compileGame($res, '');
 		return $res;
 	}
 
