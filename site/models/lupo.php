@@ -739,6 +739,8 @@ class LupoModelLupo extends JModelItem {
 	 * @param prefix of the thumb
 	 *
 	 * @return array foto
+	 *
+	 * @todo: refactor thumbnail-logic
 	 */
 	public function getGameFoto($number, $game_thumb_prefix = "") {
 		$game_image = 'images/spiele/' . $number . '.jpg';
@@ -754,7 +756,7 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		if ($game_thumb_prefix != "") {
+		//if ($game_thumb_prefix != "") {
 			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
 			if (file_exists($game_image_thumb)) {
 				$res['image_thumb'] = $game_image_thumb;
@@ -767,7 +769,7 @@ class LupoModelLupo extends JModelItem {
 					$res['image_thumb'] = null;
 				}
 			}
-		}
+		//}
 
 		//fix if only thumb is uploaded
 		if($game_thumb_prefix!='mini_' && $res['image']==null && isset($res['image_thumb']) && $res['image_thumb'] !== null){
