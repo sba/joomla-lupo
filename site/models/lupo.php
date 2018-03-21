@@ -637,7 +637,7 @@ class LupoModelLupo extends JModelItem {
                               `#__lupo_game`
                               LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
                           ) AS g ON g.gameno = CONCAT(r.`number` , IF(INSTR(r.number, '.')=0,'.0',''))
-                        WHERE r.gameid = " . $id . "
+                        WHERE r.gameid = (SELECT id FROM #__lupo_game WHERE number=" . $id . ")
                         ORDER BY r.id");
 		$res['related'] = $db->loadAssocList();
 
