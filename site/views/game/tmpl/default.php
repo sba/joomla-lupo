@@ -355,7 +355,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                     <?php
 		        }
 			}
-			
+
 			//related games
 			if($componentParams->get('detail_show_toy_related', '1')) {
 				if (count($this->game['related']) > 0) {
