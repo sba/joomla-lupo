@@ -133,17 +133,6 @@ class LupoController extends JControllerLegacy {
 		$toynr       = $jinput->get('toynr', '', 'STRING');
 		$toyname     = $jinput->get('toyname', '', 'STRING');
 
-		//check captcha
-		$captchaSet = JFactory::getApplication()->get('captcha', '0');
-		if($captchaSet != "0") {
-			JPluginHelper::importPlugin('captcha');
-			$dispatcher = JDispatcher::getInstance();
-			$result     = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
-			if (!$result[0]) {
-				die(JText::_('COM_LUPO_RES_FORM_INVALIV_CAPTCHA'));
-			}
-		}
-
 		$mailer = JFactory::getMailer();
 
 		$formerror = false;

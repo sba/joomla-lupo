@@ -12,15 +12,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 $componentParams = JComponentHelper::getParams('com_lupo');
-
-//check if captcha is enabled
-$captchaEnabled = false;
-$captchaSet = JFactory::getApplication()->get('captcha', '0');
-
-if ($captchaSet != "0") {
-    $captchaEnabled = true;
-}
-
 ?>
 
 
@@ -256,7 +247,6 @@ if ($captchaSet != "0") {
                                     method: "POST",
                                     url: "index.php?option=com_lupo&task=sendres&format=raw",
                                     data: {
-                                        <?php if($captchaEnabled){ ?>'g-recaptcha-response': grecaptcha.getResponse(),<?php } ?>
                                         clientname: $('#clientname').val(),
                                         clientemail: $('#clientemail').val(),
                                         clientnr: $('#clientnr').val(),
@@ -268,7 +258,6 @@ if ($captchaSet != "0") {
                                 })
                                         .done(function (msg) {
                                             if (msg == 'ok') {
-	                                            <?php if($captchaEnabled){ ?>grecaptcha.reset();<?php } ?>
                                                 var modal = UIkit.modal("#resform");
                                                 modal.hide();
                                                 $('#btnres').after('<div class="uk-alert uk-alert-success"><?php echo JText::_("COM_LUPO_RES_SUBMIT_SUCCESS_MSG"); ?></div>');
@@ -354,19 +343,6 @@ if ($captchaSet != "0") {
                                     </td>
                                 </tr>
                                 <?php } ?>
-                                <?php if ($captchaEnabled) { ?>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>
-                                            <div id="recaptcha"></div>
-                                            <?php
-                                            JPluginHelper::importPlugin('captcha');
-                                            $dispatcher = JDispatcher::getInstance();
-                                            $dispatcher->trigger('onInit', 'recaptcha');
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
                                 </tbody>
                             </table>
                             <div class="uk-modal-footer">
@@ -379,8 +355,7 @@ if ($captchaSet != "0") {
                     <?php
 		        }
 			}
-
-
+			
 			//related games
 			if($componentParams->get('detail_show_toy_related', '1')) {
 				if (count($this->game['related']) > 0) {
