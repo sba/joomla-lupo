@@ -32,7 +32,7 @@ ul.lupo_categories {
 
 
 .lupo_image {
-
+    max-height: 250px;
 }
 
 .lupo_description {
