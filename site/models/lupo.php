@@ -617,6 +617,8 @@ class LupoModelLupo extends JModelItem {
                           , g.id
                           , g.number
                           , g.title
+                          , g.description_title
+                          , g.description
                           , g.edition
                           , g.catid
                           , '' as category_alias
@@ -633,6 +635,8 @@ class LupoModelLupo extends JModelItem {
                               , catid
                               , age_catid
                               , title
+                              , description_title
+                              , description
                               , edition
                             FROM
                               `#__lupo_game`
@@ -706,12 +710,10 @@ class LupoModelLupo extends JModelItem {
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
 
 		//description-text
-		if (isset($row['description_title'])) {
-			if ($row['description_title'] != "") {
-				$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
-			} else {
-				$row['description_full'] = $row['description'];
-			}
+		if ($row['description_title'] != "") {
+			$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
+		} else {
+			$row['description_full'] = $row['description'];
 		}
 
 		if (isset($row['editions']) && count($row['editions']) == 1) {
