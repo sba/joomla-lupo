@@ -214,7 +214,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the genres
 	 */
 	public function getGenres() {
-
 		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
@@ -228,7 +227,6 @@ class LupoModelLupo extends JModelItem {
 						GROUP BY #__lupo_genres.id
 						ORDER BY genre
 						");
-
 		$res = $db->loadAssocList();
 
 		foreach ($res as &$row) {
@@ -406,7 +404,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array with the games
 	 */
 	public function getGamesByGenre($id, $foto_prefix = '') {
-
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
@@ -459,11 +456,8 @@ class LupoModelLupo extends JModelItem {
 	 * @return array with the game(s)
 	 */
 	public function getGamesByNumber($number, $foto_prefix = '') {
-
 		$numbers = explode(";", $number);
-
 		$db = JFactory::getDBO();
-
 		$games = false;
 
 		foreach ($numbers as $number) {
@@ -823,7 +817,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return no return
 	 */
 	public function saveSearchResultToSession($res) {
-
 		$games = array();
 		foreach ($res as $row) {
 			$games[]['id'] = $row['number'];
@@ -880,7 +873,6 @@ class LupoModelLupoClient extends LupoModelLupo {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
