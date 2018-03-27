@@ -137,18 +137,6 @@
 			<option value="0">JNO</option>
 		</field>
 
-		<field
-			type="radio"
-			class="btn-group btn-group-yesno"
-			name="category_nbr_games"
-			id="category_nbr_games"
-			label="COM_LUPO_OPTIONS_CAT_NBR_GAMES"
-			description="COM_LUPO_OPTIONS_CAT_NBR_GAMES_DESC"
-			default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
         <field
                 type="radio"
                 class="btn-group btn-group-yesno"
