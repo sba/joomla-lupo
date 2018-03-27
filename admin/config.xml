@@ -132,8 +132,7 @@
 				class="btn-group btn-group-yesno"
 				label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
 				description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
-				default="1"
-				showon="foto_list_show:0">
+				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
