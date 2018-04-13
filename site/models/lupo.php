@@ -564,7 +564,13 @@ class LupoModelLupo extends JModelItem {
 					break;
 				case 'link_manual':
 					$document['href'] = $document['value'];
-					$document['icon'] = 'file-pdf-o';
+					if(strpos($document['value'],"youtube.com")!==false || strpos($document['value'],"//youtu.be")!==false) {
+						$document['icon'] = 'youtube-play';
+					} elseif(strpos($document['value'],"vimeo.com")!==false){
+						$document['icon'] = 'vimeo-square';
+					} else {
+						$document['icon'] = 'file-pdf-o';
+					}
 					$desc             = 'Spielanleitung';
 					$lightbox         = false;
 					break;

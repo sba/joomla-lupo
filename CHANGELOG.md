@@ -7,6 +7,7 @@
   - use main image instead of thumb_
   - optimize database query performance
   - support search by toy-number
+  - detect youtube and vimeo in document-link
   - captcha removed from reservation form
   - updated language strings
   - deprecated code updated
