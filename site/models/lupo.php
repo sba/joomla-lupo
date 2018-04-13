@@ -521,7 +521,7 @@ class LupoModelLupo extends JModelItem {
 					FROM
 					    #__lupo_game_genre
                     LEFT JOIN #__lupo_genres ON #__lupo_genres.id = genreid
-					WHERE gameid = " . $id);
+					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['genres_list'] = $db->loadAssocList();
 		foreach ($res['genres_list'] as &$genre) {
 			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $genre['id']);;
