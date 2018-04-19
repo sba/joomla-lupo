@@ -158,6 +158,7 @@ function processXML( $file ) {
 			foreach ( $xml->games->game as $game ) {
 				$db->setQuery( 'INSERT INTO #__lupo_game SET
 										`number`=' . $db->quote( $game['number'] ) . '
+										, `id_databauer`=' . $db->quote( $game['id_databauer'] ) . '
 										, `catid`=' . $db->quote( $game['catid'] ) . '
 										, `age_catid`=' . $db->quote( $game['age_catid'] ) . '
 										, `title`=' . $db->quote( $game->title ) . '
