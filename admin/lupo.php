@@ -133,7 +133,7 @@ function processXML( $file ) {
 
 			foreach ( $xml->categories->category as $category ) {
 				$db->setQuery( 'INSERT INTO #__lupo_categories SET
-										id=' . $db->quote( $category['id'] ) . '
+										`id`=' . $db->quote( $category['id'] ) . '
 										, `title`=' . $db->quote( $category['desc'] ) . '
 										, `alias`=' . $db->quote( JApplicationHelper::stringURLSafe( $category['desc'] ) ) . '
 										, `description`=' . $db->quote( $category['explanation'] ) . '
@@ -157,7 +157,7 @@ function processXML( $file ) {
 			$genres = array();
 			foreach ( $xml->games->game as $game ) {
 				$db->setQuery( 'INSERT INTO #__lupo_game SET
-										number=' . $db->quote( $game['number'] ) . '
+										`number`=' . $db->quote( $game['number'] ) . '
 										, `catid`=' . $db->quote( $game['catid'] ) . '
 										, `age_catid`=' . $db->quote( $game['age_catid'] ) . '
 										, `title`=' . $db->quote( $game->title ) . '
