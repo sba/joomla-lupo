@@ -134,22 +134,22 @@ function processXML( $file ) {
 			foreach ( $xml->categories->category as $category ) {
 				$db->setQuery( 'INSERT INTO #__lupo_categories SET
 										id=' . $db->quote( $category['id'] ) . '
-										, title=' . $db->quote( $category['desc'] ) . '
-										, alias=' . $db->quote( JApplicationHelper::stringURLSafe( $category['desc'] ) ) . '
-										, description=' . $db->quote( $category['explanation'] ) . '
-										, samples=' . $db->quote( $category['samples'] ) . '
-										, sort=' . $db->quote( $category['sort'] ) );
+										, `title`=' . $db->quote( $category['desc'] ) . '
+										, `alias`=' . $db->quote( JApplicationHelper::stringURLSafe( $category['desc'] ) ) . '
+										, `description`=' . $db->quote( $category['explanation'] ) . '
+										, `samples`=' . $db->quote( $category['samples'] ) . '
+										, `sort`=' . $db->quote( $category['sort'] ) );
 				$db->execute();
 			}
 
 			foreach ( $xml->age_categories->category as $category ) {
 				$db->setQuery( 'INSERT INTO #__lupo_agecategories SET
-										id=' . $db->quote( $category['id'] ) . '
-										, title=' . $db->quote( $category['desc'] ) . '
-										, alias=' . $db->quote( JApplicationHelper::stringURLSafe( $category['desc'] ) ) . '
-										, description=' . $db->quote( $category['explanation'] ) . '
-										, samples=' . $db->quote( $category['samples'] ) . '
-										, sort=' . $db->quote( $category['sort'] ) );
+										`id`=' . $db->quote( $category['id'] ) . '
+										, `title`=' . $db->quote( $category['desc'] ) . '
+										, `alias`=' . $db->quote( JApplicationHelper::stringURLSafe( $category['desc'] ) ) . '
+										, `description`=' . $db->quote( $category['explanation'] ) . '
+										, `samples`=' . $db->quote( $category['samples'] ) . '
+										, `sort`=' . $db->quote( $category['sort'] ) );
 				$db->execute();
 			}
 
@@ -158,20 +158,20 @@ function processXML( $file ) {
 			foreach ( $xml->games->game as $game ) {
 				$db->setQuery( 'INSERT INTO #__lupo_game SET
 										number=' . $db->quote( $game['number'] ) . '
-										, catid=' . $db->quote( $game['catid'] ) . '
-										, age_catid=' . $db->quote( $game['age_catid'] ) . '
-										, title=' . $db->quote( $game->title ) . '
-										, description_title=' . $db->quote( $game->description_title ) . '
-										, description=' . $db->quote( $game->description ) . '
-										, days=' . $db->quote( $game['days'] ) . '
-										, fabricator=' . $db->quote( $game->fabricator ) . '
-										, author=' . $db->quote( $game->author ) . '
-										, artist=' . $db->quote( $game->artist ) . '
-										, play_duration=' . $db->quote( $game->play_duration ) . '
-										, players=' . $db->quote( $game->players ) . '
-										, keywords=' . $db->quote( $game->keywords ) . '
-										, genres=' . $db->quote( $game->genres ) . '
-										, prolongable=' . $db->quote( $game->prolongable )
+										, `catid`=' . $db->quote( $game['catid'] ) . '
+										, `age_catid`=' . $db->quote( $game['age_catid'] ) . '
+										, `title`=' . $db->quote( $game->title ) . '
+										, `description_title`=' . $db->quote( $game->description_title ) . '
+										, `description`=' . $db->quote( $game->description ) . '
+										, `days`=' . $db->quote( $game['days'] ) . '
+										, `fabricator`=' . $db->quote( $game->fabricator ) . '
+										, `author`=' . $db->quote( $game->author ) . '
+										, `artist`=' . $db->quote( $game->artist ) . '
+										, `play_duration`=' . $db->quote( $game->play_duration ) . '
+										, `players`=' . $db->quote( $game->players ) . '
+										, `keywords`=' . $db->quote( $game->keywords ) . '
+										, `genres`=' . $db->quote( $game->genres ) . '
+										, `prolongable`=' . $db->quote( $game->prolongable )
 				);
 				$db->execute();
 				$gameid = $db->insertid();
@@ -183,7 +183,7 @@ function processXML( $file ) {
 				if ( isset( $game->documents->document ) ) {
 					foreach ( $game->documents->document as $document ) {
 						$db->setQuery( 'INSERT INTO #__lupo_game_documents SET
-												gameid=' . $db->quote( $gameid ) . '
+												`gameid`=' . $db->quote( $gameid ) . '
 												, `code`=' . $db->quote( $document['code'] ) . '
 												, `type`=' . $db->quote( $document['type'] ) . '
 												, `desc`=' . $db->quote( $document['desc'] ) . '
@@ -207,11 +207,11 @@ function processXML( $file ) {
 				foreach ( $game->editions->edition as $edition ) {
 					$n ++;
 					$db->setQuery( 'INSERT INTO #__lupo_game_editions SET
-											gameid=' . $db->quote( $gameid ) . '
+											`gameid`=' . $db->quote( $gameid ) . '
 											, `index`=' . $db->quote( $edition['index'] ) . '
-											, edition=' . $db->quote( $edition['edition'] ) . '
-											, acquired_date=' . $db->quote( $edition['acquired_date'] ) . '
-											, tax=' . $db->quote( str_replace( ',', '.', $edition['tax'] ) )
+											, `edition`=' . $db->quote( $edition['edition'] ) . '
+											, `acquired_date`=' . $db->quote( $edition['acquired_date'] ) . '
+											, `tax`=' . $db->quote( str_replace( ',', '.', $edition['tax'] ) )
 					);
 					$db->execute();
 				}
@@ -221,7 +221,7 @@ function processXML( $file ) {
 			$genres = array_unique( $genres );
 			foreach ( $genres as $genre ) {
 				$db->setQuery( 'INSERT INTO #__lupo_genres SET
-											genre=' . $db->quote( $genre )
+											`genre`=' . $db->quote( $genre )
 				);
 				$db->execute();
 			}
@@ -237,8 +237,8 @@ function processXML( $file ) {
 				$genres[ $row['id'] ] = $row['genre']; //made key value-array
 			}
 			$db->setQuery( "SELECT
-							id
-							, genres
+							`id`
+							, `genres`
 						FROM #__lupo_game
 						WHERE genres!=''"
 			);
@@ -247,7 +247,7 @@ function processXML( $file ) {
 				$game_genres = explode( ', ', $row['genres'] );
 				foreach ( $game_genres as $game_genre ) {
 					$db->setQuery( 'INSERT INTO #__lupo_game_genre SET
-											gameid=' . $row['id'] . ', genreid=' . array_search( $game_genre, $genres )
+											`gameid`=' . $row['id'] . ', `genreid`=' . array_search( $game_genre, $genres )
 					);
 					$db->execute();
 				}
