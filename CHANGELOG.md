@@ -9,6 +9,7 @@
   - support search by toy-number
   - detect youtube and vimeo in document-link
   - captcha removed from reservation form
+  - added id_databauer_id for toys from database
   - updated language strings
   - deprecated code updated
   - uikit updated to 2.27.5
