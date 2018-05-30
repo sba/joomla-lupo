@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.7.0 (Mai 29, 2018)
+  - added date of next reservation to game to prevent prolongation
+
 ### 3.6.0 (April 11, 2018)
   - new SEO optimized routing for game and category URLs
   - only show photo-column if at least one foto exists
