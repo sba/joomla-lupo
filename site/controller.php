@@ -361,6 +361,7 @@ class LupoController extends JControllerLegacy {
 						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
 						$client->return_extended      = $row->ex; //is extended (spiel wurde verlängert)
 						$client->reminder_sent        = $row->re;
+						$client->next_reservation     = $row->rs==""?null:$row->rs;
 
 						try {
 							$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
