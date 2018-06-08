@@ -1,5 +1,26 @@
 # Changelog
 
+### 3.7.0 (Mai 29, 2018)
+  - added date of next reservation to game to prevent prolongation
+
+### 3.6.0 (April 11, 2018)
+  - new SEO optimized routing for game and category URLs
+  - only show photo-column if at least one foto exists
+  - fix bug with placeholder photo thumbnail
+  - use main image instead of thumb_
+  - optimize database query performance
+  - support search by toy-number
+  - detect youtube and vimeo in document-link
+  - captcha removed from reservation form
+  - added id_databauer_id for toys from database
+  - updated language strings
+  - deprecated code updated
+  - uikit updated to 2.27.5
+  - plupload updated to version 2.3.6
+
+### 3.5.1 (June 04, 2017)
+  - error in php 7 static function call
+
 ### 3.5.0 (June 02, 2017)
   - error in php 7 with assignment by reference
   - added option to hide photo in search result 

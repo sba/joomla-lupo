@@ -12,15 +12,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 $componentParams = JComponentHelper::getParams('com_lupo');
-
-//check if captcha is enabled
-$captchaEnabled = false;
-$captchaSet = JFactory::getApplication()->get('captcha', '0');
-
-if ($captchaSet != "0") {
-    $captchaEnabled = true;
-}
-
 ?>
 
 
@@ -28,7 +19,7 @@ if ($captchaSet != "0") {
 	<div class="tm-article-content ">
 		<?php
 		if($this->game == 'error'){
-			?><h2 class="contentheading">Fehler - Spiel nicht gefunden</h2><?php
+			?><h2 class="contentheading"><?php echo JText::_("COM_LUPO_ERROR_NOT_FOUND")?></h2><?php
 		} else {
 			//description-text
 			$description_title = $this->game['description_title'];
@@ -77,30 +68,22 @@ if ($captchaSet != "0") {
 					if($componentParams->get('detail_show_toy_photo', '1') && $this->game['image']!=null){?>
 						<div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width?> uk-margin-bottom">
 							<?php
-							if($this->game['image_thumb']==null){
-								if(!$this->game['image']==null){
-									$image_size=getimagesize($this->game['image']);
-									?><img class="lupo_image" width="<?php echo $image_size[0]?>" height="<?php echo $image_size[1]?>"  src="<?php echo $this->game['image']?>"><?php
-								}
-							} else {
-								$image_thumb_size=getimagesize($this->game['image_thumb']);
-								if($this->game['image']==null){
-									?><img class="lupo_image" width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" src="<?php echo $this->game['image_thumb']?>"><?php
-								} else {
-									?>
-									<?php if($componentParams->get('detail_photo_lightbox', '1')){ ?>
-										<a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo htmlspecialchars($this->game['title'].' '.$this->game['edition'])?>"><img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
-									<?php } else { ?>
-										<img width="<?php echo $image_thumb_size[0]?>" height="<?php echo $image_thumb_size[1]?>" class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
-									<?php }?>
-									<div id="img-toy" class="uk-modal">
-										<div>
-											<img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
-										</div>
-									</div>
-									<?php
-								}
-							}?>
+                            if($this->game['image']==null){
+                                ?><img class="lupo_image" src="<?php echo $this->game['image_thumb']?>"><?php
+                            } else {
+                                ?>
+                                <?php if($componentParams->get('detail_photo_lightbox', '1')){ ?>
+                                    <a href="<?php echo $this->game['image']?>" data-uk-lightbox title="<?php echo htmlspecialchars($this->game['title'].' '.$this->game['edition'])?>"><img class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" /></a>
+                                <?php } else { ?>
+                                    <img class="lupo_image" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" src="<?php echo $this->game['image_thumb']?>" />
+                                <?php }?>
+                                <div id="img-toy" class="uk-modal">
+                                    <div>
+                                        <img src="<?php echo $this->game['image']?>" alt="<?php echo JText::_("COM_LUPO_TOY").' '.$this->game['number']?>" />
+                                    </div>
+                                </div>
+                                <?php
+                            } ?>
 						</div>
 						<?php
 					}?>
@@ -264,7 +247,6 @@ if ($captchaSet != "0") {
                                     method: "POST",
                                     url: "index.php?option=com_lupo&task=sendres&format=raw",
                                     data: {
-                                        <?php if($captchaEnabled){ ?>'g-recaptcha-response': grecaptcha.getResponse(),<?php } ?>
                                         clientname: $('#clientname').val(),
                                         clientemail: $('#clientemail').val(),
                                         clientnr: $('#clientnr').val(),
@@ -276,10 +258,9 @@ if ($captchaSet != "0") {
                                 })
                                         .done(function (msg) {
                                             if (msg == 'ok') {
-	                                            <?php if($captchaEnabled){ ?>grecaptcha.reset();<?php } ?>
                                                 var modal = UIkit.modal("#resform");
                                                 modal.hide();
-                                                $('#btnres').after('<div class="uk-alert uk-alert-success">Ein Email mit der Reservation wurde versendet.</div>');
+                                                $('#btnres').after('<div class="uk-alert uk-alert-success"><?php echo JText::_("COM_LUPO_RES_SUBMIT_SUCCESS_MSG"); ?></div>');
                                             } else {
                                                 $('#modal-msg').html('<div class="uk-alert uk-alert-danger">' + msg + '</div>');
                                             }
@@ -362,19 +343,6 @@ if ($captchaSet != "0") {
                                     </td>
                                 </tr>
                                 <?php } ?>
-                                <?php if ($captchaEnabled) { ?>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>
-                                            <div id="recaptcha"></div>
-                                            <?php
-                                            JPluginHelper::importPlugin('captcha');
-                                            $dispatcher = JDispatcher::getInstance();
-                                            $dispatcher->trigger('onInit', 'recaptcha');
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
                                 </tbody>
                             </table>
                             <div class="uk-modal-footer">
@@ -387,7 +355,6 @@ if ($captchaSet != "0") {
                     <?php
 		        }
 			}
-
 
 			//related games
 			if($componentParams->get('detail_show_toy_related', '1')) {
@@ -416,7 +383,7 @@ if ($captchaSet != "0") {
 										if ($related['image_thumb'] != NULL) {
 											$image = $related['image_thumb'];
 										} else {
-											$image = 'images/spiele/'.$this->foto['prefix'].'dice-gray.jpg';
+											$image = 'images/spiele/mini_dice-gray.jpg';
 										}
 										?>
 										<li>

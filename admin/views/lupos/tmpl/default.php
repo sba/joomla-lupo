@@ -120,18 +120,15 @@ JHtml::_('behavior.tooltip');
 		<input type="submit" name="submit" class="btn btn-large"  id="processzip" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
 	</form>
 
-	<?php
-	//show processxml button only to me (if user is superadmin)
-	$user = JFactory::getUser();
-	$isroot = $user->authorise('core.admin');
-	?>
-
 	<br />
 	<hr />
 	<br />
 	<br />
 
     <?php
+    //show processxml button only to me (if user is superadmin)
+    $user = JFactory::getUser();
+    $isroot = $user->authorise('core.admin');
     if($isroot){ ?>
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processXMLForm">
 		<input type="hidden" name="act" value="processxml" />

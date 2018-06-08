@@ -2,13 +2,13 @@
 <extension type="component" version="2.5.0" method="upgrade">
 
 	<name>COM_LUPO</name>
-	<creationDate>June 2017</creationDate>
 	<author>Stefan Bauer</author>
+	<creationDate>Mai 2018</creationDate>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
-	<version>3.5.0</version>
+	<version>3.7.0</version>
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
 	<install> <!-- Runs on install -->
@@ -72,7 +72,7 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/admin/update_pkg_lupo.xml</server>
+		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/develop/admin/update_pkg_lupo.xml</server>
 	</updateservers>
 	
 </extension>

@@ -62,10 +62,11 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Lupo categories
 	 *
 	 * @param show_new override component settings
+	 * @param load_samples bool load sample games to array
 	 *
 	 * @return array the categories
 	 */
-	public function getCategories($show_new = true) {
+	public function getCategories($show_new = true, $load_samples = true) {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 		$db              = JFactory::getDBO();
 
@@ -87,6 +88,7 @@ class LupoModelLupo extends JModelItem {
 
 		$db->setQuery("SELECT
 				    #__lupo_categories.id
+				    , #__lupo_categories.alias AS alias
 				    , #__lupo_categories.title AS title
 				    , #__lupo_categories.description AS description
 				    , #__lupo_categories.samples AS samples				    
@@ -107,7 +109,7 @@ class LupoModelLupo extends JModelItem {
 		}
 
 		foreach ($res as &$row) {
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['id']);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['alias']);
 
 			//add photo to game array
 			if ($row['samples'] != "") {
@@ -116,17 +118,18 @@ class LupoModelLupo extends JModelItem {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
 
-			//load sample games
-			$samples = explode(",", $row['samples']);
-			$sample_games = false;
-			if(is_array($samples)) {
-				foreach ($samples as $sample_nr) {
-					$sample_game = $this->getGamesByNumber($sample_nr);
-					if(is_array($sample_game)) {
-						$sample_games[] = $sample_game[0];
+			if ($load_samples) {
+				$samples      = explode( ",", $row['samples'] );
+				$sample_games = false;
+				if ( is_array( $samples ) ) {
+					foreach ( $samples as $sample_nr ) {
+						$sample_game = $this->getGamesByNumber( $sample_nr );
+						if ( is_array( $sample_game ) ) {
+							$sample_games[] = $sample_game[0];
+						}
 					}
+					$row['sample_games'] = $sample_games;
 				}
-				$row['sample_games'] = $sample_games;
 			}
 		}
 
@@ -137,10 +140,11 @@ class LupoModelLupo extends JModelItem {
 	 * Get the Lupo agecategories
 	 *
 	 * @param show_new override component settings
+	 * @param load_samples bool load sample games to array
 	 *
 	 * @return array the agecategories
 	 */
-	public function getAgecategories($show_new = true) {
+	public function getAgecategories($show_new = true, $load_samples = true) {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 		$db              = JFactory::getDBO();
 
@@ -156,6 +160,7 @@ class LupoModelLupo extends JModelItem {
 
 		$db->setQuery("SELECT
 				    #__lupo_agecategories.id
+				    , #__lupo_agecategories.alias AS alias
 				    , #__lupo_agecategories.title AS title
 				    , #__lupo_agecategories.description AS description
 				    , #__lupo_agecategories.samples AS samples
@@ -176,7 +181,7 @@ class LupoModelLupo extends JModelItem {
 		}
 
 		foreach ($res as &$row) {
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['id']);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['alias']);
 
 			//add photo to game array
 			if ($row['samples'] != "") {
@@ -185,17 +190,18 @@ class LupoModelLupo extends JModelItem {
 				$row += array('image' => null, 'image_thumb' => null);
 			}
 
-			//load sample games
-			$samples = explode(",", $row['samples']);
-			$sample_games = false;
-			if(is_array($samples)) {
-				foreach ($samples as $sample_nr) {
-					$sample_game = $this->getGamesByNumber($sample_nr);
-					if(is_array($sample_game)) {
-						$sample_games[] = $sample_game[0];
+			if ($load_samples) {
+				$samples      = explode( ",", $row['samples'] );
+				$sample_games = false;
+				if ( is_array( $samples ) ) {
+					foreach ( $samples as $sample_nr ) {
+						$sample_game = $this->getGamesByNumber( $sample_nr );
+						if ( is_array( $sample_game ) ) {
+							$sample_games[] = $sample_game[0];
+						}
 					}
+					$row['sample_games'] = $sample_games;
 				}
-				$row['sample_games'] = $sample_games;
 			}
 		}
 
@@ -208,7 +214,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the genres
 	 */
 	public function getGenres() {
-
 		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
@@ -222,7 +227,6 @@ class LupoModelLupo extends JModelItem {
 						GROUP BY #__lupo_genres.id
 						ORDER BY genre
 						");
-
 		$res = $db->loadAssocList();
 
 		foreach ($res as &$row) {
@@ -250,7 +254,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the category
 	 *
-	 * @id category-id
+	 * @id category-alias
 	 * @return    array the category
 	 */
 	public function getCategory($id) {
@@ -259,7 +263,7 @@ class LupoModelLupo extends JModelItem {
 		if ($id == 'new') {
 			$res = array('id' => 'new', 'title' => JText::_('COM_LUPO_NEW_TOYS'));
 		} else {
-			$sql = "SELECT * FROM #__lupo_categories WHERE id=" . $db->quote($id);
+			$sql = "SELECT * FROM #__lupo_categories WHERE alias=" . $db->quote($id);
 			$db->setQuery($sql);
 			$res = $db->loadAssoc();
 		}
@@ -270,7 +274,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the agecategory
 	 *
-	 * @id agecategory-id
+	 * @id agecategory-alias
 	 * @return    array the agecategory
 	 */
 	public function getAgecategory($id) {
@@ -279,7 +283,7 @@ class LupoModelLupo extends JModelItem {
 		if ($id == 'new') {
 			$res = array('id' => 'new', 'title' => JText::_('COM_LUPO_NEW_TOYS'));
 		} else {
-			$sql = "SELECT * FROM #__lupo_agecategories WHERE id=" . $db->quote($id);
+			$sql = "SELECT * FROM #__lupo_agecategories WHERE alias=" . $db->quote($id);
 			$db->setQuery($sql);
 			$res = $db->loadAssoc();
 		}
@@ -290,7 +294,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the Games in a category
 	 *
-	 * @id          category-id
+	 * @id          category-alias
 	 * @field       catid or age_catid
 	 * @foto_prefix name of the prefix for the image
 	 * @return array with the games
@@ -310,7 +314,8 @@ class LupoModelLupo extends JModelItem {
 			$where                 = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
 			$order_by_acquire_date = 'acquired_date DESC, ';
 		} else {
-			$where                 = "WHERE " . $field . "=" . $db->quote($id);
+			$cat_table = ($field == 'catid')?'#__lupo_categories':'#__lupo_agecategories';
+			$where                 = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote($id) ." LIMIT 1)";
 			$order_by_acquire_date = '';
 		}
 
@@ -326,8 +331,10 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.play_duration
 					, #__lupo_game.players
 					, #__lupo_game.keywords
+					, #__lupo_categories.alias AS category_alias 
 					, #__lupo_categories.title as category
 					, #__lupo_game.age_catid
+					, #__lupo_agecategories.alias AS agecategory_alias 
 					, #__lupo_agecategories.title as age_category
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
@@ -356,12 +363,7 @@ class LupoModelLupo extends JModelItem {
 			$res = $db->loadAssocList();
 		}
 
-		$pos = 0;
-		foreach ($res as $key => &$row) {
-			$row += $this->compileGame($row, $foto_prefix, $pos);
-			$pos++;
-		}
-
+		$res = $this->compileGames($res, $foto_prefix);
 		$this->saveSearchResultToSession($res);
 
 		return $res;
@@ -402,7 +404,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array with the games
 	 */
 	public function getGamesByGenre($id, $foto_prefix = '') {
-
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
@@ -416,8 +417,10 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.play_duration
 							, #__lupo_game.players
 							, #__lupo_game.keywords
+							, #__lupo_categories.alias AS category_alias 
 							, #__lupo_categories.title AS category
 							, #__lupo_game.age_catid
+							, #__lupo_agecategories.alias AS agecategory_alias 
 							, #__lupo_agecategories.title AS age_category
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
@@ -438,12 +441,7 @@ class LupoModelLupo extends JModelItem {
 						ORDER BY title, number");
 		$res = $db->loadAssocList();
 
-		$pos = 0;
-		foreach ($res as $key => &$row) {
-			$row += $this->compileGame($row, $foto_prefix, $pos);
-			$pos++;
-		}
-
+		$res = $this->compileGames($res, $foto_prefix);
 		$this->saveSearchResultToSession($res);
 
 		return $res;
@@ -458,17 +456,14 @@ class LupoModelLupo extends JModelItem {
 	 * @return array with the game(s)
 	 */
 	public function getGamesByNumber($number, $foto_prefix = '') {
-
 		$numbers = explode(";", $number);
-
 		$db = JFactory::getDBO();
-
 		$games = false;
 
 		foreach ($numbers as $number) {
 			$number = (strpos($number,'.')==0?$number.'.0':$number);
 			$db->setQuery("SELECT
-                            #__lupo_game.id
+                            #__lupo_game.number
                         FROM
                             #__lupo_game
                         LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
@@ -476,7 +471,7 @@ class LupoModelLupo extends JModelItem {
 			$res = $db->loadAssoc();
 
 			if ($res !== null) {
-				$games[] = $this->getGame($res['id']);
+				$games[] = $this->getGame($res['number']);
 			}
 		}
 
@@ -487,16 +482,20 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get a game
 	 *
-	 * @id game-id
+	 * @id game-number
+	 * @load_related bool
+	 *
 	 * @return array the game
 	 */
-	public function getGame($id) {
+	public function getGame($id, $load_related = false) {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
+					    , #__lupo_categories.alias AS category_alias 
 					    , #__lupo_categories.title AS category 
+					    , #__lupo_agecategories.alias AS agecategory_alias
 					    , #__lupo_agecategories.title AS age_category
 					    , t_userdefined.value AS userdefined
 						, #__lupo_clients_borrowed.return_date
@@ -508,7 +507,7 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
-					WHERE #__lupo_game.id = " . $db->quote($id));
+					WHERE #__lupo_game.number = " . $db->quote($id));
 		$res = $db->loadAssoc();
 
 		if ($res == 0) {
@@ -522,7 +521,7 @@ class LupoModelLupo extends JModelItem {
 					FROM
 					    #__lupo_game_genre
                     LEFT JOIN #__lupo_genres ON #__lupo_genres.id = genreid
-					WHERE gameid = " . $id);
+					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['genres_list'] = $db->loadAssocList();
 		foreach ($res['genres_list'] as &$genre) {
 			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $genre['id']);;
@@ -533,7 +532,7 @@ class LupoModelLupo extends JModelItem {
 					    *
 					FROM
 					    #__lupo_game_documents
-					WHERE gameid = " . $id);
+					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . ")");
 		$res['documents'] = $db->loadAssocList();
 
 		//parse document fields
@@ -565,7 +564,13 @@ class LupoModelLupo extends JModelItem {
 					break;
 				case 'link_manual':
 					$document['href'] = $document['value'];
-					$document['icon'] = 'file-pdf-o';
+					if(strpos($document['value'],"youtube.com")!==false || strpos($document['value'],"//youtu.be")!==false) {
+						$document['icon'] = 'youtube-play';
+					} elseif(strpos($document['value'],"vimeo.com")!==false){
+						$document['icon'] = 'vimeo-square';
+					} else {
+						$document['icon'] = 'file-pdf-o';
+					}
 					$desc             = 'Spielanleitung';
 					$lightbox         = false;
 					break;
@@ -593,7 +598,7 @@ class LupoModelLupo extends JModelItem {
 					    *
 					FROM
 					    #__lupo_game_editions
-					WHERE gameid = " . $id);
+					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['editions'] = $db->loadAssocList();
 
 		//Find min/max tax
@@ -612,14 +617,19 @@ class LupoModelLupo extends JModelItem {
 		$res['tax'] = $res['tax_min']; //tax = alias for tax_min
 
 		//related games
-		$db->setQuery("SELECT
+		if($load_related) {
+			$db->setQuery( "SELECT
                           r.number
                           , g.id
                           , g.number
                           , g.title
+                          , g.description_title
+                          , g.description
                           , g.edition
                           , g.catid
+                          , '' as category_alias
                           , g.age_catid
+                          , '' as agecategory_alias
                         FROM
                           `#__lupo_game_related` AS r
                           LEFT JOIN
@@ -631,25 +641,64 @@ class LupoModelLupo extends JModelItem {
                               , catid
                               , age_catid
                               , title
+                              , description_title
+                              , description
                               , edition
                             FROM
                               `#__lupo_game`
                               LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
                           ) AS g ON g.gameno = CONCAT(r.`number` , IF(INSTR(r.number, '.')=0,'.0',''))
-                        WHERE r.gameid = " . $id . "
-                        ORDER BY r.id");
-		$res['related'] = $db->loadAssocList();
+                        WHERE r.gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . ")
+                        ORDER BY r.id" );
 
-		shuffle($res['related']); //mischeln damit nicht immer das spiel mit den meisten ausleihen zuerst kommt
+			$res['related'] = $db->loadAssocList();
+			shuffle($res['related']); //mischen damit nicht immer das spiel mit den meisten ausleihen zuerst kommt
 
-		foreach ($res['related'] as &$relatedgame) {
-			$relatedgame = $this->compileGame($relatedgame, 'mini_');
+			foreach ($res['related'] as &$relatedgame) {
+				$relatedgame = $this->compileGame($relatedgame, 'mini_');
+			}
+		} else {
+			$res['related'] = null;
 		}
 
-		$game_thumb_prefix = $componentParams->get('game_thumb_prefix', 'thumb_');
-		$res               = $this->compileGame($res, $game_thumb_prefix);
-
+		$res               = $this->compileGame($res, '');
 		return $res;
+	}
+
+
+	/**
+	 * check games array if one or more foto exists
+	 *
+	 * @param array games
+	 *
+	 * @return boolean true if one or more fotos exists
+	 */
+	public function hasFoto($games) {
+		$hasOneFotoOrMore = false;
+		foreach ($games as $key => $row) {
+			if($row['image'] !== null){
+				$hasOneFotoOrMore = true;
+			}
+		}
+		return $hasOneFotoOrMore;
+	}
+
+
+	/**
+	 * complete games array
+	 *
+	 * @param array games
+	 *
+	 * @return array completed games
+	 */
+	public function compileGames($games, $foto_prefix) {
+		$pos = 0;
+		foreach ($games as $key => &$row) {
+			$row += $this->compileGame($row, $foto_prefix, $pos);
+			$pos++;
+		}
+
+		return $games;
 	}
 
 
@@ -667,12 +716,10 @@ class LupoModelLupo extends JModelItem {
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
 
 		//description-text
-		if (isset($row['description_title'])) {
-			if ($row['description_title'] != "") {
-				$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
-			} else {
-				$row['description_full'] = $row['description'];
-			}
+		if ($row['description_title'] != "") {
+			$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
+		} else {
+			$row['description_full'] = $row['description'];
 		}
 
 		if (isset($row['editions']) && count($row['editions']) == 1) {
@@ -685,9 +732,11 @@ class LupoModelLupo extends JModelItem {
 			$pos = '&pos=' . $pos;
 		}
 
-		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['id'] . $pos);
-		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['catid']);
-		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['age_catid']);
+		//Attention: For SEO id exchanged with number, but get-field is still named with id
+		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['number'] . $pos);
+
+		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['category_alias']);
+		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
 		return $row;
 	}
@@ -700,6 +749,8 @@ class LupoModelLupo extends JModelItem {
 	 * @param prefix of the thumb
 	 *
 	 * @return array foto
+	 *
+	 * @todo: refactor thumbnail-logic
 	 */
 	public function getGameFoto($number, $game_thumb_prefix = "") {
 		$game_image = 'images/spiele/' . $number . '.jpg';
@@ -715,7 +766,7 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		if ($game_thumb_prefix != "") {
+		//if ($game_thumb_prefix != "") {
 			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
 			if (file_exists($game_image_thumb)) {
 				$res['image_thumb'] = $game_image_thumb;
@@ -728,10 +779,11 @@ class LupoModelLupo extends JModelItem {
 					$res['image_thumb'] = null;
 				}
 			}
-		}
+		//}
 
 		//fix if only thumb is uploaded
-		if($game_thumb_prefix!='mini_' && $res['image']==null && $res['image_thumb'] !== null){
+		//TODO: remove? (thumb not uploaded anymore, apr. 2018)
+		if($game_thumb_prefix!='mini_' && $res['image']==null && isset($res['image_thumb']) && $res['image_thumb'] !== null){
 			$res['image']=$res['image_thumb'];
 			$res['image_thumb']=null;
 		}
@@ -774,10 +826,9 @@ class LupoModelLupo extends JModelItem {
 	 * @return no return
 	 */
 	public function saveSearchResultToSession($res) {
-
 		$games = array();
 		foreach ($res as $row) {
-			$games[]['id'] = $row['id'];
+			$games[]['id'] = $row['number'];
 		}
 
 		$session = JFactory::getSession();
@@ -831,7 +882,6 @@ class LupoModelLupoClient extends LupoModelLupo {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**

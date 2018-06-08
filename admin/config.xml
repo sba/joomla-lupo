@@ -132,20 +132,7 @@
 				class="btn-group btn-group-yesno"
 				label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
 				description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
-				default="1"
-				showon="foto_list_show:0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-			type="radio"
-			class="btn-group btn-group-yesno"
-			name="category_nbr_games"
-			id="category_nbr_games"
-			label="COM_LUPO_OPTIONS_CAT_NBR_GAMES"
-			description="COM_LUPO_OPTIONS_CAT_NBR_GAMES_DESC"
-			default="1">
+				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
@@ -391,19 +378,6 @@
 		>
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
-		</field>
-
-		<field
-			name="game_thumb_prefix"
-			id="game_thumb_prefix"
-			type="text"
-			maxLenght="20"
-			size="20"
-			label="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX"
-			description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
-			default="thumb_"
-			showon="detail_show_toy_photo:1"
-		>
 		</field>
 
 		<field type="spacer" name="spacer5" class="text strong" label="COM_LUPO_OPTIONS_TOY_RESERVATION" />

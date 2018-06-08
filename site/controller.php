@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright   Copyright (C) databauer / Stefan Bauer 
+ * @copyright   Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
  * @link		http://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -27,14 +27,17 @@ class LupoController extends JControllerLegacy {
 		$uikit    = $params->get('lupo_load_uikit_css', "0");
 		if ($uikit !== "0") {
 			$document->addStyleSheet("components/com_lupo/uikit/css/" . $uikit, 'text/css', "screen");
+			$document->addStyleSheet("components/com_lupo/uikit/css/components/slider." . str_replace('uikit.','', $uikit), 'text/css', "screen");
+			$document->addStyleSheet("components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.','', $uikit), 'text/css', "screen");
+
+			//load uikit
+			//$document->addScript() will not work because its loaded before jquery / uikit
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>');
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
+			$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/slider.min.js" type="text/javascript"></script>');
 		}
 		$document->addStyleSheet("components/com_lupo/css/com_lupo.css", 'text/css', "screen");
-
-		//load uikit. uncomment if uikit is not loaded with template
-		//$document->addScript() will not work because its loaded before jquery / uikit
-		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/uikit.min.js" type="text/javascript"></script>');
-		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>');
-		//$document->addCustomTag('<script src="'.JURI::root(true).'/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
 
 		$view = $app->input->getCmd('view');
 		$id   = $app->input->getCmd('id', 0);
@@ -60,7 +63,7 @@ class LupoController extends JControllerLegacy {
 		switch ($view) {
 			case 'game':
 				$model      = $this->getModel();
-				$game       = $model->getGame($id);
+				$game       = $model->getGame($id, true);
 				$view       = $this->getView('Game', 'html');
 				$view->game = $game;
 				$view->display();
@@ -73,7 +76,7 @@ class LupoController extends JControllerLegacy {
 				$view->title = $genre['genre'];
 				$view->genre = $genre;
 				$view->games = $games;
-				$view->foto  = array('show' => $foto_list_show, 'prefix' => $foto_list_prefix);
+				$view->foto  = array('show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix);
 				$view->display();
 				break;
 			case 'category':
@@ -84,7 +87,7 @@ class LupoController extends JControllerLegacy {
 				$view->title    = $category['title'];
 				$view->category = $category;
 				$view->games    = $games;
-				$view->foto     = array('show' => $foto_list_show, 'prefix' => $foto_list_prefix);
+				$view->foto     = array('show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategory':
@@ -95,7 +98,7 @@ class LupoController extends JControllerLegacy {
 				$view->title       = $agecategory['title'];
 				$view->agecategory = $agecategory;
 				$view->games       = $games;
-				$view->foto        = array('show' => $foto_list_show, 'prefix' => $foto_list_prefix);
+				$view->foto        = array('show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix);
 				$view->display();
 				break;
 			case 'agecategories':
@@ -130,25 +133,14 @@ class LupoController extends JControllerLegacy {
 		$toynr       = $jinput->get('toynr', '', 'STRING');
 		$toyname     = $jinput->get('toyname', '', 'STRING');
 
-		//check captcha
-		$captchaSet = JFactory::getApplication()->get('captcha', '0');
-		if($captchaSet != "0") {
-			JPluginHelper::importPlugin('captcha');
-			$dispatcher = JDispatcher::getInstance();
-			$result     = $dispatcher->trigger('onCheckAnswer', $recaptcha_response);
-			if (!$result[0]) {
-				die('Das Captcha zum Schutz gegen Spam wurde nicht gelöst.');
-			}
-		}
-
 		$mailer = JFactory::getMailer();
 
 		$formerror = false;
 		if (!$mailer->ValidateAddress($clientemail)) {
-			$formerror = 'Ungültige Email';
+			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($clientname == "") {
-			$formerror = 'Name erforderlich';
+			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($formerror !== false) {
 			echo $formerror;
@@ -168,31 +160,17 @@ class LupoController extends JControllerLegacy {
 		$mailer->addRecipient($recipient);
 		$mailer->addReplyTo($clientemail);
 
-		$email_text = 'Liebe Kundin, lieber Kunde
-
-Vielen Dank für Ihre Reservation.
-
-Sobald das von Ihnen gewünschte Spiel bei uns eingetroffen ist, werden Sie von uns benachrichtigt.
-
-Bei Spielen oder Geräten, welche auf ein bestimmtes Datum reserviert werden, melden wir uns nur, wenn es zum gewünschten Zeitpunkt nicht erhältlich sein sollte.
-
-Bitte beachten Sie, dass dieses automatische E-Mail gleichzeitig eine Bestätigung darstellt.
-
-Freundliche Grüsse
-Ihr Ludotheks-Team
-
------------------------------------------------------------
-';
+		$email_text = JText::_('COM_LUPO_RES_EMAIL_BODY');
 
 		$body = $email_text."\n\n";
-		$body .= "Spiel-Nr:      $toynr\n";
-		$body .= "Spiel:         $toyname\n";
-		$body .= "Reserviert ab: $resdate\n\n";
-		$body .= "Kundenname:    $clientname\n";
-		$body .= "Kundennummer:  $clientnr\n";
-		$body .= "Email:         $clientemail\n\n";
-		$body .= "Bemerkungen:\n$comment\n\n";
-		$mailer->setSubject($config->get('sitename') . ' Spielreservation ' . $toynr . ' - ' . $toyname);
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_NR'), 15) . "$toynr\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toyname\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . "$clientnr\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL'), 15) . "$clientemail\n\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_COMMENTS'), 15) . "\n$comment\n\n";
+		$mailer->setSubject(sprintf(JText::_('COM_LUPO_RES_EMAIL_SUBJECT'), $config->get('sitename'), $toynr, $toyname));
 		$mailer->setBody($body);
 
 		$send = $mailer->Send();
@@ -383,6 +361,7 @@ Ihr Ludotheks-Team
 						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
 						$client->return_extended      = $row->ex; //is extended (spiel wurde verlängert)
 						$client->reminder_sent        = $row->re;
+						$client->next_reservation     = $row->rs==""?null:$row->rs;
 
 						try {
 							$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);

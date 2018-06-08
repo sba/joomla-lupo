@@ -11,9 +11,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-//load lupo styles
-JHTML::stylesheet('com_lupo.css', 'components/com_lupo/css/');
 $componentParams = JComponentHelper::getParams('com_lupo');
+
 if($this->foto['show']=='1') {?>
     <style>
         #lupo_category_table tr td > p {
@@ -81,13 +80,12 @@ if($this->foto['show']=='1') {?>
 		                <?php }?>
 		                <?php echo $availability ?>
 		                <?php if($componentParams->get('category_show_detail_link', '1')) {
-			                $nbr_games = ($game['nbr']>1 && $componentParams->get('category_nbr_games', '1'))?'('.$game['nbr'].')':'';
 			                ?>
                             <p>
-                                <a class="category" href="<?php echo $game['link']?>"><?php echo $game['title']?> <?php echo $nbr_games?></a>
+                                <a class="category" href="<?php echo $game['link']?>"><?php echo $game['title']?></a>
                             </p>
 		                <?php } else { ?>
-			                <?php echo $game['title']?> <?php echo $game['nbr']>1?' ('.$game['nbr'].')':''?>
+			                <?php echo $game['title']?>
 		                <?php } ?>
 	                    <?php if($componentParams->get('foto_list_show_description', '1')) { ?>
                             <p>
