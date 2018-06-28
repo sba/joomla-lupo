@@ -125,17 +125,10 @@ JHtml::_('behavior.tooltip');
 	<br />
 	<br />
 
-    <?php
-    //show processxml button only to me (if user is superadmin)
-    $user = JFactory::getUser();
-    $isroot = $user->authorise('core.admin');
-    if($isroot){ ?>
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processXMLForm">
 		<input type="hidden" name="act" value="processxml" />
 		<input type="submit" name="submit" class="btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
 	</form>
-    <?php } ?>
-
 
     <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="deleteImagesForm">
         <input type="hidden" name="act" value="deleteimages" />
