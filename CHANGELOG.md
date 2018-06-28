@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.7.1 (June 28, 2018)
+  - show admin button 'reprocess xml' to all admin-users
+
 ### 3.7.0 (Mai 29, 2018)
   - added date of next reservation to game to prevent prolongation
 
