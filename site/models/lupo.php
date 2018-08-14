@@ -488,8 +488,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the game
 	 */
 	public function getGame($id, $load_related = false) {
-		$componentParams = JComponentHelper::getParams('com_lupo');
-
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
