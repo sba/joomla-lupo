@@ -42,7 +42,12 @@ function LupoBuildRoute(&$query) {
  */
 function LupoParseRoute($segments) {
 	$params = JComponentHelper::getParams('com_lupo');
-	$itemid = $params->get('lupomenuitem');
+	$itemid = $params->get('lupomenuitem', '0');
+
+	if($itemid!='0') {
+		$app = JFactory::getApplication();
+		$app->getMenu()->setActive( $itemid );
+	}
 
 	$vars = array();
 	switch ($segments[0]) {
