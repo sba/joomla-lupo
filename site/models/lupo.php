@@ -728,13 +728,9 @@ class LupoModelLupo extends JModelItem {
 			$row['edition'] = '';
 		}
 
-		if ($pos !== '') {
-			$pos = '&pos=' . $pos;
-		}
-
+		if ( $pos !== '' ) $pos = '&pos=' . $pos;
 		//Attention: For SEO id exchanged with number, but get-field is still named with id
 		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['number'] . $pos);
-
 		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['category_alias']);
 		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
