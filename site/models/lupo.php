@@ -772,14 +772,7 @@ class LupoModelLupo extends JModelItem {
 				$res['image_thumb'] = null;
 			}
 		}
-
-		//fix if only thumb is uploaded
-		//TODO: remove? (thumb not uploaded anymore, apr. 2018)
-		if($game_thumb_prefix!='mini_' && $res['image']==null && isset($res['image_thumb']) && $res['image_thumb'] !== null){
-			$res['image']=$res['image_thumb'];
-			$res['image_thumb']=null;
-		}
-
+		
 		return $res;
 	}
 
