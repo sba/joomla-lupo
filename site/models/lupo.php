@@ -760,20 +760,18 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		//if ($game_thumb_prefix != "") {
-			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
-			if (file_exists($game_image_thumb)) {
-				$res['image_thumb'] = $game_image_thumb;
+		$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
+		if (file_exists($game_image_thumb)) {
+			$res['image_thumb'] = $game_image_thumb;
+		} else {
+			//try to get file without index in name
+			$game_image = 'images/spiele/' . $game_thumb_prefix . (int) $number . '.jpg';
+			if (file_exists($game_image)) {
+				$res['image_thumb'] = $game_image;
 			} else {
-				//try to get file without index in name
-				$game_image = 'images/spiele/' . $game_thumb_prefix . (int) $number . '.jpg';
-				if (file_exists($game_image)) {
-					$res['image_thumb'] = $game_image;
-				} else {
-					$res['image_thumb'] = null;
-				}
+				$res['image_thumb'] = null;
 			}
-		//}
+		}
 
 		//fix if only thumb is uploaded
 		//TODO: remove? (thumb not uploaded anymore, apr. 2018)
