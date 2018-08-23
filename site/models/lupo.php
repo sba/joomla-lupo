@@ -772,7 +772,7 @@ class LupoModelLupo extends JModelItem {
 				$res['image_thumb'] = null;
 			}
 		}
-		
+
 		return $res;
 	}
 
