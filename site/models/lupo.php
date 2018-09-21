@@ -328,6 +328,8 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.catid
 					, #__lupo_game.genres
 					, #__lupo_game.fabricator
+					, #__lupo_game.author
+					, #__lupo_game.artist
 					, #__lupo_game.play_duration
 					, #__lupo_game.players
 					, #__lupo_game.keywords
