@@ -2,6 +2,7 @@
 
 ### 3.8.0 (TBA)
   - author an artist added to game-object
+  - multi-site support for zip-uploader
 
 ### 3.7.1 (June 28, 2018)
   - show admin button 'reprocess xml' to all admin-users

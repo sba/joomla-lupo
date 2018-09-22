@@ -31,7 +31,7 @@ JHtml::_('behavior.tooltip');
 			chunk_size: "3000kb",
 			max_retries: 3,
 
-			url : 'components/com_lupo/models/upload.php',
+			url : 'components/com_lupo/models/upload.php?JPATH_SITE=<?=JPATH_SITE?>',
 
 			flash_swf_url : 'components/com_lupo/assets/plupload/js/Moxie.swf',
 			silverlight_xap_url : 'components/com_lupo/assets/plupload/js/Moxie.xap',
@@ -116,7 +116,6 @@ JHtml::_('behavior.tooltip');
 
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processZIPForm">
 		<input type="hidden" name="act" value="processzip" />
-
 		<input type="submit" name="submit" class="btn btn-large"  id="processzip" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
 	</form>
 
