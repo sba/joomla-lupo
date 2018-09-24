@@ -20,10 +20,9 @@ class LupoViewLupos extends JViewLegacy {
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
-			JError::raiseError(500, implode('<br />', $errors));
-
-			return false;
+			throw new Exception(implode("\n", $errors), 500);
 		}
+
 		// Assign data to the view
 		$this->items      = $items;
 		$this->pagination = $pagination;
