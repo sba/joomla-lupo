@@ -1,8 +1,9 @@
 # Changelog
 
-### 3.8.0 (TBA)
+### 3.7.2 (TBA)
   - author an artist added to game-object
   - multi-site support for zip-uploader
+  - fixed broken link to game in client's gameslist
 
 ### 3.7.1 (June 28, 2018)
   - show admin button 'reprocess xml' to all admin-users
