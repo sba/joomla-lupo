@@ -31,7 +31,7 @@ JHtml::_('behavior.tooltip');
 			chunk_size: "3000kb",
 			max_retries: 3,
 
-			url : 'components/com_lupo/models/upload.php',
+			url : 'components/com_lupo/models/upload.php?JPATH_SITE=<?=JPATH_SITE?>',
 
 			flash_swf_url : 'components/com_lupo/assets/plupload/js/Moxie.swf',
 			silverlight_xap_url : 'components/com_lupo/assets/plupload/js/Moxie.xap',
@@ -41,13 +41,13 @@ JHtml::_('behavior.tooltip');
 
 			init: {
 				PostInit: function() {
-					$('filelist').innerHTML = '';
+					jQuery('#filelist').html('');
 
-					$('uploadfiles').onclick = function() {
+                    jQuery('#uploadfiles').click(function() {
 						uploader.start();
                         jQuery('#processzip').prop('disabled', true);
 						return false;
-					};
+					});
 				},
 
 				FilesAdded: function(up, files) {
@@ -59,7 +59,7 @@ JHtml::_('behavior.tooltip');
 					}
 
 					plupload.each(files, function(file) {
-						$('filelist').innerHTML = ' <span id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></span>';
+                        jQuery('#filelist').html (' <span id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></span>');
 						jQuery('#upload_percent').html('');
 					});
 				},
@@ -71,7 +71,7 @@ JHtml::_('behavior.tooltip');
 				FileUploaded: function(up, file) {
 					jQuery('#upload_percent').html('<b>100%</b>  <span class="icon-ok"> </span> ' + jQuery("#"+file.id).html());
 					jQuery('#processzip').prop('disabled', false);
-					$('filelist').innerHTML = '';
+                    jQuery('#filelist').html('');
 					uploader.splice();
 				},
 
@@ -116,7 +116,6 @@ JHtml::_('behavior.tooltip');
 
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processZIPForm">
 		<input type="hidden" name="act" value="processzip" />
-
 		<input type="submit" name="submit" class="btn btn-large"  id="processzip" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS")?>" />
 	</form>
 
@@ -125,17 +124,10 @@ JHtml::_('behavior.tooltip');
 	<br />
 	<br />
 
-    <?php
-    //show processxml button only to me (if user is superadmin)
-    $user = JFactory::getUser();
-    $isroot = $user->authorise('core.admin');
-    if($isroot){ ?>
 	<form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processXMLForm">
 		<input type="hidden" name="act" value="processxml" />
 		<input type="submit" name="submit" class="btn" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN")?>" />
 	</form>
-    <?php } ?>
-
 
     <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="deleteImagesForm">
         <input type="hidden" name="act" value="deleteimages" />

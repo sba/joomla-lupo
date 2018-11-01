@@ -42,7 +42,12 @@ function LupoBuildRoute(&$query) {
  */
 function LupoParseRoute($segments) {
 	$params = JComponentHelper::getParams('com_lupo');
-	$itemid = $params->get('lupomenuitem');
+	$itemid = $params->get('lupomenuitem', '0');
+
+	if($itemid!='0') {
+		$app = JFactory::getApplication();
+		$app->getMenu()->setActive( $itemid );
+	}
 
 	$vars = array();
 	switch ($segments[0]) {
@@ -54,13 +59,13 @@ function LupoParseRoute($segments) {
 			break;
 		case 'category':
 			$vars['view']   = 'category';
-			$alias = str_replace(":","-", $segments[1]); //bugfix to support alias-routing... TODO: find propper solution
+			$alias = str_replace(":","-", $segments[1]); //bugfix to support alias-routing... TODO: find proper solution
 			$vars['id']     = $alias;
 			$vars['Itemid'] = $itemid;
 			break;
 		case 'agecategory':
 			$vars['view']   = 'agecategory';
-			$alias = str_replace(":","-", $segments[1]); //bugfix to support alias-routing... TODO: find propper solution
+			$alias = str_replace(":","-", $segments[1]); //bugfix to support alias-routing... TODO: find proper solution
 			$vars['id']     = $alias;
 			$vars['Itemid'] = $itemid;
 			break;

@@ -23,10 +23,10 @@ header("Pragma: no-cache");
 
 
 // Settings
-$targetDir = '../../../../tmp/'; //Joomla temp dir
+$JPATH_SITE=$_GET['JPATH_SITE'];
+$targetDir = $JPATH_SITE . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR; //Joomla temp dir
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
-
 
 // Create target dir
 if (!file_exists($targetDir)) {

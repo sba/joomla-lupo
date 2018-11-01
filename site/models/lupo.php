@@ -230,7 +230,8 @@ class LupoModelLupo extends JModelItem {
 		$res = $db->loadAssocList();
 
 		foreach ($res as &$row) {
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $row['id']);
+			$alias = JFilterOutput::stringURLSafe($row['title']);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);
 		}
 
 		return $res;
@@ -239,12 +240,12 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the genre
 	 *
-	 * @id genre-id
+	 * @genre genre-alias
 	 * @return    array the genre
 	 */
-	public function getGenre($id) {
+	public function getGenre($genre) {
 		$db  = JFactory::getDBO();
-		$sql = "SELECT * FROM #__lupo_genres WHERE id=" . $db->quote($id);
+		$sql = "SELECT * FROM #__lupo_genres WHERE genre=" . $db->quote($genre);
 		$db->setQuery($sql);
 		$res = $db->loadAssoc();
 
@@ -328,6 +329,8 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.catid
 					, #__lupo_game.genres
 					, #__lupo_game.fabricator
+					, #__lupo_game.author
+					, #__lupo_game.artist
 					, #__lupo_game.play_duration
 					, #__lupo_game.players
 					, #__lupo_game.keywords
@@ -372,7 +375,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Helper-Function to get the games per category
 	 *
-	 * @id          genre-id
+	 * @id          cat-id
 	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
@@ -385,7 +388,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Helper-Function to get the games per agecategory
 	 *
-	 * @id          genre-id
+	 * @id          agecat-id
 	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
@@ -399,11 +402,11 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the Games per genre
 	 *
-	 * @id          genre-id
+	 * @genre          genre-alias
 	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
-	public function getGamesByGenre($id, $foto_prefix = '') {
+	public function getGamesByGenre($genre, $foto_prefix = '') {
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
@@ -436,7 +439,8 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
-						WHERE #__lupo_game_genre.genreid=" . $db->quote($id) . "
+						LEFT JOIN #__lupo_genres ON (#__lupo_game_genre.genreid = #__lupo_genres.id)
+						WHERE #__lupo_genres.genre=" . $db->quote($genre) . "
 						GROUP BY #__lupo_game.id
 						ORDER BY title, number");
 		$res = $db->loadAssocList();
@@ -488,8 +492,6 @@ class LupoModelLupo extends JModelItem {
 	 * @return array the game
 	 */
 	public function getGame($id, $load_related = false) {
-		$componentParams = JComponentHelper::getParams('com_lupo');
-
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
@@ -524,7 +526,8 @@ class LupoModelLupo extends JModelItem {
 					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['genres_list'] = $db->loadAssocList();
 		foreach ($res['genres_list'] as &$genre) {
-			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $genre['id']);;
+			$alias = JFilterOutput::stringURLSafe($genre['genre']);
+			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);;
 		}
 
 		//Load documents
@@ -728,13 +731,9 @@ class LupoModelLupo extends JModelItem {
 			$row['edition'] = '';
 		}
 
-		if ($pos !== '') {
-			$pos = '&pos=' . $pos;
-		}
-
+		if ( $pos !== '' ) $pos = '&pos=' . $pos;
 		//Attention: For SEO id exchanged with number, but get-field is still named with id
 		$row['link']        = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row['number'] . $pos);
-
 		$row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['category_alias']);
 		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
@@ -766,26 +765,17 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		//if ($game_thumb_prefix != "") {
-			$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
-			if (file_exists($game_image_thumb)) {
-				$res['image_thumb'] = $game_image_thumb;
+		$game_image_thumb = 'images/spiele/' . $game_thumb_prefix . $number . '.jpg';
+		if (file_exists($game_image_thumb)) {
+			$res['image_thumb'] = $game_image_thumb;
+		} else {
+			//try to get file without index in name
+			$game_image = 'images/spiele/' . $game_thumb_prefix . (int) $number . '.jpg';
+			if (file_exists($game_image)) {
+				$res['image_thumb'] = $game_image;
 			} else {
-				//try to get file without index in name
-				$game_image = 'images/spiele/' . $game_thumb_prefix . (int) $number . '.jpg';
-				if (file_exists($game_image)) {
-					$res['image_thumb'] = $game_image;
-				} else {
-					$res['image_thumb'] = null;
-				}
+				$res['image_thumb'] = null;
 			}
-		//}
-
-		//fix if only thumb is uploaded
-		//TODO: remove? (thumb not uploaded anymore, apr. 2018)
-		if($game_thumb_prefix!='mini_' && $res['image']==null && isset($res['image_thumb']) && $res['image_thumb'] !== null){
-			$res['image']=$res['image_thumb'];
-			$res['image_thumb']=null;
 		}
 
 		return $res;
@@ -908,7 +898,7 @@ class LupoModelLupoClient extends LupoModelLupo {
 		$res = $db->loadObjectList();
 
 		foreach ($res as &$row) {
-			$row->link = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row->id);
+			$row->link = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row->number);
 		}
 
 		return $res;

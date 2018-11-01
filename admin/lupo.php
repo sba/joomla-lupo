@@ -222,7 +222,8 @@ function processXML( $file ) {
 			$genres = array_unique( $genres );
 			foreach ( $genres as $genre ) {
 				$db->setQuery( 'INSERT INTO #__lupo_genres SET
-											`genre`=' . $db->quote( $genre )
+											`genre`=' . $db->quote( $genre ) . ',
+											`alias`=' . JFilterOutput::stringURLSafe($genre)
 				);
 				$db->execute();
 			}

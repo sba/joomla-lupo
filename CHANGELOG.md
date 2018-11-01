@@ -1,5 +1,19 @@
 # Changelog
 
+### 3.9.0 (November 01, 2018)
+  - SEO optimized routing for toy genres
+
+### 3.8.1 (October 19, 2018)
+  - new option to hide from-date in reservation dialog
+
+### 3.8.0 (October 01, 2018)
+  - author an artist added to game-object
+  - multi-site support for zip-uploader
+  - fixed broken link to game in client's gameslist
+
+### 3.7.1 (June 28, 2018)
+  - show admin button 'reprocess xml' to all admin-users
+
 ### 3.7.0 (Mai 29, 2018)
   - added date of next reservation to game to prevent prolongation
 

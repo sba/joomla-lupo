@@ -316,6 +316,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     <td><input type="email" required maxlength="100" size="40" value="" id="clientemail"
                                                name="clientemail"></td>
                                 </tr>
+                                <?php if($componentParams->get('detail_show_res_date', '1')==1) {?>
                                 <tr>
                                     <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
                                     <td>
@@ -325,6 +326,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                         </div>
                                     </td>
                                 </tr>
+                                <?php } ?>
                                 <tr id="row_resdate">
                                     <td></td>
                                     <td><input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate"
