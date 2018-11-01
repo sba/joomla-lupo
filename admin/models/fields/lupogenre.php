@@ -42,8 +42,7 @@ class JFormFieldLupoGenre extends JFormFieldList {
 		$res = $db->loadAssocList();
 
 		foreach ($res as $row) {
-			$alias = JFilterOutput::stringURLSafe($row['genre']);
-			$options[] = JHtml::_('select.option', $alias, $row['genre']);
+			$options[] = JHtml::_('select.option', $row['alias'], $row['genre']);
 		}
 
 		return $options;

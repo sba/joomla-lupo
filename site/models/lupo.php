@@ -219,6 +219,7 @@ class LupoModelLupo extends JModelItem {
 		$db->setQuery("SELECT
 						  #__lupo_genres.id
 						  , #__lupo_genres.genre AS title
+						  , #__lupo_genres.alias
 						  , COUNT(#__lupo_game.id) AS number
 						FROM
 						  #__lupo_game
@@ -230,9 +231,7 @@ class LupoModelLupo extends JModelItem {
 		$res = $db->loadAssocList();
 
 		foreach ($res as &$row) {
-			$alias = JFilterOutput::stringURLSafe($row['title']);
-			$row['alias'] = $alias;
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $row['alias']);
 		}
 
 		return $res;
@@ -244,9 +243,9 @@ class LupoModelLupo extends JModelItem {
 	 * @genre genre-alias
 	 * @return    array the genre
 	 */
-	public function getGenre($genre) {
+	public function getGenre($alias) {
 		$db  = JFactory::getDBO();
-		$sql = "SELECT * FROM #__lupo_genres WHERE genre=" . $db->quote($genre);
+		$sql = "SELECT * FROM #__lupo_genres WHERE alias=" . $db->quote($alias);
 		$db->setQuery($sql);
 		$res = $db->loadAssoc();
 
@@ -441,7 +440,7 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
 						LEFT JOIN #__lupo_genres ON (#__lupo_game_genre.genreid = #__lupo_genres.id)
-						WHERE #__lupo_genres.genre=" . $db->quote($genre) . "
+						WHERE #__lupo_genres.alias=" . $db->quote($genre) . "
 						GROUP BY #__lupo_game.id
 						ORDER BY title, number");
 		$res = $db->loadAssocList();
@@ -520,15 +519,15 @@ class LupoModelLupo extends JModelItem {
 		//load genres
 		$db->setQuery("SELECT
                         #__lupo_genres.id
-					    , genre
+					    , #__lupo_genres.genre
+					    , #__lupo_genres.alias
 					FROM
 					    #__lupo_game_genre
                     LEFT JOIN #__lupo_genres ON #__lupo_genres.id = genreid
 					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['genres_list'] = $db->loadAssocList();
 		foreach ($res['genres_list'] as &$genre) {
-			$alias = JFilterOutput::stringURLSafe($genre['genre']);
-			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);;
+			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $genre['alias']);;
 		}
 
 		//Load documents

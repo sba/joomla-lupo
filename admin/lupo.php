@@ -223,7 +223,7 @@ function processXML( $file ) {
 			foreach ( $genres as $genre ) {
 				$db->setQuery( 'INSERT INTO #__lupo_genres SET
 											`genre`=' . $db->quote( $genre ) . ',
-											`alias`=' . JFilterOutput::stringURLSafe($genre)
+											`alias`=' . $db->quote(str_replace( "-", "_", JFilterOutput::stringURLSafe($genre)))
 				);
 				$db->execute();
 			}

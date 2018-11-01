@@ -27,7 +27,7 @@ class com_lupoInstallerScript
 
 		foreach ($res as $row) {
 			$query = $db->getQuery(true);
-			$alias = JFilterOutput::stringURLSafe($row['genre']);
+			$alias = str_replace( "-", "_", JFilterOutput::stringURLSafe($row['genre']));
 			$fields = array(
 				$db->quoteName('alias') . ' = ' . $db->quote($alias)
 			);
