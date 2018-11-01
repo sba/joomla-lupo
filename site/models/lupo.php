@@ -230,7 +230,8 @@ class LupoModelLupo extends JModelItem {
 		$res = $db->loadAssocList();
 
 		foreach ($res as &$row) {
-			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $row['id']);
+			$alias = JFilterOutput::stringURLSafe($row['title']);
+			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);
 		}
 
 		return $res;
@@ -239,12 +240,12 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the genre
 	 *
-	 * @id genre-id
+	 * @genre genre-alias
 	 * @return    array the genre
 	 */
-	public function getGenre($id) {
+	public function getGenre($genre) {
 		$db  = JFactory::getDBO();
-		$sql = "SELECT * FROM #__lupo_genres WHERE id=" . $db->quote($id);
+		$sql = "SELECT * FROM #__lupo_genres WHERE genre=" . $db->quote($genre);
 		$db->setQuery($sql);
 		$res = $db->loadAssoc();
 
@@ -374,7 +375,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Helper-Function to get the games per category
 	 *
-	 * @id          genre-id
+	 * @id          cat-id
 	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
@@ -387,7 +388,7 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Helper-Function to get the games per agecategory
 	 *
-	 * @id          genre-id
+	 * @id          agecat-id
 	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
@@ -401,11 +402,11 @@ class LupoModelLupo extends JModelItem {
 	/**
 	 * Get the Games per genre
 	 *
-	 * @id          genre-id
+	 * @genre          genre-alias
 	 * @foto_prefix name of the prefix for the image*
 	 * @return array with the games
 	 */
-	public function getGamesByGenre($id, $foto_prefix = '') {
+	public function getGamesByGenre($genre, $foto_prefix = '') {
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT
 							#__lupo_game.id
@@ -438,7 +439,8 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
-						WHERE #__lupo_game_genre.genreid=" . $db->quote($id) . "
+						LEFT JOIN #__lupo_genres ON (#__lupo_game_genre.genreid = #__lupo_genres.id)
+						WHERE #__lupo_genres.genre=" . $db->quote($genre) . "
 						GROUP BY #__lupo_game.id
 						ORDER BY title, number");
 		$res = $db->loadAssocList();
@@ -524,7 +526,8 @@ class LupoModelLupo extends JModelItem {
 					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['genres_list'] = $db->loadAssocList();
 		foreach ($res['genres_list'] as &$genre) {
-			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $genre['id']);;
+			$alias = JFilterOutput::stringURLSafe($genre['genre']);
+			$genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);;
 		}
 
 		//Load documents
