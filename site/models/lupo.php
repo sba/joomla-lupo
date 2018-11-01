@@ -231,6 +231,7 @@ class LupoModelLupo extends JModelItem {
 
 		foreach ($res as &$row) {
 			$alias = JFilterOutput::stringURLSafe($row['title']);
+			$row['alias'] = $alias;
 			$row['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $alias);
 		}
 
