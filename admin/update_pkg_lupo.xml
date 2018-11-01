@@ -3,13 +3,13 @@
    <update>
       <name>LUPO Updates</name>
       <description>LUPO Package</description>
-	  <creationDate>May 2018</creationDate>
+	  <creationDate>November 2018</creationDate>
 	  <authorEmail>stefan@databauer.ch</authorEmail>
 	  <authorUrl>http://www.ludothekprogramm.ch</authorUrl>
 	  <copyright>Copyright (C) databauer / Stefan Bauer</copyright>	  
       <element>com_lupo</element>
       <type>component</type>
-      <version>3.7.0</version>
+      <version>3.9.0</version>
  
       <infourl title="Ludothekprogramm LUPO">https://github.com/sba/com_lupo/blob/master/CHANGELOG.md</infourl>
       <downloads>
@@ -18,6 +18,6 @@
  
       <maintainer>Stefan Bauer</maintainer>
       <maintainerurl>http://databauer.ch</maintainerurl>
-      <targetplatform name="joomla" version="3.4"/>
+      <targetplatform name="joomla" version="3.*"/>
    </update> 
 </updates>
