@@ -1,7 +1,10 @@
 # Changelog
 
+### 3.9.0 (November 01, 2018)
+  - SEO optimized routing for toy genres
+
 ### 3.8.1 (October 19, 2018)
-  - new option to hide from-date in reservation dialog  
+  - new option to hide from-date in reservation dialog
 
 ### 3.8.0 (October 01, 2018)
   - author an artist added to game-object
