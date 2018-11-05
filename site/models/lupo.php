@@ -342,6 +342,7 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
 					, #__lupo_game_editions.acquired_date
+					, #__lupo_game_editions.next_reservation
 					, #__lupo_clients_borrowed.return_date
                     , #__lupo_clients_borrowed.return_extended
 					, t_userdefined.value as userdefined
@@ -428,6 +429,7 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
 							, #__lupo_game_editions.acquired_date
+							, #__lupo_game_editions.next_reservation
 							, #__lupo_clients_borrowed.return_date
   							, #__lupo_clients_borrowed.return_extended
 							, t_userdefined.value AS userdefined
@@ -502,6 +504,7 @@ class LupoModelLupo extends JModelItem {
 					    , t_userdefined.value AS userdefined
 						, #__lupo_clients_borrowed.return_date
                         , #__lupo_clients_borrowed.return_extended
+                        , #__lupo_game_editions.next_reservation
 					FROM
 					    #__lupo_game 
 						LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid) 
