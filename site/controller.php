@@ -267,7 +267,6 @@ class LupoController extends JControllerLegacy {
 			case 'adr':
 				if (!$this->autohorize($token)) {
 					echo 'error_token';
-
 					return;
 				}
 
@@ -301,7 +300,6 @@ class LupoController extends JControllerLegacy {
 						$result = JFactory::getDbo()->updateObject( '#__lupo_clients', $client, 'adrnr' );
 					}
 				}
-
 
 				echo $result;
 				break;
@@ -339,17 +337,13 @@ class LupoController extends JControllerLegacy {
 				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');
 				$game_ids = $db->loadAssocList('number', 'id');
 
-
 				foreach ($arr as $row) {
-					//get edition_id
-
 					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if (strpos($row->nr, ".") == 0) {
 						$game_nr = $row->nr . '.0';
 					} else {
 						$game_nr = $row->nr;
 					}
-
 
 					if (isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
 						$client                       = new stdClass();
@@ -416,7 +410,6 @@ class LupoController extends JControllerLegacy {
 				$game_ids = $db->loadAssocList('number', 'id');
 
 				foreach ($arr as $row) {
-
 					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if (strpos($row->nr, ".") == 0) {
 						$game_nr = $row->nr . '.0';
@@ -453,7 +446,6 @@ class LupoController extends JControllerLegacy {
 				// reads online prolongations to store them in LUPO
 				if (!$this->autohorize($token)) {
 					echo 'error_token';
-
 					return;
 				}
 
