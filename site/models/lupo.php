@@ -607,21 +607,6 @@ class LupoModelLupo extends JModelItem {
 					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
 		$res['editions'] = $db->loadAssocList();
 
-		//Find min/max tax
-		$min = 9999;
-		foreach ($res['editions'] as $arr) {
-			if ($arr['tax'] < $min) {
-				$res['tax_min'] = $min = $arr['tax'];
-			}
-		}
-		$max = 0;
-		foreach ($res['editions'] as $arr) {
-			if ($arr['tax'] > $max) {
-				$res['tax_max'] = $max = $arr['tax'];
-			}
-		}
-		$res['tax'] = $res['tax_min']; //tax = alias for tax_min
-
 		//related games
 		if($load_related) {
 			$db->setQuery( "SELECT

@@ -164,34 +164,12 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						<td><?php echo $this->game['days']?></td>
 					</tr>
 				<?php } ?>
-				<?php if(count($this->game['editions'])==1){?>
-					<?php if($componentParams->get('detail_show_toy_tax', '1') && ($componentParams->get('detail_show_toy_tax_not_null', '1')=='0' || $this->game['editions'][0]['tax'] > 0)){ ?>
-						<tr>
-							<td><?php echo JText::_("COM_LUPO_TAX")?>:</td>
-							<td>Fr. <?php echo number_format($this->game['editions'][0]['tax'],2)?></td>
-						</tr>
-					<?php } ?>
-				<?php } else { ?>
-					<?php if($componentParams->get('detail_show_toy_nbrtoys', '1')){ ?>
-						<tr>
-							<td><?php echo JText::_("COM_LUPO_NBR_TOYS")?>:</td>
-							<td><?php echo count($this->game['editions'])?></td>
-						</tr>
-					<?php } ?>
-					<?php if($componentParams->get('detail_show_toy_tax', '1') && ($componentParams->get('detail_show_toy_tax_not_null', '1')=='0' || $this->game['tax_max'] > 0)){ ?>
-						<tr>
-							<td><?php echo JText::_("COM_LUPO_TAX")?>:</td>
-							<td>
-								<?php if(!isset($this->game['tax_max']) || $this->game['tax_min']==$this->game['tax_max']) {
-									echo JText::_("COM_LUPO_CURRENCY"). " " . number_format($this->game['tax_min'],2);
-								} else {
-									echo JText::_("COM_LUPO_CURRENCY")." " . number_format($this->game['tax_min'],2);
-									echo " " . JText::_("COM_LUPO_TO") . " ". JText::_("COM_LUPO_CURRENCY") . number_format($this->game['tax_max'],2);
-								} ?>
-							</td>
-						</tr>
-					<?php }
-				}?>
+                <?php if($componentParams->get('detail_show_toy_tax', '1') && ($componentParams->get('detail_show_toy_tax_not_null', '1')=='0' || $this->game['editions'][0]['tax'] > 0)){ ?>
+                    <tr>
+                        <td><?php echo JText::_("COM_LUPO_TAX")?>:</td>
+                        <td>Fr. <?php echo number_format($this->game['editions'][0]['tax'],2)?></td>
+                    </tr>
+                <?php } ?>
 				<?php if($componentParams->get('lupo_show_toystatus', '0')) { ?>
 					<tr>
 						<td><?php echo JText::_("COM_LUPO_AVAILABILITY")?>:</td>
