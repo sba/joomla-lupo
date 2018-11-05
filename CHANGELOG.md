@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.10.0 (November 05, 2018)
+  - show the next reservation at loan status
+
 ### 3.9.0 (November 01, 2018)
   - SEO optimized routing for toy genres
 
