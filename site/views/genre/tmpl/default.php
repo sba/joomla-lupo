@@ -54,18 +54,12 @@ if($this->foto['show']=='1') {?>
             <?php
             $i=0;
             foreach($this->games as $game){
-                if($componentParams->get('lupo_show_toystatus', '0')) {
-	                if ($game['return_date'] != null) {
-		                $availability = '<i class="uk-icon uk-icon-circle red uk-float-right availability_dot" title="' . JText::_("COM_LUPO_BORROWED") . '"></i>';
-	                } elseif ($game['next_reservation'] != null) {
-		                $availability = '<i class="uk-icon uk-icon-circle orange uk-float-right availability_dot" title="' . JText::_("COM_LUPO_RESERVED") . '"></i>';
-	                } else {
-		                $availability = '<i class="uk-icon uk-icon-circle green uk-float-right availability_dot" title="' . JText::_("COM_LUPO_AVAILABLE") . '"></i>';
-	                }
-                } else {
-                    $availability = '';
-                }
-                ?>
+	            if($componentParams->get('lupo_show_toystatus', '0')) {
+		            $availability = '<i class="uk-icon uk-icon-circle '.$game['availability_color'].' uk-float-right availability_dot" title="' . $game['availability_text'] . '"></i>';
+	            } else {
+		            $availability = '';
+	            }
+	            ?>
                 <tr>
                     <td>
 		                <?php if($this->foto['show']!='0') {?>

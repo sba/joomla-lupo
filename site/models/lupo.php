@@ -519,6 +519,8 @@ class LupoModelLupo extends JModelItem {
 			return 'error';
 		}
 
+		$res += $this->getLoanStatus($res);
+
 		//load genres
 		$db->setQuery("SELECT
                         #__lupo_genres.id
@@ -698,6 +700,7 @@ class LupoModelLupo extends JModelItem {
 	public function compileGame($row, $game_thumb_prefix, $pos = '') {
 		//add photo to game array
 		$row += $this->getGameFoto($row['number'], $game_thumb_prefix);
+		$row += $this->getLoanStatus($row);
 
 		//description-text
 		if ($row['description_title'] != "") {
@@ -713,6 +716,29 @@ class LupoModelLupo extends JModelItem {
 		$row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
 		return $row;
+	}
+
+
+
+	/**
+	 * add loan status / availability to game array
+	 *
+	 * @param array  game*
+	 * @return array loan status
+	 */
+	public function getLoanStatus($row) {
+		if($row['return_date']!=null) {
+			$availability['availability_color'] = 'red';
+			$availability['availability_text'] = JText::_("COM_LUPO_BORROWED");
+		} elseif ($row['next_reservation']!=null) {
+			$availability['availability_color'] = 'orange';
+			$availability['availability_text'] = JText::_("COM_LUPO_RESERVED");
+		} else {
+			$availability['availability_color'] = 'green';
+			$availability['availability_text'] = JText::_("COM_LUPO_AVAILABLE");
+		}
+
+		return $availability;
 	}
 
 

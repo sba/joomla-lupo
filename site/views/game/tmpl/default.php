@@ -173,18 +173,9 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 				<?php if($componentParams->get('lupo_show_toystatus', '0')) { ?>
 					<tr>
 						<td><?php echo JText::_("COM_LUPO_AVAILABILITY")?>:</td>
-						<td><?php
-							if($this->game['return_date']!=null) {
-								echo '<i class="uk-icon uk-icon-circle red availability_dot"></i> '.JText::_("COM_LUPO_BORROWED");
-							} elseif ($this->game['next_reservation']!=null) {
-								echo '<i class="uk-icon uk-icon-circle orange availability_dot"></i> '.JText::_("COM_LUPO_RESERVED");
-							} else {
-								echo '<i class="uk-icon uk-icon-circle green availability_dot"></i> '.JText::_("COM_LUPO_AVAILABLE");
-							}
-						?></td>
+						<td><i class="uk-icon uk-icon-circle <?=$this->game['availability_color']?> availability_dot"></i> <?=$this->game['availability_text']?></td>
 					</tr>
 				<?php } ?>
-
 			</table>
 
 			<?php
