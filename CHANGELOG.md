@@ -2,6 +2,8 @@
 
 ### 3.10.0 (November 05, 2018)
   - show the next reservation at loan status
+  - add missing columns to sql installer script
+  - improved error handling on zip-upload 
 
 ### 3.9.0 (November 01, 2018)
   - SEO optimized routing for toy genres

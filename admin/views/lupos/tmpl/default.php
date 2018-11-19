@@ -82,7 +82,9 @@ JHtml::_('behavior.tooltip');
 						errorMsg = '<span style="color:red"><b>' + errorMsg + '</b></span>';
 						jQuery('#filelist').html(errorMsg);
 					} else {
-						errorMsg = "\nError #" + err.code + ": " + err.message;
+					    json = JSON.parse(err.response);
+					    err = json.error;
+                        errorMsg = '<span style="color:red"><b>' + "Error #" + err.code + ": " + err.message + '</b></span>';
 						jQuery('#upload_percent').html(errorMsg);
 					}
 				}

@@ -45,7 +45,7 @@ $chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
 // Remove old temp files	
 if ($cleanupTargetDir) {
 	if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
-		die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
+		die_on_error('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
 	}
 
 	while (($file = readdir($dir)) !== false) {
@@ -67,21 +67,21 @@ if ($cleanupTargetDir) {
 
 // Open temp file
 if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
-	die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
+	die_on_error('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
 }
 
 if (!empty($_FILES)) {
 	if ($_FILES["file"]["error"] || !is_uploaded_file($_FILES["file"]["tmp_name"])) {
-		die('{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}');
+		die_on_error('{"jsonrpc" : "2.0", "error" : {"code": 103, "message": "Failed to move uploaded file."}, "id" : "id"}');
 	}
 
 	// Read binary input stream and append it to temp file
 	if (!$in = @fopen($_FILES["file"]["tmp_name"], "rb")) {
-		die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
+		die_on_error('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
 	}
 } else {
 	if (!$in = @fopen("php://input", "rb")) {
-		die('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
+		die_on_error('{"jsonrpc" : "2.0", "error" : {"code": 101, "message": "Failed to open input stream."}, "id" : "id"}');
 	}
 }
 
@@ -100,3 +100,9 @@ if (!$chunks || $chunk == $chunks - 1) {
 
 // Return Success JSON-RPC response
 die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
+
+
+function die_on_error($json){
+	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+	die($json);
+}
