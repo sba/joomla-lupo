@@ -497,6 +497,7 @@ class LupoModelLupo extends JModelItem {
 		$db = JFactory::getDBO();
 		$db->setQuery("SELECT 
 					    #__lupo_game.*
+                        , #__lupo_game_editions.*
 					    , #__lupo_categories.alias AS category_alias 
 					    , #__lupo_categories.title AS category 
 					    , #__lupo_agecategories.alias AS agecategory_alias
@@ -504,7 +505,6 @@ class LupoModelLupo extends JModelItem {
 					    , t_userdefined.value AS userdefined
 						, #__lupo_clients_borrowed.return_date
                         , #__lupo_clients_borrowed.return_extended
-                        , #__lupo_game_editions.next_reservation
 					FROM
 					    #__lupo_game 
 						LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid) 
@@ -599,13 +599,6 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
-		//Load game editions
-		$db->setQuery("SELECT 
-					    *
-					FROM
-					    #__lupo_game_editions
-					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) .")");
-		$res['editions'] = $db->loadAssocList();
 
 		//related games
 		if($load_related) {
@@ -711,12 +704,6 @@ class LupoModelLupo extends JModelItem {
 			$row['description_full'] = '<b>' . $row['description_title'] . '</b><br>' . $row['description'];
 		} else {
 			$row['description_full'] = $row['description'];
-		}
-
-		if (isset($row['editions']) && count($row['editions']) == 1) {
-			$row['edition'] = $row['editions'][0]['edition'];
-		} else {
-			$row['edition'] = '';
 		}
 
 		if ( $pos !== '' ) $pos = '&pos=' . $pos;

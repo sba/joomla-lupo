@@ -164,10 +164,10 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						<td><?php echo $this->game['days']?></td>
 					</tr>
 				<?php } ?>
-                <?php if($componentParams->get('detail_show_toy_tax', '1') && ($componentParams->get('detail_show_toy_tax_not_null', '1')=='0' || $this->game['editions'][0]['tax'] > 0)){ ?>
+                <?php if($componentParams->get('detail_show_toy_tax', '1') && ($componentParams->get('detail_show_toy_tax_not_null', '1')=='0' || $this->game['tax'] > 0)){ ?>
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_TAX")?>:</td>
-                        <td>Fr. <?php echo number_format($this->game['editions'][0]['tax'],2)?></td>
+                        <td>Fr. <?php echo number_format($this->game['tax'],2)?></td>
                     </tr>
                 <?php } ?>
 				<?php if($componentParams->get('lupo_show_toystatus', '0')) { ?>
