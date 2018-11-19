@@ -61,6 +61,7 @@ CREATE TABLE `#__lupo_clients_borrowed` (
 
 CREATE TABLE `#__lupo_game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_databauer` int(11) DEFAULT NULL,
   `catid` int(11) DEFAULT NULL,
   `age_catid` int(11) DEFAULT NULL,
   `number` char(10) DEFAULT NULL,
@@ -102,6 +103,7 @@ CREATE TABLE `#__lupo_game_editions` (
   `edition` varchar(50) DEFAULT NULL,
   `acquired_date` date DEFAULT NULL,
   `tax` double DEFAULT NULL,
+  `next_reservation` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -126,6 +128,7 @@ CREATE TABLE `#__lupo_game_related` (
 CREATE TABLE `#__lupo_genres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `genre` char(30) DEFAULT NULL,
+  `alias` char(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
