@@ -345,6 +345,7 @@ class LupoModelLupo extends JModelItem {
 					, #__lupo_game_editions.next_reservation
 					, #__lupo_clients_borrowed.return_date
                     , #__lupo_clients_borrowed.return_extended
+                    , #__lupo_clients_borrowed.return_date_extended
 					, t_userdefined.value as userdefined
 					, COUNT(#__lupo_game_editions.id) as nbr
 				FROM #__lupo_game
@@ -432,6 +433,7 @@ class LupoModelLupo extends JModelItem {
 							, #__lupo_game_editions.next_reservation
 							, #__lupo_clients_borrowed.return_date
   							, #__lupo_clients_borrowed.return_extended
+  							, #__lupo_clients_borrowed.return_date_extended
 							, t_userdefined.value AS userdefined
 							, COUNT(#__lupo_game_editions.id) AS nbr
 						FROM #__lupo_game
@@ -505,6 +507,7 @@ class LupoModelLupo extends JModelItem {
 					    , t_userdefined.value AS userdefined
 						, #__lupo_clients_borrowed.return_date
                         , #__lupo_clients_borrowed.return_extended
+                        , #__lupo_clients_borrowed.return_date_extended
 					FROM
 					    #__lupo_game 
 						LEFT JOIN #__lupo_categories ON (#__lupo_categories.id = #__lupo_game.catid) 
@@ -733,10 +736,15 @@ class LupoModelLupo extends JModelItem {
 	public function getLoanStatus( $row ) {
 		if ( $row['return_date'] != null ) {
 			$availability['availability_color'] = 'red';
-			$availability['availability_text']  = JText::_( "COM_LUPO_BORROWED" );
-		} elseif ( $row['next_reservation'] != null ) {
+			if($row['return_extended']==1){
+				$return_date = $row['return_date_extended'];
+			} else {
+				$return_date = $row['return_date'];
+			}
+			$availability['availability_text']  = JText::_( "COM_LUPO_BORROWED" ) . ' ' . JText::_( "COM_LUPO_TO" ) . ' ' . date("d.m.Y", strtotime ($return_date));
+		} elseif ( $row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime ( '+28 day' , time() )))  {
 			$availability['availability_color'] = 'orange';
-			$availability['availability_text']  = JText::_( "COM_LUPO_RESERVED" );
+			$availability['availability_text']  = JText::_( "COM_LUPO_RESERVED" ) . ' ' . date("d.m.Y", strtotime ($row['next_reservation']));
 		} else {
 			$availability['availability_color'] = 'green';
 			$availability['availability_text']  = JText::_( "COM_LUPO_AVAILABLE" );
