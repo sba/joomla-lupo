@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.10.0 (November 05, 2018)
+### 3.10.0 (November 20, 2018)
   - only show orange reservation dot if the reservation is in the next 4 weeks
   - show the return date for borrowed toys
   - add missing columns to sql installer script
