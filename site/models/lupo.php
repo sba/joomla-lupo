@@ -748,7 +748,7 @@ class LupoModelLupo extends JModelItem {
 			}
 		} elseif ( $row['next_reservation'] != null && $row['next_reservation'] < date( "Y-m-d", strtotime( '+28 day', time() ) ) ) {
 			$availability['availability_color'] = 'orange';
-			$availability['availability_text']  = JText::_( "COM_LUPO_RESERVED" ) . ' ' . date( "d.m.Y", strtotime( $row['next_reservation'] ) );
+			$availability['availability_text']  = JText::_( "COM_LUPO_RESERVED_FROM" ) . ' ' . date( "d.m.Y", strtotime( $row['next_reservation'] ) );
 		} else {
 			$availability['availability_color'] = 'green';
 			$availability['availability_text']  = JText::_( "COM_LUPO_AVAILABLE" );
