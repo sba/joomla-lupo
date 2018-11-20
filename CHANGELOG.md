@@ -1,9 +1,11 @@
 # Changelog
 
 ### 3.10.0 (November 05, 2018)
-  - show the next reservation at loan status
+  - only show orange reservation dot if the reservation is in the next 4 weeks
+  - show the return date for borrowed toys
   - add missing columns to sql installer script
-  - improved error handling on zip-upload 
+  - improved error handling on zip-upload
+  - code cleanup
 
 ### 3.9.0 (November 01, 2018)
   - SEO optimized routing for toy genres
