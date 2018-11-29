@@ -1,7 +1,8 @@
 # Changelog
 
-### 3.10.1 (November 24, 2018)
+### 3.10.1 (November 29, 2018)
   - remove all reservation dates before uploading them
+  - if toy is borrowed and reserved show reservation-text too
 
 ### 3.10.0 (November 20, 2018)
   - only show orange reservation dot if the reservation is in the next 4 weeks
