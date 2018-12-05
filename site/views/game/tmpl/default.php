@@ -255,10 +255,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     width: 150px;
                                     vertical-align: top;
                                 }
-
+                                <?php if($componentParams->get('detail_show_res_date_now', '1')==1) {?>
                                 #row_resdate {
                                     display: none;
                                 }
+                                <?php } ?>
                             </style>
                             <table class="res-table">
                                 <tbody>
@@ -292,8 +293,10 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
                                     <td>
                                         <div style="margin-bottom: 10px">
+                                        <?php if($componentParams->get('detail_show_res_date_now', '1')==1) {?>
                                         <input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
-                                        <span class="uk-text-muted"> - <?php echo JText::_("COM_LUPO_RES_FROM_INFO"); ?></span>
+                                        <?php } ?>
+                                        <span class="uk-text-muted"> <?php echo JText::_("COM_LUPO_RES_FROM_INFO"); ?></span>
                                         </div>
                                     </td>
                                 </tr>
