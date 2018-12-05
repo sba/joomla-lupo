@@ -1,6 +1,9 @@
 # Changelog
 
-### 3.10.1 (November 29, 2018)
+### 3.11.0 (December 05, 2018)
+  - fix genres search result link
+  - add option to hide 'now' in res-form
+  - fix wrong langauge-var in resform error
   - remove all reservation dates before uploading them
   - if toy is borrowed and reserved show reservation-text too
 
