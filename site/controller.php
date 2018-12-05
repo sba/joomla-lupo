@@ -140,7 +140,7 @@ class LupoController extends JControllerLegacy {
 			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($clientname == "") {
-			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
+			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_NAME');
 		}
 		if ($formerror !== false) {
 			echo $formerror;
@@ -404,6 +404,16 @@ class LupoController extends JControllerLegacy {
 					echo "nodata";
 					return;
 				}
+
+				//remove all reservation dates
+				$fields     = array(
+					$db->quoteName('next_reservation') . ' = NULL'
+				);
+				$query = $db->getQuery(true);
+				$query->update($db->quoteName('#__lupo_game_editions'))->set($fields);
+
+				$db->setQuery($query);
+				$db->execute();
 
 				//cache query-result. min 3x faster
 				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');

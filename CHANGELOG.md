@@ -1,5 +1,12 @@
 # Changelog
 
+### 3.11.0 (December 05, 2018)
+  - fix genres search result link
+  - add option to hide 'now' in res-form
+  - fix wrong langauge-var in resform error
+  - remove all reservation dates before uploading them
+  - if toy is borrowed and reserved show reservation-text too
+
 ### 3.10.0 (November 20, 2018)
   - only show orange reservation dot if the reservation is in the next 4 weeks
   - show the return date for borrowed toys
