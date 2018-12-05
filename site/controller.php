@@ -140,7 +140,7 @@ class LupoController extends JControllerLegacy {
 			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($clientname == "") {
-			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
+			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_NAME');
 		}
 		if ($formerror !== false) {
 			echo $formerror;
