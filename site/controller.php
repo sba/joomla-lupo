@@ -271,14 +271,14 @@ class LupoController extends JControllerLegacy {
 				}
 
 				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
-				$arr = json_decode($data);
+				$rows = json_decode($data);
 
-				if(!is_array($arr)){
+				if(!is_array($rows)){
 					echo "nodata";
 					return;
 				}
 
-				foreach ( $arr as $row )
+				foreach ( $rows as $row )
 				{
 					$client            = new stdClass();
 					$client->adrnr     = $row->nr;
@@ -311,9 +311,9 @@ class LupoController extends JControllerLegacy {
 					return;
 				}
 
-				$arr = json_decode($data);
+				$rows = json_decode($data);
 
-				if(!is_array($arr)){
+				if(!is_array($rows)){
 					echo "nodata";
 					return;
 				}
@@ -331,13 +331,13 @@ class LupoController extends JControllerLegacy {
 				$query = $db->getQuery(true);
 				$query->delete($db->quoteName('#__lupo_clients_borrowed'));
 				$db->setQuery($query);
-				$result = $db->execute();
+				$db->execute();
 
 				//cache query-result. min 3x faster
 				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');
 				$game_ids = $db->loadAssocList('number', 'id');
 
-				foreach ($arr as $row) {
+				foreach ($rows as $row) {
 					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if (strpos($row->nr, ".") == 0) {
 						$game_nr = $row->nr . '.0';
@@ -398,9 +398,9 @@ class LupoController extends JControllerLegacy {
 				}
 
 				//$data= [{"nr":"0.1", "rs":"2016-05-12"}]
-				$arr = json_decode($data);
+				$rows = json_decode($data);
 
-				if(!is_array($arr)){
+				if(!is_array($rows)){
 					echo "nodata";
 					return;
 				}
@@ -419,7 +419,7 @@ class LupoController extends JControllerLegacy {
 				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');
 				$game_ids = $db->loadAssocList('number', 'id');
 
-				foreach ($arr as $row) {
+				foreach ($rows as $row) {
 					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if (strpos($row->nr, ".") == 0) {
 						$game_nr = $row->nr . '.0';
