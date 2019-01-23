@@ -1,9 +1,13 @@
 # Changelog
 
+### 3.12.0 (January 23, 2019)
+  - fix mixing of borrowed games when uploading zip-file with new games
+  - give placeholder image to widgetkit content provider in case of no image
+
 ### 3.11.0 (December 05, 2018)
   - fix genres search result link
   - add option to hide 'now' in res-form
-  - fix wrong langauge-var in resform error
+  - fix wrong language-var in resform error
   - remove all reservation dates before uploading them
   - if toy is borrowed and reserved show reservation-text too
 
