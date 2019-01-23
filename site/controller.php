@@ -271,14 +271,14 @@ class LupoController extends JControllerLegacy {
 				}
 
 				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
-				$arr = json_decode($data);
+				$rows = json_decode($data);
 
-				if(!is_array($arr)){
+				if(!is_array($rows)){
 					echo "nodata";
 					return;
 				}
 
-				foreach ( $arr as $row )
+				foreach ( $rows as $row )
 				{
 					$client            = new stdClass();
 					$client->adrnr     = $row->nr;
@@ -307,13 +307,12 @@ class LupoController extends JControllerLegacy {
 			case 'aus':
 				if (!$this->autohorize($token)) {
 					echo 'error_token';
-
 					return;
 				}
 
-				$arr = json_decode($data);
+				$rows = json_decode($data);
 
-				if(!is_array($arr)){
+				if(!is_array($rows)){
 					echo "nodata";
 					return;
 				}
@@ -331,13 +330,13 @@ class LupoController extends JControllerLegacy {
 				$query = $db->getQuery(true);
 				$query->delete($db->quoteName('#__lupo_clients_borrowed'));
 				$db->setQuery($query);
-				$result = $db->execute();
+				$db->execute();
 
 				//cache query-result. min 3x faster
 				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');
 				$game_ids = $db->loadAssocList('number', 'id');
 
-				foreach ($arr as $row) {
+				foreach ($rows as $row) {
 					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if (strpos($row->nr, ".") == 0) {
 						$game_nr = $row->nr . '.0';
@@ -350,6 +349,7 @@ class LupoController extends JControllerLegacy {
 						$client->lupo_id              = $row->id; //LFDAUSLEIHNR
 						$client->adrnr                = $row->adr; //ADRNR
 						$client->tax_extended         = $row->tx; //tx = gebühr für verlängerung
+						$client->game_number          = $game_nr;
 						$client->edition_id           = $game_ids[$game_nr];
 						$client->return_date          = $row->rd; //rd = returdate
 						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
@@ -358,7 +358,7 @@ class LupoController extends JControllerLegacy {
 						$client->next_reservation     = $row->rs==""?null:$row->rs;
 
 						try {
-							$result = JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
+							JFactory::getDbo()->insertObject('#__lupo_clients_borrowed', $client);
 
 							if (is_array($preserved_prolongations)) {
 								foreach ($preserved_prolongations as $preserved_prolongation) {
@@ -398,9 +398,9 @@ class LupoController extends JControllerLegacy {
 				}
 
 				//$data= [{"nr":"0.1", "rs":"2016-05-12"}]
-				$arr = json_decode($data);
+				$rows = json_decode($data);
 
-				if(!is_array($arr)){
+				if(!is_array($rows)){
 					echo "nodata";
 					return;
 				}
@@ -419,7 +419,7 @@ class LupoController extends JControllerLegacy {
 				$query    = $db->setQuery('SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id');
 				$game_ids = $db->loadAssocList('number', 'id');
 
-				foreach ($arr as $row) {
+				foreach ($rows as $row) {
 					//compile full game-number (web-table contains full number when editions are exported as single game)
 					if (strpos($row->nr, ".") == 0) {
 						$game_nr = $row->nr . '.0';
@@ -462,8 +462,7 @@ class LupoController extends JControllerLegacy {
 				$query = $db->getQuery(true);
 				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended, #__lupo_clients_borrowed.tax_extended')
 					->from('#__lupo_clients_borrowed')
-					->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
-					->join('LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id')
+					->join('LEFT', '#__lupo_game ON #__lupo_clients_borrowed.game_number = #__lupo_game.number')
 					->where('#__lupo_clients_borrowed.return_extended_online = 1');
 				$db->setQuery($query);
 

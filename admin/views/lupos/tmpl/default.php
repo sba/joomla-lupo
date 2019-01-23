@@ -31,7 +31,7 @@ JHtml::_('behavior.tooltip');
 			chunk_size: "3000kb",
 			max_retries: 3,
 
-			url : 'components/com_lupo/models/upload.php?JPATH_SITE=<?=JPATH_SITE?>',
+			url : 'components/com_lupo/models/upload.php?JPATH_SITE=<?=str_replace( '\\', '\\\\', JPATH_SITE)?>',
 
 			flash_swf_url : 'components/com_lupo/assets/plupload/js/Moxie.swf',
 			silverlight_xap_url : 'components/com_lupo/assets/plupload/js/Moxie.xap',
