@@ -352,7 +352,7 @@ class LupoModelLupo extends JModelItem {
 				LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
 				LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 				LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-				LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
+				LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game.number = #__lupo_clients_borrowed.game_number)
 				LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 				%%WHERE%%
 				GROUP BY #__lupo_game.id
@@ -440,7 +440,7 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN #__lupo_categories ON (#__lupo_game.catid = #__lupo_categories.id)
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
+						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game.number = #__lupo_clients_borrowed.game_number)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
 						LEFT JOIN #__lupo_genres ON (#__lupo_game_genre.genreid = #__lupo_genres.id)
@@ -514,7 +514,7 @@ class LupoModelLupo extends JModelItem {
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_agecategories.id = #__lupo_game.age_catid)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
-						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game_editions.id = #__lupo_clients_borrowed.edition_id)
+						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game.number = #__lupo_clients_borrowed.game_number)
 					WHERE #__lupo_game.number = " . $db->quote( $id ) );
 		$res = $db->loadAssoc();
 
@@ -910,8 +910,8 @@ class LupoModelLupoClient extends LupoModelLupo {
 		$query = $db->getQuery( true );
 		$query->select( '*' )
 		      ->from( '#__lupo_clients_borrowed' )
-		      ->join( 'LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id' )
-		      ->join( 'LEFT', '#__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' )
+		      //->join( 'LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id' )
+		      ->join( 'LEFT', '#__lupo_game ON #__lupo_clients_borrowed.game_number = #__lupo_game.number' )
 		      ->where( '#__lupo_clients_borrowed.adrnr = ' . $db->quote( $adrnr ) )
 		      ->order( 'return_date, title' );
 		$db->setQuery( $query );
