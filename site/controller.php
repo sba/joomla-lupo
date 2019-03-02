@@ -350,7 +350,7 @@ class LupoController extends JControllerLegacy {
 						$client->adrnr                = $row->adr; //ADRNR
 						$client->tax_extended         = $row->tx; //tx = gebühr für verlängerung
 						$client->game_number          = $game_nr;
-						$client->edition_id           = $game_ids[$game_nr];
+						$client->edition_id           = $game_ids[$game_nr]; //TODO: remove -> refactor without editions-table
 						$client->return_date          = $row->rd; //rd = returdate
 						$client->return_date_extended = $row->ed; //vd = verlängerungs-datum (extended date)
 						$client->return_extended      = $row->ex; //is extended (spiel wurde verlängert)

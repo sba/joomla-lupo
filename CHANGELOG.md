@@ -1,6 +1,9 @@
 # Changelog
 
 ### 3.12.0 (January 23, 2019)
+  - wip
+
+### 3.12.0 (January 23, 2019)
   - fix mixing of borrowed games when uploading zip-file with new games
   - give placeholder image to widgetkit content provider in case of no image
 
