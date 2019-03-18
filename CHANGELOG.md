@@ -1,7 +1,7 @@
 # Changelog
 
-### 3.12.0 (January 23, 2019)
-  - wip
+### 3.13.0 (March 18, 2019)
+  - category description is shown above toy list
 
 ### 3.12.0 (January 23, 2019)
   - fix mixing of borrowed games when uploading zip-file with new games
