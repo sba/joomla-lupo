@@ -1,7 +1,7 @@
 # Changelog
 
-### 3.14.0 (April 02, 2019)
-  - wip 
+### 3.15.0 (May 02, 2019)
+  - support of client-login via url with get param 
   
 ### 3.14.0 (April 02, 2019)
   - show orange status dot if reservation-date is in less or equal 35 days 
