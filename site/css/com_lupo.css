@@ -19,6 +19,7 @@ ul.lupo_categories {
 
 #lupo_category_table tr td > p {
     margin: 0;
+    hyphens: auto;
 }
 
 #lupo_category_table tr td > p:last-child {

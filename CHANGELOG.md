@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.16.0 (June 11, 2019)
+  - hyphens in category table-view 
+    
 ### 3.15.0 (May 02, 2019)
   - support of client-login via url with get param 
   
