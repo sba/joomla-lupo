@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.17.0 (July 02, 2019)
+  - block prolongation only if reservation is in 14 days or less 
+    
 ### 3.16.0 (June 11, 2019)
   - hyphens in category table-view 
     
