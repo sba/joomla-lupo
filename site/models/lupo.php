@@ -262,7 +262,7 @@ class LupoModelLupo extends JModelItem {
 		$db = JFactory::getDBO();
 
 		if ( $id == 'new' ) {
-			$res = array( 'id' => 'new', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
+			$res = array( 'id' => 'new', 'description' => '', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
 		} else {
 			$sql = "SELECT * FROM #__lupo_categories WHERE alias=" . $db->quote( $id );
 			$db->setQuery( $sql );
@@ -282,7 +282,7 @@ class LupoModelLupo extends JModelItem {
 		$db = JFactory::getDBO();
 
 		if ( $id == 'new' ) {
-			$res = array( 'id' => 'new', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
+			$res = array( 'id' => 'new', 'description' => '', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
 		} else {
 			$sql = "SELECT * FROM #__lupo_agecategories WHERE alias=" . $db->quote( $id );
 			$db->setQuery( $sql );
