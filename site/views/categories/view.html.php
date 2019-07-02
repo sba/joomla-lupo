@@ -22,12 +22,12 @@ class LupoViewCategories extends JViewLegacy {
 	function display($tpl = null) {
 		$app = JFactory::getApplication();
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
-			JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
-
-			return false;
-		}
+        // Check for errors.
+        $errors = $this->get('Errors');
+        if ($errors) {
+            JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
+            return false;
+        }
 
 		// Check for empty title and add site name if param is set
 		$title = JText::_('COM_LUPO_CATEGORIES');

@@ -23,9 +23,9 @@ class LupoViewCategory extends JViewLegacy {
 		$app = JFactory::getApplication();
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
+        $errors = $this->get('Errors');
+		if ($errors) {
 			JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
-
 			return false;
 		}
 
