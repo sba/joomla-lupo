@@ -27,8 +27,18 @@
 			description="COM_LUPO_OPTIONS_CATS_NBR_DAYS_DESC"
 			default="30"
 		>
-		</field>		
-		
+		</field>
+
+		<field
+				name="new_games_sort"
+				type="list"
+				label="COM_LUPO_OPTIONS_NEW_GAMES_SORT"
+				default="0"
+		>
+			<option value="0">COM_LUPO_OPTIONS_NEW_GAMES_SORT_ALPHA</option>
+			<option value="1">COM_LUPO_OPTIONS_NEW_GAMES_SORT_BUYDATE</option>
+		</field>
+
 		<field
 				name="cats_nbr_games"
 				id="lupo_cats_nbr_games"
