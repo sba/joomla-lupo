@@ -310,9 +310,17 @@ class LupoModelLupo extends JModelItem {
 
 		$db = JFactory::getDBO();
 
+        $order_by = 'title, number'; //default order
+
 		if ( $id == 'new' ) {
 			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
 			$where                 = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
+
+            $new_games_sort = (int) $componentParams->get( 'new_games_sort', '0' );
+            if($new_games_sort=='1'){
+                $order_by = 'acquired_date DESC, title, number';
+            }
+
 		} else {
 			$cat_table             = ( $field == 'catid' ) ? '#__lupo_categories' : '#__lupo_agecategories';
 			$where                 = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote( $id ) . " LIMIT 1)";
@@ -354,7 +362,7 @@ class LupoModelLupo extends JModelItem {
 				LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 				%%WHERE%%
 				GROUP BY #__lupo_game.id
-				ORDER BY title, number";
+				ORDER BY ". $order_by;
 		$db->setQuery( str_replace( '%%WHERE%%', $where, $sql ) );
 		$res = $db->loadAssocList();
 
