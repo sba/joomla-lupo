@@ -206,7 +206,6 @@ class LupoController extends JControllerLegacy {
 		$client  = $session->get( 'lupo_client' );
 		if ( ! $client ) {
 			echo 'error';
-
 			return;
 		}
 
