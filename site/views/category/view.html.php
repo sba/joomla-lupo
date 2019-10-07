@@ -4,7 +4,7 @@
  * @subpackage	LUPO
  * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link		http://www.ludothekprogramm.ch
+ * @link		https://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -23,9 +23,9 @@ class LupoViewCategory extends JViewLegacy {
 		$app = JFactory::getApplication();
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
+        $errors = $this->get('Errors');
+		if ($errors) {
 			JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
-
 			return false;
 		}
 

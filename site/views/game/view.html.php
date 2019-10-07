@@ -4,7 +4,7 @@
  * @subpackage	LUPO
  * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link		http://www.ludothekprogramm.ch
+ * @link		https://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -22,12 +22,12 @@ class LupoViewGame extends JViewLegacy {
 	function display($tpl = null) {
 		$app = JFactory::getApplication();
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
-			JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
-
-			return false;
-		}
+        // Check for errors.
+        $errors = $this->get('Errors');
+        if ($errors) {
+            JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
+            return false;
+        }
 
 		// Check for empty title and add site name if param is set
 		if ($this->game !== 'error') {

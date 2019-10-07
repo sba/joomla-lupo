@@ -19,7 +19,7 @@ class LupoViewLupos extends JViewLegacy {
 		$pagination = $this->get('Pagination');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
+		if (is_array($errors = $this->get('Errors'))) {
 			throw new Exception(implode("\n", $errors), 500);
 		}
 

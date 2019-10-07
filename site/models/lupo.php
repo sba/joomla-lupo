@@ -4,7 +4,7 @@
  * @subpackage     LUPO
  * @copyright      Copyright (C) databauer / Stefan Bauer
  * @author         Stefan Bauer
- * @link           http://www.ludothekprogramm.ch
+ * @link           https://www.ludothekprogramm.ch
  * @license        License GNU General Public License version 2 or later
  */
 
@@ -262,7 +262,7 @@ class LupoModelLupo extends JModelItem {
 		$db = JFactory::getDBO();
 
 		if ( $id == 'new' ) {
-			$res = array( 'id' => 'new', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
+			$res = array( 'id' => 'new', 'description' => '', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
 		} else {
 			$sql = "SELECT * FROM #__lupo_categories WHERE alias=" . $db->quote( $id );
 			$db->setQuery( $sql );
@@ -282,7 +282,7 @@ class LupoModelLupo extends JModelItem {
 		$db = JFactory::getDBO();
 
 		if ( $id == 'new' ) {
-			$res = array( 'id' => 'new', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
+			$res = array( 'id' => 'new', 'description' => '', 'title' => JText::_( 'COM_LUPO_NEW_TOYS' ) );
 		} else {
 			$sql = "SELECT * FROM #__lupo_agecategories WHERE alias=" . $db->quote( $id );
 			$db->setQuery( $sql );
@@ -310,14 +310,20 @@ class LupoModelLupo extends JModelItem {
 
 		$db = JFactory::getDBO();
 
+        $order_by = 'title, number'; //default order
+
 		if ( $id == 'new' ) {
 			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
 			$where                 = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
-			$order_by_acquire_date = 'acquired_date DESC, ';
+
+            $new_games_sort = (int) $componentParams->get( 'new_games_sort', '0' );
+            if($new_games_sort=='1'){
+                $order_by = 'acquired_date DESC, title, number';
+            }
+
 		} else {
 			$cat_table             = ( $field == 'catid' ) ? '#__lupo_categories' : '#__lupo_agecategories';
 			$where                 = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote( $id ) . " LIMIT 1)";
-			$order_by_acquire_date = '';
 		}
 
 		$sql = "SELECT
@@ -356,7 +362,7 @@ class LupoModelLupo extends JModelItem {
 				LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 				%%WHERE%%
 				GROUP BY #__lupo_game.id
-				ORDER BY $order_by_acquire_date title, number";
+				ORDER BY ". $order_by;
 		$db->setQuery( str_replace( '%%WHERE%%', $where, $sql ) );
 		$res = $db->loadAssocList();
 
@@ -746,11 +752,11 @@ class LupoModelLupo extends JModelItem {
 			} else {
 				$availability['availability_text'] = JText::_( "COM_LUPO_BORROWED" ) . ' ' . JText::_( "COM_LUPO_TO" ) . ' ' . date( "d.m.Y", strtotime( $return_date ) );
 			}
-			if ( $row['next_reservation'] != null && $row['next_reservation'] < date( "Y-m-d", strtotime( '+28 day', time() ) ) ) {
+			if ( $row['next_reservation'] != null && $row['next_reservation'] < date( "Y-m-d", strtotime( '+35 day', time() ) ) ) {
 				$availability['availability_text'] .= ' / ' . JText::_( "COM_LUPO_RESERVED_FROM" ) . ' ' . date( "d.m.Y", strtotime( $row['next_reservation'] ) );
 			}
 
-		} elseif ( $row['next_reservation'] != null && $row['next_reservation'] < date( "Y-m-d", strtotime( '+28 day', time() ) ) ) {
+		} elseif ( $row['next_reservation'] != null && $row['next_reservation'] < date( "Y-m-d", strtotime( '+35 day', time() ) ) ) {
 			$availability['availability_color'] = 'orange';
 			$availability['availability_text']  = JText::_( "COM_LUPO_RESERVED_FROM" ) . ' ' . date( "d.m.Y", strtotime( $row['next_reservation'] ) );
 		} else {

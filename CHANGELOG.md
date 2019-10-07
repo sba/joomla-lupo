@@ -1,5 +1,31 @@
 # Changelog
 
+### 3.19.0 (October 07, 2019)
+  - extend title field to 100 chars, so that title and edition-title is not truncated
+  - replace double spaces in title, this improves search experience
+  - show date in prolong button
+  - don't offer prolong if extended date in today or in past
+  - make order of new games by aquired date optional
+  
+### 3.18.0 (July 02, 2019)
+  - do not order new games by aquired date anymore
+  - fix php notices
+    
+### 3.17.0 (July 02, 2019)
+  - block prolongation only if reservation is in 14 days or less 
+
+### 3.16.0 (June 11, 2019)
+  - hyphens in category table-view 
+    
+### 3.15.0 (May 02, 2019)
+  - support of client-login via url with get param 
+  
+### 3.14.0 (April 02, 2019)
+  - show orange status dot if reservation-date is in less or equal 35 days 
+  
+### 3.13.0 (March 18, 2019)
+  - category description is shown above toy list
+
 ### 3.12.0 (January 23, 2019)
   - fix mixing of borrowed games when uploading zip-file with new games
   - give placeholder image to widgetkit content provider in case of no image

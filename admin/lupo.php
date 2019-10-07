@@ -4,7 +4,7 @@
  * @subpackage     LUPO
  * @copyright      Copyright (C) databauer / Stefan Bauer
  * @author         Stefan Bauer
- * @link           http://www.ludothekprogramm.ch
+ * @link           https://www.ludothekprogramm.ch
  * @license        License GNU General Public License version 2 or later
  */
 
@@ -156,12 +156,13 @@ function processXML( $file ) {
 			$n      = 0;
 			$genres = array();
 			foreach ( $xml->games->game as $game ) {
+			    $title = $output = preg_replace('!\s+!', ' ', $game->title);
 				$db->setQuery( 'INSERT INTO #__lupo_game SET
 										`number`=' . $db->quote( $game['number'] ) . '
 										, `id_databauer`=' . $db->quote( $game['id_databauer'] ) . '
 										, `catid`=' . $db->quote( $game['catid'] ) . '
 										, `age_catid`=' . $db->quote( $game['age_catid'] ) . '
-										, `title`=' . $db->quote( $game->title ) . '
+										, `title`=' . $db->quote( $title ) . '
 										, `description_title`=' . $db->quote( $game->description_title ) . '
 										, `description`=' . $db->quote( $game->description ) . '
 										, `days`=' . $db->quote( $game['days'] ) . '

@@ -4,7 +4,7 @@
  * @subpackage	LUPO
  * @copyright   Copyright (C) databauer / Stefan Bauer 
  * @author		Stefan Bauer
- * @link		http://www.ludothekprogramm.ch
+ * @link		https://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
  */
 
@@ -24,6 +24,8 @@ if($this->foto['show']=='1') {?>
 <article class="tm-article">
     <div class="tm-article-content">
         <h2 class="contentheading"><?php echo $this->title?></h2>
+        <br class="clearfix">
+	    <?php echo $this->description?>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
             <?php if($componentParams->get('category_show_tableheader', '1')) { ?>
