@@ -1,5 +1,12 @@
 # Changelog
 
+### 3.19.0 (October 07, 2019)
+  - extend title field to 100 chars, so that title and edition-title is not truncated
+  - replace double spaces in title, this improves search experience
+  - show date in prolong button
+  - don't offer prolong if extended date in today or in past
+  - make order of new games by aquired date optional
+  
 ### 3.18.0 (July 02, 2019)
   - do not order new games by aquired date anymore
   - fix php notices
