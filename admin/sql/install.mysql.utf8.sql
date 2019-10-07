@@ -65,7 +65,7 @@ CREATE TABLE `#__lupo_game` (
   `catid` int(11) DEFAULT NULL,
   `age_catid` int(11) DEFAULT NULL,
   `number` char(10) DEFAULT NULL,
-  `title` char(50) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
   `description` text,
   `description_title` varchar(255) DEFAULT NULL,
   `fabricator` char(50) DEFAULT NULL,
