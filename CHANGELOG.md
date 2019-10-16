@@ -1,8 +1,11 @@
 # Changelog
 
+### 3.20.0 (October 16, 2019)
+  - store toy-content to database
+
 ### 3.19.1 (October 16, 2019)
   - bugfix: do not allow to extend games with reservation within next 14 days
-
+  
 ### 3.19.0 (October 07, 2019)
   - extend title field to 100 chars, so that title and edition-title is not truncated
   - replace double spaces in title, this improves search experience

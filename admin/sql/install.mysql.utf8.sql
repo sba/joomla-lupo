@@ -66,8 +66,8 @@ CREATE TABLE `#__lupo_game` (
   `age_catid` int(11) DEFAULT NULL,
   `number` char(10) DEFAULT NULL,
   `title` varchar(100) DEFAULT NULL,
-  `description` text,
   `description_title` varchar(255) DEFAULT NULL,
+  `description` text,
   `fabricator` char(50) DEFAULT NULL,
   `author` varchar(50) DEFAULT NULL,
   `artist` varchar(50) DEFAULT NULL,
@@ -104,6 +104,7 @@ CREATE TABLE `#__lupo_game_editions` (
   `acquired_date` date DEFAULT NULL,
   `tax` double DEFAULT NULL,
   `next_reservation` date DEFAULT NULL,
+  `content` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
