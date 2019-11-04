@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.21.0 (November 04, 2019)
+  - add missing field to sql-install script
+
 ### 3.20.0 (October 16, 2019)
   - store toy-content to database
 
