@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.22.0 (December 27, 2019)
+  - add another missing field to sql-install script
+  
 ### 3.21.0 (November 04, 2019)
   - add missing field to sql-install script
 
