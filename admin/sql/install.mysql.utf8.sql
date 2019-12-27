@@ -49,6 +49,7 @@ CREATE TABLE `#__lupo_clients` (
 CREATE TABLE `#__lupo_clients_borrowed` (
   `lupo_id` int(10) unsigned NOT NULL,
   `edition_id` int(11) DEFAULT NULL,
+  `game_number` char(10) DEFAULT NULL,
   `adrnr` int(10) unsigned DEFAULT NULL,
   `tax_extended` float DEFAULT '0',
   `return_date` date DEFAULT NULL,
