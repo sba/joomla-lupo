@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.23.0 (January 13, 2020)
+  - categories module: show order of filtered genres as written
+  - categories module: show <hr> for - in line
+
 ### 3.22.0 (December 27, 2019)
   - add another missing field to sql-install script
   
