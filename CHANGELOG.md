@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.24.0 (January 27, 2020)
+  - save EAN to toy recordset
+  
 ### 3.23.0 (January 13, 2020)
   - categories module: show order of filtered genres as written
   - categories module: show <hr> for - in line

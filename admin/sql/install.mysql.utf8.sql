@@ -63,6 +63,7 @@ CREATE TABLE `#__lupo_clients_borrowed` (
 CREATE TABLE `#__lupo_game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_databauer` int(11) DEFAULT NULL,
+  `ean` char(13) DEFAULT NULL,
   `catid` int(11) DEFAULT NULL,
   `age_catid` int(11) DEFAULT NULL,
   `number` char(10) DEFAULT NULL,

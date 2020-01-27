@@ -160,6 +160,7 @@ function processXML( $file ) {
 				$db->setQuery( 'INSERT INTO #__lupo_game SET
 										`number`=' . $db->quote( $game['number'] ) . '
 										, `id_databauer`=' . $db->quote( $game['id_databauer'] ) . '
+										, `ean`=' . $db->quote( isset($game['ean'])?$game['ean']:'0' ) . '
 										, `catid`=' . $db->quote( $game['catid'] ) . '
 										, `age_catid`=' . $db->quote( $game['age_catid'] ) . '
 										, `title`=' . $db->quote( $title ) . '
