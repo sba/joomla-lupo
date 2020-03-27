@@ -41,7 +41,7 @@ $menu = JFactory::getApplication()->getMenu()->getActive();
 			<?php
 			foreach($this->categories as $category){ ?>
 				<tr>
-					<td width="100">
+					<td>
 						<a href="<?php echo $category['link']?>">
 							<?php if($category['image_thumb']!=null) { ?>
 							<img class="uk-align-left" src="<?php echo $category['image_thumb']?>">

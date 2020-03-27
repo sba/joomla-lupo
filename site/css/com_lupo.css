@@ -31,6 +31,11 @@ ul.lupo_categories {
     margin-bottom: 5px;
 }
 
+@media (min-width: 769px) {
+    #lupo_category_table tr td img {
+        max-width: unset; /*reset theme property*/
+    }
+}
 
 .lupo_image {
     max-height: 250px;
