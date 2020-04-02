@@ -1,5 +1,15 @@
 # Changelog
 
+### 3.25.0 (March 27, 2020)
+  -  show category/agegategory image if jpg file named with alias exists in images/spiele folder
+
+### 3.24.0 (January 27, 2020)
+  - save EAN to toy recordset
+  
+### 3.23.0 (January 13, 2020)
+  - categories module: show order of filtered genres as written
+  - categories module: show <hr> for - in line
+
 ### 3.22.0 (December 27, 2019)
   - add another missing field to sql-install script
   

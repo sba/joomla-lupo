@@ -112,13 +112,18 @@ class LupoModelLupo extends JModelItem {
 			$row['link'] = JRoute::_( 'index.php?option=com_lupo&view=category&id=' . $row['alias'] );
 
 			//add photo to game array
-			if ( $row['samples'] != "" ) {
-				$row += $this->getGameFoto( $row['samples'], 'mini_' );
-			} else {
-				$row += array( 'image' => null, 'image_thumb' => null );
-			}
+            $category_foto = $this->getCategoryFoto($row['alias']);
+            if($category_foto['image'] != null) {
+                $row += $category_foto;
+            } else {
+                if ($row['samples'] != "") {
+                    $row += $this->getGameFoto($row['samples'], 'mini_');
+                } else {
+                    $row += ['image' => null, 'image_thumb' => null];
+                }
+            }
 
-			if ( $load_samples ) {
+            if ( $load_samples ) {
 				$samples      = explode( ",", $row['samples'] );
 				$sample_games = false;
 				if ( is_array( $samples ) ) {
@@ -184,13 +189,18 @@ class LupoModelLupo extends JModelItem {
 			$row['link'] = JRoute::_( 'index.php?option=com_lupo&view=agecategory&id=' . $row['alias'] );
 
 			//add photo to game array
-			if ( $row['samples'] != "" ) {
-				$row += $this->getGameFoto( $row['samples'], 'mini_' );
-			} else {
-				$row += array( 'image' => null, 'image_thumb' => null );
-			}
+            $category_foto = $this->getCategoryFoto($row['alias']);
+            if($category_foto['image'] != null) {
+                $row += $category_foto;
+            } else {
+                if ($row['samples'] != "") {
+                    $row += $this->getGameFoto($row['samples'], 'mini_');
+                } else {
+                    $row += ['image' => null, 'image_thumb' => null];
+                }
+            }
 
-			if ( $load_samples ) {
+            if ( $load_samples ) {
 				$samples      = explode( ",", $row['samples'] );
 				$sample_games = false;
 				if ( is_array( $samples ) ) {
@@ -805,6 +815,27 @@ class LupoModelLupo extends JModelItem {
 			}
 		}
 
+		return $res;
+	}
+
+
+	/**
+	 * Get static picture of the category / agecategory
+	 *
+	 * @param category_alias
+	 *
+	 * @return array foto
+	 *
+	 */
+	public function getCategoryFoto( $category_alias = "" ) {
+		$image = 'images/spiele/' . $category_alias . '.jpg';
+		if ( file_exists( $image ) ) {
+			$res['image'] = $image;
+		} else {
+		    $res['image'] = null;
+		}
+
+        $res['image_thumb'] = $res['image'];
 		return $res;
 	}
 
