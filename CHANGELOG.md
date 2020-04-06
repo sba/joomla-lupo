@@ -1,7 +1,11 @@
 # Changelog
 
+### 3.26.0 (April 06, 2020)
+  - fix php warning and notice when showing related games
+  - codestyle 
+
 ### 3.25.0 (March 27, 2020)
-  -  show category/agegategory image if jpg file named with alias exists in images/spiele folder
+  - show category/agegategory image if jpg file named with alias exists in images/spiele folder
 
 ### 3.24.0 (January 27, 2020)
   - save EAN to toy recordset
