@@ -172,7 +172,7 @@ class LupoController extends JControllerLegacy {
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER' ), 15 ) . "$clientnr\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL' ), 15 ) . "$clientemail\n\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_COMMENTS' ), 15 ) . "\n$comment\n\n";
-		$mailer->setSubject( sprintf( JText::_( 'COM_LUPO_RES_EMAIL_SUBJECT' ), $config->get( 'sitename' ), $toynr, $toyname ) );
+		$mailer->setSubject( sprintf( JText::_( 'COM_LUPO_RES_EMAIL_SUBJECT' ), $toynr, $toyname, $clientname ) );
 		$mailer->setBody( $body );
 
 		$send = $mailer->Send();

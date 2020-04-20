@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.27.0 (April 20, 2020)
+  - add toy variables to resemail subject
+
 ### 3.26.0 (April 06, 2020)
   - fix php warning and notice when showing related games
   - codestyle 
