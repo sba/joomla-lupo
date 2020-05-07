@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.28.0 (April 24, 2020)
+### 3.29.0 (May 07, 2020)
   - Revert: Always show retour date beside red dot
 
 ### 3.28.0 (April 24, 2020)
