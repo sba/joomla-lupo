@@ -26,6 +26,11 @@ if($this->foto['show']=='1') {?>
         <h2 class="contentheading"><?php echo $this->title?></h2>
         <br class="clearfix">
 	    <?php echo $this->description?>
+        <?php
+        $text = "<b>Lorem ipsum dolor sit amet,</b><br>consectetur adipisicing elit. Animi aspernatur aut deserunt dolorum excepturi, laudantium maxime minus molestiae nihil nobis numquam, quam quasi voluptatibus. Accusamus ipsum nullase isquam eos.";
+        //$text = "<b>zwei DODO sind ein DiDeLiDi</b><br>Neben dem verflixten DoDeLiDo wird jetzt auch DoDo Didelidi gerufen. Wer bei dieser extremen Variante blitzschnell schaltet und die richtige Aussage macht, wird als erster alle seine Karten los.";
+        echo JHtmlString::truncateComplex($text,220,true);
+        ?>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
             <?php if($componentParams->get('category_show_tableheader', '1')) { ?>

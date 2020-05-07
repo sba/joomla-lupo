@@ -1,8 +1,11 @@
 # Changelog
 
 ### 3.28.0 (April 24, 2020)
-  - Always show loan status
-  
+  - Revert: Always show retour date beside red dot
+
+### 3.28.0 (April 24, 2020)
+  - Always show retour date beside red dot
+    
 ### 3.27.0 (April 20, 2020)
   - add toy variables to resemail subject
 
