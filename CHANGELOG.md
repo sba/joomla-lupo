@@ -1,7 +1,23 @@
 # Changelog
 
+### 3.30.0 (May 09, 2020)
+  - Add hardcoded string to language file
+
+### 3.29.0 (May 07, 2020)
+  - Revert: Always show retour date beside red dot
+
+### 3.28.0 (April 24, 2020)
+  - Always show retour date beside red dot
+    
+### 3.27.0 (April 20, 2020)
+  - add toy variables to resemail subject
+
+### 3.26.0 (April 06, 2020)
+  - fix php warning and notice when showing related games
+  - codestyle 
+
 ### 3.25.0 (March 27, 2020)
-  -  show category/agegategory image if jpg file named with alias exists in images/spiele folder
+  - show category/agegategory image if jpg file named with alias exists in images/spiele folder
 
 ### 3.24.0 (January 27, 2020)
   - save EAN to toy recordset
