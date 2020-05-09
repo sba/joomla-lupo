@@ -39,7 +39,7 @@ if($this->foto['show']=='1') {?>
                     <th>
                         <?php echo JText::_('COM_LUPO_TOY'); ?>
                         <?php if($componentParams->get('lupo_show_toystatus', '0')) {?>
-                        <span class="uk-float-right">Ausleihstatus</span>
+                        <span class="uk-float-right"><?php echo JText::_('COM_LUPO_BORROWING_STATUS'); ?></span>
                         <?php } ?>
                     </th>
                     <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>

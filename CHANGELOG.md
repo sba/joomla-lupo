@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.30.0 (May 09, 2020)
+  - Add hardcoded string to language file
+
 ### 3.29.0 (May 07, 2020)
   - Revert: Always show retour date beside red dot
 
