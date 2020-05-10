@@ -1,5 +1,8 @@
 # Changelog
 
+### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - mod_lupo_login table more responsive
+  
 ### 3.30.0 (May 09, 2020)
   - Add hardcoded string to language file
 
