@@ -1,7 +1,8 @@
 # Changelog
 
-### {{version_pkg_lupo}} ({{creationDate_changelog}})
+### 3.31.0 (May 11, 2020)
   - mod_lupo_login table more responsive
+  - fix de-DE translation
   
 ### 3.30.0 (May 09, 2020)
   - Add hardcoded string to language file
