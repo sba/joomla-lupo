@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.32.0 (May 17, 2020)
+  - complete french language files
+
 ### 3.31.0 (May 11, 2020)
   - mod_lupo_login table more responsive
   - fix de-DE translation
