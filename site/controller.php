@@ -385,7 +385,8 @@ class LupoController extends JControllerLegacy {
 							}
 						}
 						catch ( Exception $e ) {
-							echo "error"; //todo
+							echo "error";
+                            //echo $e->getMessage();  //todo error handling here and in LUPO
 							die();
 						}
 					}

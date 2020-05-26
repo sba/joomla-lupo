@@ -56,7 +56,8 @@ CREATE TABLE `#__lupo_clients_borrowed` (
   `return_date_extended` date DEFAULT NULL,
   `return_extended` tinyint(4) DEFAULT NULL,
   `return_extended_online` tinyint(4) DEFAULT '0',
-  `reminder_sent` tinyint(4) DEFAULT '0'
+  `reminder_sent` tinyint(4) DEFAULT '0',
+  `next_reservation` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
