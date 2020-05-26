@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.33.0 (May 26, 2020)
+  - improve translation possibilities
+
 ### 3.32.0 (May 17, 2020)
   - add missing field in sql install script 
   

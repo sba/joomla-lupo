@@ -765,7 +765,7 @@ class LupoModelLupo extends JModelItem {
             if ($return_date < date("Y-m-d")) {
                 $availability['availability_text'] = JText::_("COM_LUPO_BORROWED");
             } else {
-                $availability['availability_text'] = JText::_("COM_LUPO_BORROWED") . ' ' . JText::_("COM_LUPO_TO") . ' ' . date("d.m.Y", strtotime($return_date));
+                $availability['availability_text'] = sprintf(JText::_("COM_LUPO_BORROWED_TO"), date("d.m.Y", strtotime($return_date)));
             }
 
             if ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime('+35 day', time()))) {
