@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.34.0 (May 27, 2020)
+  - hidden prolongation button was shown on mobile device anyway
+
 ### 3.33.0 (May 26, 2020)
   - improve translation possibilities
 
