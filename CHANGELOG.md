@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.35.0 (May 27, 2020)
+  - add language files to mod_lupo_quickicon install xml
+
 ### 3.34.0 (May 27, 2020)
   - hidden prolongation button was shown on mobile device anyway
 
@@ -8,10 +11,8 @@
 
 ### 3.32.0 (May 17, 2020)
   - add missing field in sql install script 
-  
-### 3.32.0 (May 17, 2020)
   - complete french language files
-
+  
 ### 3.31.0 (May 11, 2020)
   - mod_lupo_login table more responsive
   - fix de-DE translation
