@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.36.0 (May 28, 2020)
+  - fix some typos in fr-FR
+  - add language files to mod_lupo_quickicon zip
+
 ### 3.35.0 (May 27, 2020)
   - add language files to mod_lupo_quickicon install xml
 
