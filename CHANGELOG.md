@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.37.0 (August 18, 2020)
+  - add field age_number to #__lupo_agecategories
+
 ### 3.36.0 (May 28, 2020)
   - fix some typos in fr-FR
   - add language files to mod_lupo_quickicon zip

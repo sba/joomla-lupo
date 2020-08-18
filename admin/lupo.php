@@ -149,6 +149,7 @@ function processXML( $file ) {
 										, `alias`=' . $db->quote( JApplicationHelper::stringURLSafe( $category['desc'] ) ) . '
 										, `description`=' . $db->quote( $category['explanation'] ) . '
 										, `samples`=' . $db->quote( $category['samples'] ) . '
+										, `age_number`=' . $db->quote( $category['age_number'] ) . '
 										, `sort`=' . $db->quote( $category['sort'] ) );
 				$db->execute();
 			}

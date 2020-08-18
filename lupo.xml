@@ -3,12 +3,12 @@
 
 	<name>COM_LUPO</name>
 	<author>Stefan Bauer</author>
-	<creationDate>May 2020</creationDate>
+	<creationDate>August 2020</creationDate>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
-	<version>3.36.0</version>
+	<version>3.37.0</version>
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
 	<!-- Runs on install/uninstall/update; New in 2.5 -->
