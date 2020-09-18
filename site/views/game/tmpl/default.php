@@ -2,7 +2,7 @@
 /**
  * @package		Joomla
  * @subpackage	LUPO
- * @copyright   Copyright (C) databauer / Stefan Bauer 
+ * @copyright   Copyright (C) databauer / Stefan Bauer
  * @author		Stefan Bauer
  * @link		https://www.ludothekprogramm.ch
  * @license		License GNU General Public License version 2 or later
@@ -180,9 +180,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
 			<?php
 			//document links
-			foreach($this->game['documents'] as $document) {?>
-				<a class="uk-button uk-margin-right uk-margin-bottom" href="<?php echo $document['href']?>" <?php echo $document['lightbox']?>><i class="uk-icon-<?php echo $document['icon']?>"></i> <?php echo $document['desc']?></a>
+			foreach($this->game['documents'] as $document) {
+			    if($document['code']!='userdefined'){?>
+				    <a class="uk-button uk-margin-right uk-margin-bottom" href="<?php echo $document['href']?>" <?php echo $document['lightbox']?>><i class="uk-icon-<?php echo $document['icon']?>"></i> <?php echo $document['desc']?></a>
 				<?php
+			    }
 			}
 
 			//reservation

@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.38.0 (September 18, 2020)
+  - don't show link in toy-view for userdefined document attributes
+
 ### 3.37.0 (August 18, 2020)
   - add field age_number to #__lupo_agecategories
 
