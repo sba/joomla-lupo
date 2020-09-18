@@ -601,6 +601,8 @@ class LupoModelLupo extends JModelItem {
                     $desc     = 'Spielanleitung';
                     $lightbox = false;
                     break;
+                case 'userdefined':
+                    break;
                 case 'link_review':
                 case 'website':
                 default:

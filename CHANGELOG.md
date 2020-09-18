@@ -1,14 +1,28 @@
 # Changelog
 
+### 3.38.0 (September 18, 2020)
+  - don't show link in toy-view for userdefined document attributes
+
+### 3.37.0 (August 18, 2020)
+  - add field age_number to #__lupo_agecategories
+
+### 3.36.0 (May 28, 2020)
+  - fix some typos in fr-FR
+  - add language files to mod_lupo_quickicon zip
+
+### 3.35.0 (May 27, 2020)
+  - add language files to mod_lupo_quickicon install xml
+
+### 3.34.0 (May 27, 2020)
+  - hidden prolongation button was shown on mobile device anyway
+
 ### 3.33.0 (May 26, 2020)
   - improve translation possibilities
 
 ### 3.32.0 (May 17, 2020)
   - add missing field in sql install script 
-  
-### 3.32.0 (May 17, 2020)
   - complete french language files
-
+  
 ### 3.31.0 (May 11, 2020)
   - mod_lupo_login table more responsive
   - fix de-DE translation
