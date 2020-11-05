@@ -276,6 +276,7 @@ class LupoController extends JControllerLegacy {
 				$rows = json_decode( $data );
 
 				if ( ! is_array( $rows ) ) {
+				    echo "data:".$data;
 					echo "nodata";
 
 					return;
@@ -335,7 +336,7 @@ class LupoController extends JControllerLegacy {
 				$db->execute();
 
 				//cache query-result. min 3x faster
-				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
+				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, #__lupo_game.`number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
 				$game_ids = $db->loadAssocList( 'number', 'id' );
 
 				foreach ( $rows as $row ) {
@@ -421,7 +422,7 @@ class LupoController extends JControllerLegacy {
 				$db->execute();
 
 				//cache query-result. min 3x faster
-				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
+				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, #__lupo_game.`number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
 				$game_ids = $db->loadAssocList( 'number', 'id' );
 
 				foreach ( $rows as $row ) {
