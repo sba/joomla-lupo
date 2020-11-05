@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.39.0 (November 05, 2020)
+  - plg_content_luporandomquote added to pkg_lupo
+
 ### 3.38.0 (September 18, 2020)
   - don't show link in toy-view for userdefined document attributes
 
