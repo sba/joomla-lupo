@@ -957,6 +957,7 @@ class LupoModelLupoClient extends LupoModelLupo {
               ->from('#__lupo_clients_borrowed')
               ->join('LEFT', '#__lupo_game ON #__lupo_clients_borrowed.game_number = #__lupo_game.number')
               ->where('#__lupo_clients_borrowed.adrnr = ' . $db->quote($adrnr))
+              ->where('#__lupo_clients_borrowed.quarantine = 0')
               ->order('return_date, title');
         $db->setQuery($query);
         $res = $db->loadObjectList();

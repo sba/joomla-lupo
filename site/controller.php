@@ -276,6 +276,7 @@ class LupoController extends JControllerLegacy {
 				$rows = json_decode( $data );
 
 				if ( ! is_array( $rows ) ) {
+				    echo "data:".$data;
 					echo "nodata";
 
 					return;
@@ -335,7 +336,7 @@ class LupoController extends JControllerLegacy {
 				$db->execute();
 
 				//cache query-result. min 3x faster
-				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
+				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, #__lupo_game.`number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
 				$game_ids = $db->loadAssocList( 'number', 'id' );
 
 				foreach ( $rows as $row ) {
@@ -358,6 +359,7 @@ class LupoController extends JControllerLegacy {
 						$client->return_extended      = $row->ex; //is extended (spiel wurde verlängert)
 						$client->reminder_sent        = $row->re;
 						$client->next_reservation     = $row->rs == "" ? null : $row->rs;
+						$client->quarantine           = $row->qu == "" ? null : $row->qu;
 
 						try {
 							JFactory::getDbo()->insertObject( '#__lupo_clients_borrowed', $client );
@@ -421,7 +423,7 @@ class LupoController extends JControllerLegacy {
 				$db->execute();
 
 				//cache query-result. min 3x faster
-				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, `number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
+				$query    = $db->setQuery( 'SELECT #__lupo_game_editions.id, #__lupo_game.`number` FROM #__lupo_game_editions LEFT JOIN #__lupo_game ON #__lupo_game_editions.gameid = #__lupo_game.id' );
 				$game_ids = $db->loadAssocList( 'number', 'id' );
 
 				foreach ( $rows as $row ) {
