@@ -359,6 +359,7 @@ class LupoController extends JControllerLegacy {
 						$client->return_extended      = $row->ex; //is extended (spiel wurde verlängert)
 						$client->reminder_sent        = $row->re;
 						$client->next_reservation     = $row->rs == "" ? null : $row->rs;
+						$client->quarantine           = $row->qu == "" ? null : $row->qu;
 
 						try {
 							JFactory::getDbo()->insertObject( '#__lupo_clients_borrowed', $client );
