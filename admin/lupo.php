@@ -224,12 +224,18 @@ function processXML( $file ) {
 
 			//add all genres to genre table
 			$genres = array_unique( $genres );
+            asort($genres);
+            $last_alias = false;
 			foreach ( $genres as $genre ) {
-				$db->setQuery( 'INSERT INTO #__lupo_genres SET
-											`genre`=' . $db->quote( $genre ) . ',
-											`alias`=' . $db->quote(str_replace( "-", "_", JFilterOutput::stringURLSafe($genre)))
-				);
+			    $alias = str_replace( "-", "_", JFilterOutput::stringURLSafe($genre));
+				if($alias!=$last_alias) { //because array_unique does not filter out double alias
+                    $db->setQuery('INSERT INTO #__lupo_genres SET
+											`genre`=' . $db->quote($genre) . ',
+											`alias`=' . $db->quote($alias)
+                    );
+                }
 				$db->execute();
+                $last_alias = $alias;
 			}
 
 			//add game-genres to table #__lupo_game_genre

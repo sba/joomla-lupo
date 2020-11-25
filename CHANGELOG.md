@@ -2,6 +2,8 @@
 
 ### 3.41.0 (November 25, 2020)
   - add missing field in sql-install script 
+  - ignore double genre alias
+  - \#__lupo_genres: make alias unique, not genre
 
 ### 3.40.0 (November 16, 2020)
   - fix display of quarantained returns 
