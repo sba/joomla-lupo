@@ -17,6 +17,7 @@ CREATE TABLE `#__lupo_agecategories` (
   `alias` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(5120) NOT NULL DEFAULT '',
   `samples` varchar(255) NOT NULL DEFAULT '',
+  `age_number` varchar(20) DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
