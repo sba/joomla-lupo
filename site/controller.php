@@ -272,7 +272,7 @@ class LupoController extends JControllerLegacy {
 					return;
 				}
 
-				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
+                //$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
 				$rows = json_decode( $data );
 
 				if ( ! is_array( $rows ) ) {
