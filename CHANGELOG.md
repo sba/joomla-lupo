@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.42.0 (February 22, 2021)
+  - custom css class to style badge with number of toys in mod_lupo_categories
+
 ### 3.41.0 (November 25, 2020)
   - add missing field in sql-install script 
   - ignore double genre alias
