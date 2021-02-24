@@ -33,22 +33,22 @@ if ($this->foto['show'] == '1') { ?>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $('.lupo_btn_subset').click(function(){
-                let filter_age_catids = $(this).data('age_catids');
+                let filter_agecategories = $(this).data('agecategories');
                 let filter_genres = $(this).data('genres');
 
                 //filter table rows
-                if(filter_age_catids=="*"){
+                if(filter_agecategories=="*"){
                     $('#lupo_category_table > tbody > tr').show();
                 } else {
-                    let row_age_catid, row_genres, has_age_catid, has_genres;
+                    let row_agecategory, row_genres, has_agecategory, has_genres;
                     $('#lupo_category_table > tbody > tr').each(function () {
-                        row_age_catid = $(this).data('age_catid');
+                        row_agecategory = $(this).data('agecategory');
                         row_genres = $(this).data('genres');
 
-                        has_age_catid = filter_age_catids.includes(row_age_catid);
+                        has_agecategory = filter_agecategories.includes(row_agecategory);
                         has_genres = filter_genres.filter(element => row_genres.includes(element));
 
-                        if (has_age_catid || has_genres.length > 0 ) {
+                        if (has_agecategory || has_genres.length > 0 ) {
                             $(this).show();
                         } else {
                             $(this).hide();
@@ -77,15 +77,14 @@ if ($this->foto['show'] == '1') { ?>
         if (is_array($subsets)) {
             ?>
             <div class="uk-button-group" data-uk-button-radio>
-                <button class="uk-button lupo_btn_subset" data-age_catids="*" data-genres="*">Alle</button>
+                <button class="uk-button lupo_btn_subset" data-agecategories="*" data-genres="*">Alle</button>
 
                 <?php
-                $json_flags = JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE;
                 foreach ($subsets as $subset_desc => $subset) {
-                    $data_age_catids=json_encode($subset['age_catids'], $json_flags);
-                    $data_genres=json_encode($subset['genres'],  $json_flags);
+                    $data_agecategories=json_encode($subset['agecategories']);
+                    $data_genres=json_encode($subset['genres']);
                     ?>
-                    <button class="uk-button lupo_btn_subset" data-age_catids='<?=$data_age_catids?>' data-genres='<?=$data_genres?>'><?=$subset_desc?></button>
+                    <button class="uk-button lupo_btn_subset" data-agecategories='<?=$data_agecategories?>' data-genres='<?=$data_genres?>'><?=$subset_desc?></button>
                     <?php
                 }
                 ?>
@@ -135,7 +134,7 @@ if ($this->foto['show'] == '1') { ?>
                     $availability = '';
                 }
                 ?>
-                <tr data-age_catid='<?= $game['age_catid'] ?>' data-genres='<?= json_encode(explode(", ", $game['genres'])) ?>'>
+                <tr data-agecategory='<?= $game['agecategory_alias'] ?>' data-genres='<?= json_encode(explode(", ", $game['genres'])) ?>'>
                     <td>
                         <?php if ($this->foto['show'] != '0') { ?>
                             <a class="category" href="<?php echo $game['link'] ?>"><?php
