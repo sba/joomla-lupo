@@ -20,7 +20,6 @@ if ( ! JFactory::getUser()->authorise( 'core.manage', 'com_lupo' ) ) {
 $app      = JFactory::getApplication();
 $document = JFactory::getDocument();
 $document->addStyleDeclaration( '.icon-generic:before {content: "" }' ); //remove icon
-//$document->addStyleDeclaration('.strong {font-weight: bold;}');
 
 // import joomla controller library
 jimport( 'joomla.application.component.controller' );
