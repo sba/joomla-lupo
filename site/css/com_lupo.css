@@ -12,6 +12,10 @@ ul.lupo_categories {
 
 }
 
+.lupo_btn_subset {
+    margin-bottom: 3px;
+}
+
 /* detail view */
 #lupo_detail_table tr td:last-child {
     font-weight: bold;
