@@ -13,51 +13,17 @@ defined('_JEXEC') or die('Restricted access');
 
 $componentParams = JComponentHelper::getParams('com_lupo');
 
+//determine category. is set before include of agecategory
+if (!isset($catType)){
+    $catType = 'category';
+}
+
 if ($this->foto['show'] == '1') { ?>
     <style>
         #lupo_category_table tr td > p {
             padding-left: 115px
         }
-
-        .lupo_btn_subset {
-            margin-bottom: 3px;
-        }
-
-        .uk-button-group .uk-button.uk-active {
-            background-color: #d1417e;
-            color: #ffffff;
-            background-image: linear-gradient(to bottom, #ea488c, #c03d74);
-        }
     </style>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $('.lupo_btn_subset').click(function(){
-                let filter_agecategories = $(this).data('agecategories');
-                let filter_genres = $(this).data('genres');
-
-                //filter table rows
-                if(filter_agecategories=="*"){
-                    $('#lupo_category_table > tbody > tr').show();
-                } else {
-                    let row_agecategory, row_genres, has_agecategory, has_genres;
-                    $('#lupo_category_table > tbody > tr').each(function () {
-                        row_agecategory = $(this).data('agecategory');
-                        row_genres = $(this).data('genres');
-
-                        has_agecategory = filter_agecategories.includes(row_agecategory);
-                        has_genres = filter_genres.filter(element => row_genres.includes(element));
-
-                        if (has_agecategory || has_genres.length > 0 ) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    })
-                }
-            })
-        })
-    </script>
 <?php } ?>
 
 <article class="tm-article">
@@ -73,25 +39,23 @@ if ($this->foto['show'] == '1') { ?>
         ?>
 
         <?php
-        $subsets = json_decode($this->category['subsets'], true);
+        $subsets = json_decode($this->{$catType}['subsets'], true);
         if (is_array($subsets)) {
             ?>
-            <div class="uk-button-group" data-uk-button-radio>
-                <button class="uk-button lupo_btn_subset" data-agecategories="*" data-genres="*">Alle</button>
-
-                <?php
-                foreach ($subsets as $subset_desc => $subset) {
-                    $data_agecategories=json_encode($subset['agecategories']);
-                    $data_genres=json_encode($subset['genres']);
-                    ?>
-                    <button class="uk-button lupo_btn_subset" data-agecategories='<?=$data_agecategories?>' data-genres='<?=$data_genres?>'><?=$subset_desc?></button>
+            <div class="uk-width-1-1 uk-margin-top">
+                <div class="uk-button-group" data-uk-button-radio>
+                    <button class="uk-button lupo_btn_subset uk-active" data-categories="*"  data-agecategories="*" data-genres="*"><?php echo JText::_('COM_LUPO_ALL'); ?></button>
                     <?php
-                }
-                ?>
+                    foreach ($subsets as $subset_desc => $subset) {
+                        $data_categories = json_encode($subset['categories']);
+                        $data_agecategories = json_encode($subset['agecategories']);
+                        $data_genres        = json_encode($subset['genres']);
+                        ?>
+                        <button class="uk-button lupo_btn_subset" data-categories='<?= $data_categories ?>' data-agecategories='<?= $data_agecategories ?>' data-genres='<?= $data_genres ?>'><?= $subset_desc ?></button>
+                    <?php } ?>
+                </div>
             </div>
-            <?php
-        }
-        ?>
+        <?php } ?>
 
         <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_category_table">
             <?php if ($componentParams->get('category_show_tableheader', '1')) { ?>
@@ -103,10 +67,10 @@ if ($this->foto['show'] == '1') { ?>
                             <span class="uk-float-right"><?php echo JText::_('COM_LUPO_BORROWING_STATUS'); ?></span>
                         <?php } ?>
                     </th>
-                    <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
+                    <?php if($componentParams->get('category_show_toy_category', '1') && $catType!='category') { ?>
                         <th nowrap="nowrap" class="uk-hidden-small"><div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div></th>
-                    <?php } */ ?>
-                    <?php if ($componentParams->get('category_show_toy_age_category', '1')) { ?>
+                    <?php } ?>
+                    <?php if ($componentParams->get('category_show_toy_age_category', '1') && $catType!='agecategory') { ?>
                         <th nowrap="nowrap" class="uk-hidden-small">
                             <div align="right"><?php echo JText::_('COM_LUPO_AGE_CATEGORY'); ?></div>
                         </th>
@@ -134,7 +98,7 @@ if ($this->foto['show'] == '1') { ?>
                     $availability = '';
                 }
                 ?>
-                <tr data-agecategory='<?= $game['agecategory_alias'] ?>' data-genres='<?= json_encode(explode(", ", $game['genres'])) ?>'>
+                <tr data-category='<?= $game['category_alias'] ?>' data-agecategory='<?= $game['agecategory_alias'] ?>' data-genres='<?= json_encode(explode(", ", $game['genres'])) ?>'>
                     <td>
                         <?php if ($this->foto['show'] != '0') { ?>
                             <a class="category" href="<?php echo $game['link'] ?>"><?php
@@ -166,10 +130,10 @@ if ($this->foto['show'] == '1') { ?>
                             </p>
                         <?php } ?>
                     </td>
-                    <?php /* if($componentParams->get('category_show_toy_category', '1')) { ?>
+                    <?php if($componentParams->get('category_show_toy_category', '1') && $catType!='category') { ?>
                         <td align="right" class="uk-hidden-small"><?php echo $game['category']?></td>
-                    <?php } */ ?>
-                    <?php if ($componentParams->get('category_show_toy_age_category', '1')) { ?>
+                    <?php }  ?>
+                    <?php if ($componentParams->get('category_show_toy_age_category', '1') && $catType!='agecategory') { ?>
                         <td align="right" class="uk-hidden-small"><?php echo $game['age_category'] ?></td>
                     <?php } ?>
                     <?php if ($componentParams->get('category_show_tax', '1')) { ?>
