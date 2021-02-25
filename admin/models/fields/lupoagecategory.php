@@ -38,7 +38,7 @@ class JFormFieldLupoAgecategory extends JFormFieldList {
 		$db = JFactory::getDBO();
 
 		$db->setQuery("SELECT
-				    COALESCE(#__lupo_agecategories.id,0) AS id
+				    alias AS id
 				    , IF(ISNULL(#__lupo_agecategories.title),'" . JText::_('COM_LUPO_VARIOUS_TOYS') . "',#__lupo_agecategories.title) AS title
 				FROM
 				    #__lupo_game
