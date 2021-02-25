@@ -136,6 +136,7 @@ CREATE TABLE `#__lupo_genres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `genre` char(30) DEFAULT NULL,
   `alias` char(30) DEFAULT NULL,
+  `subsets` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`alias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
