@@ -108,6 +108,15 @@ function processXML($file)
         } else {
             $db = JFactory::getDBO();
 
+            //cache data not provided in xml, save afterwards
+            $db->setQuery("SELECT `alias`, `subsets` FROM #__lupo_categories WHERE NOT ISNULL(subsets)");
+            $res_categories = $db->loadAssocList();
+            $db->setQuery("SELECT `alias`, `subsets` FROM #__lupo_agecategories WHERE NOT ISNULL(subsets)");
+            $res_agecategories = $db->loadAssocList();
+            $db->setQuery("SELECT `alias`, `subsets` FROM #__lupo_genres WHERE NOT ISNULL(subsets)");
+            $res_genres = $db->loadAssocList();
+
+
             $db->setQuery('TRUNCATE #__lupo_game');
             $db->execute();
 
@@ -247,7 +256,7 @@ function processXML($file)
             $res    = $db->loadAssocList();
             $genres = [];
             foreach ($res as $row) {
-                $genres[$row['id']] = $row['genre']; //made key value-array
+                $genres[$row['id']]          = $row['genre']; //made key value-array
                 $genres_alias[$row['genre']] = $row['alias'];
             }
             $db->setQuery("SELECT
@@ -269,21 +278,37 @@ function processXML($file)
                 }
 
                 //update genres in games-table (calculated filed)
-                if(is_array($genres_alias_list)) {
+                if (is_array($genres_alias_list)) {
                     $db->setQuery('UPDATE #__lupo_game 
                                       SET `genres`=' . $db->quote(implode(',', $genres_alias_list)) . '
                                       WHERE id=' . $row['id']
                     );
                     $db->execute();
                 }
-			}
+            }
 
 
+            //save cached data, not provided in xml
+            foreach ($res_categories as $row) {
+                $db->setQuery('UPDATE #__lupo_categories 
+                                      SET `subsets`=' . $db->quote($row['subsets']) . '
+                                      WHERE `alias`=' . $db->quote($row['alias']))->execute();
+            }
+            foreach ($res_agecategories as $row) {
+                $db->setQuery('UPDATE #__lupo_agecategories 
+                                      SET `subsets`=' . $db->quote($row['subsets']) . '
+                                      WHERE `alias`=' . $db->quote($row['alias']))->execute();
+            }
+            foreach ($res_genres as $row) {
+                $db->setQuery('UPDATE #__lupo_genres 
+                                      SET `subsets`=' . $db->quote($row['subsets']) . '
+                                      WHERE `alias`=' . $db->quote($row['alias']))->execute();
+            }
 
-			JFactory::getApplication()->enqueueMessage( JText::sprintf( 'COM_LUPO_ADMIN_MSG_SUCCESS_IMPORTED', $n ) );
-		}
-	} else {
-		JFactory::getApplication()->enqueueMessage( JText::_( "COM_LUPO_ADMIN_MSG_ERROR_XML_NOT_FOUND" ), 'error' );
-	}
+            JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_LUPO_ADMIN_MSG_SUCCESS_IMPORTED', $n));
+        }
+    } else {
+        JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_XML_NOT_FOUND"), 'error');
+    }
 
 }
