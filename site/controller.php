@@ -38,6 +38,7 @@ class LupoController extends JControllerLegacy {
 			$document->addCustomTag( '<script src="' . JURI::root( true ) . '/components/com_lupo/uikit/js/components/slider.min.js" type="text/javascript"></script>' );
 		}
 		$document->addStyleSheet( "components/com_lupo/css/com_lupo.css", 'text/css', "screen" );
+        $document->addCustomTag( '<script src="' . JURI::root( true ) . '/components/com_lupo/js/lupo.js" type="text/javascript"></script>' );
 
 		$view = $app->input->getCmd( 'view' );
 		$id   = $app->input->getCmd( 'id', 0 );
