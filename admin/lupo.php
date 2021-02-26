@@ -21,6 +21,9 @@ $app      = JFactory::getApplication();
 $document = JFactory::getDocument();
 $document->addStyleDeclaration('.icon-generic:before {content: "" }'); //remove icon
 
+// Require helper file
+JLoader::register('LupoHelper', JPATH_COMPONENT . '/helpers/lupo.php');
+
 // import joomla controller library
 jimport('joomla.application.component.controller');
 

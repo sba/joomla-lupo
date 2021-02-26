@@ -8,19 +8,22 @@ jimport('joomla.application.component.view');
 /**
  * Lupo View
  */
-class LupoViewLupos extends JViewLegacy {
+class LupoViewFilters extends JViewLegacy {
 	/**
 	 * Lupo view display method
 	 * @return void
 	 */
 	function display($tpl = null) {
+		// Get data from the model
+        $this->items      = $this->get('Categories');
+
 		// Check for errors.
-		if (is_array($errors = $this->get('Errors'))) {
+		if (count($errors = $this->get('Errors'))) {
 			throw new Exception(implode("\n", $errors), 500);
 		}
 
         // Set the submenu
-        LupoHelper::addSubmenu('lupos');
+        LupoHelper::addSubmenu('filter');
 
 		// Set the toolbar
 		$this->addToolBar();
@@ -39,4 +42,3 @@ class LupoViewLupos extends JViewLegacy {
 
 
 }
-?>
