@@ -25,5 +25,8 @@ jQuery(document).ready(function ($) {
                 }
             })
         }
+
+        //bugfix: remove fixed height
+        $('.tm-main, .tm-sidebar-a').css('min-height', '');
     })
 })
