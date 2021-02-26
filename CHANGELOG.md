@@ -1,7 +1,11 @@
 # Changelog
 
-### 3.42.0 (February 22, 2021)
+### 3.42.0 (February 26, 2021)
+  - add buttons to filter list by a category or genre
+  - refactor category views
   - custom css class to style badge with number of toys in mod_lupo_categories
+  - bugfix view agecategory by menuitem
+  - codestyle / cleanup
 
 ### 3.41.0 (November 25, 2020)
   - add missing field in sql-install script 
@@ -9,7 +13,7 @@
   - \#__lupo_genres: make alias unique, not genre
 
 ### 3.40.0 (November 16, 2020)
-  - fix display of quarantained returns 
+  - fix display of quarantined returns 
   
 ### 3.39.0 (November 05, 2020)
   - plg_content_luporandomquote added to pkg_lupo
@@ -84,10 +88,10 @@
   - replace double spaces in title, this improves search experience
   - show date in prolong button
   - don't offer prolong if extended date in today or in past
-  - make order of new games by aquired date optional
+  - make order of new games by acquired date optional
   
 ### 3.18.0 (July 02, 2019)
-  - do not order new games by aquired date anymore
+  - do not order new games by acquired date anymore
   - fix php notices
     
 ### 3.17.0 (July 02, 2019)
