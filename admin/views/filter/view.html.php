@@ -17,6 +17,10 @@ class LupoViewFilter extends JViewLegacy {
 		// Get data from the model
         $this->item      = $this->get('Category');
 
+        $this->categories = $this->get('Categories');
+        $this->agecategories = $this->get('Agecategories');
+        $this->genres = $this->get('Genres');
+
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			throw new Exception(implode("\n", $errors), 500);

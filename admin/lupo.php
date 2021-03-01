@@ -37,6 +37,8 @@ $controller->execute($app->input->getCmd('task'));
 $controller->redirect();
 
 
+
+//TODO: Move functions fo controller / model
 set_time_limit(600); //10 Min
 
 $zipfile   = 'lupo_spiele_export.zip';

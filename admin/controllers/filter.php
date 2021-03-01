@@ -44,8 +44,15 @@ class LupoControllerFilter extends JControllerForm
 
     public function save($key = null, $urlVar = null)
     {
+        $model = $this->getModel('Filter');
         $app = JFactory::getApplication();
-        $app->enqueueMessage(JText::_('Es wurde gespeichert'), 'message');
+
+        $input = JFactory::getApplication()->input;
+        $data['subsets'] = $input->get('subsets','','RAW');
+        $data['id'] = $input->get('id');
+        $model->save($data);
+
+        $app->enqueueMessage(JText::_('Erfolgreich gespeichert'), 'message');
         $app->redirect('index.php?option=com_lupo&view=filters');
     }
 }

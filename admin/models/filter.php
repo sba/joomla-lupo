@@ -26,6 +26,54 @@ class LupoModelFilter extends JModelItem
      *
      * @return  array  The toy categories
      */
+    public function getCategories()
+    {
+        $db = JFactory::getDBO();
+        $db->setQuery("SELECT
+					    *
+					FROM
+					    #__lupo_categories"
+        );
+        return $db->loadAssocList();
+    }
+
+    /**
+     * Get the agecategories
+     *
+     * @return  array  The toy agecategories
+     */
+    public function getAgecategories()
+    {
+        $db = JFactory::getDBO();
+        $db->setQuery("SELECT
+					    *
+					FROM
+					    #__lupo_agecategories"
+        );
+        return $db->loadAssocList();
+    }
+
+    /**
+     * Get the genres
+     *
+     * @return  array  The genres
+     */
+    public function getGenres()
+    {
+        $db = JFactory::getDBO();
+        $db->setQuery("SELECT
+					    *
+					FROM
+					    #__lupo_genres"
+        );
+        return $db->loadAssocList();
+    }
+
+    /**
+     * Get the categories
+     *
+     * @return  array  The toy categories
+     */
     public function getCategory()
     {
         $input = Factory::getApplication()->input;
@@ -51,8 +99,10 @@ class LupoModelFilter extends JModelItem
      */
     public function save($data)
     {
-        $input = JFactory::getApplication()->input;
-
-
+        $db    = JFactory::getDBO();
+        $db->setQuery("UPDATE		
+                        #__lupo_categories			    
+					SET subsets = " .$db->quote($data['subsets']) ."					    
+					WHERE id = " . $db->quote($data['id']))->execute();
     }
 }
