@@ -18,6 +18,7 @@ CREATE TABLE `#__lupo_agecategories` (
   `description` varchar(5120) NOT NULL DEFAULT '',
   `samples` varchar(255) NOT NULL DEFAULT '',
   `age_number` varchar(20) DEFAULT NULL,
+  `subsets` text DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -30,6 +31,7 @@ CREATE TABLE `#__lupo_categories` (
   `alias` varchar(255) NOT NULL DEFAULT '',
   `description` varchar(5120) NOT NULL DEFAULT '',
   `samples` varchar(255) NOT NULL DEFAULT '',
+  `subsets` text DEFAULT NULL,
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -134,6 +136,7 @@ CREATE TABLE `#__lupo_genres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `genre` char(30) DEFAULT NULL,
   `alias` char(30) DEFAULT NULL,
+  `subsets` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`alias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -222,6 +222,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     data: {
                                         clientname: $('#clientname').val(),
                                         clientemail: $('#clientemail').val(),
+                                        clientmobile: $('#clientmobile').val(),
                                         clientnr: $('#clientnr').val(),
                                         resdate: ($('#resnow').prop('checked') ? 'sofort' : $('#resdate').val()),
                                         comment: $('#comment').val(),
@@ -289,6 +290,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     <td><?php echo JText::_("COM_LUPO_RES_EMAIL"); ?>:*<br></td>
                                     <td><input type="email" required maxlength="100" size="40" value="" id="clientemail"
                                                name="clientemail"></td>
+                                </tr>
+                                <tr>
+                                    <td><?php echo JText::_("COM_LUPO_RES_MOBILE"); ?>:*<br></td>
+                                    <td><input type="tel" required maxlength="15" size="40" value="" id="clientmobile"
+                                               name="clientmobile"></td>
                                 </tr>
                                 <?php if($componentParams->get('detail_show_res_date', '1')==1) {?>
                                 <tr>

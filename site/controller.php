@@ -38,6 +38,7 @@ class LupoController extends JControllerLegacy {
 			$document->addCustomTag( '<script src="' . JURI::root( true ) . '/components/com_lupo/uikit/js/components/slider.min.js" type="text/javascript"></script>' );
 		}
 		$document->addStyleSheet( "components/com_lupo/css/com_lupo.css", 'text/css', "screen" );
+        $document->addCustomTag( '<script src="' . JURI::root( true ) . '/components/com_lupo/js/lupo.js" type="text/javascript"></script>' );
 
 		$view = $app->input->getCmd( 'view' );
 		$id   = $app->input->getCmd( 'id', 0 );
@@ -130,6 +131,7 @@ class LupoController extends JControllerLegacy {
 		$clientname         = $jinput->get( 'clientname', '', 'STRING' );
 		$clientnr           = $jinput->get( 'clientnr', '', 'STRING' );
 		$clientemail        = $jinput->get( 'clientemail', '', 'STRING' );
+        $clientmobile       = $jinput->get( 'clientmobile', '', 'STRING' );
 		$resdate            = $jinput->get( 'resdate', '', 'STRING' );
 		$comment            = $jinput->get( 'comment', '', 'STRING' );
 		$toynr              = $jinput->get( 'toynr', '', 'STRING' );
@@ -143,6 +145,9 @@ class LupoController extends JControllerLegacy {
 		}
 		if ( $clientname == "" ) {
 			$formerror = JText::_( 'COM_LUPO_RES_FORM_INVALIV_NAME' );
+		}
+		if ( $clientmobile == "" ) {
+			$formerror = JText::_( 'COM_LUPO_RES_FORM_INVALIV_MOBILE' );
 		}
 		if ( $formerror !== false ) {
 			echo $formerror;
@@ -171,6 +176,7 @@ class LupoController extends JControllerLegacy {
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME' ), 15 ) . "$clientname\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER' ), 15 ) . "$clientnr\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL' ), 15 ) . "$clientemail\n\n";
+        $body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_MOBILE' ), 15 ) . "$clientmobile\n\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_COMMENTS' ), 15 ) . "\n$comment\n\n";
 		$mailer->setSubject( sprintf( JText::_( 'COM_LUPO_RES_EMAIL_SUBJECT' ), $toynr, $toyname, $clientname ) );
 		$mailer->setBody( $body );
@@ -272,7 +278,7 @@ class LupoController extends JControllerLegacy {
 					return;
 				}
 
-				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
+                //$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","ae":"2016-9-15","at":"Jahresabo"}]';
 				$rows = json_decode( $data );
 
 				if ( ! is_array( $rows ) ) {
