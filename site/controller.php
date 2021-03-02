@@ -131,6 +131,7 @@ class LupoController extends JControllerLegacy {
 		$clientname         = $jinput->get( 'clientname', '', 'STRING' );
 		$clientnr           = $jinput->get( 'clientnr', '', 'STRING' );
 		$clientemail        = $jinput->get( 'clientemail', '', 'STRING' );
+        $clientmobile       = $jinput->get( 'clientmobile', '', 'STRING' );
 		$resdate            = $jinput->get( 'resdate', '', 'STRING' );
 		$comment            = $jinput->get( 'comment', '', 'STRING' );
 		$toynr              = $jinput->get( 'toynr', '', 'STRING' );
@@ -144,6 +145,9 @@ class LupoController extends JControllerLegacy {
 		}
 		if ( $clientname == "" ) {
 			$formerror = JText::_( 'COM_LUPO_RES_FORM_INVALIV_NAME' );
+		}
+		if ( $clientmobile == "" ) {
+			$formerror = JText::_( 'COM_LUPO_RES_FORM_INVALIV_MOBILE' );
 		}
 		if ( $formerror !== false ) {
 			echo $formerror;
@@ -172,6 +176,7 @@ class LupoController extends JControllerLegacy {
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME' ), 15 ) . "$clientname\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER' ), 15 ) . "$clientnr\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL' ), 15 ) . "$clientemail\n\n";
+        $body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_CLIENT_MOBILE' ), 15 ) . "$clientmobile\n\n";
 		$body .= str_pad( JText::_( 'COM_LUPO_RES_EMAIL_BODY_COMMENTS' ), 15 ) . "\n$comment\n\n";
 		$mailer->setSubject( sprintf( JText::_( 'COM_LUPO_RES_EMAIL_SUBJECT' ), $toynr, $toyname, $clientname ) );
 		$mailer->setBody( $body );

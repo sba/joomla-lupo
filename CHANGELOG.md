@@ -1,7 +1,8 @@
 # Changelog
 
-### 3.42.0 (February 26, 2021)
+### 3.42.0 (March 02, 2021)
   - add buttons to filter list by a category or genre
+  - add mobile number to reservation form  
   - refactor category views
   - custom css class to style badge with number of toys in mod_lupo_categories
   - bugfix view agecategory by menuitem
