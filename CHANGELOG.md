@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.43.0 (March 03, 2021)
+  - add missing files to installer
+
 ### 3.42.0 (March 02, 2021)
   - add buttons to filter list by a category or genre
   - add mobile number to reservation form  
