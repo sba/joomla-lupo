@@ -54,7 +54,7 @@ JHtml::_('behavior.tooltip');
     </p>
 
     <?php
-    $json_arr = ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => []]]; ?>
+    $json_arr = ['filters' => ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => []]], 'style' => 'dropdown|buttons']; ?>
     <pre><?= json_encode($json_arr, JSON_PRETTY_PRINT); ?></pre>
 
     <p>

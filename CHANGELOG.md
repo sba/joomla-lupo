@@ -1,6 +1,11 @@
 # Changelog
 
-### 3.43.0 (March 03, 2021)
+### 3.43.0 (March 04, 2021)
+  - show filter-items as buttons or dropdown
+  - output ordered items in admin-filterlist
+  - bugfix list genres in filter data-attribute
+
+### 3.42.0 (March 03, 2021)
   - add missing files to installer
 
 ### 3.42.0 (March 02, 2021)

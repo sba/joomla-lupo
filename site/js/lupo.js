@@ -26,6 +26,8 @@ jQuery(document).ready(function ($) {
             })
         }
 
+        $('#btn-dropdown-filter > span').html($(this).html());
+
         //bugfix: remove fixed height
         $('.tm-main, .tm-sidebar-a').css('min-height', '');
     })
