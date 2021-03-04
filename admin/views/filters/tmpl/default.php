@@ -42,6 +42,9 @@ JHtml::_('behavior.tooltip');
                 Suchfilter
             </th>
             <th>
+                Filter-Style
+            </th>
+            <th>
                 &nbsp;
             </th>
         </tr>
@@ -50,13 +53,14 @@ JHtml::_('behavior.tooltip');
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
                 $link = JRoute::_('index.php?option=com_lupo&view=filter&task=filter.edit&id=' . $row['id']);
+                $subsets = json_decode($row['subsets'],true);
                 ?>
                 <tr>
                     <td><?=$row['title']?></td>
                     <td><?php
-                        $subsets = json_decode($row['subsets'],true);
+
                         if(is_array($subsets)) {
-                            foreach ($subsets as $caption => $subset){
+                            foreach ($subsets['filters'] as $caption => $subset){
                             ?>
                             <b><?=$caption?></b><br>
                                 <em>Kategorien:</em> <?= implode(', ',$subset['categories']);?><br>
@@ -67,6 +71,7 @@ JHtml::_('behavior.tooltip');
                         }
                         ?>
                     </td>
+                    <td><?=$subsets['style']?></td>
                     <td class="right">
                         <a href="<?php echo $link; ?>" class="btn btn-small">
                             <span class="icon-edit"></span> Bearbeiten
