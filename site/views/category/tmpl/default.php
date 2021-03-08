@@ -55,11 +55,13 @@ if ($this->foto['show'] == '1') { ?>
                     <?php } ?>
                 </div>
             </div>
-            <?php } else { ?>
+            <?php } else {
+                if($this->description!=""){ ?>
                 <br class="clearfix">
                 <br>
-                Liste filtern:&nbsp;&nbsp;
-            <div class="uk-button-group">
+                <?php } ?>
+                <?php echo JText::_('COM_LUPO_FILTER_LIST'); ?>
+            <div class="uk-button-group uk-margin-small-left">
                 <div class="uk-button-dropdown uk-dropdown-close" data-uk-dropdown="{mode:'click'}">
                     <button class="uk-button" id="btn-dropdown-filter"><span><?php echo JText::_('COM_LUPO_ALL'); ?></span> <i class="uk-icon-caret-down"></i></button>
                     <div class="uk-dropdown uk-dropdown-small">
