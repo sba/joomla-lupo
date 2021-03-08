@@ -19,7 +19,7 @@ JHtml::_('behavior.tooltip');
 <script>
     jQuery(document).ready(function () {
         var uploader = new plupload.Uploader({
-            runtimes: 'html5,flash,silverlight,html4',
+            runtimes: 'html5,html4',
             browse_button: 'pickfiles',
             container: 'container',
 
@@ -32,8 +32,6 @@ JHtml::_('behavior.tooltip');
 
             url: 'components/com_lupo/models/upload.php?JPATH_SITE=<?=str_replace('\\', '\\\\', JPATH_SITE)?>',
 
-            flash_swf_url: 'components/com_lupo/assets/plupload/js/Moxie.swf',
-            silverlight_xap_url: 'components/com_lupo/assets/plupload/js/Moxie.xap',
             filters: [
                 {title: "Zip files", extensions: "zip"}
             ],
@@ -112,14 +110,10 @@ JHtml::_('behavior.tooltip');
 <div id="j-main-container" class="span10 j-toggle-main">
     <div id="lupo">
         <div id="container">
-            <a id="pickfiles" href="javascript:;">
-                <button class="btn btn-large">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button>
-            </a> <span id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</span>
+            <a id="pickfiles" href="javascript:;"><button class="btn btn-large">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button></a> <span id="filelist">Your browser doesn't have HTML5 support.</span>
             <br/>
             <br/>
-            <a id="uploadfiles" href="javascript:;">
-                <button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
-            </a>
+            <a id="uploadfiles" href="javascript:;"><button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button></a>
             <span id="upload_percent"></span>
         </div>
 

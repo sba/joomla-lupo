@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.44.0 (March 08, 2021)
+  - remove flash and silverlight upload routines
+
 ### 3.43.0 (March 04, 2021)
   - show filter-items as buttons or dropdown
   - output ordered items in admin-filterlist
