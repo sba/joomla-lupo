@@ -42,7 +42,7 @@ if ($this->foto['show'] == '1') { ?>
         $subsets = json_decode($this->{$catType}['subsets'], true);
         if (is_array($subsets)) {
             if(isset($subsets['style']) && $subsets['style']=='buttons'){?>
-            <div class="uk-width-1-1 uk-margin-top">
+            <div class="uk-width-1-1 uk-margin-top lupo_buttons">
                 <div class="uk-button-group" data-uk-button-radio>
                     <button class="uk-button lupo_btn_subset uk-active" data-categories="*"  data-agecategories="*" data-genres="*"><?php echo JText::_('COM_LUPO_ALL'); ?></button>
                     <?php
@@ -61,12 +61,12 @@ if ($this->foto['show'] == '1') { ?>
                 <br>
                 <?php } ?>
                 <?php echo JText::_('COM_LUPO_FILTER_LIST'); ?>
-            <div class="uk-button-group uk-margin-small-left">
+            <div class="uk-button-group uk-margin-small-left lupo_dropdown">
                 <div class="uk-button-dropdown uk-dropdown-close" data-uk-dropdown="{mode:'click'}">
                     <button class="uk-button" id="btn-dropdown-filter"><span><?php echo JText::_('COM_LUPO_ALL'); ?></span> <i class="uk-icon-caret-down"></i></button>
                     <div class="uk-dropdown uk-dropdown-small">
                         <ul class="uk-nav uk-nav-dropdown">
-                            <li><a href="#" class="lupo_btn_subset"  data-categories="*"  data-agecategories="*" data-genres="*"><?php echo JText::_('COM_LUPO_ALL'); ?></a></li>
+                            <li><a href="#" class="lupo_btn_subset" data-categories="*" data-agecategories="*" data-genres="*"><?php echo JText::_('COM_LUPO_ALL'); ?></a></li>
                             <?php
                             foreach ($subsets['filters'] as $subset_desc => $subset) {
                                 $data_categories = json_encode($subset['categories']);

@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.44.0 (March 08, 2021)
+### 3.45.0 (March 09, 2021)
   - toy detail view: move buttons above details table
   - remove flash and silverlight upload routines
 
