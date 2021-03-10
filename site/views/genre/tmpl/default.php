@@ -12,4 +12,4 @@
 defined('_JEXEC') or die('Restricted access');
 
 $catType = 'genre';
-include 'components/com_lupo/views/category/tmpl/default.php';
+include 'components/com_lupo/views/template_list_games.php';

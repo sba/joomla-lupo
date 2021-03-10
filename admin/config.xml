@@ -195,6 +195,18 @@
 			<option value="0">JNO</option>
 		</field>	
 
+        <field
+				type="radio"
+                class="btn-group btn-group-yesno"
+				name="category_show_filter"
+				id="category_show_filter"
+				label="COM_LUPO_OPTIONS_CAT_SHOW_FILTER"
+				description="COM_LUPO_OPTIONS_CAT_SHOW_FILTER_DESC"
+				default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
 	</fieldset>
 	
 	<fieldset

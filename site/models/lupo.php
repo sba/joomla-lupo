@@ -17,7 +17,8 @@ jimport('joomla.application.component.modelitem');
 /**
  * Lupo Model
  */
-class LupoModelLupo extends JModelItem {
+class LupoModelLupo extends JModelItem
+{
     /**
      * @var object item
      */
@@ -29,7 +30,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array the category
      */
-    public function getCategoryNew() {
+    public function getCategoryNew()
+    {
         $componentParams = JComponentHelper::getParams('com_lupo');
         $nbr_new_games   = (int)$componentParams->get('nbr_new_games', '30');
         if ($nbr_new_games == 0) {
@@ -66,7 +68,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array the categories
      */
-    public function getCategories($show_new = true, $load_samples = true) {
+    public function getCategories($show_new = true, $load_samples = true)
+    {
         $componentParams = JComponentHelper::getParams('com_lupo');
         $db              = JFactory::getDBO();
 
@@ -149,7 +152,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array the agecategories
      */
-    public function getAgecategories($show_new = true, $load_samples = true) {
+    public function getAgecategories($show_new = true, $load_samples = true)
+    {
         $componentParams = JComponentHelper::getParams('com_lupo');
         $db              = JFactory::getDBO();
 
@@ -223,7 +227,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array the genres
      */
-    public function getGenres() {
+    public function getGenres()
+    {
         $db = JFactory::getDBO();
 
         $db->setQuery("SELECT
@@ -253,7 +258,8 @@ class LupoModelLupo extends JModelItem {
      * @genre genre-alias
      * @return    array the genre
      */
-    public function getGenre($alias) {
+    public function getGenre($alias)
+    {
         $db  = JFactory::getDBO();
         $sql = "SELECT * FROM #__lupo_genres WHERE alias=" . $db->quote($alias);
         $db->setQuery($sql);
@@ -268,7 +274,8 @@ class LupoModelLupo extends JModelItem {
      * @id category-alias
      * @return    array the category
      */
-    public function getCategory($id) {
+    public function getCategory($id)
+    {
         $db = JFactory::getDBO();
 
         if ($id == 'new') {
@@ -288,7 +295,8 @@ class LupoModelLupo extends JModelItem {
      * @id agecategory-alias
      * @return    array the agecategory
      */
-    public function getAgecategory($id) {
+    public function getAgecategory($id)
+    {
         $db = JFactory::getDBO();
 
         if ($id == 'new') {
@@ -310,7 +318,8 @@ class LupoModelLupo extends JModelItem {
      * @foto_prefix name of the prefix for the image
      * @return array with the games
      */
-    public function getGames($id, $field = 'catid', $foto_prefix = '') {
+    public function getGames($id, $field = 'catid', $foto_prefix = '')
+    {
         $componentParams = JComponentHelper::getParams('com_lupo');
 
         $nbr_new_games = (int)$componentParams->get('nbr_new_games', '30');
@@ -397,7 +406,8 @@ class LupoModelLupo extends JModelItem {
      * @foto_prefix name of the prefix for the image*
      * @return array with the games
      */
-    public function getGamesByCategory($id, $foto_prefix = '') {
+    public function getGamesByCategory($id, $foto_prefix = '')
+    {
         $games = $this->getGames($id, 'catid', $foto_prefix);
 
         return $games;
@@ -410,7 +420,8 @@ class LupoModelLupo extends JModelItem {
      * @foto_prefix name of the prefix for the image*
      * @return array with the games
      */
-    public function getGamesByAgeCategory($id, $foto_prefix = '') {
+    public function getGamesByAgeCategory($id, $foto_prefix = '')
+    {
         $games = $this->getGames($id, 'age_catid', $foto_prefix);
 
         return $games;
@@ -424,7 +435,8 @@ class LupoModelLupo extends JModelItem {
      * @foto_prefix    name of the prefix for the image*
      * @return array with the games
      */
-    public function getGamesByGenre($genre, $foto_prefix = '') {
+    public function getGamesByGenre($genre, $foto_prefix = '')
+    {
         $db = JFactory::getDBO();
         $db->setQuery("SELECT
 							#__lupo_game.id
@@ -479,7 +491,8 @@ class LupoModelLupo extends JModelItem {
      * @foto_prefix name of the prefix for the image*
      * @return array with the game(s)
      */
-    public function getGamesByNumber($number, $foto_prefix = '') {
+    public function getGamesByNumber($number, $foto_prefix = '')
+    {
         $numbers = explode(";", $number);
         $db      = JFactory::getDBO();
         $games   = false;
@@ -511,7 +524,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array the game
      */
-    public function getGame($id, $load_related = false) {
+    public function getGame($id, $load_related = false)
+    {
         $db = JFactory::getDBO();
         $db->setQuery("SELECT 
 					    #__lupo_game.*
@@ -685,7 +699,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return boolean true if one or more fotos exists
      */
-    public function hasFoto($games) {
+    public function hasFoto($games)
+    {
         $hasOneFotoOrMore = false;
         foreach ($games as $key => $row) {
             if ($row['image'] !== null) {
@@ -704,7 +719,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array completed games
      */
-    public function compileGames($games, $foto_prefix) {
+    public function compileGames($games, $foto_prefix)
+    {
         $pos = 0;
         foreach ($games as $key => &$row) {
             $row += $this->compileGame($row, $foto_prefix, $pos);
@@ -724,7 +740,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array game
      */
-    public function compileGame($row, $game_thumb_prefix, $pos = '') {
+    public function compileGame($row, $game_thumb_prefix, $pos = '')
+    {
         //add photo to game array
         $row += $this->getGameFoto($row['number'], $game_thumb_prefix);
         $row += $this->getLoanStatus($row);
@@ -755,7 +772,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return array loan status
      */
-    public function getLoanStatus($row) {
+    public function getLoanStatus($row)
+    {
         if ($row['return_date'] != null) {
             $availability['availability_color'] = 'red';
             if ($row['return_extended'] == 1) {
@@ -796,7 +814,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @todo: refactor thumbnail-logic
      */
-    public function getGameFoto($number, $game_thumb_prefix = "") {
+    public function getGameFoto($number, $game_thumb_prefix = "")
+    {
         $game_image = 'images/spiele/' . $number . '.jpg';
         if (file_exists($game_image)) {
             $res['image'] = $game_image;
@@ -835,7 +854,8 @@ class LupoModelLupo extends JModelItem {
      * @return array foto
      *
      */
-    public function getCategoryFoto($category_alias = "") {
+    public function getCategoryFoto($category_alias = "")
+    {
         $image = 'images/spiele/' . $category_alias . '.jpg';
         if (file_exists($image)) {
             $res['image'] = $image;
@@ -855,7 +875,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return number itemid
      */
-    public function getCategoryItemId($gameid) {
+    public function getCategoryItemId($gameid)
+    {
         $db = JFactory::getDBO();
 
         $db->setQuery("SELECT catid FROM #__lupo_game WHERE id = " . $db->quote($gameid));
@@ -881,7 +902,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return no return
      */
-    public function saveSearchResultToSession($res) {
+    public function saveSearchResultToSession($res)
+    {
         $games = [];
         foreach ($res as $row) {
             $games[]['id'] = $row['number'];
@@ -897,7 +919,8 @@ class LupoModelLupo extends JModelItem {
      *
      * @return int number of toys
      */
-    public function totalToys() {
+    public function totalToys()
+    {
         $db = JFactory::getDBO();
 
         $db->setQuery("SELECT COUNT(id) AS total FROM #__lupo_game_editions");
@@ -906,10 +929,58 @@ class LupoModelLupo extends JModelItem {
         return $row;
     }
 
+    /**
+     * Gets subsets array for dynamic filter
+     *
+     * @param array $types
+     *
+     * @return array filter-def
+     */
+    public function getSubsets($types, $games)
+    {
+        if(count($games)<=1){
+            return ['style' => 'dropdown', 'filters' => []];
+        }
+
+        //read all available age/cats in games
+        foreach ($games as $game) {
+            $available_categories[$game['category_alias']]       = $game['category_alias'];
+            $available_agecategories[$game['agecategory_alias']] = $game['agecategory_alias'];
+        }
+
+        $agecategories = [];
+        $categories    = [];
+        foreach ($types as $type) {
+            switch ($type) {
+                case 'agecategory':
+                    $agecategories = $this->getAgecategories(false, false);
+                    break;
+                case 'category':
+                    $categories = $this->getCategories(false, false);
+                    break;
+            }
+        }
+
+        foreach ($categories as $category) {
+            if (array_key_exists($category['alias'], $available_categories)) {
+                $filters[$category['title']] = ['categories' => [$category['alias']], 'agecategories' => [], 'genres' => []];
+            }
+        }
+        foreach ($agecategories as $agecategory) {
+            if (array_key_exists($agecategory['alias'], $available_agecategories)) {
+                $filters[$agecategory['title']] = ['categories' => [], 'agecategories' => [$agecategory['alias']], 'genres' => []];
+            }
+        }
+
+        $subsets = ['style' => 'dropdown', 'filters' => $filters];
+        return $subsets;
+    }
+
 }
 
 
-class LupoModelLupoClient extends LupoModelLupo {
+class LupoModelLupoClient extends LupoModelLupo
+{
 
     /**
      * do client login and save values in session
@@ -920,7 +991,8 @@ class LupoModelLupoClient extends LupoModelLupo {
      * @return bool true if login successful
      */
 
-    public function clientLogin($adrnr, $password) {
+    public function clientLogin($adrnr, $password)
+    {
         $db    = JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('#__lupo_clients.*')
@@ -944,13 +1016,15 @@ class LupoModelLupoClient extends LupoModelLupo {
      *
      * @return void
      */
-    public function clientLogout() {
+    public function clientLogout()
+    {
         $session = JFactory::getSession();
         $session->clear('lupo_client');
     }
 
 
-    public function getClientToys($adrnr) {
+    public function getClientToys($adrnr)
+    {
         $db    = JFactory::getDBO();
         $query = $db->getQuery(true);
         $query->select('*')

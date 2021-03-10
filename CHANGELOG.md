@@ -1,6 +1,11 @@
 # Changelog
 
-### 3.45.0 (March 09, 2021)
+### 3.45.0 (March 10, 2021)
+  - show generic filter if no specific filter is defined
+  - save input filter value and reselect on page load
+  - refactor list views
+
+### 3.44.0 (March 08, 2021)
   - toy detail view: move buttons above details table
   - remove flash and silverlight upload routines
 
