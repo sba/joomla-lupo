@@ -32,7 +32,9 @@ class LupoModelFilter extends JModelItem
         $db->setQuery("SELECT
 					    *
 					FROM
-					    #__lupo_categories"
+					    #__lupo_categories
+					ORDER BY
+					    `sort`,`alias`"
         );
         return $db->loadAssocList();
     }
@@ -48,7 +50,9 @@ class LupoModelFilter extends JModelItem
         $db->setQuery("SELECT
 					    *
 					FROM
-					    #__lupo_agecategories"
+					    #__lupo_agecategories
+                    ORDER BY 
+                        `sort`,`age_number`,`alias`"
         );
         return $db->loadAssocList();
     }
@@ -64,15 +68,17 @@ class LupoModelFilter extends JModelItem
         $db->setQuery("SELECT
 					    *
 					FROM
-					    #__lupo_genres"
+					    #__lupo_genres
+					ORDER BY 
+				        alias"
         );
         return $db->loadAssocList();
     }
 
     /**
-     * Get the categories
+     * Get the category
      *
-     * @return  array  The toy categories
+     * @return  array  The toy category
      */
     public function getCategory()
     {

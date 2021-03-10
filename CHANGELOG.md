@@ -1,6 +1,20 @@
 # Changelog
 
-### 3.43.0 (March 03, 2021)
+### 3.45.0 (March 10, 2021)
+  - show generic filter if no specific filter is defined
+  - save input filter value and reselect on page load
+  - refactor list views
+
+### 3.44.0 (March 08, 2021)
+  - toy detail view: move buttons above details table
+  - remove flash and silverlight upload routines
+
+### 3.43.0 (March 04, 2021)
+  - show filter-items as buttons or dropdown
+  - output ordered items in admin-filterlist
+  - bugfix list genres in filter data-attribute
+
+### 3.42.0 (March 03, 2021)
   - add missing files to installer
 
 ### 3.42.0 (March 02, 2021)
