@@ -936,9 +936,9 @@ class LupoModelLupo extends JModelItem
      *
      * @return array filter-def
      */
-    public function getSubsets($types, $games)
+    public function getSubsets($types, $games, $filter_list_show)
     {
-        if(count($games)<=1){
+        if(count($games)<=1 || $filter_list_show === '0'){
             return ['style' => 'dropdown', 'filters' => []];
         }
 

@@ -35,7 +35,7 @@ if ($this->foto['show'] == '1') { ?>
 
         <?php
         $subsets = json_decode($this->{$catType}['subsets'], true);
-        if ($componentParams->get('category_show_filter', '1')=='1' && !is_array($subsets)) {
+        if (!is_array($subsets)) {
             if(count($this->subsets['filters'])>1) {
                 $subsets = $this->subsets;
             }
