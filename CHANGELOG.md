@@ -1,6 +1,7 @@
 # Changelog
 
 ### 3.46.0 (March 11, 2021)
+  - new option to control if filter shows categories or agecategories
   - filter can be disabled at menu level
 
 ### 3.45.0 (March 10, 2021)

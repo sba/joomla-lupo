@@ -61,12 +61,27 @@ class LupoController extends JControllerLegacy
             $foto_list_prefix = $menu_foto_list_prefix;
         }
 
-        $com_filter_list_show  = $params->get('category_show_filter', '1')=='1';
-        $menu_filter_list_show = $app->input->getCmd('filter_list_show', "");
-        if ($menu_filter_list_show == '') {
-            $filter_list_show = $com_filter_list_show;
+        $filter_types = [];
+        $com_show_category_filter  = $params->get('category_show_category_filter', '1')=='1';
+        $menu_show_category_filter = $app->input->getCmd('filter_category_list_show', "");
+        if ($menu_show_category_filter == '') {
+            $filter_list_show = $com_show_category_filter;
         } else {
-            $filter_list_show = $menu_filter_list_show;
+            $filter_list_show = $menu_show_category_filter;
+        }
+        if($filter_list_show == 1 && ($view != 'category' || $id=='new')){
+            $filter_types[] = 'category';
+        }
+
+        $com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1')=='1';
+        $menu_show_agecategory_filter = $app->input->getCmd('filter_agecategory_list_show', "");
+        if ($menu_show_agecategory_filter == '') {
+            $filter_list_show = $com_show_agecategory_filter;
+        } else {
+            $filter_list_show = $menu_show_agecategory_filter;
+        }
+        if($filter_list_show == 1 && $view != 'agecategory'){
+            $filter_types[] = 'agecategory';
         }
 
 
@@ -82,7 +97,7 @@ class LupoController extends JControllerLegacy
                 $model         = $this->getModel();
                 $genre         = $model->getGenre($id);
                 $games         = $model->getGamesByGenre($id, $foto_list_prefix);
-                $subsets       = $model->getSubsets(['agecategory', 'category'], $games, $filter_list_show);
+                $subsets       = $model->getSubsets($filter_types, $games);
                 $view          = $this->getView('Genre', 'html');
                 $view->title   = $genre['genre'];
                 $view->genre   = $genre;
@@ -95,7 +110,7 @@ class LupoController extends JControllerLegacy
                 $model             = $this->getModel();
                 $category          = $model->getCategory($id);
                 $games             = $model->getGames($id, 'catid', $foto_list_prefix);
-                $subsets           = $model->getSubsets($id=='new'?['agecategory', 'category']:['agecategory'], $games, $filter_list_show);
+                $subsets           = $model->getSubsets($filter_types, $games);
                 $view              = $this->getView('Category', 'html');
                 $view->title       = $category['title'];
                 $view->description = $category['description'];
@@ -109,7 +124,7 @@ class LupoController extends JControllerLegacy
                 $model             = $this->getModel();
                 $agecategory       = $model->getAgecategory($id);
                 $games             = $model->getGames($id, 'age_catid', $foto_list_prefix);
-                $subsets           = $model->getSubsets(['category'], $games, $filter_list_show);
+                $subsets           = $model->getSubsets($filter_types, $games);
                 $view              = $this->getView('Agecategory', 'html');
                 $view->title       = $agecategory['title'];
                 $view->description = $agecategory['description'];

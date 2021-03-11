@@ -933,12 +933,13 @@ class LupoModelLupo extends JModelItem
      * Gets subsets array for dynamic filter
      *
      * @param array $types
+     * @param array $games
      *
      * @return array filter-def
      */
-    public function getSubsets($types, $games, $filter_list_show)
+    public function getSubsets($types, $games)
     {
-        if(count($games)<=1 || $filter_list_show === '0'){
+        if(count($games)<=1 || count($types)==0){
             return ['style' => 'dropdown', 'filters' => []];
         }
 

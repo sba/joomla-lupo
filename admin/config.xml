@@ -198,10 +198,22 @@
         <field
 				type="radio"
                 class="btn-group btn-group-yesno"
-				name="category_show_filter"
-				id="category_show_filter"
-				label="COM_LUPO_OPTIONS_CAT_SHOW_FILTER"
-				description="COM_LUPO_OPTIONS_CAT_SHOW_FILTER_DESC"
+				name="category_show_category_filter"
+				id="category_show_category_filter"
+				label="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER"
+				description="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER_DESC"
+				default="1">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+        <field
+				type="radio"
+                class="btn-group btn-group-yesno"
+				name="category_show_agecategory_filter"
+				id="category_show_agecategory_filter"
+				label="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER"
+				description="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER_DESC"
 				default="1">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
