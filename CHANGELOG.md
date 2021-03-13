@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.46.0 (March 11, 2021)
+  - new option to control if filter shows categories or agecategories
+  - filter can be disabled at menu level
+
 ### 3.45.0 (March 10, 2021)
   - show generic filter if no specific filter is defined
   - save input filter value and reselect on page load
@@ -13,8 +17,6 @@
   - show filter-items as buttons or dropdown
   - output ordered items in admin-filterlist
   - bugfix list genres in filter data-attribute
-
-### 3.42.0 (March 03, 2021)
   - add missing files to installer
 
 ### 3.42.0 (March 02, 2021)
