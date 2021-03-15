@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.47.0 (March 15, 2021)
+  - compare typesafe in filter javascript
+  - cleanup and codestyle
+
 ### 3.46.0 (March 11, 2021)
   - new option to control if filter shows categories or agecategories
   - filter can be disabled at menu level
