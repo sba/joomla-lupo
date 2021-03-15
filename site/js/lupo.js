@@ -12,9 +12,9 @@ jQuery(document).ready(function ($) {
         } else {
             let row_category, row_agecategory, row_genres, has_category, has_agecategory, has_genres;
             $('#lupo_category_table > tbody > tr').each(function () {
-                row_category = $(this).data('category');
-                row_agecategory = $(this).data('agecategory');
-                row_genres = $(this).data('genres');
+                row_category = String($(this).data('category'));
+                row_agecategory = String($(this).data('agecategory'));
+                row_genres = String($(this).data('genres'));
 
                 has_category = filter_categories.includes(row_category);
                 has_agecategory = filter_agecategories.includes(row_agecategory);
@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
                 })
             }
 
-            }
+        }
         catch (e) {
             //no filter set: NOP
         }
