@@ -1,1 +1,0 @@
-ALTER TABLE `#__lupo_genres` DROP INDEX `genre`, ADD UNIQUE INDEX `genre` (`alias`);

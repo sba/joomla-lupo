@@ -16,7 +16,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
 
 <article class="tm-article">
-    <div class="tm-article-content ">
+    <div class="tm-article-content">
         <?php
         if ($this->game == 'error') {
             ?><h2 class="contentheading"><?php echo JText::_("COM_LUPO_ERROR_NOT_FOUND") ?></h2><?php
@@ -58,16 +58,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             <div class="uk-grid">
                 <?php
                 if ($description != "") { ?>
-                <div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width ?> uk-margin-bottom">
-                    <?php
-
-                    ?>
-                    <div class="lupo_description"><?php echo $description; ?></div>
-                    </div><?php
-                } ?>
-                <?php
-                if ($componentParams->get('detail_show_toy_photo', '1') && $this->game['image'] != null) {
-                    ?>
+                    <div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width ?> uk-margin-bottom">
+                        <div class="lupo_description"><?php echo $description; ?></div>
+                    </div>
+                <?php }
+                if ($componentParams->get('detail_show_toy_photo', '1') && $this->game['image'] != null) { ?>
                     <div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width ?> uk-margin-bottom">
                         <?php
                         if ($this->game['image'] == null) {
@@ -95,16 +90,15 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
         <?php
         //reservation
-        if ($componentParams->get('detail_show_toy_res', '0')) { ?>
-        <?php $session          = JFactory::getSession();
+        if ($componentParams->get('detail_show_toy_res', '0')) {
+        $session                = JFactory::getSession();
         $client                 = $session->get('lupo_client');
         $show_only_to_logged_in = $componentParams->get('detail_show_toy_res_only_logged_in', '0');
         if (!$show_only_to_logged_in || ($show_only_to_logged_in && $client)) {
         $clientname = ($client) ? $client->firstname . ' ' . $client->lastname : '';
         $clientnr   = ($client) ? $client->adrnr : '';
         ?>
-            <a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i
-                        class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+            <a class="uk-button uk-margin-right uk-margin-bottom" id="btnres" href="#resform" data-uk-modal><i class="uk-icon-calendar-check-o"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
 
             <script type="text/javascript">
                 jQuery(document).ready(function ($) {
@@ -259,7 +253,6 @@ $componentParams = JComponentHelper::getParams('com_lupo');
         }
         ?>
 
-
             <table class="uk-table uk-table-striped uk-table-condensed" id="lupo_detail_table">
                 <colgroup>
                     <col style="width:150px">
@@ -403,6 +396,5 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                 }
             }
         }  // endif get_game=error?>
-
     </div>
 </article>
