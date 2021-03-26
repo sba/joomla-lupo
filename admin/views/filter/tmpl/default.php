@@ -54,7 +54,7 @@ JHtml::_('behavior.tooltip');
     </p>
 
     <?php
-    $json_arr = ['filters' => ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => []]], 'style' => 'dropdown|buttons']; ?>
+    $json_arr = ['filters' => ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => [], 'players' => []]], 'style' => 'dropdown|buttons']; ?>
     <pre><?= json_encode($json_arr, JSON_PRETTY_PRINT); ?></pre>
 
     <p>
@@ -83,6 +83,15 @@ JHtml::_('behavior.tooltip');
         $genres[] = '"'. $genre['alias'].'"';
     } ?>
     <pre><?=implode(", ", $genres)?></pre>
+
+    <p>
+        Verfügbare Anzahl Spieler (alias):
+    </p>
+    <?php
+    foreach ($this->players as $player){
+        $players[] = '"'. JApplicationHelper::stringURLSafe($player['players']).'"';
+    } ?>
+    <pre><?=implode(", ", $players)?></pre>
 
 </div>
 

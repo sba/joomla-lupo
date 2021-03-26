@@ -76,6 +76,28 @@ class LupoModelFilter extends JModelItem
     }
 
     /**
+     * Get all different players-entries
+     *
+     * @return  array  The genres
+     */
+    public function getPlayers()
+    {
+        $db = JFactory::getDBO();
+        $db->setQuery("SELECT
+					    players
+					FROM
+					    #__lupo_game
+					WHERE     
+					    players != ''
+                    GROUP BY
+                        players
+					ORDER BY 
+				        players"
+        );
+        return $db->loadAssocList();
+    }
+
+    /**
      * Get the category
      *
      * @return  array  The toy category

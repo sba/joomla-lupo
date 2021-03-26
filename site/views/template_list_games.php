@@ -52,8 +52,9 @@ if ($this->foto['show'] == '1') { ?>
                             $data_categories    = json_encode($subset['categories']);
                             $data_agecategories = json_encode($subset['agecategories']);
                             $data_genres        = json_encode($subset['genres']);
+                            $data_players       = json_encode($subset['players']);
                             ?>
-                            <button class="uk-button lupo_btn_subset" data-categories='<?= $data_categories ?>' data-agecategories='<?= $data_agecategories ?>' data-genres='<?= $data_genres ?>'><?= $subset_desc ?></button>
+                            <button class="uk-button lupo_btn_subset" data-categories='<?= $data_categories ?>' data-agecategories='<?= $data_agecategories ?>' data-genres='<?= $data_genres ?>' data-players='<?= $data_players ?>'><?= $subset_desc ?></button>
                         <?php } ?>
                     </div>
                 </div>
@@ -74,8 +75,9 @@ if ($this->foto['show'] == '1') { ?>
                                     $data_categories    = json_encode($subset['categories']);
                                     $data_agecategories = json_encode($subset['agecategories']);
                                     $data_genres        = json_encode($subset['genres']);
+                                    $data_players       = json_encode($subset['players']);
                                     ?>
-                                    <li><a href="#" class="lupo_btn_subset" data-categories='<?= $data_categories ?>' data-agecategories='<?= $data_agecategories ?>' data-genres='<?= $data_genres ?>'><?= $subset_desc ?></a></li>
+                                    <li><a href="#" class="lupo_btn_subset" data-categories='<?= $data_categories ?>' data-agecategories='<?= $data_agecategories ?>' data-genres='<?= $data_genres ?>' data-players='<?= $data_players ?>'><?= $subset_desc ?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -127,7 +129,7 @@ if ($this->foto['show'] == '1') { ?>
                     $availability = '';
                 }
                 ?>
-                <tr data-category='<?= $game['category_alias'] ?>' data-agecategory='<?= $game['agecategory_alias'] ?>' data-genres='<?= json_encode(explode(",", $game['genres'])) ?>'>
+                <tr data-category='<?= $game['category_alias'] ?>' data-agecategory='<?= $game['agecategory_alias'] ?>' data-genres='<?= json_encode(explode(",", $game['genres'])) ?>' data-players="<?=JApplicationHelper::stringURLSafe($game['players'])?>">
                     <td>
                         <?php if ($this->foto['show'] != '0') { ?>
                             <a class="category" href="<?php echo $game['link'] ?>"><?php

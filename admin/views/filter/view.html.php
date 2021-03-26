@@ -1,10 +1,10 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
- 
+
 // import Joomla view library
 jimport('joomla.application.component.view');
- 
+
 /**
  * Lupo View
  */
@@ -20,6 +20,7 @@ class LupoViewFilter extends JViewLegacy {
         $this->categories = $this->get('Categories');
         $this->agecategories = $this->get('Agecategories');
         $this->genres = $this->get('Genres');
+        $this->players = $this->get('Players');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

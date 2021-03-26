@@ -931,6 +931,7 @@ class LupoModelLupo extends JModelItem
 
     /**
      * Gets subsets array for dynamic filter
+     * "Players"-Attribute currently not supported for dynamic filters
      *
      * @param array $types
      * @param array $games

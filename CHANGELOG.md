@@ -1,6 +1,9 @@
 # Changelog
 
 ### 3.48.0 (March 25, 2021)
+  - add support for filter by number of players
+
+### 3.48.0 (March 25, 2021)
   - codestyle and unnecessary character deleted
 
 ### 3.47.0 (March 15, 2021)
