@@ -71,7 +71,7 @@ JHtml::_('behavior.tooltip');
                         }
                         ?>
                     </td>
-                    <td><?= $subsets['style'] ?></td>
+                    <td><?= $subsets['style']!=null?$subsets['style']:'dropdown' ?></td>
                     <td class="right">
                         <a href="<?php echo $link; ?>" class="btn btn-small">
                             <span class="icon-edit"></span> Bearbeiten
