@@ -1,11 +1,10 @@
 <?php
 /**
- * @package        Joomla
- * @subpackage    LUPO
+ * @package     LUPO
  * @copyright   Copyright (C) databauer / Stefan Bauer
- * @author        Stefan Bauer
+ * @author      Stefan Bauer
  * @link        https://www.ludothekprogramm.ch
- * @license        License GNU General Public License version 2 or later
+ * @license     License GNU General Public License version 2 or later
  */
 
 // No direct access to this file

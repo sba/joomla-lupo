@@ -1,12 +1,12 @@
 <?php
 /**
- * @package		Joomla
- * @subpackage	LUPO
- * @copyright	Copyright (C) 2006 - 2014 databauer / Stefan Bauer
- * @author		Stefan Bauer
- * @link		https://www.ludothekprogramm.ch
- * @license		License GNU General Public License version 2 or later
+ * @package     LUPO
+ * @copyright   Copyright (C) databauer / Stefan Bauer
+ * @author      Stefan Bauer
+ * @link        https://www.ludothekprogramm.ch
+ * @license     License GNU General Public License version 2 or later
  */
+
 
 // No direct access to this file
 defined('_JEXEC') or die;
