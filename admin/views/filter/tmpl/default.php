@@ -49,7 +49,18 @@ JHtml::_('behavior.tooltip');
         <?php echo JHtml::_('form.token'); ?>
     </form>
     <p>
-        Die Filter müssen in gültigem JSON-Format und mit den alias-Namen gespeichert werden. Markup Filter-Button:
+        Die Filter müssen in gültigem JSON-Format und mit den alias-Namen gespeichert werden.
+        <br>
+        Filter-Attribute müssen nicht gesetzt werden, z.B. ist {
+        "filters": {
+        "BUTTONNAME": {
+        "players": ["1-spieler", "1-4-spieler"]
+        }
+        }
+        } zulässig.
+        Ist "style" nicht gesetzt, so wird automatisch "dropdown" definiert.
+        <br><br>
+        Markup Filter-Button:
     </p>
 
     <?php
