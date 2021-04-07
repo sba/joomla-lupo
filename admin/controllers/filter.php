@@ -1,21 +1,15 @@
 <?php
 /**
- * @package     Joomla.Administrator
- * @subpackage  com_lupo
- *
- * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     LUPO
+ * @copyright   Copyright (C) databauer / Stefan Bauer
+ * @author      Stefan Bauer
+ * @link        https://www.ludothekprogramm.ch
+ * @license     License GNU General Public License version 2 or later
  */
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-/**
- * Lupo Controller
- *
- * @package     Joomla.Administrator
- * @subpackage  com_lupo
- * @since       3.43.0
- */
 class LupoControllerFilter extends JControllerForm
 {
 
@@ -49,10 +43,18 @@ class LupoControllerFilter extends JControllerForm
 
         $input = JFactory::getApplication()->input;
         $data['subsets'] = $input->get('subsets','','RAW');
-        $data['id'] = $input->get('id');
-        $model->save($data);
 
-        $app->enqueueMessage(JText::_('Erfolgreich gespeichert'), 'message');
+        if($data['subsets']!="") {
+            $json = json_decode($data['subsets']);
+            if ($json !== null) {
+                $data['id'] = $input->get('id');
+                $model->save($data);
+                $app->enqueueMessage(JText::_('Erfolgreich gespeichert'), 'message');
+            } else {
+                $app->enqueueMessage(JText::_('Ungültiges JSON, nicht gespeichert'), 'error');
+            }
+        }
+
         $app->redirect('index.php?option=com_lupo&view=filters');
     }
 }

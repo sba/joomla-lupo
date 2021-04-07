@@ -1,11 +1,10 @@
 <?php
 /**
- * @package        Joomla
- * @subpackage     LUPO
- * @copyright      Copyright (C) databauer / Stefan Bauer
- * @author         Stefan Bauer
- * @link           https://www.ludothekprogramm.ch
- * @license        License GNU General Public License version 2 or later
+ * @package     LUPO
+ * @copyright   Copyright (C) databauer / Stefan Bauer
+ * @author      Stefan Bauer
+ * @link        https://www.ludothekprogramm.ch
+ * @license     License GNU General Public License version 2 or later
  */
 
 // No direct access to this file
@@ -931,6 +930,7 @@ class LupoModelLupo extends JModelItem
 
     /**
      * Gets subsets array for dynamic filter
+     * "Players"-Attribute currently not supported for dynamic filters
      *
      * @param array $types
      * @param array $games

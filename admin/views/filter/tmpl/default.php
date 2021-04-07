@@ -1,11 +1,10 @@
 <?php
 /**
- * @package        Joomla
- * @subpackage    LUPO
+ * @package     LUPO
  * @copyright   Copyright (C) databauer / Stefan Bauer
- * @author        Stefan Bauer
+ * @author      Stefan Bauer
  * @link        https://www.ludothekprogramm.ch
- * @license        License GNU General Public License version 2 or later
+ * @license     License GNU General Public License version 2 or later
  */
 
 // No direct access to this file
@@ -50,11 +49,22 @@ JHtml::_('behavior.tooltip');
         <?php echo JHtml::_('form.token'); ?>
     </form>
     <p>
-        Die Filter müssen in gültigem JSON-Format und mit den alias-Namen gespeichert werden. Markup Filter-Button:
+        Die Filter müssen in gültigem JSON-Format und mit den alias-Namen gespeichert werden.
+        <br>
+        Filter-Attribute müssen nicht gesetzt werden, z.B. ist {
+        "filters": {
+        "BUTTONNAME": {
+        "players": ["1-spieler", "1-4-spieler"]
+        }
+        }
+        } zulässig.
+        Ist "style" nicht gesetzt, so wird automatisch "dropdown" definiert.
+        <br><br>
+        Markup Filter-Button:
     </p>
 
     <?php
-    $json_arr = ['filters' => ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => []]], 'style' => 'dropdown|buttons']; ?>
+    $json_arr = ['filters' => ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => [], 'players' => []]], 'style' => 'dropdown|buttons']; ?>
     <pre><?= json_encode($json_arr, JSON_PRETTY_PRINT); ?></pre>
 
     <p>
@@ -83,6 +93,15 @@ JHtml::_('behavior.tooltip');
         $genres[] = '"'. $genre['alias'].'"';
     } ?>
     <pre><?=implode(", ", $genres)?></pre>
+
+    <p>
+        Verfügbare Anzahl Spieler (alias):
+    </p>
+    <?php
+    foreach ($this->players as $player){
+        $players[] = '"'. JApplicationHelper::stringURLSafe($player['players']).'"';
+    } ?>
+    <pre><?=implode(", ", $players)?></pre>
 
 </div>
 

@@ -1,11 +1,10 @@
 <?php
 /**
- * @package		Joomla
- * @subpackage	LUPO
+ * @package     LUPO
  * @copyright   Copyright (C) databauer / Stefan Bauer
- * @author		Stefan Bauer
- * @link		https://www.ludothekprogramm.ch
- * @license		License GNU General Public License version 2 or later
+ * @author      Stefan Bauer
+ * @link        https://www.ludothekprogramm.ch
+ * @license     License GNU General Public License version 2 or later
  */
 
 // No direct access to this file
@@ -71,6 +70,28 @@ class LupoModelFilter extends JModelItem
 					    #__lupo_genres
 					ORDER BY 
 				        alias"
+        );
+        return $db->loadAssocList();
+    }
+
+    /**
+     * Get all different players-entries
+     *
+     * @return  array  The genres
+     */
+    public function getPlayers()
+    {
+        $db = JFactory::getDBO();
+        $db->setQuery("SELECT
+					    players
+					FROM
+					    #__lupo_game
+					WHERE     
+					    players != ''
+                    GROUP BY
+                        players
+					ORDER BY 
+				        players"
         );
         return $db->loadAssocList();
     }
