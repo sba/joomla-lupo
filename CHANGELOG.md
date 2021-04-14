@@ -1,6 +1,9 @@
 # Changelog
 
-### 3.48.0 (March 29, 2021)
+### 3.50.0 (April 09, 2021)
+  - some translated strings updated (it/fr) 
+
+### 3.49.0 (March 29, 2021)
   - add support for filter by number of players
 
 ### 3.48.0 (March 25, 2021)
