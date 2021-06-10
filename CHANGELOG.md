@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.51.0 (July 10, 2021)
+  - show prolongable field within toy detail
+
 ### 3.50.0 (April 09, 2021)
   - some translated strings updated (it/fr) 
 
