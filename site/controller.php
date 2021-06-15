@@ -429,6 +429,15 @@ class LupoController extends JControllerLegacy
                         }
                     }
                 }
+
+                //store upload date
+                $stats_file = JPATH_COMPONENT_ADMINISTRATOR.'/upload_stats.json';
+                if(file_exists($stats_file)) {
+                    $json = json_decode(file_get_contents($stats_file), true);
+                }
+                $json['websync_ausleihen'] = date('Y-m-d H:i:s');
+                file_put_contents($stats_file, json_encode($json));
+
                 echo 'ok';
                 break;
 

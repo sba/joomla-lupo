@@ -52,12 +52,18 @@ if (isset($_POST['act']) && $_POST['act'] == 'processzip') {
     }
     if (unzipImages($xmlpath . $zipfile, $xmlpath, $xmlfile, $gamespath)) {
         processXML($xmlpath . $xmlfile);
+
+        $uri = JUri::getInstance();
+        $app->redirect($uri->toString());
     }
 }
 
 
 if (isset($_POST['act']) && $_POST['act'] == 'processxml') {
     processXML($xmlpath . $xmlfile);
+
+    $uri = JUri::getInstance();
+    $app->redirect($uri->toString());
 }
 
 if (isset($_POST['act']) && $_POST['act'] == 'deleteimages') {
@@ -308,6 +314,15 @@ function processXML($file)
                                       SET `subsets`=' . $db->quote($row['subsets']) . '
                                       WHERE `alias`=' . $db->quote($row['alias']))->execute();
             }
+
+            //store upload date
+            $stats_file = JPATH_COMPONENT_ADMINISTRATOR.'/upload_stats.json';
+            if(file_exists($stats_file)) {
+                $json = json_decode(file_get_contents($stats_file), true);
+            }
+            $json['toylist'] = date('Y-m-d H:i:s');
+            file_put_contents($stats_file, json_encode($json));
+
 
             JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_LUPO_ADMIN_MSG_SUCCESS_IMPORTED', $n));
         }
