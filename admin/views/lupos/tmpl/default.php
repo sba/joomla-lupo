@@ -101,6 +101,10 @@ JHtml::_('behavior.tooltip');
     #upload_percent {
         font-size: 120%;
     }
+    .stats-label {
+        display: inline-block;
+        width: 150px;
+    }
 </style>
 
 <div id="j-sidebar-container" class="j-sidebar-container j-sidebar-visible">
@@ -109,10 +113,14 @@ JHtml::_('behavior.tooltip');
 <div id="j-main-container" class="span10 j-toggle-main">
     <div id="lupo">
         <div id="container">
-            <a id="pickfiles" href="javascript:;"><button class="btn btn-large">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button></a> <span id="filelist">Your browser doesn't have HTML5 support.</span>
+            <a id="pickfiles" href="javascript:;">
+                <button class="btn btn-large">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button>
+            </a> <span id="filelist">Your browser doesn't have HTML5 support.</span>
             <br/>
             <br/>
-            <a id="uploadfiles" href="javascript:;"><button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button></a>
+            <a id="uploadfiles" href="javascript:;">
+                <button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
+            </a>
             <span id="upload_percent"></span>
         </div>
 
@@ -139,6 +147,25 @@ JHtml::_('behavior.tooltip');
             <input type="submit" name="submit" class="btn btn-danger" value="<?php echo JText::_("COM_LUPO_ADMIN_DELETE_IMAGES") ?>"/>
         </form>
 
+        <?php
+        //show upload date
+        $stats_file = JPATH_COMPONENT_ADMINISTRATOR . '/upload_stats.json';
+        if (file_exists($stats_file)) {
+            $json = json_decode(file_get_contents($stats_file), true);
+            ?>
+            <br/>
+            <br/>
+            <hr/>
+            <br/>
+            <h3><?php echo JText::_("COM_LUPO_ADMIN_STATS") ?></h3>
+            <?php if (isset($json['toylist'])) { ?>
+                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_UPLOAD") ?></span> <?= date('d.m.Y H:i', strtotime($json['toylist'])) ?>
+            <?php } ?>
+            <?php if (isset($json['websync_ausleihen'])) { ?>
+                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_WEBSYNC") ?></span> <?= date('d.m.Y H:i', strtotime($json['websync_ausleihen'])) ?>
+            <?php } ?>
+
+        <?php } ?>
     </div>
 </div>
 

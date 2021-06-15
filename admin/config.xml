@@ -386,7 +386,19 @@
             <option value="0">JNO</option>
         </field>
 
-        <field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO" />
+		<field
+				type="radio"
+				class="btn-group btn-group-yesno"
+				name="detail_show_toy_prolongable"
+				id="detail_show_toy_prolongable"
+				label="COM_LUPO_OPTIONS_TOY_PROLONGABLE"
+				description="COM_LUPO_OPTIONS_TOY_PROLONGABLE_DESC"
+				default="0">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+
+		<field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO" />
 
 		<field
 				type="radio"

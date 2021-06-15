@@ -337,6 +337,12 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         <td><i class="uk-icon uk-icon-circle <?= $this->game['availability_color'] ?> availability_dot"></i> <?= $this->game['availability_text'] ?></td>
                     </tr>
                 <?php } ?>
+                <?php if ($componentParams->get('detail_show_toy_prolongable', '0')) { ?>
+                    <tr>
+                        <td><?php echo JText::_("COM_LUPO_PROLONGABLE") ?>:</td>
+                        <td><?= $this->game['prolongable']?JText::_("JYES"):JText::_("JNO") ?></td>
+                    </tr>
+                <?php } ?>
             </table>
 
             <?php
