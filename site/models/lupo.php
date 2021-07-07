@@ -773,6 +773,7 @@ class LupoModelLupo extends JModelItem
      */
     public function getLoanStatus($row)
     {
+        $days_show_reservation = '+35 day';
         if ($row['return_date'] != null) {
             $availability['availability_color'] = 'red';
             if ($row['return_extended'] == 1) {
@@ -787,11 +788,11 @@ class LupoModelLupo extends JModelItem
                 $availability['availability_text'] = sprintf(JText::_("COM_LUPO_BORROWED_TO"), date("d.m.Y", strtotime($return_date)));
             }
 
-            if ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime('+35 day', time()))) {
+            if ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime($days_show_reservation, time()))) {
                 $availability['availability_text'] .= ' / ' . JText::_("COM_LUPO_RESERVED_FROM") . ' ' . date("d.m.Y", strtotime($row['next_reservation']));
             }
 
-        } elseif ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime('+35 day', time()))) {
+        } elseif ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime($days_show_reservation, time()))) {
             $availability['availability_color'] = 'orange';
             $availability['availability_text']  = JText::_("COM_LUPO_RESERVED_FROM") . ' ' . date("d.m.Y", strtotime($row['next_reservation']));
         } else {
