@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.51.0 (June 15, 2021)
+### {{version_pkg_lupo}} (June 15, 2021)
   - show prolongable field within toy detail
   - show upload stats in admin upload view
 

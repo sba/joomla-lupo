@@ -44,15 +44,15 @@ class LupoController extends JControllerLegacy
         $view = $app->input->getCmd('view');
         $id   = $app->input->getCmd('id', 0);
 
-        $com_foto_list_show   = $params->get('foto_list_show', "0");
-        $menu_foto_list_show   = $app->input->getCmd('foto_list_show', '');
+        $com_foto_list_show  = $params->get('foto_list_show', "0");
+        $menu_foto_list_show = $app->input->getCmd('foto_list_show', '');
         if ($menu_foto_list_show == '') {
             $foto_list_show = $com_foto_list_show;
         } else {
             $foto_list_show = $menu_foto_list_show;
         }
 
-        $com_foto_list_prefix = $params->get('foto_list_prefix', "mini_");
+        $com_foto_list_prefix  = $params->get('foto_list_prefix', "mini_");
         $menu_foto_list_prefix = $app->input->getCmd('foto_list_prefix', 'mini_');
         if ($menu_foto_list_prefix == '') {
             $foto_list_prefix = $com_foto_list_prefix;
@@ -60,26 +60,26 @@ class LupoController extends JControllerLegacy
             $foto_list_prefix = $menu_foto_list_prefix;
         }
 
-        $filter_types = [];
-        $com_show_category_filter  = $params->get('category_show_category_filter', '1')=='1';
+        $filter_types              = [];
+        $com_show_category_filter  = $params->get('category_show_category_filter', '1') == '1';
         $menu_show_category_filter = $app->input->getCmd('filter_category_list_show', "");
         if ($menu_show_category_filter == '') {
             $filter_list_show = $com_show_category_filter;
         } else {
             $filter_list_show = $menu_show_category_filter;
         }
-        if($filter_list_show == 1 && ($view != 'category' || $id=='new')){
+        if ($filter_list_show == 1 && ($view != 'category' || $id == 'new')) {
             $filter_types[] = 'category';
         }
 
-        $com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1')=='1';
+        $com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1') == '1';
         $menu_show_agecategory_filter = $app->input->getCmd('filter_agecategory_list_show', "");
         if ($menu_show_agecategory_filter == '') {
             $filter_list_show = $com_show_agecategory_filter;
         } else {
             $filter_list_show = $menu_show_agecategory_filter;
         }
-        if($filter_list_show == 1 && $view != 'agecategory'){
+        if ($filter_list_show == 1 && $view != 'agecategory') {
             $filter_types[] = 'agecategory';
         }
 
@@ -150,6 +150,40 @@ class LupoController extends JControllerLegacy
                 break;
         }
     }
+
+
+    /**
+     * store reservation to session
+     */
+    public function resadd()
+    {
+        $jinput               = JFactory::getApplication()->input;
+        $toynr                = $jinput->get('toynr', '', 'STRING');
+        $toyname              = $jinput->get('toyname', '', 'STRING');
+        $session              = JFactory::getSession();
+        $reservations         = $session->get('lupo_reservations');
+        $reservations[$toynr] = (object) ['toynr' => $toynr, 'toyname' => $toyname];
+        $session->set('lupo_reservations', $reservations);
+
+        echo json_encode(['msg'=> 'ok', 'reservations_nbr'=>count($reservations)]);
+    }
+
+
+    /**
+     * delete reservation from session
+     */
+    public function resdel()
+    {
+        $jinput               = JFactory::getApplication()->input;
+        $toynr                = $jinput->get('toynr', '', 'STRING');
+        $session              = JFactory::getSession();
+        $reservations         = $session->get('lupo_reservations');
+        unset($reservations[$toynr]);
+        $session->set('lupo_reservations', $reservations);
+
+        echo json_encode(['msg'=> 'ok', 'reservations_nbr'=>count($reservations)]);
+    }
+
 
     /**
      * sends reservation email
@@ -431,8 +465,8 @@ class LupoController extends JControllerLegacy
                 }
 
                 //store upload date
-                $stats_file = JPATH_COMPONENT_ADMINISTRATOR.'/upload_stats.json';
-                if(file_exists($stats_file)) {
+                $stats_file = JPATH_COMPONENT_ADMINISTRATOR . '/upload_stats.json';
+                if (file_exists($stats_file)) {
                     $json = json_decode(file_get_contents($stats_file), true);
                 }
                 $json['websync_ausleihen'] = date('Y-m-d H:i:s');
