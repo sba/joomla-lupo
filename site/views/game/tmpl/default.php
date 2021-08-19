@@ -96,7 +96,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
             if (!$show_only_to_logged_in || ($show_only_to_logged_in && $client)) {
             ?>
-                <a class="uk-button uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-cart-plus"></i><?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+                <?php if($this->game['in_cart']) { ?>
+                <a class="uk-button uk-button-success uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-check"></i> <?php echo JText::_("COM_LUPO_RES_ADDED"); ?></a>
+                <?php } else { ?>
+                <a class="uk-button uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-cart-plus"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+                <?php } ?>
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {
                         $('#btnresadd').on('click', function () {
@@ -113,7 +117,9 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                     if (response.msg === 'ok') {
                                         $('#lupo_loginlink_reservations').removeClass('uk-hidden');
                                         $('#lupo_loginlink_reservations span').html(response.reservations_nbr);
-                                        $('#btnresadd').after('<div class="uk-alert uk-alert-success"><?php echo JText::_("COM_LUPO_RES_ADDED"); ?></div>');
+                                        $('#btnresadd')
+                                            .html('<i class="uk-icon-check"></i> <?php echo JText::_("COM_LUPO_RES_ADDED"); ?>')
+                                            .addClass('uk-button-success');
                                     } else {
                                         $('#btnresadd').after('<div class="uk-alert uk-alert-danger">ERROR</div>');
                                     }

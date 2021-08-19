@@ -760,6 +760,11 @@ class LupoModelLupo extends JModelItem
         $row['link_cat']    = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['category_alias']);
         $row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
+        //check if toy is in reservation-cart
+        $session          = JFactory::getSession();
+        $reservations     = $session->get('lupo_reservations');
+        $row['in_cart'] = array_key_exists($row['number'], $reservations);
+
         return $row;
     }
 

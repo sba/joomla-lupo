@@ -426,75 +426,6 @@
 			<option value="0">JNO</option>
 		</field>
 
-		<field type="spacer" name="spacer5" class="text strong" label="COM_LUPO_OPTIONS_TOY_RESERVATION" />
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_res"
-				id="detail_show_toy_res"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_res_only_logged_in"
-				id="detail_show_toy_res_only_logged_in"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN_DESC"
-				default="0"
-				showon="detail_show_toy_res:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_res_date"
-				id="detail_show_res_date"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_DESC"
-				default="1"
-				showon="detail_show_toy_res:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_res_date_now"
-				id="detail_show_res_date_now"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW_DESC"
-				default="1"
-				showon="detail_show_toy_res:1[AND]detail_show_res_date:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="text"
-				name="detail_toy_res_costs"
-				id="detail_toy_res_costs"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS_DESC"
-				default=""
-				filter="safehtml"
-				showon="detail_show_toy_res:1"
-		>
-		</field>
-
-
 		<field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
 
         <field
@@ -523,6 +454,90 @@
 			<option value="0">JNO</option>
 		</field>
 	</fieldset>
+
+
+	<fieldset
+			name="LUPO_RESERVATION"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION"
+	>
+
+	<field
+			type="radio"
+			class="btn-group btn-group-yesno"
+			name="detail_show_toy_res"
+			id="detail_show_toy_res"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
+			description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
+			default="0">
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+			type="radio"
+			class="btn-group btn-group-yesno"
+			name="detail_show_toy_res_only_logged_in"
+			id="detail_show_toy_res_only_logged_in"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN"
+			description="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN_DESC"
+			default="0"
+			showon="detail_show_toy_res:1"
+	>
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+			type="radio"
+			class="btn-group btn-group-yesno"
+			name="detail_show_res_date"
+			id="detail_show_res_date"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE"
+			description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_DESC"
+			default="1"
+			showon="detail_show_toy_res:1"
+	>
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+			type="radio"
+			class="btn-group btn-group-yesno"
+			name="detail_show_res_date_now"
+			id="detail_show_res_date_now"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW"
+			description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW_DESC"
+			default="1"
+			showon="detail_show_toy_res:1[AND]detail_show_res_date:1"
+	>
+		<option value="1">JYES</option>
+		<option value="0">JNO</option>
+	</field>
+
+	<field
+			type="text"
+			name="detail_toy_res_costs"
+			id="detail_toy_res_costs"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS"
+			description="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS_DESC"
+			default=""
+			filter="safehtml"
+			showon="detail_show_toy_res:1"
+	>
+	</field>
+
+	<field
+			type="email"
+			name="detail_toy_res_sendto"
+			id="detail_toy_res_sendto"
+			label="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDTO"
+			description="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDTO_DESC"
+			default=""
+			showon="detail_show_toy_res:1"
+	>
+	</field>
+</fieldset>
 
     <fieldset
             name="LUPO_ONLINESERVICE"
