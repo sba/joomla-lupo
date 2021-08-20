@@ -198,8 +198,6 @@ class LupoController extends JControllerLegacy
         $clientmobile       = $jinput->get('clientmobile', '', 'STRING');
         $resdate            = $jinput->get('resdate', '', 'STRING');
         $comment            = $jinput->get('comment', '', 'STRING');
-        $toynr              = $jinput->get('toynr', '', 'STRING');
-        $toyname            = $jinput->get('toyname', '', 'STRING');
 
         $mailer = JFactory::getMailer();
 
@@ -219,6 +217,17 @@ class LupoController extends JControllerLegacy
             return;
         }
 
+
+        $session              = JFactory::getSession();
+        $reservations         = $session->get('lupo_reservations');
+        if(isnull($reservations)){
+            echo "No reservations found";
+            return;
+        }
+        foreach ($reservations as $reservation) {
+            $toys .= $reservation['toynr'] . ' - ' . $reservation['toyname']."\n";
+        }
+
         $config = JFactory::getConfig();
         $sender = [
             $config->get('mailfrom'),
@@ -234,8 +243,7 @@ class LupoController extends JControllerLegacy
         $email_text = JText::_('COM_LUPO_RES_EMAIL_BODY');
 
         $body = $email_text . "\n\n";
-        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_NR'), 15) . "$toynr\n";
-        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toyname\n";
+        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toys\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . "$clientnr\n";

@@ -763,7 +763,7 @@ class LupoModelLupo extends JModelItem
         //check if toy is in reservation-cart
         $session          = JFactory::getSession();
         $reservations     = $session->get('lupo_reservations');
-        $row['in_cart'] = array_key_exists($row['number'], $reservations);
+        $row['in_cart'] = $reservations!=null && array_key_exists($row['number'], $reservations);
 
         return $row;
     }
