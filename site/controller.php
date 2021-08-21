@@ -220,7 +220,7 @@ class LupoController extends JControllerLegacy
 
         $session              = JFactory::getSession();
         $reservations         = $session->get('lupo_reservations');
-        if(isnull($reservations)){
+        if($reservations==null){
             echo "No reservations found";
             return;
         }
