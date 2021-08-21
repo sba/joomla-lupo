@@ -162,10 +162,10 @@ class LupoController extends JControllerLegacy
         $toyname              = $jinput->get('toyname', '', 'STRING');
         $session              = JFactory::getSession();
         $reservations         = $session->get('lupo_reservations');
-        $reservations[$toynr] = (object) ['toynr' => $toynr, 'toyname' => $toyname];
+        $reservations[$toynr] = (object)['toynr' => $toynr, 'toyname' => $toyname];
         $session->set('lupo_reservations', $reservations);
 
-        echo json_encode(['msg'=> 'ok', 'reservations_nbr'=>count($reservations)]);
+        echo json_encode(['msg' => 'ok', 'reservations_nbr' => count($reservations)]);
     }
 
 
@@ -174,14 +174,14 @@ class LupoController extends JControllerLegacy
      */
     public function resdel()
     {
-        $jinput               = JFactory::getApplication()->input;
-        $toynr                = $jinput->get('toynr', '', 'STRING');
-        $session              = JFactory::getSession();
-        $reservations         = $session->get('lupo_reservations');
+        $jinput       = JFactory::getApplication()->input;
+        $toynr        = $jinput->get('toynr', '', 'STRING');
+        $session      = JFactory::getSession();
+        $reservations = $session->get('lupo_reservations');
         unset($reservations[$toynr]);
         $session->set('lupo_reservations', $reservations);
 
-        echo json_encode(['msg'=> 'ok', 'reservations_nbr'=>count($reservations)]);
+        echo json_encode(['msg' => 'ok', 'reservations_nbr' => count($reservations)]);
     }
 
 
@@ -191,7 +191,7 @@ class LupoController extends JControllerLegacy
     public function sendres()
     {
         $jinput             = JFactory::getApplication()->input;
-        $recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
+        //$recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
         $clientname         = $jinput->get('clientname', '', 'STRING');
         $clientnr           = $jinput->get('clientnr', '', 'STRING');
         $clientemail        = $jinput->get('clientemail', '', 'STRING');
@@ -217,15 +217,14 @@ class LupoController extends JControllerLegacy
             return;
         }
 
-
-        $session              = JFactory::getSession();
-        $reservations         = $session->get('lupo_reservations');
-        if($reservations==null){
+        $session      = JFactory::getSession();
+        $reservations = $session->get('lupo_reservations');
+        if ($reservations == null) {
             echo "No reservations found";
             return;
         }
         foreach ($reservations as $reservation) {
-            $toys .= $reservation['toynr'] . ' - ' . $reservation['toyname']."\n";
+            $toys .= $reservation->toynr . ' - ' . $reservation->toyname."\n";
         }
 
         $config = JFactory::getConfig();
@@ -236,15 +235,16 @@ class LupoController extends JControllerLegacy
 
         $mailer->setSender($sender);
 
-        $app      = JFactory::getApplication();
-        $params   = $app->getParams();
-        $res_sendto    = $params->get('detail_toy_res_sendto', "");
+        $app        = JFactory::getApplication();
+        $params     = $app->getParams();
+        $res_sendto = $params->get('detail_toy_res_sendto', "");
 
-        $recipient = [$clientemail, ($res_sendto!=''?$res_sendto:$config->get('mailfrom'))];
+        $recipient = [$clientemail, ($res_sendto != '' ? $res_sendto : $config->get('mailfrom'))];
         $mailer->addRecipient($recipient);
         $mailer->addReplyTo($clientemail);
 
-        $email_text = JText::_('COM_LUPO_RES_EMAIL_BODY');
+        $email_text = $params->get('detail_toy_res_email_body', "");
+        $subject = $params->get('detail_toy_res_email_subject', "");
 
         $body = $email_text . "\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toys\n";
@@ -254,7 +254,7 @@ class LupoController extends JControllerLegacy
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL'), 15) . "$clientemail\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_MOBILE'), 15) . "$clientmobile\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_COMMENTS'), 15) . "\n$comment\n\n";
-        $mailer->setSubject(sprintf(JText::_('COM_LUPO_RES_EMAIL_SUBJECT'), $config->get( 'sitename' ), $clientname));
+        $mailer->setSubject(sprintf($subject, $config->get('sitename'), $clientname));
         $mailer->setBody($body);
 
         $send = $mailer->Send();
