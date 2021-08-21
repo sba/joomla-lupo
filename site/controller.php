@@ -224,7 +224,7 @@ class LupoController extends JControllerLegacy
             return;
         }
         foreach ($reservations as $reservation) {
-            $toys .= $reservation->toynr . ' - ' . $reservation->toyname."\n";
+            $reservated_toys .= $reservation->toynr . ' - ' . $reservation->toyname."\n";
         }
 
         $config = JFactory::getConfig();
@@ -247,7 +247,7 @@ class LupoController extends JControllerLegacy
         $subject = $params->get('detail_toy_res_email_subject', "");
 
         $body = $email_text . "\n\n";
-        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toys\n";
+        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOYS'), 15) . "\n$reservated_toys\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . "$clientnr\n";
