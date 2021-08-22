@@ -263,7 +263,7 @@ class LupoController extends JControllerLegacy
         if ($send !== true) {
             echo 'Error sending email: ' . $send->__toString();
         } else {
-//            $session->set('lupo_reservations', null);
+            $session->set('lupo_reservations', null);
             echo 'ok';
         }
 
