@@ -224,7 +224,7 @@ class LupoController extends JControllerLegacy
             return;
         }
         foreach ($reservations as $reservation) {
-            $reservated_toys .= $reservation->toynr . ' - ' . $reservation->toyname."\n";
+            $reservated_toys .=  str_pad($reservation->toynr, 15, " ", STR_PAD_LEFT) . $reservation->toyname."\n";
         }
 
         $config = JFactory::getConfig();
