@@ -119,7 +119,8 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                         $('#lupo_loginlink_reservations span').html(response.reservations_nbr);
                                         $('#btnresadd')
                                             .html('<i class="uk-icon-check"></i> <?php echo JText::_("COM_LUPO_RES_ADDED"); ?>')
-                                            .addClass('uk-button-success');
+                                            .addClass('uk-button-success')
+                                            .attr('href', $('#lupo_loginlink a').attr("href"))
                                     } else {
                                         $('#btnresadd').after('<div class="uk-alert uk-alert-danger">ERROR</div>');
                                     }
