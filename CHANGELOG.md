@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.52.0 (August 20, 2021)
+### 3.52.0 (August 23, 2021)
   - allow sending multiple reservations with one mail
   - reservation email recipient
   - upload/websync time display fixed   
