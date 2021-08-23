@@ -190,6 +190,12 @@ class LupoController extends JControllerLegacy
      */
     public function sendres()
     {
+        $session = JFactory::getSession();
+        $app     = JFactory::getApplication();
+        $config  = JFactory::getConfig();
+        $mailer  = JFactory::getMailer();
+        $params  = $app->getParams();
+
         $jinput = JFactory::getApplication()->input;
         //$recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
         $clientname   = $jinput->get('clientname', '', 'STRING');
@@ -199,7 +205,6 @@ class LupoController extends JControllerLegacy
         $resdate      = $jinput->get('resdate', '', 'STRING');
         $comment      = $jinput->get('comment', '', 'STRING');
 
-        $mailer = JFactory::getMailer();
 
         $formerror = false;
         if (!$mailer->ValidateAddress($clientemail)) {
@@ -217,7 +222,6 @@ class LupoController extends JControllerLegacy
             return;
         }
 
-        $session      = JFactory::getSession();
         $reservations = $session->get('lupo_reservations');
         if ($reservations == null) {
             echo "No reservations found";
@@ -227,28 +231,12 @@ class LupoController extends JControllerLegacy
             $reservated_toys .= $reservation->toynr . str_repeat(" ", 15 - strlen($reservation->toynr)) . $reservation->toyname . "\n";
         }
 
-        $config = JFactory::getConfig();
-        $sender = [
-            $config->get('mailfrom'),
-            $config->get('fromname'),
-        ];
-
-        $mailer->setSender($sender);
-
-        $app        = JFactory::getApplication();
-        $params     = $app->getParams();
-        $res_sendto = $params->get('detail_toy_res_sendto', "");
-
-        $recipient = [$clientemail, ($res_sendto != '' ? $res_sendto : $config->get('mailfrom'))];
-        $mailer->addRecipient($recipient);
-        $mailer->addReplyTo($clientemail);
-
         $email_text = $params->get('detail_toy_res_email_body', "");
         $subject    = $params->get('detail_toy_res_email_subject', "");
 
         $body = $email_text . "\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOYS'), 15) . "\n$reservated_toys\n";
-        if($resdate!="") {
+        if ($resdate != "") {
             $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
         }
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
@@ -259,18 +247,35 @@ class LupoController extends JControllerLegacy
         $mailer->setSubject(sprintf($subject, $config->get('sitename'), $clientname));
         $mailer->setBody($body);
 
-        $send = $mailer->Send();
-        if ($send !== true) {
-            echo 'Error sending email: ' . $send->__toString();
+
+        $sender = [
+            $config->get('mailfrom'),
+            $config->get('fromname'),
+        ];
+
+        $res_sendto     = $params->get('detail_toy_res_sendto', "");
+        $ludo_recipient = $res_sendto != '' ? $res_sendto : $config->get('mailfrom');
+
+        $mailer->setSender($sender);
+
+        $mailer->addRecipient($clientemail);
+        $mailer->addReplyTo($ludo_recipient);
+        $send_client = $mailer->Send();
+
+        $mailer->clearAddresses();
+        $mailer->clearReplyTos();
+
+        $mailer->addRecipient($ludo_recipient);
+        $mailer->addReplyTo($clientemail);
+        $send_ludo = $mailer->Send();
+
+        if (($send_client && $send_ludo) !== true) {
+            echo 'Error sending email: ' . $send_client->__toString() . $send_ludo->__toString();
         } else {
             $session->set('lupo_reservations', null);
             echo 'ok';
         }
-
-        return;
-
     }
-
 
     /**
      * prolongation of toy retour date
