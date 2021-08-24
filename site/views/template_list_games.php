@@ -42,7 +42,7 @@ if ($this->foto['show'] == '1') { ?>
             }
         }
 
-        if (is_array($subsets)) {
+        if (is_array($subsets) && is_array($subsets['filters'])) {
             if (isset($subsets['style']) && $subsets['style'] == 'buttons') {
                 ?>
                 <div class="uk-width-1-1 uk-margin-top lupo_buttons">
