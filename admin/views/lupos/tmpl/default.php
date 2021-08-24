@@ -159,7 +159,7 @@ JHtml::_('behavior.tooltip');
             <br/>
             <h3><?php echo JText::_("COM_LUPO_ADMIN_STATS") ?></h3>
             <?php if (isset($json['toylist'])) { ?>
-                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_UPLOAD") ?></span> <?= strtotime($json['toylist'])>0?date('d.m.Y H:i', strtotime($json['toylist'])):'' ?>
+                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_UPLOAD") ?></span> <?= strtotime($json['toylist'])>0?date('d.m.Y H:i', strtotime($json['toylist'])):'-' ?>
             <?php } ?>
             <?php if (isset($json['websync_ausleihen'])) { ?>
                 <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_WEBSYNC") ?></span> <?= strtotime($json['websync_ausleihen'])>0?date('d.m.Y H:i', strtotime($json['websync_ausleihen'])):'-' ?>

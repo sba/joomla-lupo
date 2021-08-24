@@ -761,12 +761,11 @@ class LupoModelLupo extends JModelItem
         $row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
         //check if toy is in reservation-cart
-        $mainframe = JFactory::getApplication('site');
-        $mainframe->initialise();
-        $session    = $mainframe->getSession();
+        $app     = JFactory::getApplication('site');
+        $session = $app->getSession();
 
-        $reservations     = $session->get('lupo_reservations');
-        $row['in_cart'] = $reservations!=null && array_key_exists($row['number'], $reservations);
+        $reservations   = $session->get('lupo_reservations');
+        $row['in_cart'] = $reservations != null && array_key_exists($row['number'], $reservations);
 
         return $row;
     }
@@ -948,7 +947,7 @@ class LupoModelLupo extends JModelItem
      */
     public function getSubsets($types, $games)
     {
-        if(count($games)<=1 || count($types)==0){
+        if (count($games) <= 1 || count($types) == 0) {
             return ['style' => 'dropdown', 'filters' => []];
         }
 

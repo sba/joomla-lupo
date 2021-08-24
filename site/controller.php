@@ -157,14 +157,12 @@ class LupoController extends JControllerLegacy
      */
     public function resadd()
     {
-        $jinput               = JFactory::getApplication()->input;
-        $toynr                = $jinput->get('toynr', '', 'STRING');
-        $toyname              = $jinput->get('toyname', '', 'STRING');
+        $app     = JFactory::getApplication('site');
+        $jinput  = $app->input;
+        $toynr   = $jinput->get('toynr', '', 'STRING');
+        $toyname = $jinput->get('toyname', '', 'STRING');
 
-        $mainframe = JFactory::getApplication('site');
-        $mainframe->initialise();
-        $session    = $mainframe->getSession();
-
+        $session              = $app->getSession();
         $reservations         = $session->get('lupo_reservations');
         $reservations[$toynr] = (object)['toynr' => $toynr, 'toyname' => $toyname];
         $session->set('lupo_reservations', $reservations);
@@ -178,13 +176,11 @@ class LupoController extends JControllerLegacy
      */
     public function resdel()
     {
-        $jinput       = JFactory::getApplication()->input;
-        $toynr        = $jinput->get('toynr', '', 'STRING');
+        $app    = JFactory::getApplication('site');
+        $jinput = $app->input;
+        $toynr  = $jinput->get('toynr', '', 'STRING');
 
-        $mainframe = JFactory::getApplication('site');
-        $mainframe->initialise();
-        $session    = $mainframe->getSession();
-
+        $session      = $app->getSession();
         $reservations = $session->get('lupo_reservations');
         unset($reservations[$toynr]);
         $session->set('lupo_reservations', $reservations);
@@ -198,11 +194,8 @@ class LupoController extends JControllerLegacy
      */
     public function sendres()
     {
-        $mainframe = JFactory::getApplication('site');
-        $mainframe->initialise();
-        $session    = $mainframe->getSession();
-
-        $app     = JFactory::getApplication();
+        $app     = JFactory::getApplication('site');
+        $session = $app->getSession();
         $config  = JFactory::getConfig();
         $mailer  = JFactory::getMailer();
         $params  = $app->getParams();
