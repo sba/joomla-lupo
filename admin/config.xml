@@ -490,6 +490,20 @@
         <field
                 type="radio"
                 class="btn-group btn-group-yesno"
+                name="detail_res_allow_only_loaned"
+                id="detail_res_allow_only_loaned"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_ALLOW_ONLY_LOANED"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_ALLOW_ONLY_LOANED_DESC"
+                default="0"
+                showon="detail_show_toy_res:1"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
                 name="detail_show_res_date"
                 id="detail_show_res_date"
                 label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE"

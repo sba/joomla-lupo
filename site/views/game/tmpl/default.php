@@ -93,8 +93,10 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             $session                = JFactory::getSession();
             $client                 = $session->get('lupo_client');
             $show_only_to_logged_in = $componentParams->get('detail_show_toy_res_only_logged_in', '0');
+            $detail_res_allow_only_loaned = $componentParams->get('detail_res_allow_only_loaned', '0');
+            $show_res_because_loaned = $this->game['return_date']!==null || $detail_res_allow_only_loaned==0;
 
-            if (!$show_only_to_logged_in || ($show_only_to_logged_in && $client)) {
+            if ((!$show_only_to_logged_in || ($show_only_to_logged_in && $client)) && $show_res_because_loaned) {
             ?>
                 <?php if($this->game['in_cart']) { ?>
                 <a class="uk-button uk-button-success uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-check"></i> <?php echo JText::_("COM_LUPO_RES_ADDED"); ?></a>
