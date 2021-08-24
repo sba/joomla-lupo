@@ -489,7 +489,7 @@ class LupoController extends JControllerLegacy
                 }
 
                 //store upload date
-                $stats_file = JPATH_COMPONENT_ADMINISTRATOR . '/upload_stats.json';
+                $stats_file = JPATH_ROOT . '/images/upload_stats.json';
                 if (file_exists($stats_file)) {
                     $json = json_decode(file_get_contents($stats_file), true);
                 }
