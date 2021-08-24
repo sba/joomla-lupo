@@ -160,7 +160,11 @@ class LupoController extends JControllerLegacy
         $jinput               = JFactory::getApplication()->input;
         $toynr                = $jinput->get('toynr', '', 'STRING');
         $toyname              = $jinput->get('toyname', '', 'STRING');
-        $session              = JFactory::getSession();
+
+        $mainframe = JFactory::getApplication('site');
+        $mainframe->initialise();
+        $session    = $mainframe->getSession();
+
         $reservations         = $session->get('lupo_reservations');
         $reservations[$toynr] = (object)['toynr' => $toynr, 'toyname' => $toyname];
         $session->set('lupo_reservations', $reservations);
@@ -176,7 +180,11 @@ class LupoController extends JControllerLegacy
     {
         $jinput       = JFactory::getApplication()->input;
         $toynr        = $jinput->get('toynr', '', 'STRING');
-        $session      = JFactory::getSession();
+
+        $mainframe = JFactory::getApplication('site');
+        $mainframe->initialise();
+        $session    = $mainframe->getSession();
+
         $reservations = $session->get('lupo_reservations');
         unset($reservations[$toynr]);
         $session->set('lupo_reservations', $reservations);
@@ -190,7 +198,10 @@ class LupoController extends JControllerLegacy
      */
     public function sendres()
     {
-        $session = JFactory::getSession();
+        $mainframe = JFactory::getApplication('site');
+        $mainframe->initialise();
+        $session    = $mainframe->getSession();
+
         $app     = JFactory::getApplication();
         $config  = JFactory::getConfig();
         $mailer  = JFactory::getMailer();
