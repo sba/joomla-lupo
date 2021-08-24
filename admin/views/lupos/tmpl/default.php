@@ -149,7 +149,7 @@ JHtml::_('behavior.tooltip');
 
         <?php
         //show upload date
-        $stats_file = JPATH_COMPONENT_ADMINISTRATOR . '/upload_stats.json';
+        $stats_file = JPATH_ROOT . '/images/upload_stats.json';
         if (file_exists($stats_file)) {
             $json = json_decode(file_get_contents($stats_file), true);
             ?>
@@ -159,10 +159,10 @@ JHtml::_('behavior.tooltip');
             <br/>
             <h3><?php echo JText::_("COM_LUPO_ADMIN_STATS") ?></h3>
             <?php if (isset($json['toylist'])) { ?>
-                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_UPLOAD") ?></span> <?= date('d.m.Y H:i', strtotime($json['toylist'])) ?>
+                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_UPLOAD") ?></span> <?= strtotime($json['toylist'])>0?date('d.m.Y H:i', strtotime($json['toylist'])):'-' ?>
             <?php } ?>
             <?php if (isset($json['websync_ausleihen'])) { ?>
-                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_WEBSYNC") ?></span> <?= date('d.m.Y H:i', strtotime($json['websync_ausleihen'])) ?>
+                <br/><span class="stats-label"><?php echo JText::_("COM_LUPO_ADMIN_STATS_WEBSYNC") ?></span> <?= strtotime($json['websync_ausleihen'])>0?date('d.m.Y H:i', strtotime($json['websync_ausleihen'])):'-' ?>
             <?php } ?>
 
         <?php } ?>

@@ -1,165 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset
-		name="LUPO_CATS"
-		label="COM_LUPO_CATEGORIES"
-		description="COM_LUPO_OPTIONS_CATS_DESC"
-	>
-		<field
-				type="radio"
+    <fieldset
+            name="LUPO_CATS"
+            label="COM_LUPO_CATEGORIES"
+            description="COM_LUPO_OPTIONS_CATS_DESC"
+    >
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="show_diverse"
-				id="lupo_show_diverse"
-				label="COM_LUPO_OPTIONS_CATS_SHOW_DIV"
-				description="COM_LUPO_OPTIONS_CATS_SHOW_DIV_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
-		
-		<field
-			name="nbr_new_games"
-			id="lupo_nbr_new_games"
-			type="number"
-			maxLenght="5"
-			size="4"
-			label="COM_LUPO_OPTIONS_CATS_NBR_DAYS"
-			description="COM_LUPO_OPTIONS_CATS_NBR_DAYS_DESC"
-			default="30"
-		>
-		</field>
+                name="show_diverse"
+                id="lupo_show_diverse"
+                label="COM_LUPO_OPTIONS_CATS_SHOW_DIV"
+                description="COM_LUPO_OPTIONS_CATS_SHOW_DIV_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				name="new_games_sort"
-				type="list"
-				label="COM_LUPO_OPTIONS_NEW_GAMES_SORT"
-				default="0"
-		>
-			<option value="0">COM_LUPO_OPTIONS_NEW_GAMES_SORT_ALPHA</option>
-			<option value="1">COM_LUPO_OPTIONS_NEW_GAMES_SORT_BUYDATE</option>
-		</field>
+        <field
+                name="nbr_new_games"
+                id="lupo_nbr_new_games"
+                type="number"
+                maxLenght="5"
+                size="4"
+                label="COM_LUPO_OPTIONS_CATS_NBR_DAYS"
+                description="COM_LUPO_OPTIONS_CATS_NBR_DAYS_DESC"
+                default="30"
+        >
+        </field>
 
-		<field
-				name="cats_nbr_games"
-				id="lupo_cats_nbr_games"
-				type="radio"
-				class="btn-group btn-group-yesno"
-				label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
-				description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="new_games_sort"
+                type="list"
+                label="COM_LUPO_OPTIONS_NEW_GAMES_SORT"
+                default="0"
+        >
+            <option value="0">COM_LUPO_OPTIONS_NEW_GAMES_SORT_ALPHA</option>
+            <option value="1">COM_LUPO_OPTIONS_NEW_GAMES_SORT_BUYDATE</option>
+        </field>
 
-		<field
-				name="cats_show_table_with_details"
-				id="cats_show_table_with_details"
-				type="radio"
-				class="btn-group btn-group-yesno"
-				label="COM_LUPO_OPTIONS_SHOW_TABLE"
-				description="COM_LUPO_OPTIONS_SHOW_TABLE_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				name="cats_sort"
-				type="list"
-				label="COM_LUPO_CATEGORIES_SORT"
-				default="0"
-		>
-			<option value="0">COM_LUPO_CATEGORIES_SORT_ALPHA</option>
-			<option value="1">COM_LUPO_CATEGORIES_SORT_LUPO</option>
-		</field>
-	</fieldset>
-
-	<fieldset
-		name="LUPO_CAT"
-		label="COM_LUPO_CATEGORY"
-		description="COM_LUPO_OPTIONS_CAT_DESC"
-	>
-
-			<field
-				type="radio"
+        <field
+                name="cats_nbr_games"
+                id="lupo_cats_nbr_games"
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="category_show_tableheader"
-				id="category_show_tableheader"
-				label="COM_LUPO_OPTIONS_CAT_SHOW_HEADER"
-				description="COM_LUPO_OPTIONS_CAT_SHOW_HEADER_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
+                description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                name="cats_show_table_with_details"
+                id="cats_show_table_with_details"
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="category_show_detail_link"
-				id="category_show_detail_link"
-				label="COM_LUPO_OPTIONS_CAT_SHOW_DETAIL_LINK"
-				description="COM_LUPO_OPTIONS_CAT_SHOW_DETAIL_LINK_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                label="COM_LUPO_OPTIONS_SHOW_TABLE"
+                description="COM_LUPO_OPTIONS_SHOW_TABLE_DESC"
+                default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				name="foto_list_show"
-				type="radio"
-				class="btn-group btn-group-yesno"
-				default="0"
-				label="COM_LUPO_PHOTO"
-				description="COM_LUPO_PHOTO_DESC">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="cats_sort"
+                type="list"
+                label="COM_LUPO_CATEGORIES_SORT"
+                default="0"
+        >
+            <option value="0">COM_LUPO_CATEGORIES_SORT_ALPHA</option>
+            <option value="1">COM_LUPO_CATEGORIES_SORT_LUPO</option>
+        </field>
+    </fieldset>
 
-		<field
-				name="foto_list_prefix"
-				type="text"
-				label="COM_LUPO_PHOTO_PREFIX"
-				description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
-				default="mini_"
-				showon="foto_list_show:1"
-				/>
+    <fieldset
+            name="LUPO_CAT"
+            label="COM_LUPO_CATEGORY"
+            description="COM_LUPO_OPTIONS_CAT_DESC"
+    >
 
-		<field
-				name="foto_list_show_placeholder"
-				type="radio"
-				class="btn-group btn-group-yesno"
-				label="COM_LUPO_PHOTO_SHOW_PLACEHOLDER"
-				description="COM_LUPO_PHOTO_SHOW_PLACEHOLDER_DESC"
-				default="1"
-				showon="foto_list_show:1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="category_show_tableheader"
+                id="category_show_tableheader"
+                label="COM_LUPO_OPTIONS_CAT_SHOW_HEADER"
+                description="COM_LUPO_OPTIONS_CAT_SHOW_HEADER_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				name="foto_list_show_description"
-				type="radio"
-				class="btn-group btn-group-yesno"
-				label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
-				description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="category_show_detail_link"
+                id="category_show_detail_link"
+                label="COM_LUPO_OPTIONS_CAT_SHOW_DETAIL_LINK"
+                description="COM_LUPO_OPTIONS_CAT_SHOW_DETAIL_LINK_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="category_show_toy_category"
-				id="category_show_toy_category"
-				label="COM_LUPO_OPTIONS_TOY_CATEGORY"
-				description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                name="foto_list_show"
+                type="radio"
+                class="btn-group btn-group-yesno"
+                default="0"
+                label="COM_LUPO_PHOTO"
+                description="COM_LUPO_PHOTO_DESC">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
+        <field
+                name="foto_list_prefix"
+                type="text"
+                label="COM_LUPO_PHOTO_PREFIX"
+                description="COM_LUPO_OPTIONS_TOY_THUMB_PREFIX_DESC"
+                default="mini_"
+                showon="foto_list_show:1"
+        />
+
+        <field
+                name="foto_list_show_placeholder"
+                type="radio"
+                class="btn-group btn-group-yesno"
+                label="COM_LUPO_PHOTO_SHOW_PLACEHOLDER"
+                description="COM_LUPO_PHOTO_SHOW_PLACEHOLDER_DESC"
+                default="1"
+                showon="foto_list_show:1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                name="foto_list_show_description"
+                type="radio"
+                class="btn-group btn-group-yesno"
+                label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
+                description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="category_show_toy_category"
+                id="category_show_toy_category"
+                label="COM_LUPO_OPTIONS_TOY_CATEGORY"
+                description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
                 type="radio"
                 class="btn-group btn-group-yesno"
                 name="category_show_toy_age_category"
@@ -184,194 +184,194 @@
         </field>
 
         <field
-				type="radio"
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="category_show_tax"
-				id="category_show_tax"
-				label="COM_LUPO_OPTIONS_CAT_SHOW_TAX"
-				description="COM_LUPO_OPTIONS_CAT_SHOW_TAX_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="category_show_tax"
+                id="category_show_tax"
+                label="COM_LUPO_OPTIONS_CAT_SHOW_TAX"
+                description="COM_LUPO_OPTIONS_CAT_SHOW_TAX_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
         <field
-				type="radio"
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="category_show_category_filter"
-				id="category_show_category_filter"
-				label="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER"
-				description="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="category_show_category_filter"
+                id="category_show_category_filter"
+                label="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER"
+                description="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
         <field
-				type="radio"
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="category_show_agecategory_filter"
-				id="category_show_agecategory_filter"
-				label="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER"
-				description="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="category_show_agecategory_filter"
+                id="category_show_agecategory_filter"
+                label="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER"
+                description="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-	</fieldset>
-	
-	<fieldset
-		name="LUPO_DETAIL"
-		label="COM_LUPO_TOY_DETAIL_VIEW"
-		description="COM_LUPO_OPTIONS_TOY_DESC"
-	>
-		
-		<field type="spacer" name="spacer1" class="text" label="COM_LUPO_OPTIONS_SHOW_FIELDS" />
-		
-		<field
-				type="radio"
+    </fieldset>
+
+    <fieldset
+            name="LUPO_DETAIL"
+            label="COM_LUPO_TOY_DETAIL_VIEW"
+            description="COM_LUPO_OPTIONS_TOY_DESC"
+    >
+
+        <field type="spacer" name="spacer1" class="text" label="COM_LUPO_OPTIONS_SHOW_FIELDS"/>
+
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_no"
-				id="detail_show_toy_no"
-				label="COM_LUPO_OPTIONS_TOY_NO"
-				description="COM_LUPO_OPTIONS_TOY_NO_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="detail_show_toy_no"
+                id="detail_show_toy_no"
+                label="COM_LUPO_OPTIONS_TOY_NO"
+                description="COM_LUPO_OPTIONS_TOY_NO_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_category"
-				id="detail_show_toy_category"
-				label="COM_LUPO_OPTIONS_TOY_CATEGORY"
-				description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="detail_show_toy_category"
+                id="detail_show_toy_category"
+                label="COM_LUPO_OPTIONS_TOY_CATEGORY"
+                description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_age_category"
-				id="detail_show_toy_age_category"
-				label="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY"
-				description="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="detail_show_toy_age_category"
+                id="detail_show_toy_age_category"
+                label="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY"
+                description="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_genres"
-				id="detail_show_toy_genres"
-				label="COM_LUPO_OPTIONS_TOY_GENRES"
-				description="COM_LUPO_OPTIONS_TOY_GENRES_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="detail_show_toy_genres"
+                id="detail_show_toy_genres"
+                label="COM_LUPO_OPTIONS_TOY_GENRES"
+                description="COM_LUPO_OPTIONS_TOY_GENRES_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_play_duration"
-				id="detail_show_toy_play_duration"
-				label="COM_LUPO_OPTIONS_TOY_PLAY_DURATION"
-				description="COM_LUPO_OPTIONS_TOY_PLAY_DURATION_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="detail_show_toy_play_duration"
+                id="detail_show_toy_play_duration"
+                label="COM_LUPO_OPTIONS_TOY_PLAY_DURATION"
+                description="COM_LUPO_OPTIONS_TOY_PLAY_DURATION_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_players"
-				id="detail_show_toy_players"
-				label="COM_LUPO_OPTIONS_TOY_PLAYERS"
-				description="COM_LUPO_OPTIONS_TOY_PLAYERS_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="detail_show_toy_players"
+                id="detail_show_toy_players"
+                label="COM_LUPO_OPTIONS_TOY_PLAYERS"
+                description="COM_LUPO_OPTIONS_TOY_PLAYERS_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_fabricator"
-				id="detail_show_toy_fabricator"
-				label="COM_LUPO_OPTIONS_TOY_FABRICATOR"
-				description="COM_LUPO_OPTIONS_TOY_FABRICATOR_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="detail_show_toy_fabricator"
+                id="detail_show_toy_fabricator"
+                label="COM_LUPO_OPTIONS_TOY_FABRICATOR"
+                description="COM_LUPO_OPTIONS_TOY_FABRICATOR_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_author"
-				id="detail_show_toy_author"
-				label="COM_LUPO_OPTIONS_TOY_AUTHOR"
-				description="COM_LUPO_OPTIONS_TOY_AUTHOR_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="detail_show_toy_author"
+                id="detail_show_toy_author"
+                label="COM_LUPO_OPTIONS_TOY_AUTHOR"
+                description="COM_LUPO_OPTIONS_TOY_AUTHOR_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_artist"
-				id="detail_show_toy_artist"
-				label="COM_LUPO_OPTIONS_TOY_ARTIST"
-				description="COM_LUPO_OPTIONS_TOY_ARTIST_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_nbrdays"
-				id="detail_show_toy_nbrdays"
-				label="COM_LUPO_OPTIONS_TOY_NBRDAYS"
-				description="COM_LUPO_OPTIONS_TOY_NBRDAYS_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="detail_show_toy_artist"
+                id="detail_show_toy_artist"
+                label="COM_LUPO_OPTIONS_TOY_ARTIST"
+                description="COM_LUPO_OPTIONS_TOY_ARTIST_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_nbrtoys"
-				id="detail_show_toy_nbrtoys"
-				label="COM_LUPO_OPTIONS_TOY_NBRTOYS"
-				description="COM_LUPO_OPTIONS_TOY_NBRTOYS_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>	
+                name="detail_show_toy_nbrdays"
+                id="detail_show_toy_nbrdays"
+                label="COM_LUPO_OPTIONS_TOY_NBRDAYS"
+                description="COM_LUPO_OPTIONS_TOY_NBRDAYS_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_tax"
-				id="detail_show_toy_tax"
-				label="COM_LUPO_OPTIONS_TOY_TAX"
-				description="COM_LUPO_OPTIONS_TOY_TAX_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+                name="detail_show_toy_nbrtoys"
+                id="detail_show_toy_nbrtoys"
+                label="COM_LUPO_OPTIONS_TOY_NBRTOYS"
+                description="COM_LUPO_OPTIONS_TOY_NBRTOYS_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_tax"
+                id="detail_show_toy_tax"
+                label="COM_LUPO_OPTIONS_TOY_TAX"
+                description="COM_LUPO_OPTIONS_TOY_TAX_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
         <field
                 type="radio"
@@ -381,121 +381,52 @@
                 label="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL"
                 description="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL_DESC"
                 default="1"
-				showon="detail_show_toy_tax:1">
+                showon="detail_show_toy_tax:1">
             <option value="1">JYES</option>
             <option value="0">JNO</option>
         </field>
 
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_prolongable"
-				id="detail_show_toy_prolongable"
-				label="COM_LUPO_OPTIONS_TOY_PROLONGABLE"
-				description="COM_LUPO_OPTIONS_TOY_PROLONGABLE_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_prolongable"
+                id="detail_show_toy_prolongable"
+                label="COM_LUPO_OPTIONS_TOY_PROLONGABLE"
+                description="COM_LUPO_OPTIONS_TOY_PROLONGABLE_DESC"
+                default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO" />
+        <field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO"/>
 
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_photo"
-				id="detail_show_toy_photo"
-				label="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO"
-				description="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_photo"
+                id="detail_show_toy_photo"
+                label="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO"
+                description="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_photo_lightbox"
-				id="detail_photo_lightbox"
-				label="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX"
-				description="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX_DESC"
-				default="1"
-				showon="detail_show_toy_photo:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_photo_lightbox"
+                id="detail_photo_lightbox"
+                label="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX"
+                description="COM_LUPO_OPTIONS_PHOTO_LIGHTBOX_DESC"
+                default="1"
+                showon="detail_show_toy_photo:1"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
 
-		<field type="spacer" name="spacer5" class="text strong" label="COM_LUPO_OPTIONS_TOY_RESERVATION" />
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_res"
-				id="detail_show_toy_res"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_toy_res_only_logged_in"
-				id="detail_show_toy_res_only_logged_in"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN_DESC"
-				default="0"
-				showon="detail_show_toy_res:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_res_date"
-				id="detail_show_res_date"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_DESC"
-				default="1"
-				showon="detail_show_toy_res:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="detail_show_res_date_now"
-				id="detail_show_res_date_now"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW_DESC"
-				default="1"
-				showon="detail_show_toy_res:1[AND]detail_show_res_date:1"
-		>
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-
-		<field
-				type="text"
-				name="detail_toy_res_costs"
-				id="detail_toy_res_costs"
-				label="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS"
-				description="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS_DESC"
-				default=""
-				filter="safehtml"
-				showon="detail_show_toy_res:1"
-		>
-		</field>
-
-
-		<field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED" />
+        <field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED"/>
 
         <field
                 type="radio"
@@ -509,60 +440,182 @@
             <option value="0">JNO</option>
         </field>
 
-        <field type="spacer" name="spacer4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE" />
-		
-		<field
-				type="radio"
+        <field type="spacer" name="spacer4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE"/>
+
+        <field
+                type="radio"
                 class="btn-group btn-group-yesno"
-				name="detail_show_toy_nav"
-				id="detail_show_toy_nav"
-				label="COM_LUPO_OPTIONS_TOY_NAV"
-				description="COM_LUPO_OPTIONS_TOY_NAV_DESC"
-				default="1">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-	</fieldset>
+                name="detail_show_toy_nav"
+                id="detail_show_toy_nav"
+                label="COM_LUPO_OPTIONS_TOY_NAV"
+                description="COM_LUPO_OPTIONS_TOY_NAV_DESC"
+                default="1">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+    </fieldset>
+
+
+    <fieldset
+            name="LUPO_RESERVATION"
+            label="COM_LUPO_OPTIONS_TOY_RESERVATION"
+    >
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_res"
+                id="detail_show_toy_res"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
+                default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_res_only_logged_in"
+                id="detail_show_toy_res_only_logged_in"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_ONLY_LOGGED_IN_DESC"
+                default="0"
+                showon="detail_show_toy_res:1"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_res_allow_only_loaned"
+                id="detail_res_allow_only_loaned"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_ALLOW_ONLY_LOANED"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_ALLOW_ONLY_LOANED_DESC"
+                default="0"
+                showon="detail_show_toy_res:1"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_res_date"
+                id="detail_show_res_date"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_DESC"
+                default="1"
+                showon="detail_show_toy_res:1"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="detail_show_res_date_now"
+                id="detail_show_res_date_now"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE_NOW_DESC"
+                default="1"
+                showon="detail_show_toy_res:1[AND]detail_show_res_date:1"
+        >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+                type="text"
+                name="detail_toy_res_costs"
+                id="detail_toy_res_costs"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_COSTS_DESC"
+                default=""
+                filter="safehtml"
+                showon="detail_show_toy_res:1"
+        >
+        </field>
+
+        <field
+                type="email"
+                name="detail_toy_res_sendto"
+                id="detail_toy_res_sendto"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDTO"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDTO_DESC"
+                default=""
+                showon="detail_show_toy_res:1"
+        >
+        </field>
+
+        <field
+                type="text"
+                name="detail_toy_res_email_subject"
+                id="detail_toy_res_email_subject"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_EMAIL_SUBJECT"
+                description=""
+                showon="detail_show_toy_res:1"
+        >
+        </field>
+
+        <field
+                type="textarea"
+                name="detail_toy_res_email_body"
+                id="detail_toy_res_email_body"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_EMAIL_BODY"
+                description=""
+                rows="15"
+                cols="40"
+                filter="raw"
+                showon="detail_show_toy_res:1"
+        >
+        </field>
+
+    </fieldset>
 
     <fieldset
             name="LUPO_ONLINESERVICE"
             label="COM_LUPO_ONLINESERVICE"
-            >
+    >
         <field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="lupo_show_toystatus"
-				id="lupo_show_toystatus"
-				label="COM_LUPO_SHOW_TOYSTATUS"
-				description="COM_LUPO_SHOW_TOYSTATUS_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="lupo_show_toystatus"
+                id="lupo_show_toystatus"
+                label="COM_LUPO_SHOW_TOYSTATUS"
+                description="COM_LUPO_SHOW_TOYSTATUS_DESC"
+                default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
         </field>
 
         <field
-				type="radio"
-				class="btn-group btn-group-yesno"
-				name="lupo_prolongation_enabled"
-				id="lupo_prolongation_enabled"
-				label="COM_LUPO_PROLONGATION_ENABLED"
-				description="COM_LUPO_PROLONGATION_ENABLED_DESC"
-				default="0">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
+                type="radio"
+                class="btn-group btn-group-yesno"
+                name="lupo_prolongation_enabled"
+                id="lupo_prolongation_enabled"
+                label="COM_LUPO_PROLONGATION_ENABLED"
+                description="COM_LUPO_PROLONGATION_ENABLED_DESC"
+                default="0">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
         </field>
 
-		<field
-				name="lupo_websynctoken"
-				id="lupo_websynctoken"
-				type="text"
-				maxLenght="32"
-				size="32"
-				label="COM_LUPO_OPTIONS_WEBSYNCTOKEN"
-				description="COM_LUPO_OPTIONS_WEBSYNCTOKEN_DESC"
-				default=""
-				>
-		</field>
+        <field
+                name="lupo_websynctoken"
+                id="lupo_websynctoken"
+                type="text"
+                maxLenght="32"
+                size="32"
+                label="COM_LUPO_OPTIONS_WEBSYNCTOKEN"
+                description="COM_LUPO_OPTIONS_WEBSYNCTOKEN_DESC"
+                default=""
+        >
+        </field>
 
 
     </fieldset>
@@ -570,7 +623,7 @@
     <fieldset
             name="LUPO_INTEGRATION"
             label="COM_LUPO_INTEGRATION"
-            >
+    >
         <field
                 type="list"
                 name="lupo_load_uikit_css"
@@ -584,25 +637,26 @@
             <option value="uikit.gradient.min.css">uikit.gradient.min.css</option>
         </field>
 
-        <field name="lupomenuitem" type="menuitem" label="COM_LUPO_MENUITEM" description="COM_LUPO_MENUITEM_DESCRIPTION" />
+        <field name="lupomenuitem" type="menuitem" label="COM_LUPO_MENUITEM"
+               description="COM_LUPO_MENUITEM_DESCRIPTION"/>
     </fieldset>
 
-	<fieldset
-		name="permissions"
-		label="JCONFIG_PERMISSIONS_LABEL"
-		description="JCONFIG_PERMISSIONS_DESC"
-	>
-		<field
-			name="rules"
-			type="rules"
-			label="JCONFIG_PERMISSIONS_LABEL"
-			class="inputbox"
-			validate="rules"
-			filter="rules"
-			component="com_lupo"
-			section="component"
-		/>
-	</fieldset>
+    <fieldset
+            name="permissions"
+            label="JCONFIG_PERMISSIONS_LABEL"
+            description="JCONFIG_PERMISSIONS_DESC"
+    >
+        <field
+                name="rules"
+                type="rules"
+                label="JCONFIG_PERMISSIONS_LABEL"
+                class="inputbox"
+                validate="rules"
+                filter="rules"
+                component="com_lupo"
+                section="component"
+        />
+    </fieldset>
 
 </config>
 

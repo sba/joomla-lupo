@@ -1,5 +1,11 @@
 # Changelog
 
+### 3.52.0 (August 23, 2021)
+  - allow sending multiple reservations with one mail
+  - reservation email recipient
+  - new option to allow reservation only for loaned toys
+  - upload/websync time display fixed   
+
 ### 3.51.0 (June 15, 2021)
   - show prolongable field within toy detail
   - show upload stats in admin upload view

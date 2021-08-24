@@ -44,15 +44,15 @@ class LupoController extends JControllerLegacy
         $view = $app->input->getCmd('view');
         $id   = $app->input->getCmd('id', 0);
 
-        $com_foto_list_show   = $params->get('foto_list_show', "0");
-        $menu_foto_list_show   = $app->input->getCmd('foto_list_show', '');
+        $com_foto_list_show  = $params->get('foto_list_show', "0");
+        $menu_foto_list_show = $app->input->getCmd('foto_list_show', '');
         if ($menu_foto_list_show == '') {
             $foto_list_show = $com_foto_list_show;
         } else {
             $foto_list_show = $menu_foto_list_show;
         }
 
-        $com_foto_list_prefix = $params->get('foto_list_prefix', "mini_");
+        $com_foto_list_prefix  = $params->get('foto_list_prefix', "mini_");
         $menu_foto_list_prefix = $app->input->getCmd('foto_list_prefix', 'mini_');
         if ($menu_foto_list_prefix == '') {
             $foto_list_prefix = $com_foto_list_prefix;
@@ -60,26 +60,26 @@ class LupoController extends JControllerLegacy
             $foto_list_prefix = $menu_foto_list_prefix;
         }
 
-        $filter_types = [];
-        $com_show_category_filter  = $params->get('category_show_category_filter', '1')=='1';
+        $filter_types              = [];
+        $com_show_category_filter  = $params->get('category_show_category_filter', '1') == '1';
         $menu_show_category_filter = $app->input->getCmd('filter_category_list_show', "");
         if ($menu_show_category_filter == '') {
             $filter_list_show = $com_show_category_filter;
         } else {
             $filter_list_show = $menu_show_category_filter;
         }
-        if($filter_list_show == 1 && ($view != 'category' || $id=='new')){
+        if ($filter_list_show == 1 && ($view != 'category' || $id == 'new')) {
             $filter_types[] = 'category';
         }
 
-        $com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1')=='1';
+        $com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1') == '1';
         $menu_show_agecategory_filter = $app->input->getCmd('filter_agecategory_list_show', "");
         if ($menu_show_agecategory_filter == '') {
             $filter_list_show = $com_show_agecategory_filter;
         } else {
             $filter_list_show = $menu_show_agecategory_filter;
         }
-        if($filter_list_show == 1 && $view != 'agecategory'){
+        if ($filter_list_show == 1 && $view != 'agecategory') {
             $filter_types[] = 'agecategory';
         }
 
@@ -151,23 +151,64 @@ class LupoController extends JControllerLegacy
         }
     }
 
+
+    /**
+     * store reservation to session
+     */
+    public function resadd()
+    {
+        $app     = JFactory::getApplication('site');
+        $jinput  = $app->input;
+        $toynr   = $jinput->get('toynr', '', 'STRING');
+        $toyname = $jinput->get('toyname', '', 'STRING');
+
+        $session              = $app->getSession();
+        $reservations         = $session->get('lupo_reservations');
+        $reservations[$toynr] = (object)['toynr' => $toynr, 'toyname' => $toyname];
+        $session->set('lupo_reservations', $reservations);
+
+        echo json_encode(['msg' => 'ok', 'reservations_nbr' => count($reservations)]);
+    }
+
+
+    /**
+     * delete reservation from session
+     */
+    public function resdel()
+    {
+        $app    = JFactory::getApplication('site');
+        $jinput = $app->input;
+        $toynr  = $jinput->get('toynr', '', 'STRING');
+
+        $session      = $app->getSession();
+        $reservations = $session->get('lupo_reservations');
+        unset($reservations[$toynr]);
+        $session->set('lupo_reservations', $reservations);
+
+        echo json_encode(['msg' => 'ok', 'reservations_nbr' => count($reservations)]);
+    }
+
+
     /**
      * sends reservation email
      */
     public function sendres()
     {
-        $jinput             = JFactory::getApplication()->input;
-        $recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
-        $clientname         = $jinput->get('clientname', '', 'STRING');
-        $clientnr           = $jinput->get('clientnr', '', 'STRING');
-        $clientemail        = $jinput->get('clientemail', '', 'STRING');
-        $clientmobile       = $jinput->get('clientmobile', '', 'STRING');
-        $resdate            = $jinput->get('resdate', '', 'STRING');
-        $comment            = $jinput->get('comment', '', 'STRING');
-        $toynr              = $jinput->get('toynr', '', 'STRING');
-        $toyname            = $jinput->get('toyname', '', 'STRING');
+        $app     = JFactory::getApplication('site');
+        $session = $app->getSession();
+        $config  = JFactory::getConfig();
+        $mailer  = JFactory::getMailer();
+        $params  = $app->getParams();
 
-        $mailer = JFactory::getMailer();
+        $jinput = JFactory::getApplication()->input;
+        //$recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
+        $clientname   = $jinput->get('clientname', '', 'STRING');
+        $clientnr     = $jinput->get('clientnr', '', 'STRING');
+        $clientemail  = $jinput->get('clientemail', '', 'STRING');
+        $clientmobile = $jinput->get('clientmobile', '', 'STRING');
+        $resdate      = $jinput->get('resdate', '', 'STRING');
+        $comment      = $jinput->get('comment', '', 'STRING');
+
 
         $formerror = false;
         if (!$mailer->ValidateAddress($clientemail)) {
@@ -185,43 +226,60 @@ class LupoController extends JControllerLegacy
             return;
         }
 
-        $config = JFactory::getConfig();
-        $sender = [
-            $config->get('mailfrom'),
-            $config->get('fromname'),
-        ];
+        $reservations = $session->get('lupo_reservations');
+        if ($reservations == null) {
+            echo "No reservations found";
+            return;
+        }
+        foreach ($reservations as $reservation) {
+            $reservated_toys .= $reservation->toynr . str_repeat(" ", 15 - strlen($reservation->toynr)) . $reservation->toyname . "\n";
+        }
 
-        $mailer->setSender($sender);
-
-        $recipient = [$clientemail, $config->get('mailfrom')];
-        $mailer->addRecipient($recipient);
-        $mailer->addReplyTo($clientemail);
-
-        $email_text = JText::_('COM_LUPO_RES_EMAIL_BODY');
+        $email_text = $params->get('detail_toy_res_email_body', "");
+        $subject    = $params->get('detail_toy_res_email_subject', "");
 
         $body = $email_text . "\n\n";
-        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_NR'), 15) . "$toynr\n";
-        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOY'), 15) . "$toyname\n";
-        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
+        $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_TOYS'), 15) . "\n$reservated_toys\n";
+        if ($resdate != "") {
+            $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
+        }
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . "$clientnr\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL'), 15) . "$clientemail\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_MOBILE'), 15) . "$clientmobile\n\n";
         $body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_COMMENTS'), 15) . "\n$comment\n\n";
-        $mailer->setSubject(sprintf(JText::_('COM_LUPO_RES_EMAIL_SUBJECT'), $toynr, $toyname, $clientname));
+        $mailer->setSubject(sprintf($subject, $config->get('sitename'), $clientname));
         $mailer->setBody($body);
 
-        $send = $mailer->Send();
-        if ($send !== true) {
-            echo 'Error sending email: ' . $send->__toString();
+
+        $sender = [
+            $config->get('mailfrom'),
+            $config->get('fromname'),
+        ];
+
+        $res_sendto     = $params->get('detail_toy_res_sendto', "");
+        $ludo_recipient = $res_sendto != '' ? $res_sendto : $config->get('mailfrom');
+
+        $mailer->setSender($sender);
+
+        $mailer->addRecipient($clientemail);
+        $mailer->addReplyTo($ludo_recipient);
+        $send_client = $mailer->Send();
+
+        $mailer->clearAddresses();
+        $mailer->clearReplyTos();
+
+        $mailer->addRecipient($ludo_recipient);
+        $mailer->addReplyTo($clientemail);
+        $send_ludo = $mailer->Send();
+
+        if (($send_client && $send_ludo) !== true) {
+            echo 'Error sending email: ' . $send_client->__toString() . $send_ludo->__toString();
         } else {
+            $session->set('lupo_reservations', null);
             echo 'ok';
         }
-
-        return;
-
     }
-
 
     /**
      * prolongation of toy retour date
@@ -431,8 +489,8 @@ class LupoController extends JControllerLegacy
                 }
 
                 //store upload date
-                $stats_file = JPATH_COMPONENT_ADMINISTRATOR.'/upload_stats.json';
-                if(file_exists($stats_file)) {
+                $stats_file = JPATH_ROOT . '/images/upload_stats.json';
+                if (file_exists($stats_file)) {
                     $json = json_decode(file_get_contents($stats_file), true);
                 }
                 $json['websync_ausleihen'] = date('Y-m-d H:i:s');
