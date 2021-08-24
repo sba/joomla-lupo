@@ -557,6 +557,7 @@
                 rows="15"
                 cols="40"
                 filter="raw"
+                showon="detail_show_toy_res:1"
         >
         </field>
 
