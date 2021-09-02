@@ -43,6 +43,8 @@ CREATE TABLE `#__lupo_clients` (
   `username` char(20) DEFAULT NULL,
   `firstname` varchar(50) DEFAULT NULL,
   `lastname` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `aboenddat` date DEFAULT NULL,
   `abotype` varchar(40) DEFAULT NULL,
   UNIQUE KEY `adrnr` (`adrnr`)

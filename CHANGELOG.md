@@ -1,6 +1,9 @@
 # Changelog
 
 ### 3.53.0 (August 31, 2021)
+  - email and phone number added to client table
+
+### 3.53.0 (August 31, 2021)
   - option to hide client login and only show cart-link for reservations
 
 ### 3.52.0 (August 23, 2021)
