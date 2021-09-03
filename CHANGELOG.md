@@ -1,6 +1,7 @@
 # Changelog
 
-### 3.53.0 (August 31, 2021)
+### 3.53.0 (September 03, 2021)
+  - passwort forgotten function to login form added 
   - email and phone number added to client table
 
 ### 3.53.0 (August 31, 2021)
