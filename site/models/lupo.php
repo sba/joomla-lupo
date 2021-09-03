@@ -1052,4 +1052,17 @@ class LupoModelLupoClient extends LupoModelLupo
         return $res;
     }
 
+
+	public function getClient($email) {
+		$db    = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('*')
+			->from('#__lupo_clients')
+			->where('email = ' . $db->quote($email));
+		$db->setQuery($query);
+		$res = $db->loadObject();
+
+		return $res;
+	}
+
 }

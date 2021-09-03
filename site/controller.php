@@ -227,6 +227,7 @@ class LupoController extends JControllerLegacy {
 
 			return;
 		}
+		$reservated_toys='';
 		foreach ($reservations as $reservation) {
 			$reservated_toys .= $reservation->toynr . str_repeat(" ", 15 - strlen($reservation->toynr)) . $reservation->toyname . "\n";
 		}
