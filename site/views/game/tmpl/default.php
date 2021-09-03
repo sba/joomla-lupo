@@ -101,7 +101,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                 <?php if($this->game['in_cart']) { ?>
                 <a class="uk-button uk-button-success uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-check"></i> <?php echo JText::_("COM_LUPO_RES_ADDED"); ?></a>
                 <?php } else { ?>
-                <a class="uk-button uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-cart-plus"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
+                <a class="uk-button uk-button-primary uk-margin-right uk-margin-bottom" id="btnresadd"><i class="uk-icon-cart-plus"></i> <?php echo JText::_("COM_LUPO_RES_TOYS"); ?></a>
                 <?php } ?>
                 <script type="text/javascript">
                     jQuery(document).ready(function ($) {

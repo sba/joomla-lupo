@@ -1,5 +1,12 @@
 # Changelog
 
+### 3.53.0 (September 03, 2021)
+  - passwort forgotten function to login form added 
+  - email and phone number added to client table
+
+### 3.53.0 (August 31, 2021)
+  - option to hide client login and only show cart-link for reservations
+
 ### 3.52.0 (August 23, 2021)
   - allow sending multiple reservations with one mail
   - reservation email recipient

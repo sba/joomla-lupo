@@ -35,7 +35,7 @@ if ($this->foto['show'] == '1') { ?>
         <?php
         //get subsets from category or take generic subsets
         //TODO: Move to Controller/Model
-        $subsets = json_decode($this->{$catType}['subsets'], true);
+        $subsets = json_decode($this->{$catType}['subsets'] ?? '', true);
         if (!is_array($subsets)) {
             if (count($this->subsets['filters']) > 1) {
                 $subsets = $this->subsets;
