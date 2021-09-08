@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.56.0 (September 07, 2021)
+  - remove margin if client login is disabled
+  - caption for cart added if login is disabled
+
 ### 3.55.0 (September 04, 2021)
   - disable password-reset if no email addresses are uploaded
 
