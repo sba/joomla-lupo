@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.57.0 (September 08, 2021)
+  - fix display of cart-link
+
 ### 3.56.0 (September 07, 2021)
   - remove margin if client login is disabled
   - caption for cart added if login is disabled
