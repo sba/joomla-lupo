@@ -117,8 +117,8 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                 .done(function (response) {
                                     response = JSON.parse(response)
                                     if (response.msg === 'ok') {
-                                        $('#lupo_loginlink_reservations').removeClass('uk-hidden');
-                                        $('#lupo_loginlink_reservations span').html(response.reservations_nbr);
+                                        $('.lupo_loginlink_reservations').removeClass('uk-hidden');
+                                        $('#lupo_loginlink_reservations_nbr').html(response.reservations_nbr);
                                         $('#btnresadd')
                                             .html('<i class="uk-icon-check"></i> <?php echo JText::_("COM_LUPO_RES_ADDED"); ?>')
                                             .addClass('uk-button-success')
