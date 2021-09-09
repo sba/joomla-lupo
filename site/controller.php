@@ -21,7 +21,11 @@ jimport('joomla.application.component.helper');
 class LupoController extends JControllerLegacy {
 	function display($cachable = false, $urlparams = []) {
 		$document = JFactory::getDocument();
-		$app      = JFactory::getApplication();
+		$app      = JFactory::getApplication('site');
+
+		//init session anyway, may it helps with reservation problem...
+		$app->getSession();
+
 		$params   = $app->getParams();
 		$uikit    = $params->get('lupo_load_uikit_css', "0");
 		if ($uikit !== "0") {
