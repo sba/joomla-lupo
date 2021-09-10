@@ -761,7 +761,7 @@ class LupoModelLupo extends JModelItem
         $row['link_agecat'] = JRoute::_('index.php?option=com_lupo&view=agecategory&id=' . $row['agecategory_alias']);
 
         //check if toy is in reservation-cart
-        $app     = JFactory::getApplication('site');
+        $app     = JFactory::getApplication('lupo');
         $session = $app->getSession();
 
         $reservations   = $session->get('lupo_reservations');

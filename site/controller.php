@@ -21,7 +21,7 @@ jimport('joomla.application.component.helper');
 class LupoController extends JControllerLegacy {
 	function display($cachable = false, $urlparams = []) {
 		$document = JFactory::getDocument();
-		$app      = JFactory::getApplication('site');
+		$app      = JFactory::getApplication('lupo');
 
 		//init session anyway, may it helps with reservation problem...
 		$app->getSession();
@@ -158,7 +158,7 @@ class LupoController extends JControllerLegacy {
 	 * store reservation to session
 	 */
 	public function resadd() {
-		$app     = JFactory::getApplication('site');
+		$app     = JFactory::getApplication('lupo');
 		$jinput  = $app->input;
 		$toynr   = $jinput->get('toynr', '', 'STRING');
 		$toyname = $jinput->get('toyname', '', 'STRING');
@@ -176,7 +176,7 @@ class LupoController extends JControllerLegacy {
 	 * delete reservation from session
 	 */
 	public function resdel() {
-		$app    = JFactory::getApplication('site');
+		$app    = JFactory::getApplication('lupo');
 		$jinput = $app->input;
 		$toynr  = $jinput->get('toynr', '', 'STRING');
 
@@ -193,7 +193,7 @@ class LupoController extends JControllerLegacy {
 	 * sends reservation email
 	 */
 	public function sendres() {
-		$app     = JFactory::getApplication('site');
+		$app     = JFactory::getApplication('lupo');
 		$session = $app->getSession();
 		$config  = JFactory::getConfig();
 		$mailer  = JFactory::getMailer();

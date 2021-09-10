@@ -1,8 +1,11 @@
 # Changelog
 
+### 3.59.0 (September 10, 2021)
+  - use own session for com_lupo  
+
 ### 3.58.0 (September 09, 2021)
   - start session when loading com_lupo
-  - 
+
 ### 3.57.0 (September 08, 2021)
   - fix display of cart-link
 
