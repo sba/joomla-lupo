@@ -1,10 +1,13 @@
 # Changelog
 
+### 3.61.0 (September 10, 2021)
+  - revert: add base url to loginlink
+
 ### 3.60.0 (September 10, 2021)
   - add base url to loginlink
   - revert: use own session for com_lupo
 
-### 3.58.0 (September 09, 2021)
+### 3.59.0 (September 10, 2021)
   - use own session for com_lupo  
 
 ### 3.58.0 (September 09, 2021)
