@@ -571,7 +571,7 @@
                 name="detail_toy_res_email_subject"
                 id="detail_toy_res_email_subject"
                 label="COM_LUPO_OPTIONS_TOY_RESERVATION_EMAIL_SUBJECT"
-                description=""
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_EMAIL_SUBJECT_DESC"
                 showon="detail_show_toy_res:1"
         >
         </field>
