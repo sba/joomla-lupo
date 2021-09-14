@@ -253,10 +253,16 @@ class LupoController extends JControllerLegacy {
 		$mailer->setBody($body);
 
 
-		$sender = [
-			$config->get('mailfrom'),
-			$config->get('fromname'),
-		];
+		$res_sendfrom     = $params->get('detail_toy_res_sendfrom', "");
+
+		if($res_sendfrom!="") {
+			$sender = $res_sendfrom;
+		} else {
+			$sender = [
+				$config->get('mailfrom'),
+				$config->get('fromname'),
+			];
+		}
 
 		$res_sendto     = $params->get('detail_toy_res_sendto', "");
 		$ludo_recipient = $res_sendto != '' ? $res_sendto : $config->get('mailfrom');

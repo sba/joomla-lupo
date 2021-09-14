@@ -1,5 +1,13 @@
 # Changelog
 
+### 3.63.0 (September 14, 2021)
+  - add option to set reservation email sender address
+  - add (german) default values for res-email to config
+  - remove install postflight which was storing default res. mailtext 
+
+### 3.62.0 (September 11, 2021) 
+  - add description to reservation option 
+
 ### 3.61.0 (September 10, 2021)
   - revert: add base url to loginlink
 

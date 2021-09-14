@@ -557,6 +557,17 @@
 
         <field
                 type="email"
+                name="detail_toy_res_sendfrom"
+                id="detail_toy_res_sendfrom"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDFROM"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDFROM_DESC"
+                default=""
+                showon="detail_show_toy_res:1"
+        >
+        </field>
+
+        <field
+                type="email"
                 name="detail_toy_res_sendto"
                 id="detail_toy_res_sendto"
                 label="COM_LUPO_OPTIONS_TOY_RESERVATION_SENDTO"
@@ -572,6 +583,7 @@
                 id="detail_toy_res_email_subject"
                 label="COM_LUPO_OPTIONS_TOY_RESERVATION_EMAIL_SUBJECT"
                 description="COM_LUPO_OPTIONS_TOY_RESERVATION_EMAIL_SUBJECT_DESC"
+                default="Spielreservation %s, %s"
                 showon="detail_show_toy_res:1"
         >
         </field>
@@ -585,6 +597,7 @@
                 rows="15"
                 cols="40"
                 filter="raw"
+                default="Liebe Kundin, lieber Kunde\n\nVielen Dank für Ihre Reservation.\n\nSobald das von Ihnen gewünschte Spiel bei uns eingetroffen ist, werden Sie von uns benachrichtigt.\n\nBei Spielen oder Geräten, welche auf ein bestimmtes Datum reserviert werden, melden wir uns nur, wenn es zum gewünschten Zeitpunkt nicht erhältlich sein sollte.\n\nBitte beachten Sie, dass dieses automatische E-Mail gleichzeitig eine Bestätigung darstellt.\n\nFreundliche Grüsse\nIhr Ludotheks-Team\n\n-----------------------------------------------------------"
                 showon="detail_show_toy_res:1"
         >
         </field>
