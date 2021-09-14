@@ -54,45 +54,4 @@ class com_lupoInstallerScript
         }
     }
 
-
-    function postflight($type, $parent)
-    {
-        $lang = JFactory::getLanguage();
-        $lang->load($this->component_name, JPATH_SITE, $lang->getTag(), true);
-
-        //check if lang overrides are defined
-        $file = JPATH_SITE . '/language/overrides/' . $lang->getTag() . '.override.ini';
-        $ini  = [];
-        if (is_file($file)) {
-            $content = @file_get_contents($file);
-
-            if ($content && is_string($content)) {
-                $ini = @parse_ini_string($content, true);
-            }
-        }
-
-        $body_default = isset($ini['COM_LUPO_RES_EMAIL_BODY']) ? $ini['COM_LUPO_RES_EMAIL_BODY'] : JText::_('COM_LUPO_RES_EMAIL_BODY');
-        $body_default = str_replace('\n', "\n", $body_default);
-
-        $params = JComponentHelper::getParams($this->component_name);
-
-        $subject = $params->get('detail_toy_res_email_subject', '');
-        if ($subject == "") {
-            $subject = JText::_('COM_LUPO_RES_EMAIL_SUBJECT');
-            $params->set('detail_toy_res_email_subject', $subject);
-        }
-
-        $body = $params->get('detail_toy_res_email_body', '');
-        if ($body == "") {
-            $params->set('detail_toy_res_email_body', $body_default);
-        }
-
-        // Save the parameters
-        $componentid = JComponentHelper::getComponent($this->component_name)->id;
-        $table       = JTable::getInstance('extension');
-        $table->load($componentid);
-        $table->bind(['params' => $params->toString()]);
-        $table->store();
-    }
-    
 }
