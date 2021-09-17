@@ -4,6 +4,7 @@
   - add option to set reservation email sender address
   - add (german) default values for res-email to config
   - remove install postflight which was storing default res. mailtext 
+  - imporove display of navigation-arrows in toy detail view
 
 ### 3.62.0 (September 11, 2021) 
   - add description to reservation option 
