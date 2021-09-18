@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.64.0 (September 17, 2021)
+  - new content plugin to display toy with image in content
+
 ### 3.63.0 (September 14, 2021)
   - add option to set reservation email sender address
   - add (german) default values for res-email to config
