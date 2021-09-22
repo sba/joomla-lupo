@@ -1,0 +1,1 @@
+ALTER TABLE `#__lupo_game_related` CHANGE `number` `number` CHAR(10) NULL;

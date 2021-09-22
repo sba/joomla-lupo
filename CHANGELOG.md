@@ -1,5 +1,11 @@
 # Changelog
 
+### 3.65.0 (September 22, 2021)
+  - fix error showing related toys with index in toynumber 
+
+### 3.64.0 (September 17, 2021)
+  - new content plugin to display toy with image in content
+
 ### 3.63.0 (September 14, 2021)
   - add option to set reservation email sender address
   - add (german) default values for res-email to config
