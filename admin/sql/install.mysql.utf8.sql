@@ -129,7 +129,7 @@ CREATE TABLE `#__lupo_game_genre` (
 CREATE TABLE `#__lupo_game_related` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gameid` int(11) DEFAULT NULL,
-  `number` double DEFAULT NULL,
+  `number` char(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
