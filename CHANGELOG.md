@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.66.0 (September 30, 2021)
+  - rename button: "in cart" to "show cart" (german only)
+
 ### 3.65.0 (September 22, 2021)
   - fix error showing related toys with index in toynumber 
 
