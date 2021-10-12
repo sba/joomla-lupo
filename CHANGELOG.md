@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.67.0 (October 12, 2021)
+  - enable prolongation for toys with today's return date
+
 ### 3.66.0 (September 30, 2021)
   - rename button: "in cart" to "show cart" (german only)
 
