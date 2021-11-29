@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.69.0 (November 29, 2021)
+  - add open graph properties to toy view
+
 ### 3.68.0 (November 09, 2021)
   - bugfix: remove reserved toy as well from list in reservation form
 

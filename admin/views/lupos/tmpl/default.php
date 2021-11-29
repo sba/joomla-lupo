@@ -118,9 +118,7 @@ JHtml::_('behavior.tooltip');
             </a> <span id="filelist">Your browser doesn't have HTML5 support.</span>
             <br/>
             <br/>
-            <a id="uploadfiles" href="javascript:;">
-                <button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
-            </a>
+            <a id="uploadfiles" href="javascript:;"><button class="btn btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button></a>
             <span id="upload_percent"></span>
         </div>
 
