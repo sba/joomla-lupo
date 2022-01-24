@@ -1,6 +1,7 @@
 # Changelog
 
 ### 3.70.0 (Januar 24, 2022)
+  - fix php-notice and cleanup code
 
 ### 3.69.0 (November 29, 2021)
   - add open graph properties to toy view
