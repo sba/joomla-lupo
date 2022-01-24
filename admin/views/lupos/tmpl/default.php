@@ -91,7 +91,7 @@ defined('_JEXEC') or die('Restricted Access');
     });
 </script>
 
-<style type="text/css">
+<style>
     #lupo .btn {
         min-width: 340px;
     }
