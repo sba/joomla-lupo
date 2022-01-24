@@ -1,5 +1,14 @@
 # Changelog
 
+### 3.70.0 (Januar 24, 2022)
+  - fix php-notice and cleanup code
+
+### 3.69.0 (November 29, 2021)
+  - add open graph properties to toy view
+
+### 3.68.0 (November 09, 2021)
+  - bugfix: remove reserved toy as well from list in reservation form
+
 ### 3.67.0 (October 12, 2021)
   - enable prolongation for toys with today's return date
 

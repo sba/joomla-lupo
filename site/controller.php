@@ -26,8 +26,8 @@ class LupoController extends JControllerLegacy {
 		//init session anyway, may it helps with reservation problem...
 		$app->getSession();
 
-		$params   = $app->getParams();
-		$uikit    = $params->get('lupo_load_uikit_css', "0");
+		$params = $app->getParams();
+		$uikit  = $params->get('lupo_load_uikit_css', "0");
 		if ($uikit !== "0") {
 			$document->addStyleSheet("components/com_lupo/uikit/css/" . $uikit, 'text/css', "screen");
 			$document->addStyleSheet("components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit), 'text/css', "screen");
@@ -90,6 +90,12 @@ class LupoController extends JControllerLegacy {
 			case 'game':
 				$model      = $this->getModel();
 				$game       = $model->getGame($id, true);
+
+				$document->setMetaData( 'og:title', $game['title'], 'property' );
+				$description = strlen($game['description_title'])>0?substr($game['description_title'],0,297):substr($game['description'],0,297);
+				$document->setMetaData( 'og:description', $description, 'property' );
+				$document->setMetaData( 'og:image', JUri::base().$game['image'] , 'property' );
+
 				$view       = $this->getView('Game', 'html');
 				$view->game = $game;
 				$view->display();
@@ -231,7 +237,7 @@ class LupoController extends JControllerLegacy {
 
 			return;
 		}
-		$reservated_toys='';
+		$reservated_toys = '';
 		foreach ($reservations as $reservation) {
 			$reservated_toys .= $reservation->toynr . str_repeat(" ", 15 - strlen($reservation->toynr)) . $reservation->toyname . "\n";
 		}
@@ -253,9 +259,9 @@ class LupoController extends JControllerLegacy {
 		$mailer->setBody($body);
 
 
-		$res_sendfrom     = $params->get('detail_toy_res_sendfrom', "");
+		$res_sendfrom = $params->get('detail_toy_res_sendfrom', "");
 
-		if($res_sendfrom!="") {
+		if ($res_sendfrom != "") {
 			$sender = $res_sendfrom;
 		} else {
 			$sender = [

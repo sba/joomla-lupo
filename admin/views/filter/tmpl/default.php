@@ -10,8 +10,6 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
-// load tooltip behavior
-JHtml::_('behavior.tooltip');
 ?>
 
 <script>
@@ -20,7 +18,7 @@ JHtml::_('behavior.tooltip');
     });
 </script>
 
-<style type="text/css">
+<style>
     .right {
         text-align: right !important;
     }

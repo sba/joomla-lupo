@@ -10,8 +10,6 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
-// load tooltip behavior
-JHtml::_('behavior.tooltip');
 ?>
 
 <script>
@@ -20,7 +18,7 @@ JHtml::_('behavior.tooltip');
     });
 </script>
 
-<style type="text/css">
+<style>
     .right {
         text-align: right !important;
     }
@@ -71,7 +69,7 @@ JHtml::_('behavior.tooltip');
                         }
                         ?>
                     </td>
-                    <td><?= $subsets['style']!=null?$subsets['style']:'dropdown' ?></td>
+                    <td><?= isset($subsets['style']) && $subsets['style']!=null?$subsets['style']:'dropdown' ?></td>
                     <td class="right">
                         <a href="<?php echo $link; ?>" class="btn btn-small">
                             <span class="icon-edit"></span> Bearbeiten
