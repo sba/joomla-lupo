@@ -18,7 +18,7 @@ defined('_JEXEC') or die('Restricted Access');
     });
 </script>
 
-<style type="text/css">
+<style>
     .right {
         text-align: right !important;
     }
