@@ -24,7 +24,7 @@ if ($this->foto['show'] == '1') { ?>
     <div class="tm-article-content">
         <h2 class="contentheading"><?php echo $this->title ?></h2>
         <br class="clearfix">
-        <?php echo $this->description ?>
+        <?php echo $this->description ?? '' ?>
         <?php
         //TODO: fix joomla bug
         //$text = "<b>Lorem ipsum dolor sit amet,</b><br>consectetur adipisicing elit. Animi aspernatur aut deserunt dolorum excepturi, laudantium maxime minus molestiae nihil nobis numquam, quam quasi voluptatibus. Accusamus ipsum nullase isquam eos.";
@@ -60,7 +60,7 @@ if ($this->foto['show'] == '1') { ?>
                     </div>
                 </div>
             <?php } else {
-                if ($this->description != "") { ?>
+                if (isset($this->description) && $this->description != "") { ?>
                     <br class="clearfix">
                     <br>
                 <?php } ?>

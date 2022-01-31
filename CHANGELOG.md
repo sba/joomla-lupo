@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.71.0 (January 31, 2022)
+  - fix php-notice
+
 ### 3.70.0 (Januar 24, 2022)
   - fix php-notice and cleanup code
 
