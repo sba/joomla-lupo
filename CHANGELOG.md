@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.72.0 (February 17, 2022)
+  - fix SQL-error if toys are mistakenly duplicated in database
+
 ### 3.71.0 (January 31, 2022)
   - fix php-notice
 
