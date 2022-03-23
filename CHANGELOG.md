@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.73.0 (March 23, 2022)
+  - plupload updated to version 2.3.9
+
 ### 3.72.0 (February 17, 2022)
   - fix SQL-error if toys are mistakenly duplicated in database
 
