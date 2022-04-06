@@ -1,5 +1,14 @@
 # Changelog
 
+### 3.74.0 (April 07, 2022)
+  - send reservation: change button caption to "next"
+
+### 3.73.0 (March 23, 2022)
+  - plupload updated to version 2.3.9
+
+### 3.72.0 (February 17, 2022)
+  - fix SQL-error if toys are mistakenly duplicated in database
+
 ### 3.71.0 (January 31, 2022)
   - fix php-notice
 

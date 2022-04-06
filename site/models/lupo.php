@@ -561,7 +561,7 @@ class LupoModelLupo extends JModelItem
 					FROM
 					    #__lupo_game_genre
                     LEFT JOIN #__lupo_genres ON #__lupo_genres.id = genreid
-					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . ")");
+					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . " LIMIT 1)");
         $res['genres_list'] = $db->loadAssocList();
         foreach ($res['genres_list'] as &$genre) {
             $genre['link'] = JRoute::_('index.php?option=com_lupo&view=genre&id=' . $genre['alias']);;
@@ -572,7 +572,7 @@ class LupoModelLupo extends JModelItem
 					    *
 					FROM
 					    #__lupo_game_documents
-					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . ")");
+					WHERE gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . " LIMIT 1)");
         $res['documents'] = $db->loadAssocList();
 
         //parse document fields
@@ -672,7 +672,7 @@ class LupoModelLupo extends JModelItem
                               `#__lupo_game`
                               LEFT JOIN `#__lupo_game_editions` ON `#__lupo_game`.id = `#__lupo_game_editions`.`gameid`
                           ) AS g ON g.gameno = CONCAT(r.`number` , IF(INSTR(r.number, '.')=0,'.0',''))
-                        WHERE r.gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . ")
+                        WHERE r.gameid = (SELECT id FROM #__lupo_game WHERE number=" . $db->quote($id) . " LIMIT 1)
                         ORDER BY r.id");
 
             $res['related'] = $db->loadAssocList();
