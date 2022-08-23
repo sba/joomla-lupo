@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `#__lupo_game_documents`;
 DROP TABLE IF EXISTS `#__lupo_game_genre`;
 DROP TABLE IF EXISTS `#__lupo_game_documents`;
 DROP TABLE IF EXISTS `#__lupo_game_related`;
+DROP TABLE IF EXISTS `#__lupo_reservations_web`;
 
 
 CREATE TABLE `#__lupo_agecategories` (
@@ -126,6 +127,7 @@ CREATE TABLE `#__lupo_game_genre` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE `#__lupo_game_related` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gameid` int(11) DEFAULT NULL,
@@ -142,3 +144,12 @@ CREATE TABLE `#__lupo_genres` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`alias`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `#__lupo_reservations_web` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `game_number` char(10) NOT NULL,
+  `adrnr` int(10) unsigned DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;

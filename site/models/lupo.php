@@ -985,6 +985,23 @@ class LupoModelLupo extends JModelItem
         return $subsets;
     }
 
+
+	/**
+	 * stores to reservation cache table
+	 * reservations remain in this table until its added to lupo
+	 *
+	 * @since 3.74.0
+	 */
+
+	public function storeReservation($game_number, $adrnr) {
+		$tupel = new stdClass;
+		$tupel->game_number = $game_number;
+		$tupel->adrnr = $adrnr;
+
+		$db    = JFactory::getDBO();
+		$db->insertObject('#__lupo_reservations_web', $tupel);
+	}
+
 }
 
 

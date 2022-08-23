@@ -9,3 +9,4 @@ DROP TABLE IF EXISTS `#__lupo_game_documents`;
 DROP TABLE IF EXISTS `#__lupo_game_genre`;
 DROP TABLE IF EXISTS `#__lupo_game_documents`;
 DROP TABLE IF EXISTS `#__lupo_game_related`;
+DROP TABLE IF EXISTS `#__lupo_reservations_web`;
