@@ -358,18 +358,20 @@ class LupoModelLupo extends JModelItem
 					, #__lupo_game.play_duration
 					, #__lupo_game.players
 					, #__lupo_game.keywords
-					, #__lupo_categories.alias AS category_alias 
-					, #__lupo_categories.title as category
 					, #__lupo_game.age_catid
-					, #__lupo_agecategories.alias AS agecategory_alias 
-					, #__lupo_agecategories.title as age_category
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
 					, #__lupo_game_editions.acquired_date
 					, #__lupo_game_editions.next_reservation
+     				, #__lupo_game_editions.next_reservation
+					, #__lupo_categories.alias AS category_alias 
+					, #__lupo_categories.title as category
+					, #__lupo_agecategories.alias AS agecategory_alias 
+					, #__lupo_agecategories.title as age_category
 					, #__lupo_clients_borrowed.return_date
                     , #__lupo_clients_borrowed.return_extended
-                    , #__lupo_clients_borrowed.return_date_extended
+     				, #__lupo_clients_borrowed.return_date_extended
+                    , #__lupo_reservations_web.created_at as reservation_web_created_at
 					, t_userdefined.value as userdefined
 					, COUNT(#__lupo_game_editions.id) as nbr
 				FROM #__lupo_game
@@ -377,6 +379,7 @@ class LupoModelLupo extends JModelItem
 				LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 				LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 				LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game.number = #__lupo_clients_borrowed.game_number)
+				LEFT JOIN #__lupo_reservations_web ON (#__lupo_game.number = #__lupo_reservations_web.game_number)				    
 				LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 				%%WHERE%%
 				GROUP BY #__lupo_game.id
@@ -449,15 +452,16 @@ class LupoModelLupo extends JModelItem
 							, #__lupo_game.play_duration
 							, #__lupo_game.players
 							, #__lupo_game.keywords
-							, #__lupo_categories.alias AS category_alias 
-							, #__lupo_categories.title AS category
 							, #__lupo_game.age_catid
-							, #__lupo_agecategories.alias AS agecategory_alias 
-							, #__lupo_agecategories.title AS age_category
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
 							, #__lupo_game_editions.acquired_date
 							, #__lupo_game_editions.next_reservation
+							, #__lupo_categories.alias AS category_alias 
+							, #__lupo_categories.title AS category
+							, #__lupo_agecategories.alias AS agecategory_alias 
+							, #__lupo_agecategories.title AS age_category
+     						, #__lupo_reservations_web.created_at as reservation_web_created_at
 							, #__lupo_clients_borrowed.return_date
   							, #__lupo_clients_borrowed.return_extended
   							, #__lupo_clients_borrowed.return_date_extended
@@ -468,6 +472,7 @@ class LupoModelLupo extends JModelItem
 						LEFT JOIN #__lupo_agecategories ON (#__lupo_game.age_catid = #__lupo_agecategories.id)
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game.number = #__lupo_clients_borrowed.game_number)
+						LEFT JOIN #__lupo_reservations_web ON (#__lupo_game.number = #__lupo_reservations_web.game_number)
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						INNER JOIN #__lupo_game_genre ON (#__lupo_game.id = #__lupo_game_genre.gameid)
 						LEFT JOIN #__lupo_genres ON (#__lupo_game_genre.genreid = #__lupo_genres.id)
@@ -534,6 +539,7 @@ class LupoModelLupo extends JModelItem
 					    , #__lupo_agecategories.alias AS agecategory_alias
 					    , #__lupo_agecategories.title AS age_category
 					    , t_userdefined.value AS userdefined
+     					, #__lupo_reservations_web.created_at as reservation_web_created_at
 						, #__lupo_clients_borrowed.return_date
                         , #__lupo_clients_borrowed.return_extended
                         , #__lupo_clients_borrowed.return_date_extended
@@ -544,6 +550,7 @@ class LupoModelLupo extends JModelItem
 						LEFT JOIN (SELECT gameid, `value` FROM #__lupo_game_documents WHERE type='userdefined') AS t_userdefined ON #__lupo_game.id = t_userdefined.gameid
 						LEFT JOIN #__lupo_game_editions ON (#__lupo_game.id = #__lupo_game_editions.gameid)
 						LEFT JOIN #__lupo_clients_borrowed ON (#__lupo_game.number = #__lupo_clients_borrowed.game_number)
+						LEFT JOIN #__lupo_reservations_web ON (#__lupo_game.number = #__lupo_reservations_web.game_number)
 					WHERE #__lupo_game.number = " . $db->quote($id));
         $res = $db->loadAssoc();
 
@@ -551,7 +558,8 @@ class LupoModelLupo extends JModelItem
             return 'error';
         }
 
-        $res += $this->getLoanStatus($res);
+		//nötig hier? unterhalb via compileGame  nochmals dasselbe!!
+        //$res += $this->getLoanStatus($res);
 
         //load genres
         $db->setQuery("SELECT
@@ -654,6 +662,7 @@ class LupoModelLupo extends JModelItem
                           , NULL AS return_extended
                           , NULL AS return_date_extended
                           , NULL AS next_reservation
+                          , NULL AS reservation_web_created_at
                         FROM
                           `#__lupo_game_related` AS r
                           LEFT JOIN
@@ -802,6 +811,9 @@ class LupoModelLupo extends JModelItem
         } elseif ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime($days_show_reservation, time()))) {
             $availability['availability_color'] = 'orange';
             $availability['availability_text']  = JText::_("COM_LUPO_RESERVED_FROM") . ' ' . date("d.m.Y", strtotime($row['next_reservation']));
+        } elseif ($row['reservation_web_created_at'] != null && $row['reservation_web_created_at'] < date("Y-m-d", strtotime($days_show_reservation, time()))) {
+            $availability['availability_color'] = 'orange';
+            $availability['availability_text']  = JText::_("COM_LUPO_RESERVED_FROM") . ' ' . date("d.m.Y", strtotime($row['reservation_web_created_at']));
         } else {
             $availability['availability_color'] = 'green';
             $availability['availability_text']  = JText::_("COM_LUPO_AVAILABLE");
@@ -993,13 +1005,13 @@ class LupoModelLupo extends JModelItem
 	 * @since 3.74.0
 	 */
 
-	public function storeReservation($game_number, $adrnr) {
-		$tupel = new stdClass;
-		$tupel->game_number = $game_number;
-		$tupel->adrnr = $adrnr;
+	public function storeReservation($adrnr, $game_number) {
+		$tuple = new stdClass;
+		$tuple->game_number = $game_number;
+		$tuple->adrnr = $adrnr;
 
 		$db    = JFactory::getDBO();
-		$db->insertObject('#__lupo_reservations_web', $tupel);
+		$db->insertObject('#__lupo_reservations_web', $tuple);
 	}
 
 }
