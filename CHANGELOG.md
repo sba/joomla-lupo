@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.75.0 (August 23, 2022)
+### 3.75.0 (August 29, 2022)
   - store online reservations to cache table
 
 ### 3.74.0 (April 07, 2022)
