@@ -88,13 +88,13 @@ class LupoController extends JControllerLegacy {
 
 		switch ($view) {
 			case 'game':
-				$model      = $this->getModel();
-				$game       = $model->getGame($id, true);
+				$model = $this->getModel();
+				$game  = $model->getGame($id, true);
 
-				$document->setMetaData( 'og:title', $game['title'], 'property' );
-				$description = strlen($game['description_title'])>0?substr($game['description_title'],0,297):substr($game['description'],0,297);
-				$document->setMetaData( 'og:description', $description, 'property' );
-				$document->setMetaData( 'og:image', JUri::base().$game['image'] , 'property' );
+				$document->setMetaData('og:title', $game['title'], 'property');
+				$description = strlen($game['description_title']) > 0 ? substr($game['description_title'], 0, 297) : substr($game['description'], 0, 297);
+				$document->setMetaData('og:description', $description, 'property');
+				$document->setMetaData('og:image', JUri::base() . $game['image'], 'property');
 
 				$view       = $this->getView('Game', 'html');
 				$view->game = $game;
@@ -204,6 +204,7 @@ class LupoController extends JControllerLegacy {
 		$config  = JFactory::getConfig();
 		$mailer  = JFactory::getMailer();
 		$params  = $app->getParams();
+		$model   = $this->getModel();
 
 		$jinput = JFactory::getApplication()->input;
 		//$recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
@@ -239,6 +240,7 @@ class LupoController extends JControllerLegacy {
 		}
 		$reservated_toys = '';
 		foreach ($reservations as $reservation) {
+			$model->storeReservation($clientnr, $reservation->toynr);
 			$reservated_toys .= $reservation->toynr . str_repeat(" ", 15 - strlen($reservation->toynr)) . $reservation->toyname . "\n";
 		}
 
@@ -457,6 +459,9 @@ class LupoController extends JControllerLegacy {
 					}
 
 					if (isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
+						if ($game_nr == 1904) {
+							$stop = true;
+						}
 						$client                       = new stdClass();
 						$client->lupo_id              = $row->id;  //LFDAUSLEIHNR
 						$client->adrnr                = $row->adr; //ADRNR

@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `#__lupo_game_documents`;
 DROP TABLE IF EXISTS `#__lupo_game_genre`;
 DROP TABLE IF EXISTS `#__lupo_game_documents`;
 DROP TABLE IF EXISTS `#__lupo_game_related`;
+DROP TABLE IF EXISTS `#__lupo_reservations_web`;
 
 
 CREATE TABLE `#__lupo_agecategories` (
@@ -22,7 +23,7 @@ CREATE TABLE `#__lupo_agecategories` (
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_categories` (
@@ -35,7 +36,7 @@ CREATE TABLE `#__lupo_categories` (
   `published` tinyint(1) NOT NULL DEFAULT '1',
   `sort` smallint(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_clients` (
@@ -48,7 +49,7 @@ CREATE TABLE `#__lupo_clients` (
   `aboenddat` date DEFAULT NULL,
   `abotype` varchar(40) DEFAULT NULL,
   UNIQUE KEY `adrnr` (`adrnr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_clients_borrowed` (
@@ -64,7 +65,7 @@ CREATE TABLE `#__lupo_clients_borrowed` (
   `reminder_sent` tinyint(4) DEFAULT '0',
   `next_reservation` date DEFAULT NULL,
   `quarantine` tinyint(4) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_game` (
@@ -90,7 +91,7 @@ CREATE TABLE `#__lupo_game` (
   KEY `game_catid` (`catid`),
   KEY `game_age_catid` (`age_catid`),
   KEY `game_number` (`number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_game_documents` (
@@ -102,7 +103,7 @@ CREATE TABLE `#__lupo_game_documents` (
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `documents_gameid` (`gameid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_game_editions` (
@@ -116,7 +117,7 @@ CREATE TABLE `#__lupo_game_editions` (
   `content` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_game_genre` (
@@ -124,14 +125,15 @@ CREATE TABLE `#__lupo_game_genre` (
   `gameid` int(11) NOT NULL,
   `genreid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
 
 CREATE TABLE `#__lupo_game_related` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `gameid` int(11) DEFAULT NULL,
   `number` char(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__lupo_genres` (
@@ -141,4 +143,13 @@ CREATE TABLE `#__lupo_genres` (
   `subsets` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre` (`alias`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `#__lupo_reservations_web` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `game_number` char(10) NOT NULL,
+  `adrnr` int(10) unsigned DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
