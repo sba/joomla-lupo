@@ -459,9 +459,6 @@ class LupoController extends JControllerLegacy {
 					}
 
 					if (isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
-						if ($game_nr == 1904) {
-							$stop = true;
-						}
 						$client                       = new stdClass();
 						$client->lupo_id              = $row->id;  //LFDAUSLEIHNR
 						$client->adrnr                = $row->adr; //ADRNR
