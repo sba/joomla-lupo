@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.76.0 (September 1, 2022)
+  - delete in online-reservation table if reservation in lupo exists for toy
+
 ### 3.75.0 (August 29, 2022)
   - store online reservations to cache table
 

@@ -499,6 +499,16 @@ class LupoController extends JControllerLegacy {
 									}
 								}
 							}
+
+							//delete in online-reservation table if reservation in lupo exists for this toy
+							if($row->rs){
+								$query = $db->getQuery(true);
+								$query->delete($db->quoteName('#__lupo_reservations_web'));
+								$query->where($db->quoteName('game_number') . ' = ' . $db->quote($game_nr));
+								$db->setQuery($query);
+								$db->execute();
+							}
+
 						} catch (Exception $e) {
 							echo "error";
 							//echo $e->getMessage();  //todo error handling here and in LUPO
