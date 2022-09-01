@@ -564,7 +564,6 @@ class LupoController extends JControllerLegacy {
 					}
 
 					if (isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
-
 						try {
 							$fields     = [
 								$db->quoteName('next_reservation') . ' = ' . $db->quote($row->rs),
@@ -578,6 +577,15 @@ class LupoController extends JControllerLegacy {
 
 							$db->setQuery($query);
 							$db->execute();
+
+
+							//delete in online-reservation table if reservation in lupo exists for this toy
+							$query = $db->getQuery(true);
+							$query->delete($db->quoteName('#__lupo_reservations_web'));
+							$query->where($db->quoteName('game_number') . ' = ' . $db->quote($game_nr));
+							$db->setQuery($query);
+							$db->execute();
+
 						} catch (Exception $e) {
 							echo "error"; //todo
 							die();
