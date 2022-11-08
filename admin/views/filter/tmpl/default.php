@@ -101,5 +101,25 @@ defined('_JEXEC') or die('Restricted Access');
     } ?>
     <pre><?=implode(", ", $players)?></pre>
 
+    <p>
+        Alle möglichen Filter einzeln aufgelistet:
+    </p>
+	<?php
+	foreach ($this->categories as $category){
+		$filter_def[][$category['title']] = ["categories" => [$category['alias']]];
+	}
+	foreach ($this->agecategories as $agecategory){
+		$filter_def[][$agecategory['title']] = ["agecategories" => [$agecategory['alias']]];
+	}
+	foreach ($this->genres as $genre){
+		$filter_def[][$genre['title']] = ["genres" => [$genre['alias']]];
+	}
+	foreach ($this->players as $player){
+		$filter_def[][$player['title']] = ["players" => [$player['alias']]];
+	}
+    ?>
+    <pre><?= json_encode(['filters' => $filter_def], JSON_PRETTY_PRINT); ?></pre>
+
+
 </div>
 
