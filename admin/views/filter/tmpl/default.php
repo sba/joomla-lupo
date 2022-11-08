@@ -57,6 +57,8 @@ defined('_JEXEC') or die('Restricted Access');
         }
         } zulässig.
         Ist "style" nicht gesetzt, so wird automatisch "dropdown" definiert.
+        <br>
+        Die einzelnen Filter werden logisch mit ODER verknüpft: {"players": ["1", "2"], "genres": ["lesen"]} Zeigt alle Spiele an, bei welchen eines der Argumente zutrifft.
         <br><br>
         Markup Filter-Button:
     </p>
@@ -100,6 +102,26 @@ defined('_JEXEC') or die('Restricted Access');
         $players[] = '"'. JApplicationHelper::stringURLSafe($player['players']).'"';
     } ?>
     <pre><?=implode(", ", $players)?></pre>
+
+    <p>
+        Alle möglichen Filter einzeln aufgelistet:
+    </p>
+	<?php
+	foreach ($this->categories as $category){
+		$filter_def[][$category['title']] = ["categories" => [$category['alias']]];
+	}
+	foreach ($this->agecategories as $agecategory){
+		$filter_def[][$agecategory['title']] = ["agecategories" => [$agecategory['alias']]];
+	}
+	foreach ($this->genres as $genre){
+		$filter_def[][$genre['genre']] = ["genres" => [$genre['alias']]];
+	}
+	foreach ($this->players as $player){
+		$filter_def[][$player['players']] = ["genres" => [$player['players']]] ; //Caution: Different array structure
+	}
+    ?>
+    <pre><?= json_encode(['filters' => $filter_def], JSON_PRETTY_PRINT); ?></pre>
+
 
 </div>
 
