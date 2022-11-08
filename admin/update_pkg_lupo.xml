@@ -5,7 +5,7 @@
       <description>LUPO Package</description>
 	  <creationDate>November 2022</creationDate>
 	  <authorEmail>stefan@databauer.ch</authorEmail>
-	  <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
+	  <authorUrl>https://www.ludothekprogramm.ch/</authorUrl>
 	  <copyright>Copyright (C) databauer / Stefan Bauer</copyright>	  
       <element>com_lupo</element>
       <type>component</type>
