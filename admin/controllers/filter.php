@@ -43,16 +43,19 @@ class LupoControllerFilter extends JControllerForm
 
         $input = JFactory::getApplication()->input;
         $data['subsets'] = $input->get('subsets','','RAW');
+	    $data['id'] = $input->get('id');
 
         if($data['subsets']!="") {
             $json = json_decode($data['subsets']);
             if ($json !== null) {
-                $data['id'] = $input->get('id');
                 $model->save($data);
                 $app->enqueueMessage(JText::_('Erfolgreich gespeichert'), 'message');
             } else {
                 $app->enqueueMessage(JText::_('Ungültiges JSON, nicht gespeichert'), 'error');
             }
+        } else {
+	        $model->save($data);
+	        $app->enqueueMessage(JText::_('JSON gelöscht'), 'message');
         }
 
         $app->redirect('index.php?option=com_lupo&view=filters');
