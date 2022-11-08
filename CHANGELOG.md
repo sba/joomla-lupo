@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.77.0 (November 8, 2022)
+### 3.76.0 (September 1, 2022)
   - show genres in autofilter-select
   - allow deletion of filters
 
