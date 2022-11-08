@@ -941,14 +941,24 @@ class LupoModelLupo extends JModelItem {
 			return ['style' => 'dropdown', 'filters' => []];
 		}
 
-		//read all available age/cats in games
+		//read all available age/cats/genres in games
+		$available_genres = [];
 		foreach ($games as $game) {
 			$available_categories[$game['category_alias']]       = $game['category_alias'];
 			$available_agecategories[$game['agecategory_alias']] = $game['agecategory_alias'];
+
+			$genres = explode(',', $game['genres']);
+			foreach ($genres as $genre) {
+				if ($genre !== "") {
+					$available_genres[$genre] = $genre;
+				}
+			}
 		}
+		asort($available_genres);
 
 		$agecategories = [];
 		$categories    = [];
+		$genres        = [];
 		foreach ($types as $type) {
 			switch ($type) {
 				case 'agecategory':
@@ -956,6 +966,9 @@ class LupoModelLupo extends JModelItem {
 					break;
 				case 'category':
 					$categories = $this->getCategories(false, false);
+					break;
+				case 'genre':
+					$genres = $this->getGenres();
 					break;
 			}
 		}
@@ -968,6 +981,11 @@ class LupoModelLupo extends JModelItem {
 		foreach ($agecategories as $agecategory) {
 			if (array_key_exists($agecategory['alias'], $available_agecategories)) {
 				$filters[$agecategory['title']] = ['categories' => [], 'agecategories' => [$agecategory['alias']], 'genres' => []];
+			}
+		}
+		foreach ($genres as $genre) {
+			if (array_key_exists($genre['alias'], $available_genres)) {
+				$filters[$genre['title']] = ['categories' => [], 'agecategories' => [], 'genres' => [$genre['alias']]];
 			}
 		}
 
