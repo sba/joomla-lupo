@@ -102,11 +102,12 @@ class LupoController extends JControllerLegacy {
 				$model = $this->getModel();
 				$game  = $model->getGame($id, true);
 
-				$document->setMetaData('og:title', $game['title'], 'property');
-				$description = strlen($game['description_title']) > 0 ? substr($game['description_title'], 0, 297) : substr($game['description'], 0, 297);
-				$document->setMetaData('og:description', $description, 'property');
-				$document->setMetaData('og:image', JUri::base() . $game['image'], 'property');
-
+				if($game!=='error') {
+					$document->setMetaData('og:title', $game['title'], 'property');
+					$description = strlen($game['description_title']) > 0 ? substr($game['description_title'], 0, 297) : substr($game['description'], 0, 297);
+					$document->setMetaData('og:description', $description, 'property');
+					$document->setMetaData('og:image', JUri::base() . $game['image'], 'property');
+				}
 				$view       = $this->getView('Game', 'html');
 				$view->game = $game;
 				$view->display();
