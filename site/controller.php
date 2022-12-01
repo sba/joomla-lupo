@@ -102,11 +102,12 @@ class LupoController extends JControllerLegacy {
 				$model = $this->getModel();
 				$game  = $model->getGame($id, true);
 
-				$document->setMetaData('og:title', $game['title'], 'property');
-				$description = strlen($game['description_title']) > 0 ? substr($game['description_title'], 0, 297) : substr($game['description'], 0, 297);
-				$document->setMetaData('og:description', $description, 'property');
-				$document->setMetaData('og:image', JUri::base() . $game['image'], 'property');
-
+				if($game!=='error') {
+					$document->setMetaData('og:title', $game['title'], 'property');
+					$description = strlen($game['description_title']) > 0 ? substr($game['description_title'], 0, 297) : substr($game['description'], 0, 297);
+					$document->setMetaData('og:description', $description, 'property');
+					$document->setMetaData('og:image', JUri::base() . $game['image'], 'property');
+				}
 				$view       = $this->getView('Game', 'html');
 				$view->game = $game;
 				$view->display();
@@ -117,7 +118,8 @@ class LupoController extends JControllerLegacy {
 				$games         = $model->getGamesByGenre($id, $foto_list_prefix);
 				$subsets       = $model->getSubsets($filter_types, $games);
 				$view          = $this->getView('Genre', 'html');
-				$view->title   = $genre['genre'];
+				$view->title   = $genre['genre'] ??JText::_('JERROR_PAGE_NOT_FOUND');
+				$view->description = '';
 				$view->genre   = $genre;
 				$view->subsets = $subsets;
 				$view->games   = $games;
@@ -130,8 +132,8 @@ class LupoController extends JControllerLegacy {
 				$games             = $model->getGames($id, 'catid', $foto_list_prefix);
 				$subsets           = $model->getSubsets($filter_types, $games);
 				$view              = $this->getView('Category', 'html');
-				$view->title       = $category['title'];
-				$view->description = $category['description'];
+				$view->title       = $category['title'] ?? JText::_('JERROR_PAGE_NOT_FOUND');
+				$view->description = $category['description'] ?? '';
 				$view->category    = $category;
 				$view->subsets     = $subsets;
 				$view->games       = $games;
@@ -144,8 +146,8 @@ class LupoController extends JControllerLegacy {
 				$games             = $model->getGames($id, 'age_catid', $foto_list_prefix);
 				$subsets           = $model->getSubsets($filter_types, $games);
 				$view              = $this->getView('Agecategory', 'html');
-				$view->title       = $agecategory['title'];
-				$view->description = $agecategory['description'];
+				$view->title       = $agecategory['title'] ?? JText::_('JERROR_PAGE_NOT_FOUND');
+				$view->description = $agecategory['description'] ?? '';
 				$view->agecategory = $agecategory;
 				$view->subsets     = $subsets;
 				$view->games       = $games;

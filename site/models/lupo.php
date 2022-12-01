@@ -959,6 +959,7 @@ class LupoModelLupo extends JModelItem {
 		$agecategories = [];
 		$categories    = [];
 		$genres        = [];
+		$filters = false;
 		foreach ($types as $type) {
 			switch ($type) {
 				case 'agecategory':

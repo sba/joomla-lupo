@@ -29,7 +29,7 @@ class LupoViewGenre extends JViewLegacy {
         }
 
 		// Check for empty title and add site name if param is set
-		$title = $this->genre['genre'];
+		$title = $this->genre['genre'] ?? $this->title;
 		if (empty($title)) {
 			$title = $app->get('sitename');
 		} elseif ($app->get('sitename_pagetitles', 0) == 1) {
