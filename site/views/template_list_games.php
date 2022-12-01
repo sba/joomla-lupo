@@ -37,7 +37,7 @@ if ($this->foto['show'] == '1') { ?>
         //TODO: Move to Controller/Model
         $subsets = json_decode($this->{$catType}['subsets'] ?? '', true);
         if (!is_array($subsets)) {
-            if (count($this->subsets['filters']) > 1) {
+            if (is_array($this->subsets['filters']) && count($this->subsets['filters']) > 1) {
                 $subsets = $this->subsets;
             }
         }
