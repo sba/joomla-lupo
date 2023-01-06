@@ -1,6 +1,9 @@
 # Changelog
 
 ### 3.78.0 (December 1, 2022)
+  - fix toylist upload error if genre erroneously starting with a comma
+
+### 3.78.0 (December 1, 2022)
   - fix php 8 warning
 
 ### 3.77.0 (November 8, 2022) 
