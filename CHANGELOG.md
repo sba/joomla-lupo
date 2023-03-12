@@ -1,6 +1,6 @@
 # Changelog
 
-### 3.79.0 (January 6, 2023)
+### 3.80.0 (March 11, 2023)
   - fix toylist upload error if genre erroneously starting with a comma
 
 ### 3.78.0 (December 1, 2022)
