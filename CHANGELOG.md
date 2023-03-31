@@ -1,6 +1,9 @@
 # Changelog
 
 ### 3.80.0 (March 14, 2023)
+  - increase upload max_file_size to 500mb 
+
+### 3.80.0 (March 14, 2023)
   - add search by fabricator, author and artist
 
 ### 3.79.0 (January 6, 2023)

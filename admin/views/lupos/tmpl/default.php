@@ -20,7 +20,7 @@ defined('_JEXEC') or die('Restricted Access');
             browse_button: 'pickfiles',
             container: 'container',
 
-            max_file_size: '250mb',
+            max_file_size: '500mb',
             multi_selection: false,
             max_file_count: 1,
 
