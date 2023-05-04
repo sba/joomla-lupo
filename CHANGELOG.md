@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.82.0 (May 02, 2023)
+  - fix toylist upload-error for genre with strlen > 30
+
 ### 3.81.0 (March 31, 2023)
   - increase upload max_file_size to 500mb 
 
