@@ -380,21 +380,17 @@ class LupoController extends JControllerLegacy {
 
 		$db = JFactory::getDbo();
 
+		if (!$this->autohorize($token)) {
+			echo 'error_token';
+
+			return;
+		}
+
 		switch ($act) {
 			case 'authorize':
-				if ($this->autohorize($token)) {
-					echo "ok";
-				} else {
-					echo 'error_token';
-				}
+				echo "ok";
 				break;
 			case 'adr':
-				if (!$this->autohorize($token)) {
-					echo 'error_token';
-
-					return;
-				}
-
 				//$data = '[{ "nr":"41","un":"REGU","vn":"Regula","nn":"Gubler","em":"mail@example.com","te":"079 132 45 67","ae":"2016-9-15","at":"Jahresabo"}]';
 				$rows = json_decode($data);
 
@@ -430,12 +426,6 @@ class LupoController extends JControllerLegacy {
 				break;
 
 			case 'aus':
-				if (!$this->autohorize($token)) {
-					echo 'error_token';
-
-					return;
-				}
-
 				$rows = json_decode($data);
 
 				if (!is_array($rows)) {
@@ -539,12 +529,6 @@ class LupoController extends JControllerLegacy {
 				break;
 
 			case 'res':
-				if (!$this->autohorize($token)) {
-					echo 'error_token';
-
-					return;
-				}
-
 				//$data= [{"nr":"0.1", "rs":"2016-05-12"}]
 				$rows = json_decode($data);
 
@@ -610,12 +594,6 @@ class LupoController extends JControllerLegacy {
 
 			case 'prolong':
 				// reads online prolongations to store them in LUPO
-				if (!$this->autohorize($token)) {
-					echo 'error_token';
-
-					return;
-				}
-
 				$query = $db->getQuery(true);
 				$query->select('#__lupo_game.number, #__lupo_clients_borrowed.adrnr, #__lupo_clients_borrowed.return_date_extended, #__lupo_clients_borrowed.tax_extended')
 					->from('#__lupo_clients_borrowed')
@@ -627,6 +605,9 @@ class LupoController extends JControllerLegacy {
 
 				$json = json_encode($res);
 				echo $json;
+				break;
+			default;
+				echo 'nothing to do';
 				break;
 		}
 

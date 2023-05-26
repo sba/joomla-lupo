@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.83.0 (May 26, 2023)
+  - improve api response on error
+
 ### 3.82.0 (May 02, 2023)
   - fix toylist upload-error for genre with strlen > 30
 
