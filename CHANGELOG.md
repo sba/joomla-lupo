@@ -1,5 +1,14 @@
 # Changelog
 
+### 3.83.0 (May 26, 2023)
+  - improve api response on error
+
+### 3.82.0 (May 02, 2023)
+  - fix toylist upload-error for genre with strlen > 30
+
+### 3.81.0 (March 31, 2023)
+  - increase upload max_file_size to 500mb 
+
 ### 3.80.0 (March 14, 2023)
   - add search by fabricator, author and artist
 
@@ -203,7 +212,7 @@
   
 ### 3.23.0 (January 13, 2020)
   - categories module: show order of filtered genres as written
-  - categories module: show <hr> for - in line
+  - categories module: show \<hr> for - in line
 
 ### 3.22.0 (December 27, 2019)
   - add another missing field to sql-install script
