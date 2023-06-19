@@ -606,8 +606,11 @@ class LupoController extends JControllerLegacy {
 				$json = json_encode($res);
 				echo $json;
 				break;
+			case '':
+				echo 'auth ok but act not set';
+				break;
 			default;
-				echo 'nothing to do';
+				echo 'auth ok but act unknown';
 				break;
 		}
 
