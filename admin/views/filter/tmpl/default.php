@@ -37,7 +37,7 @@ defined('_JEXEC') or die('Restricted Access');
 
     ?>
     <form action="<?= JRoute::_('index.php?option=com_lupo&view=filter') ?>" method="post" id="adminForm" name="adminForm">
-        <textarea name="subsets" id="subsets" style="width: 98%" rows="30"><?php
+        <textarea name="subsets" id="subsets" style="width: 80%" rows="20"><?php
             if ($subsets != null) {
                 print_r(json_encode($subsets, JSON_PRETTY_PRINT));
             }

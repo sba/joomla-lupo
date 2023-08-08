@@ -10,15 +10,21 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Factory;
+
+$app = Factory::getApplication();
+$menu   = $app->getMenu()->getActive();
+$menuparams = $menu->getParams();
+
 $componentParams = JComponentHelper::getParams('com_lupo');
-$menu = JFactory::getApplication()->getMenu()->getActive();
+
 ?>
 
 <article class="tm-article">
 	<div class="tm-article-content ">
 
-		<?php if ($menu->params->get('show_page_heading', 1)) : ?>
-			<h2 class="contentheading"><?php echo $menu->params->get('page_heading')?></h2>
+		<?php if ($menuparams->get('show_page_heading', 1)) : ?>
+			<h2 class="contentheading"><?php echo $menuparams->get('page_heading')?></h2>
 		<?php endif; ?>
 
 		<?php if($componentParams->get('cats_show_table_with_details', 0)=='0'){ ?>

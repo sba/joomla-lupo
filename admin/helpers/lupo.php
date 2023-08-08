@@ -21,24 +21,5 @@ defined('_JEXEC') or die('Restricted access');
  */
 abstract class LupoHelper extends JHelperContent
 {
-    /**
-     * Configure the Linkbar.
-     *
-     * @return Bool
-     */
 
-    public static function addSubmenu($submenu)
-    {
-        JHtmlSidebar::addEntry(
-            JText::_('Spiele hochladen'),
-            'index.php?option=com_lupo',
-            $submenu == 'lupos'
-        );
-
-        JHtmlSidebar::addEntry(
-            JText::_('Suchfilter bearbeiten'),
-            'index.php?option=com_lupo&view=filters',
-            $submenu == 'filter'
-        );
-    }
 }

@@ -231,7 +231,7 @@ function processXML($file) {
 											`gameid`=' . $db->quote($gameid) . '
 											, `index`=' . $db->quote($edition['index']) . '
 											, `edition`=' . $db->quote($edition['edition']) . '
-											, `acquired_date`=' . $db->quote($edition['acquired_date']) . '
+											, `acquired_date`=' . (empty($edition['acquired_date']) ? 'NULL' : $db->quote($edition['acquired_date'])) . '
 											, `tax`=' . $db->quote(str_replace(',', '.', $edition['tax'])) . ' 
 											, `content`=' . $db->quote($edition['content'])
 					);
@@ -241,10 +241,6 @@ function processXML($file) {
 
 			//add all genres to genre table
 			$genres = array_unique($genres);
-
-			//make array-values case-insensitive unique
-			$genres = array_intersect_key($genres, array_unique(array_map("strtolower", $genres)));
-
 			asort($genres);
 			$last_alias = false;
 			foreach ($genres as $genre) {
@@ -283,7 +279,7 @@ function processXML($file) {
 				$game_genres = explode(', ', $game_genres);
 				foreach ($game_genres as $game_genre) {
 					$db->setQuery('INSERT INTO #__lupo_game_genre SET
-											`gameid`=' . $row['id'] . ', `genreid`=' . array_search(strtolower(substr($game_genre, 0, 30)), array_map('strtolower', $genres))
+											`gameid`=' . $row['id'] . ', `genreid`=' . array_search(substr($game_genre, 0, 30), $genres)
 					);
 					$db->execute();
 					$genres_alias_list[] = $genres_alias[$game_genre];
@@ -291,9 +287,6 @@ function processXML($file) {
 
 				//update genres in games-table (calculated filed)
 				if (is_array($genres_alias_list)) {
-					$sql = 'UPDATE #__lupo_game 
-                                      SET `genres`=' . $db->quote(implode(',', $genres_alias_list)) . '
-                                      WHERE id=' . $row['id'];
 					$db->setQuery('UPDATE #__lupo_game 
                                       SET `genres`=' . $db->quote(implode(',', $genres_alias_list)) . '
                                       WHERE id=' . $row['id']

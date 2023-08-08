@@ -47,4 +47,3 @@ class LupoViewLupos extends JViewLegacy {
 
 
 }
-?>

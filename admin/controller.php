@@ -33,4 +33,3 @@ class LupoController extends JControllerLegacy {
 		parent::display($cachable);
 	}
 }
-?>
