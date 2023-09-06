@@ -8,7 +8,7 @@
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
-	<version>3.83.0</version>
+	<version>4.0.0</version>
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
 	<!-- Runs on install/uninstall/update; New in 2.5 -->
@@ -53,7 +53,12 @@
 
 	<administration>
 		<!-- Administration Menu Section -->
-		<menu>COM_LUPO_MENU</menu>
+		<menu img="class:dice">COM_LUPO_MENU</menu>
+		<submenu>
+			<menu view="index.php?option=com_lupo&amp;view=lupos">COM_LUPO_MENU_SUBMENU_UPLOAD</menu>
+			<menu view="index.php?option=com_lupo&amp;view=filters">COM_LUPO_MENU_SUBMENU_FILTER</menu>
+			<menu link="option=com_config&amp;view=component&amp;component=com_lupo">COM_LUPO_MENU_SUBMENU_CONFIGURATION</menu>
+		</submenu>
 		<!-- Administration Main File Copy Section -->
 		<files folder="admin">
 			<!-- Admin Main File Copy Section -->
@@ -72,14 +77,4 @@
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_lupo.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_lupo.sys.ini</language>
-			<language tag="de-DE">language/de-DE/de-DE.com_lupo.ini</language>
-			<language tag="de-DE">language/de-DE/de-DE.com_lupo.sys.ini</language>
-		</languages>
-	</administration>
-
-	<updateservers>
-		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/admin/update_pkg_lupo.xml</server>
-	</updateservers>
-	
-</extension>
-
+			<language tag="de-DE">language/de-DE/de-DE.com_

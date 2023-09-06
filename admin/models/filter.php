@@ -17,8 +17,9 @@ defined('_JEXEC') or die('Restricted access');
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
-class LupoModelFilter extends JModelItem
+class LupoModelFilter extends BaseDatabaseModel
 {
     /**
      * Get the categories

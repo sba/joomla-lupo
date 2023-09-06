@@ -7,6 +7,8 @@
  * @license     License GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Factory;
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -22,6 +24,7 @@ class LupoController extends JControllerLegacy {
 	function display($cachable = false, $urlparams = []) {
 		$document = JFactory::getDocument();
 		$app      = JFactory::getApplication('site');
+        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 
 		//init session anyway, may it helps with reservation problem...
 		$app->getSession();
@@ -29,9 +32,10 @@ class LupoController extends JControllerLegacy {
 		$params = $app->getParams();
 		$uikit  = $params->get('lupo_load_uikit_css', "0");
 		if ($uikit !== "0") {
-			$document->addStyleSheet("components/com_lupo/uikit/css/" . $uikit, 'text/css', "screen");
-			$document->addStyleSheet("components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit), 'text/css', "screen");
-			$document->addStyleSheet("components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.', '', $uikit), 'text/css', "screen");
+
+            $wa->registerAndUseStyle('uikit', "components/com_lupo/uikit/css/" . $uikit);
+            $wa->registerAndUseStyle('uikit.slider', "components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit));
+            $wa->registerAndUseStyle('com_lupo', "components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.', '', $uikit));
 
 			//load uikit
 			//$document->addScript() will not work because its loaded before jquery / uikit
@@ -39,8 +43,9 @@ class LupoController extends JControllerLegacy {
 			$document->addCustomTag('<script src="' . JURI::root(true) . '/components/com_lupo/uikit/js/core/modal.min.js" type="text/javascript"></script>');
 			$document->addCustomTag('<script src="' . JURI::root(true) . '/components/com_lupo/uikit/js/components/lightbox.min.js" type="text/javascript"></script>');
 			$document->addCustomTag('<script src="' . JURI::root(true) . '/components/com_lupo/uikit/js/components/slider.min.js" type="text/javascript"></script>');
+
 		}
-		$document->addStyleSheet("components/com_lupo/css/com_lupo.css", 'text/css', "screen");
+        $wa->registerAndUseStyle('com_lupo', 'components/com_lupo/css/com_lupo.css');
 		$document->addCustomTag('<script src="' . JURI::root(true) . '/components/com_lupo/js/lupo.js" type="text/javascript"></script>');
 
 		$view = $app->input->getCmd('view');

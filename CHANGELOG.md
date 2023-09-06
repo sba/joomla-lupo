@@ -1,5 +1,11 @@
 # Changelog
 
+### 4.0.0 (July 22, 2023)
+  - joomla 4 compatibility
+
+### 3.84.0 (June 19, 2023)
+  - fix error when uploading toylist, case insensitive genres
+
 ### 3.83.0 (May 26, 2023)
   - improve api response on error
 

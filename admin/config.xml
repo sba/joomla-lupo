@@ -7,14 +7,14 @@
     >
         <field
                 type="radio"
-                class="btn-group btn-group-yesno"
+                layout="joomla.form.field.radio.switcher"
                 name="show_diverse"
                 id="lupo_show_diverse"
                 label="COM_LUPO_OPTIONS_CATS_SHOW_DIV"
                 description="COM_LUPO_OPTIONS_CATS_SHOW_DIV_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
@@ -43,24 +43,26 @@
                 name="cats_nbr_games"
                 id="lupo_cats_nbr_games"
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 label="COM_LUPO_OPTIONS_CATS_NBR_GAMES"
                 description="COM_LUPO_OPTIONS_CATS_NBR_GAMES_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 name="cats_show_table_with_details"
                 id="cats_show_table_with_details"
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 label="COM_LUPO_OPTIONS_SHOW_TABLE"
                 description="COM_LUPO_OPTIONS_SHOW_TABLE_DESC"
                 default="0">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
@@ -82,37 +84,40 @@
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_tableheader"
                 id="category_show_tableheader"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_HEADER"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_HEADER_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_detail_link"
                 id="category_show_detail_link"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_DETAIL_LINK"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_DETAIL_LINK_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 name="foto_list_show"
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
-                default="0"
+                default="1"
                 label="COM_LUPO_PHOTO"
                 description="COM_LUPO_PHOTO_DESC">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
@@ -127,108 +132,117 @@
         <field
                 name="foto_list_show_placeholder"
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 label="COM_LUPO_PHOTO_SHOW_PLACEHOLDER"
                 description="COM_LUPO_PHOTO_SHOW_PLACEHOLDER_DESC"
-                default="1"
+                default="0"
                 showon="foto_list_show:1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 name="foto_list_show_description"
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
                 description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_toy_category"
                 id="category_show_toy_category"
                 label="COM_LUPO_OPTIONS_TOY_CATEGORY"
                 description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_toy_age_category"
                 id="category_show_toy_age_category"
                 label="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY"
                 description="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_toy_nbrdays"
                 id="category_show_toy_nbrdays"
                 label="COM_LUPO_OPTIONS_TOY_NBRDAYS"
                 description="COM_LUPO_OPTIONS_TOY_NBRDAYS_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_tax"
                 id="category_show_tax"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_TAX"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_TAX_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_category_filter"
                 id="category_show_category_filter"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_CATEGORY_FILTER_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_agecategory_filter"
                 id="category_show_agecategory_filter"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_AGECATEGORY_FILTER_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="category_show_genre_filter"
                 id="category_show_genre_filter"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_GENRE_FILTER"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_GENRE_FILTER_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
     </fieldset>
@@ -243,150 +257,163 @@
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_no"
                 id="detail_show_toy_no"
                 label="COM_LUPO_OPTIONS_TOY_NO"
                 description="COM_LUPO_OPTIONS_TOY_NO_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_category"
                 id="detail_show_toy_category"
                 label="COM_LUPO_OPTIONS_TOY_CATEGORY"
                 description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_age_category"
                 id="detail_show_toy_age_category"
                 label="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY"
                 description="COM_LUPO_OPTIONS_TOY_AGE_CATEGORY_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_genres"
                 id="detail_show_toy_genres"
                 label="COM_LUPO_OPTIONS_TOY_GENRES"
                 description="COM_LUPO_OPTIONS_TOY_GENRES_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_play_duration"
                 id="detail_show_toy_play_duration"
                 label="COM_LUPO_OPTIONS_TOY_PLAY_DURATION"
                 description="COM_LUPO_OPTIONS_TOY_PLAY_DURATION_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_players"
                 id="detail_show_toy_players"
                 label="COM_LUPO_OPTIONS_TOY_PLAYERS"
                 description="COM_LUPO_OPTIONS_TOY_PLAYERS_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_fabricator"
                 id="detail_show_toy_fabricator"
                 label="COM_LUPO_OPTIONS_TOY_FABRICATOR"
                 description="COM_LUPO_OPTIONS_TOY_FABRICATOR_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_author"
                 id="detail_show_toy_author"
                 label="COM_LUPO_OPTIONS_TOY_AUTHOR"
                 description="COM_LUPO_OPTIONS_TOY_AUTHOR_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_artist"
                 id="detail_show_toy_artist"
                 label="COM_LUPO_OPTIONS_TOY_ARTIST"
                 description="COM_LUPO_OPTIONS_TOY_ARTIST_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_nbrdays"
                 id="detail_show_toy_nbrdays"
                 label="COM_LUPO_OPTIONS_TOY_NBRDAYS"
                 description="COM_LUPO_OPTIONS_TOY_NBRDAYS_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_nbrtoys"
                 id="detail_show_toy_nbrtoys"
                 label="COM_LUPO_OPTIONS_TOY_NBRTOYS"
                 description="COM_LUPO_OPTIONS_TOY_NBRTOYS_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_tax"
                 id="detail_show_toy_tax"
                 label="COM_LUPO_OPTIONS_TOY_TAX"
                 description="COM_LUPO_OPTIONS_TOY_TAX_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_tax_not_null"
                 id="detail_show_toy_tax_not_null"
@@ -394,38 +421,41 @@
                 description="COM_LUPO_OPTIONS_TOY_TAX_NOT_NULL_DESC"
                 default="1"
                 showon="detail_show_toy_tax:1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_prolongable"
                 id="detail_show_toy_prolongable"
                 label="COM_LUPO_OPTIONS_TOY_PROLONGABLE"
                 description="COM_LUPO_OPTIONS_TOY_PROLONGABLE_DESC"
                 default="0">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO"/>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_photo"
                 id="detail_show_toy_photo"
                 label="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO"
                 description="COM_LUPO_OPTIONS_TOY_SHOW_PHOTO_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_photo_lightbox"
                 id="detail_photo_lightbox"
@@ -434,36 +464,38 @@
                 default="1"
                 showon="detail_show_toy_photo:1"
         >
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED"/>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_related"
                 id="detail_show_toy_related"
                 label="COM_LUPO_OPTIONS_TOY_SHOW_RELATED"
                 description="COM_LUPO_OPTIONS_TOY_SHOW_RELATED_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field type="spacer" name="spacer4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE"/>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_nav"
                 id="detail_show_toy_nav"
                 label="COM_LUPO_OPTIONS_TOY_NAV"
                 description="COM_LUPO_OPTIONS_TOY_NAV_DESC"
                 default="1">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
     </fieldset>
 
@@ -475,18 +507,20 @@
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_res"
                 id="detail_show_toy_res"
                 label="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON"
                 description="COM_LUPO_OPTIONS_TOY_RESERVATION_BUTTON_DESC"
                 default="0">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_res_hide_login"
                 id="detail_show_toy_res_hide_login"
@@ -495,12 +529,13 @@
                 default="0"
                 showon="detail_show_toy_res:1"
         >
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_toy_res_only_logged_in"
                 id="detail_show_toy_res_only_logged_in"
@@ -509,12 +544,13 @@
                 default="0"
                 showon="detail_show_toy_res:1"
         >
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_res_allow_only_loaned"
                 id="detail_res_allow_only_loaned"
@@ -523,12 +559,13 @@
                 default="0"
                 showon="detail_show_toy_res:1"
         >
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_res_date"
                 id="detail_show_res_date"
@@ -537,12 +574,13 @@
                 default="1"
                 showon="detail_show_toy_res:1"
         >
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="detail_show_res_date_now"
                 id="detail_show_res_date_now"
@@ -551,8 +589,8 @@
                 default="1"
                 showon="detail_show_toy_res:1[AND]detail_show_res_date:1"
         >
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
@@ -622,26 +660,28 @@
     >
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="lupo_show_toystatus"
                 id="lupo_show_toystatus"
                 label="COM_LUPO_SHOW_TOYSTATUS"
                 description="COM_LUPO_SHOW_TOYSTATUS_DESC"
                 default="0">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field
                 type="radio"
+                layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
                 name="lupo_prolongation_enabled"
                 id="lupo_prolongation_enabled"
                 label="COM_LUPO_PROLONGATION_ENABLED"
                 description="COM_LUPO_PROLONGATION_ENABLED_DESC"
                 default="0">
-            <option value="1">JYES</option>
             <option value="0">JNO</option>
+            <option value="1">JYES</option>
         </field>
 
         <field

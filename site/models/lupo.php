@@ -8,6 +8,8 @@
  */
 
 // No direct access to this file
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+
 defined('_JEXEC') or die('Restricted access');
 
 // import Joomla modelitem library
@@ -16,7 +18,7 @@ jimport('joomla.application.component.modelitem');
 /**
  * Lupo Model
  */
-class LupoModelLupo extends JModelItem {
+class LupoModelLupo extends BaseDatabaseModel {
 	/**
 	 * @var object item
 	 */

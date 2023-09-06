@@ -231,7 +231,7 @@ function processXML($file) {
 											`gameid`=' . $db->quote($gameid) . '
 											, `index`=' . $db->quote($edition['index']) . '
 											, `edition`=' . $db->quote($edition['edition']) . '
-											, `acquired_date`=' . $db->quote($edition['acquired_date']) . '
+											, `acquired_date`=' . (empty($edition['acquired_date']) ? 'NULL' : $db->quote($edition['acquired_date'])) . '
 											, `tax`=' . $db->quote(str_replace(',', '.', $edition['tax'])) . ' 
 											, `content`=' . $db->quote($edition['content'])
 					);
@@ -279,7 +279,7 @@ function processXML($file) {
 				$game_genres = explode(', ', $game_genres);
 				foreach ($game_genres as $game_genre) {
 					$db->setQuery('INSERT INTO #__lupo_game_genre SET
-											`gameid`=' . $row['id'] . ', `genreid`=' . array_search( substr($game_genre,0,30), $genres)
+											`gameid`=' . $row['id'] . ', `genreid`=' . array_search(substr($game_genre, 0, 30), $genres)
 					);
 					$db->execute();
 					$genres_alias_list[] = $genres_alias[$game_genre];
