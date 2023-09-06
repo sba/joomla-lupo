@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8" type="plugin" group="quickicon" method="upgrade">
+	<name>LUPO Quick Icons</name>
+	<author>Stefan Bauer</author>
+	<creationDate>{{creationDate}}</creationDate>
+	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
+	<license>License GNU General Public License version 2 or later</license>
+	<authorEmail>stefan@databauer.ch</authorEmail>
+	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
+	<version>{{version_pkg_lupo}}</version>
+	<description>Quick Icons module for LUPO</description>
+	<files folder="plugins/quickicon/lupo">
+		<filename plugin="lupo">lupo.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB.plg_lupo_quickicon.ini</language>
+		<language tag="en-GB">language/en-GB.plg_lupo_quickicon.sys.ini</language>
+		<language tag="de-DE">language/de-DE.plg_lupo_quickicon.ini</language>
+		<language tag="de-DE">language/de-DE.plg_lupo_quickicon.sys.ini</language>
+	</languages>
+</extension>

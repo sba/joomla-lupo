@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="3.1" group="content" method="upgrade">
+	<name>Inhalt - LUPO Zufälliges Zitat</name>
+    <author>Stefan Bauer</author>
+    <creationDate>{{creationDate}}</creationDate>
+    <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>stefan@databauer.ch</authorEmail>
+    <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
+    <version>{{version_pkg_lupo}}</version>
+    <description>LUPO - [zufallszitat] zeigt eine zufälliges Zitat an</description>
+	<files>
+		<filename plugin="luporandomquote">luporandomquote.php</filename>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                        name="quotes_normal"
+                        type="textarea"
+                        rows="10"
+                        class="span12"
+                        label="Zitate"
+                        description="Ein Zitat pro Zeile, Name mit Semikolon trennen"
+                        default="Der Mensch ist nur da ganz Mensch, wo er spielt.;Friedrich von Schiller&#13;&#10;Beim Spiel kann man einen Menschen in einer Stunde besser kennenlernen, als im Gespräch in einem Jahr.;Plato&#13;&#10;Menschen hören nicht auf zu spielen, weil sie alt werden, sie werden alt, weil sie aufhören zu spielen!;Oliver Wendell Holmes&#13;&#10;Viele spielen des Gewinns wegen und ahnen nicht, dass das Spielen der eigentliche Gewinn ist.;Dr. Sigbert Latzel&#13;&#10;Wer nicht spielen kann, verzweifelt am Ernst des Lebens.;Karl Feldkampf&#13;&#10;Wir hören nicht auf zu spielen, weil wir alt werden, wir werden alt, weil wir aufhören zu spielen.;Georg Bernard Shaw&#13;&#10;Wer spielt, der lernt! Wer lernt, der lebt! Wer lebt, der spielt!;Jörg Roggensack&#13;&#10;Atome spalten ist ein Kinderspiel, verglichen mit einem Kinderspiel.;Albert Einstein&#13;&#10;Im Spiel offenbart sich durchaus, ob jemand Phantasie und Initiative hat oder nicht.;Christian Morgenstern&#13;&#10;Das Spiel ist die höchste Form der Forschung.;Albert Einstein&#13;&#10;Wer in der Schule nicht spielen lernt, lernt nicht lernen.;W. Menzel&#13;&#10;Solange der Mensch spielt, ist er frei;Friedrich Siegburg&#13;&#10;Spielen ist eine Tätigkeit, die man gar nicht ernst genug nehmen kann.;Jacques-Yves Cousteau"
+                />
+            </fieldset>
+            <fieldset name="basic">
+                <field
+                        name="quotes_template"
+                        type="textarea"
+                        rows="10"
+                        class="span12"
+                        label="HTML-Template"
+                        description="Das Zitat wird in diese HTML-Vorlage gerendert"
+                        default="&lt;blockquote&gt;&#13;&#10;&lt;p&gt;[quote]&lt;/p&gt;&#13;&#10;&lt;small&gt;[name]&lt;/small>&#13;&#10;&lt;/blockquote&gt;"
+                        filter="raw"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

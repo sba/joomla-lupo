@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5.0" method="upgrade">
+
+	<name>COM_LUPO</name>
+	<author>Stefan Bauer</author>
+	<creationDate>{{creationDate}}</creationDate>
+	<authorEmail>stefan@databauer.ch</authorEmail>
+	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
+	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
+	<license>License GNU General Public License version 2 or later</license>
+	<version>{{version_pkg_lupo}}</version>
+	<description>COM_LUPO_XML_DESCRIPTION</description>
+
+	<!-- Runs on install/uninstall/update; New in 2.5 -->
+	<scriptfile>script.php</scriptfile>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update> <!-- Runs on update; New in 1.6 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<!-- Site Main File Copy Section -->
+	<files folder="site">
+		<filename>lupo.php</filename>
+		<filename>controller.php</filename>
+		<filename>router.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+        <folder>css</folder>
+        <folder>uikit</folder>
+        <folder>js</folder>
+	</files>
+
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_lupo.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.com_lupo.ini</language>
+	</languages>	
+	
+	<media destination="com_lupo" folder="media">
+		<folder>images</folder>
+	</media>
+
+	<administration>
+		<!-- Administration Menu Section -->
+		<menu img="class:dice">COM_LUPO_MENU</menu>
+		<submenu>
+			<menu view="index.php?option=com_lupo&amp;view=lupos">COM_LUPO_MENU_SUBMENU_UPLOAD</menu>
+			<menu view="index.php?option=com_lupo&amp;view=filters">COM_LUPO_MENU_SUBMENU_FILTER</menu>
+			<menu link="option=com_config&amp;view=component&amp;component=com_lupo">COM_LUPO_MENU_SUBMENU_CONFIGURATION</menu>
+		</submenu>
+		<!-- Administration Main File Copy Section -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>lupo.php</filename>
+			<filename>controller.php</filename>
+            <filename>config.xml</filename>
+            <filename>access.xml</filename>
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>views</folder>
+		</files>
+
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_lupo.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_lupo.sys.ini</language>
+			<language tag="de-DE">language/de-DE/de-DE.com_lupo.ini</language>
+			<language tag="de-DE">language/de-DE/de-DE.com_lupo.sys.ini</language>
+		</languages>
+	</administration>
+
+	<updateservers>
+		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/admin/update_pkg_lupo.xml</server>
+	</updateservers>
+
+</extension>
