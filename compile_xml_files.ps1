@@ -2,8 +2,8 @@
 $folder=$args[0]
 Set-Location $folder
 
-$creationDate = "July 2023"
-$creationDate_changelog = "July 22, 2023"
+$creationDate = "September 2023"
+$creationDate_changelog = "September 06, 2023"
 $version_pkg_lupo = "4.0.0"
 
 $placeholders = @{
