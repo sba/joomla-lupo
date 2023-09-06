@@ -22,23 +22,25 @@ $version_pkg_lupo = "4.0.0"
 
 
 $placeholders = @{
-    '{{creationDate}}' = $creationDate
-    '{{version_pkg_lupo}}' = $version_pkg_lupo
+    '{{creationDate}}'           = $creationDate
+    '{{version_pkg_lupo}}'       = $version_pkg_lupo
     '{{creationDate_changelog}}' = $creationDate_changelog
 }
 
 
 
 
-if ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name -eq 'SBA-AHW2019\Stefan'){
+if ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name -eq 'SBA-AHW2019\Stefan') {
     [string] $path_source = 'D:\htdocs\_ludos\ludodev.local\'
     [string] $main_path_target = 'C:\Users\Stefan\Dropbox\Projekte\Lupo\web\joomla\'    
 
-} elseif ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name -eq 'DESKTOP-FHLIOIU\serha') {
+}
+elseif ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name -eq 'DESKTOP-FHLIOIU\serha') {
     [string] $path_source = 'C:\xampp\htdocs\databauer\ludodev.local\'
     [string] $main_path_target = 'C:\xampp\htdocs\databauer\joomla\'  
 
-} else {
+}
+else {
     [string] $path_source = 'C:\htdocs\_ludos\ludodev.local\'
     [string] $main_path_target = 'C:\htdocs\joomla\'      
 }
@@ -50,7 +52,7 @@ Write-Host "----------------------------------------------------`n"
 
 
 # Funktionen
-function CopyFilesAndFolder ([string]$path_target, [array]$files_and_folder){
+function CopyFilesAndFolder ([string]$path_target, [array]$files_and_folder) {
     foreach ($item in $files_and_folder) {
         $source = $path_source
         $source += $item | % { $_.source }
@@ -69,14 +71,12 @@ function CopyFilesAndFolder ([string]$path_target, [array]$files_and_folder){
 function CompileAndCreateZip ([string]$zip_filename, [string]$path_target) {
     Set-Location $path_target
     
-    foreach($placeholder in $placeholders.keys)
-    {
+    foreach ($placeholder in $placeholders.keys) {
         $search = ${placeholder};
         $replace = $($placeholders.Item($placeholder));
     
         $configFiles = Get-ChildItem $path_target\* -Include *.xml, *.md -rec
-        foreach ($file in $configFiles)
-        {
+        foreach ($file in $configFiles) {
             (Get-Content $file.PSPath) |
             Foreach-Object { $_ -replace $search, $replace } |
             Set-Content $file.PSPath
@@ -86,20 +86,57 @@ function CompileAndCreateZip ([string]$zip_filename, [string]$path_target) {
     Get-ChildItem -Path $path_target -Exclude *.git | Compress-Archive -DestinationPath "$($main_path_target)zip\$($zip_filename)" -Force
 }
 
+$path_source = 'D:\htdocs\_ludos\ludodev.local\'
+Copy-Item -Path "C:\Users\Stefan\Dropbox\Projekte\Lupo\web\joomla\lupo-extension\src\administrator\com_widgetkit\plugins\content\lupo\*" -Destination "T:\j-wk" -Recurse -Container
+
+
+
+
+# Copy from joomla installation to lupo-extension repoitory
+$folders = @(
+    [pscustomobject] @{source = 'administrator\com_lupo' }
+    [pscustomobject] @{source = 'administrator\com_widgetkit\plugins\content\lupo' }
+    [pscustomobject] @{source = 'administrator\language\de-DE' }
+    [pscustomobject] @{source = 'administrator\language\en-GB' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR' }
+    [pscustomobject] @{source = 'administrator\language\it-IT' }
+    [pscustomobject] @{source = 'components\com_lupo' }
+    [pscustomobject] @{source = 'language\de-DE' }
+    [pscustomobject] @{source = 'language\en-GB' }
+    [pscustomobject] @{source = 'language\fr-FR' }
+    [pscustomobject] @{source = 'language\it-IT' }
+    [pscustomobject] @{source = 'media\com_lupo' }
+    [pscustomobject] @{source = 'modules\mod_lupo_categories' }
+    [pscustomobject] @{source = 'modules\mod_lupo_login' }
+    [pscustomobject] @{source = 'modules\mod_lupo_loginlink' }
+    [pscustomobject] @{source = 'modules\mod_lupo_categories\tmpl' }
+    [pscustomobject] @{source = 'modules\mod_lupo_login\tmpl' }
+    [pscustomobject] @{source = 'modules\mod_lupo_loginlink\tmpl' }
+    [pscustomobject] @{source = 'plugins\content\lupoprivacy' }
+    [pscustomobject] @{source = 'plugins\content\luporandomquote' }
+    [pscustomobject] @{source = 'plugins\content\lupototaltoys' }
+    [pscustomobject] @{source = 'plugins\content\lupotoy' }
+    [pscustomobject] @{source = 'plugins\content\lupoprivacy\tmpl' }
+    [pscustomobject] @{source = 'plugins\quickicon\lupo' }
+    [pscustomobject] @{source = 'plugins\search\lupo' }
+    [pscustomobject] @{source = 'plugins\search\lupogenres' } 
+)
+
+
 
 # Component
 $com_lupo = @(
-    [pscustomobject] @{source = 'components\com_lupo\*'; target = 'site'}
-    [pscustomobject] @{source = 'language\en-GB\en-GB.com_lupo.ini'; target = 'site\language\en-GB\'},
-    [pscustomobject] @{source = 'language\de-DE\de-DE.com_lupo.ini'; target = 'site\language\de-DE\'}
-    [pscustomobject] @{source = 'administrator\components\com_lupo\*'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.com_lupo.ini'; target = 'admin\language\en-GB\'}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.com_lupo.sys.ini'; target = 'admin\language\en-GB\'}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.mod_lupo_quickicon.ini'; target = 'admin\language\en-GB\'}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.com_lupo.ini'; target = 'admin\language\de-DE\'}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.com_lupo.sys.ini'; target = 'admin\language\de-DE\'}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.mod_lupo_quickicon.ini'; target = 'admin\language\de-DE\'}
-    [pscustomobject] @{source = 'media\com_lupo\*'; target = 'media'}
+    [pscustomobject] @{source = 'components\com_lupo\*'; target = 'site' }
+    [pscustomobject] @{source = 'language\en-GB\en-GB.com_lupo.ini'; target = 'site\language\en-GB\' },
+    [pscustomobject] @{source = 'language\de-DE\de-DE.com_lupo.ini'; target = 'site\language\de-DE\' }
+    [pscustomobject] @{source = 'administrator\components\com_lupo\*'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.com_lupo.ini'; target = 'admin\language\en-GB\' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.com_lupo.sys.ini'; target = 'admin\language\en-GB\' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.mod_lupo_quickicon.ini'; target = 'admin\language\en-GB\' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.com_lupo.ini'; target = 'admin\language\de-DE\' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.com_lupo.sys.ini'; target = 'admin\language\de-DE\' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.mod_lupo_quickicon.ini'; target = 'admin\language\de-DE\' }
+    [pscustomobject] @{source = 'media\com_lupo\*'; target = 'media' }
 )
 
 $path_target = $main_path_target + "com_lupo\"
@@ -119,11 +156,11 @@ CompileAndCreateZip "com_lupo.zip" $path_target
 
 # Such-Plugin für Spiele
 $plg_search_lupo = @(
-    [pscustomobject] @{source = 'plugins\search\lupo\*'; target = ''}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupo.ini';    target = ''}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupo.sys.ini'; target = ''}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupo.ini';    target = ''}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupo.sys.ini'; target = ''}
+    [pscustomobject] @{source = 'plugins\search\lupo\*'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupo.ini'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupo.sys.ini'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupo.ini'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupo.sys.ini'; target = '' }
 )
 
 $path_target = $main_path_target + "plg_search_lupo\"
@@ -132,11 +169,11 @@ CompileAndCreateZip "plg_search_lupo.zip" $path_target
 
 # Such-Plugin für Genres
 $plg_search_lupogenres = @(
-    [pscustomobject] @{source = 'plugins\search\lupogenres\*'; target = ''}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupogenres.ini'; target = ''}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupogenres.sys.ini'; target = ''},
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupogenres.ini'; target = ''}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupogenres.sys.ini'; target = ''}
+    [pscustomobject] @{source = 'plugins\search\lupogenres\*'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupogenres.ini'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.plg_search_lupogenres.sys.ini'; target = '' },
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupogenres.ini'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.plg_search_lupogenres.sys.ini'; target = '' }
 )
 
 $path_target = $main_path_target + "plg_search_lupogenres\"
@@ -145,7 +182,7 @@ CompileAndCreateZip "plg_search_lupogenres.zip" $path_target
 
 # Content-Plugin für totale Spiele
 $plg_content_lupototaltoys = @(
-    [pscustomobject] @{source = 'plugins\content\lupototaltoys\*'; target = ''}
+    [pscustomobject] @{source = 'plugins\content\lupototaltoys\*'; target = '' }
 )
 
 $path_target = $main_path_target + "plg_content_lupototaltoys\"
@@ -154,7 +191,7 @@ CompileAndCreateZip "plg_content_lupototaltoys.zip" $path_target
 
 # Content-Plugin um Spiele anzuzeigen
 $plg_content_lupotoy = @(
-    [pscustomobject] @{source = 'plugins\content\lupotoy\*'; target = ''}
+    [pscustomobject] @{source = 'plugins\content\lupotoy\*'; target = '' }
 )
 
 $path_target = $main_path_target + "plg_content_lupotoy\"
@@ -163,7 +200,7 @@ CompileAndCreateZip "plg_content_lupotoy.zip" $path_target
 
 # Content-Plugin für zufällige Zitate
 $plg_content_luporandomquote = @(
-    [pscustomobject] @{source = 'plugins\content\luporandomquote\*'; target = ''}
+    [pscustomobject] @{source = 'plugins\content\luporandomquote\*'; target = '' }
 )
 
 $path_target = $main_path_target + "plg_content_luporandomquote\"
@@ -172,11 +209,11 @@ CompileAndCreateZip "plg_content_luporandomquote.zip" $path_target
 
 # Kategorie-Modul
 $mod_lupo_categories = @(
-    [pscustomobject] @{source = 'modules\mod_lupo_categories\*'; target = ''}
-    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_categories.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_categories.sys.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_categories.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_categories.sys.ini'; target = 'language\'}
+    [pscustomobject] @{source = 'modules\mod_lupo_categories\*'; target = '' }
+    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_categories.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_categories.sys.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_categories.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_categories.sys.ini'; target = 'language\' }
 )
 
 $path_target = $main_path_target + "mod_lupo_categories\"
@@ -185,11 +222,11 @@ CompileAndCreateZip "mod_lupo_categories.zip" $path_target
 
 # Login-Modul
 $mod_lupo_login = @(
-    [pscustomobject] @{source = 'modules\mod_lupo_login\*'; target = ''}
-    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_login.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_login.sys.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_login.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_login.sys.ini'; target = 'language\'}
+    [pscustomobject] @{source = 'modules\mod_lupo_login\*'; target = '' }
+    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_login.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_login.sys.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_login.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_login.sys.ini'; target = 'language\' }
 )
 
 $path_target = $main_path_target + "mod_lupo_login\"
@@ -198,11 +235,11 @@ CompileAndCreateZip "mod_lupo_login.zip" $path_target
 
 # Loginlink-Modul
 $mod_lupo_loginlink = @(
-    [pscustomobject] @{source = 'modules\mod_lupo_loginlink\*'; target = ''}
-    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_loginlink.ini'; target = 'language\'},
-    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_loginlink.sys.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_loginlink.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_loginlink.sys.ini'; target = 'language\'}
+    [pscustomobject] @{source = 'modules\mod_lupo_loginlink\*'; target = '' }
+    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_loginlink.ini'; target = 'language\' },
+    [pscustomobject] @{source = 'language\en-GB\en-GB.mod_lupo_loginlink.sys.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_loginlink.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'language\de-DE\de-DE.mod_lupo_loginlink.sys.ini'; target = 'language\' }
 )
 
 $path_target = $main_path_target + "mod_lupo_loginlink\"
@@ -211,9 +248,9 @@ CompileAndCreateZip "mod_lupo_loginlink.zip" $path_target
 
 # Quickicon-Modul
 $mod_lupo_quickicon = @(
-    [pscustomobject] @{source = 'administrator\modules\mod_lupo_quickicon\*'; target = ''}
-    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.mod_lupo_quickicon.ini'; target = 'language\'}
-    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.mod_lupo_quickicon.ini'; target = 'language\'}
+    [pscustomobject] @{source = 'administrator\modules\mod_lupo_quickicon\*'; target = '' }
+    [pscustomobject] @{source = 'administrator\language\en-GB\en-GB.mod_lupo_quickicon.ini'; target = 'language\' }
+    [pscustomobject] @{source = 'administrator\language\de-DE\de-DE.mod_lupo_quickicon.ini'; target = 'language\' }
 )
 
 $path_target = $main_path_target + "mod_lupo_quickicon\"
@@ -222,17 +259,17 @@ CompileAndCreateZip "mod_lupo_quickicon.zip" $path_target
 
 # Paket erstellen
 $pkg_lupo = @(
-    [pscustomobject] @{source = 'zip\com_lupo.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\plg_search_lupo.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\plg_search_lupogenres.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\mod_lupo_categories.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\mod_lupo_login.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\mod_lupo_loginlink.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\mod_lupo_loginlink.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\mod_lupo_quickicon.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\plg_content_lupototaltoys.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\plg_content_luporandomquote.zip'; target = ''}
-    [pscustomobject] @{source = 'zip\plg_content_lupotoy.zip'; target = ''}
+    [pscustomobject] @{source = 'zip\com_lupo.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\plg_search_lupo.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\plg_search_lupogenres.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\mod_lupo_categories.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\mod_lupo_login.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\mod_lupo_loginlink.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\mod_lupo_loginlink.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\mod_lupo_quickicon.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\plg_content_lupototaltoys.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\plg_content_luporandomquote.zip'; target = '' }
+    [pscustomobject] @{source = 'zip\plg_content_lupotoy.zip'; target = '' }
 )
 
 # Erstellt Ordner "pkg_lupo\packages\" wo alle komprimierten Ordner sind bis auf die Sprachpakete
@@ -247,20 +284,20 @@ CompileAndCreateZip "pkg_lupo.zip" $path_target
 
 # Französisch Sprachpaket
 $pkg_lupo_languagepack_fr = @(
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.com_lupo.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.com_lupo.sys.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupo.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupo.sys.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupogenres.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupogenres.sys.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.mod_lupo_quickicon.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.com_lupo.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_categories.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_categories.sys.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_login.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_login.sys.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_loginlink.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_loginlink.sys.ini'; target = 'site\'}
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.com_lupo.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.com_lupo.sys.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupo.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupo.sys.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupogenres.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.plg_search_lupogenres.sys.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\fr-FR\fr-FR.mod_lupo_quickicon.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.com_lupo.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_categories.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_categories.sys.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_login.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_login.sys.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_loginlink.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\fr-FR\fr-FR.mod_lupo_loginlink.sys.ini'; target = 'site\' }
 )
 
 $path_target = $main_path_target + "pkg_lupo_languagepack_fr-FR\"
@@ -270,20 +307,20 @@ CompileAndCreateZip "pkg_lupo_languagepack_fr-FR.zip" $path_target
 
 # Italienisch Sprachpaket
 $pkg_lupo_languagepack_it = @(
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.com_lupo.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.com_lupo.sys.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupo.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupo.sys.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupogenres.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupogenres.sys.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.mod_lupo_quickicon.ini'; target = 'admin\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.com_lupo.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_categories.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_categories.sys.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_login.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_login.sys.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_loginlink.ini'; target = 'site\'}
-    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_loginlink.sys.ini'; target = 'site\'}
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.com_lupo.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.com_lupo.sys.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupo.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupo.sys.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupogenres.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.plg_search_lupogenres.sys.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'administrator\language\it-IT\it-IT.mod_lupo_quickicon.ini'; target = 'admin\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.com_lupo.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_categories.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_categories.sys.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_login.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_login.sys.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_loginlink.ini'; target = 'site\' }
+    [pscustomobject] @{source = 'language\it-IT\it-IT.mod_lupo_loginlink.sys.ini'; target = 'site\' }
 )
 
 $path_target = $main_path_target + "pkg_lupo_languagepack_it-IT\"
