@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="file" method="upgrade">
+	<author>Stefan Bauer</author>
+	<creationDate>November 2022</creationDate>
+	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
+	<license>License GNU General Public License version 2 or later</license>
+	<authorEmail>stefan@databauer.ch</authorEmail>
+	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
+	<version>3.77.0</version>
+    <description>Italian (it-IT) translation for LUPO package</description>
+
+	<fileset>
+		<files folder="site" target="language/it-IT">
+			<file>it-IT.com_lupo.ini</file>
+			<file>it-IT.mod_lupo_categories.ini</file>
+			<file>it-IT.mod_lupo_categories.sys.ini</file>
+			<file>it-IT.mod_lupo_login.ini</file>
+			<file>it-IT.mod_lupo_login.sys.ini</file>
+			<file>it-IT.mod_lupo_loginlink.ini</file>
+			<file>it-IT.mod_lupo_loginlink.sys.ini</file>
+		</files>
+
+		<files folder="admin" target="administrator/language/it-IT">
+			<file>it-IT.com_lupo.ini</file>
+			<file>it-IT.com_lupo.sys.ini</file>
+			<file>it-IT.plg_search_lupo.ini</file>
+			<file>it-IT.plg_search_lupo.sys.ini</file>
+			<file>it-IT.plg_search_lupogenres.ini</file>
+			<file>it-IT.plg_search_lupogenres.sys.ini</file>
+			<file>it-IT.mod_lupo_quickicon.ini</file>
+		</files>
+	</fileset>
+</extension>

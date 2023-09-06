@@ -86,10 +86,6 @@ function CompileAndCreateZip ([string]$zip_filename, [string]$path_target) {
     Get-ChildItem -Path $path_target -Exclude *.git | Compress-Archive -DestinationPath "$($main_path_target)zip\$($zip_filename)" -Force
 }
 
-# Ordner "zip" erstellen falls es keines hat
-if (!(Test-Path -Path "$($main_path_target)zip\")) {
-    New-Item "$($main_path_target)zip\" -Type Directory
-}
 
 # Component
 $com_lupo = @(

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+   <update>
+      <name>LUPO Updates</name>
+      <description>LUPO Package</description>
+	  <creationDate>July 2023</creationDate>
+	  <authorEmail>stefan@databauer.ch</authorEmail>
+	  <authorUrl>https://www.ludothekprogramm.ch/</authorUrl>
+	  <copyright>Copyright (C) databauer / Stefan Bauer</copyright>	  
+      <element>com_lupo</element>
+      <type>component</type>
+      <version>4.0.0</version>
+ 
+      <infourl title="Ludothekprogramm LUPO">https://github.com/sba/com_lupo/blob/master/CHANGELOG.md</infourl>
+      <downloads>
+         <downloadurl type="full" format="zip">https://github.com/sba/pkg_lupo/archive/master.zip</downloadurl>
+      </downloads>
+ 
+      <maintainer>Stefan Bauer</maintainer>
+      <maintainerurl>https://databauer.ch</maintainerurl>
+      <targetplatform name="joomla" version="3.*"/>
+   </update> 
+</updates>

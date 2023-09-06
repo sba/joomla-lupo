@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="3.1" group="content" method="upgrade">
+	<name>Inhalt - LUPO Datenschutzerklärung</name>
+    <author>Stefan Bauer</author>
+    <creationDate>{{creationDate}}</creationDate>
+    <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>stefan@databauer.ch</authorEmail>
+    <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
+    <version>{{version_pkg_lupo}}</version>
+    <description>LUPO - [datenschutz] zeigt die Datenschutzerklärung an</description>
+	<files>
+		<filename plugin="lupoprivacy">lupoprivacy.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                        name="general_introduction"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Allgemeines / Einleitung" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="processing_of_personal_data"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Verarbeitung personenbezogener Daten" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="cookies"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Cookies" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="with_ssl_tls_encryption"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Mit SSL/TLS-Verschlüsselung" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="server_log_files"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Server-Log-Dateien" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="contact_form"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Kontaktformular / Formular für Spielreservationen" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="newsletter"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Newsletter" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="customer_login"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Kundenlogin" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="data_subject_rights"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Rechte der betroffenen Person" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="contradiction_email_marketing"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Widerspruch E-Mail Marketing" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="copyrights"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Urheberrechte" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="disclaimer"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Haftungsausschluss" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="google_maps"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Google Maps" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="google_analytics"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Google Analytics" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="google_webfonts"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Google WebFonts" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="YouTube"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="youtube" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="vimeo"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Vimeo" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="data_transfer_to_the_usa"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Datenübermittlung in die USA" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                        name="changes"
+                        type="radio"
+                        class="btn-group btn-group-yesno"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                        label="Änderungen" >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
