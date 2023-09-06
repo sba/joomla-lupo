@@ -83,7 +83,7 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/admin/update_pkg_lupo.xml</server>
+		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/update_pkg_lupo.xml</server>
 	</updateservers>
 
 </extension>
