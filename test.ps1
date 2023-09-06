@@ -23,15 +23,15 @@ Copy-Item -Path ($joomla_dir + 'media\com_lupo\*') -Destination ($target_dir + '
 
 Copy-Item -Path ($joomla_dir + 'modules\mod_lupo_categories\*') -Destination ($target_dir + 'modules\mod_lupo_categories') -Recurse -Force -Container
 Copy-Item -Path ($joomla_dir + 'modules\mod_lupo_login\*') -Destination ($target_dir + 'modules\mod_lupo_login') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'modules\mod_lupo_loginlink') -Destination ($target_dir + 'modules\mod_lupo_loginlink') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'modules\mod_lupo_loginlink\*') -Destination ($target_dir + 'modules\mod_lupo_loginlink') -Recurse -Force -Container
 
-Copy-Item -Path ($joomla_dir + 'plugins\content\lupoprivacy') -Destination ($target_dir + 'plugins\content\lupoprivacy') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'plugins\content\luporandomquote') -Destination ($target_dir + 'plugins\content\luporandomquote') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'plugins\content\lupototaltoys') -Destination ($target_dir + 'plugins\content\lupototaltoys') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'plugins\content\lupotoy') -Destination ($target_dir + 'plugins\content\lupotoy') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'plugins\quickicon\lupo') -Destination ($target_dir + 'plugins\quickicon\lupo') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'plugins\search\lupo') -Destination ($target_dir + 'plugins\search\lupo') -Recurse -Force -Container
-Copy-Item -Path ($joomla_dir + 'plugins\search\lupogenres') -Destination ($target_dir + 'plugins\search\lupogenres') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\content\lupoprivacy\*') -Destination ($target_dir + 'plugins\content\lupoprivacy') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\content\luporandomquote\*') -Destination ($target_dir + 'plugins\content\luporandomquote') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\content\lupototaltoys\*') -Destination ($target_dir + 'plugins\content\lupototaltoys') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\content\lupotoy\*') -Destination ($target_dir + 'plugins\content\lupotoy') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\quickicon\lupo\*') -Destination ($target_dir + 'plugins\quickicon\lupo') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\search\lupo\*') -Destination ($target_dir + 'plugins\search\lupo') -Recurse -Force -Container
+Copy-Item -Path ($joomla_dir + 'plugins\search\lupogenres\*') -Destination ($target_dir + 'plugins\search\lupogenres') -Recurse -Force -Container
 
 
 
