@@ -5,4 +5,6 @@
 ; @link			https://www.ludothekprogramm.ch
 ; @note			Note : All ini files need to be saved as UTF-8 - No BOM
 
-MOD_LUPO_QUICKICON_TITLE="Mise à jour des jeux"
+MOD_LUPO_CATEGORIES="LUPO Spielkategorien"
+MOD_LUPO_CATEGORIES_XML_DESCRIPTION="Dieses Modul zeigt alle Spielkategorien an."
+MOD_LUPO_CATEGORIES_LAYOUT_DEFAULT="Standard"

@@ -11,6 +11,7 @@
     <description>LUPO - [datenschutz] zeigt die Datenschutzerklärung an</description>
 	<files>
 		<filename plugin="lupoprivacy">lupoprivacy.php</filename>
+        <folder>tmpl</folder>
     </files>
 
     <config>

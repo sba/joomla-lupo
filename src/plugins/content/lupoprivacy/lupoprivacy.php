@@ -9,8 +9,10 @@
 
 defined('_JEXEC') or die;
 
-class plgContentLupoprivacy extends JPlugin {
-	public function onContentPrepare($context, &$article, &$params, $limitstart = 0) {
+class plgContentLupoprivacy extends JPlugin
+{
+	public function onContentPrepare($context, &$article, &$params, $limitstart = 0)
+	{
 		$paragraphs = [
 			'general_introduction'          => 'Allgemeines / Einleitung',
 			'processing_of_personal_data'   => 'Verarbeitung personenbezogener Daten',
@@ -18,8 +20,8 @@ class plgContentLupoprivacy extends JPlugin {
 			'with_ssl_tls_encryption'       => 'Mit SSL/TLS-Verschlüsselung',
 			'server_log_files'              => 'Server-Log-Dateien',
 			'contact_form'                  => 'Kontaktformular / Formular für Spielreservationen',
-			'newsletter'                    => 'Newsletter',
 			'customer_login'                => 'Kundenlogin',
+			'newsletter'                    => 'Newsletter',
 			'data_subject_rights'           => 'Rechte der betroffenen Person',
 			'contradiction_email_marketing' => 'Widerspruch E-Mail Marketing',
 			'copyrights'                    => 'Urheberrechte',
@@ -34,17 +36,23 @@ class plgContentLupoprivacy extends JPlugin {
 		];
 
 		$privacy_policy = '<div class="uk-accordion uk-margin-large-top" data-uk-accordion>';
-		foreach ($paragraphs as $key => $paragraph_title) {
+		foreach ($paragraphs as $key => $paragraph_title)
+		{
 			$show = $this->params->get($key, '1');
-			if($show == '1'){
-				$content = file_get_contents(__DIR__ .'/de_' . $key . '.html');
-				$privacy_policy .='<h3 class="uk-accordion-title">'.$paragraph_title.'</h3>';
-				$privacy_policy .='<div class="uk-accordion-content">' . nl2br($content) . '</div>';
+			if ($show == '1')
+			{
+				$filename = __DIR__ . '/tmpl/de_' . $key . '.html';
+				if (file_exists($filename))
+				{
+					$content        = file_get_contents($filename);
+					$privacy_policy .= '<h3 class="uk-accordion-title">' . $paragraph_title . '</h3>';
+					$privacy_policy .= '<div class="uk-accordion-content">' . nl2br($content) . '</div>';
+				}
 			}
 		}
 		$privacy_policy .= '</div>';
 
-		 $privacy_policy .= '<div class="uk-margin-top"><strong>Quellen</strong>: <a style="color: inherit; text-decoration: none;" href="https://brainbox.swiss/" rel="nofollow">BrainBox Solutions</a> / databauer</div>';
+		$privacy_policy .= '<div class="uk-margin-top"><strong>Quellen</strong>: <a style="color: inherit; text-decoration: none;" href="https://brainbox.swiss/" rel="nofollow">BrainBox Solutions</a> / databauer</div>';
 
 		$article->text = str_replace('[datenschutz]', $privacy_policy, $article->text);
 
