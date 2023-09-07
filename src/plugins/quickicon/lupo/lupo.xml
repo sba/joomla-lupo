@@ -13,9 +13,9 @@
 		<filename plugin="lupo">lupo.php</filename>
 	</files>
 	<languages>
-		<language tag="en-GB">language/en-GB.plg_lupo_quickicon.ini</language>
-		<language tag="en-GB">language/en-GB.plg_lupo_quickicon.sys.ini</language>
-		<language tag="de-DE">language/de-DE.plg_lupo_quickicon.ini</language>
-		<language tag="de-DE">language/de-DE.plg_lupo_quickicon.sys.ini</language>
+		<language tag="en-GB">language/en-GB.plg_quickicon_lupo.ini</language>
+		<language tag="en-GB">language/en-GB.plg_quickicon_lupo.sys.ini</language>
+		<language tag="de-DE">language/de-DE.plg_quickicon_lupo.ini</language>
+		<language tag="de-DE">language/de-DE.plg_quickicon_lupo.sys.ini</language>
 	</languages>
 </extension>
