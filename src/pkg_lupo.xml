@@ -2,9 +2,9 @@
 <extension type="package" version="3.1" method="upgrade">
     <name>LUPO</name>
     <packagename>LUPO</packagename>
-    <version>{{creationDate}}</version>
+    <version>{{version_pkg_lupo}}</version>
     <description>LUPO Spielliste für Joomla</description>
-    <creationDate>{{version_pkg_lupo}}</creationDate>
+    <creationDate>{{creationDate}}</creationDate>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<author>Stefan Bauer</author>

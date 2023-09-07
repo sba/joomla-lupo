@@ -139,6 +139,6 @@ Get-ChildItem -Path "$($github_dir)\pkg_lupo\src\plg_search_lupogenres" | Compre
 
 
 # create pkg_lupo.zip containing all zip-installers
-Copy-Item -Path ($github_dir + 'pkg_lupo\packages\*') -Filter *.zip -Exclude pkg_lupo_languagepack* -Destination ($github_dir + 'pkg_lupo\src\pkg_lupo\packages') -Force
+Copy-Item -Path ($github_dir + 'pkg_lupo\packages\*') -Filter *.zip -Exclude pkg_lupo* -Destination ($github_dir + 'pkg_lupo\src\pkg_lupo\packages') -Force
 Get-ChildItem -Path "$($github_dir)\pkg_lupo\src\pkg_lupo" | Compress-Archive -DestinationPath "$($github_dir)\pkg_lupo\packages\pkg_lupo" -Force
 
