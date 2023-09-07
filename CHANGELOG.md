@@ -1,6 +1,6 @@
 # Changelog
 
-### {{version_pkg_lupo}} ({{creationDate_changelog}})
+### 4.0.0 (September 06, 2023)
   - joomla 4 compatibility
 
 ### 3.84.0 (June 19, 2023)
