@@ -18,6 +18,6 @@
  
       <maintainer>Stefan Bauer</maintainer>
       <maintainerurl>https://databauer.ch</maintainerurl>
-      <targetplatform name="joomla" version="3.*"/>
+      <targetplatform name="joomla" version="4.*"/>
    </update> 
 </updates>

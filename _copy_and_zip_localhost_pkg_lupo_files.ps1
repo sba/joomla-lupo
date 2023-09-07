@@ -66,8 +66,10 @@ Copy-Item -Path ($src_dir + 'language\en-GB\*') -Filter *com_lupo* -Destination 
 
 Move-Item ($pkg_dir + 'com_lupo\admin\lupo.xml') -Destination ($pkg_dir + 'com_lupo\lupo.xml') -Force
 
-# pkg_lupo
+# pkg_lupo / Changelog
 Copy-Item ($src_dir + 'pkg_lupo.xml') -Destination ($pkg_dir + 'pkg_lupo\pkg_lupo.xml') -Force
+Copy-Item ($src_dir + 'CHANGELOG.md') -Destination ($github_dir + 'CHANGELOG.md') -Force
+Copy-Item ($src_dir + 'update_pkg_lupo.xml') -Destination ($github_dir + 'update_pkg_lupo.xml') -Force
 
 # modules
 Copy-Item -Path ($src_dir + 'modules\mod_lupo_categories\*') -Destination ($pkg_dir + 'mod_lupo_categories') -Force -Recurse -Container
@@ -109,7 +111,8 @@ foreach ($placeholder in $placeholders.keys) {
     $search = ${placeholder};
     $replace = $($placeholders.Item($placeholder));
 
-    $configFiles = @(Get-ChildItem "$($github_dir)*" -Include CHANGELOG.md)
+    $configFiles  = @(Get-ChildItem "$($github_dir)*" -Include CHANGELOG.md)
+    $configFiles += @(Get-ChildItem "$($github_dir)*" -Include update_pkg_lupo.xml)
     $configFiles += @(Get-ChildItem "$($github_dir)pkg_lupo\src\*" -Include *.xml -Recurse)
     foreach ($file in $configFiles) {
         (Get-Content $file.PSPath) |
