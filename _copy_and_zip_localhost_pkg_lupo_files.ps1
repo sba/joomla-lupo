@@ -1,7 +1,7 @@
 # Kopiert die Joomla-Files ins github-Dir, verteilt die Files in components/modules/plugins Ordner, erstellt Zip und pkg_lupo Zip
 
 $joomla_dir = 'D:\htdocs\_ludos\ludodev.local\'
-$github_dir = 'C:\Users\Stefan\Dropbox\Projekte\Lupo\web\joomla\lupo-extension\'
+$github_dir = 'C:\Users\Stefan\Dropbox\Projekte\Lupo\web\joomla\github-joomla-lupo\'
 $target_dir = $github_dir + 'src\'
 
 
