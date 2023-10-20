@@ -1,10 +1,14 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - joomla 4.4 compatibility
+  - bugfix reservation button: escape toyname properly 
+   
+### 4.0.0 (September 07, 2023)
   - joomla 4 compatibility
 
 ### 3.84.0 (June 19, 2023)
-  - fix error when uploading toylist, case insensitive genres
+  - fix error when uploading toylist, case-insensitive genres
 
 ### 3.83.0 (May 26, 2023)
   - improve api response on error

@@ -3,15 +3,15 @@
 
 	<name>COM_LUPO</name>
 	<author>Stefan Bauer</author>
-	<creationDate>September 2023</creationDate>
+	<creationDate>October 2023</creationDate>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
-	<version>4.0.0</version>
+	<version>4.0.1</version>
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
-	<!-- Runs on install/uninstall/update; New in 2.5 -->
+	<!-- Runs on install/uninstall/update -->
 	<scriptfile>script.php</scriptfile>
 
 	<install> <!-- Runs on install -->
@@ -24,7 +24,7 @@
 			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
-	<update> <!-- Runs on update; New in 1.6 -->
+	<update> <!-- Runs on update -->
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
@@ -83,7 +83,6 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/update_pkg_lupo.xml</server>
 	</updateservers>
 
 </extension>

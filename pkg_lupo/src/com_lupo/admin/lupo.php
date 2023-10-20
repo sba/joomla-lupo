@@ -279,7 +279,7 @@ function processXML($file) {
 				$game_genres = explode(', ', $game_genres);
 				foreach ($game_genres as $game_genre) {
 					$db->setQuery('INSERT INTO #__lupo_game_genre SET
-											`gameid`=' . $row['id'] . ', `genreid`=' . array_search(substr($game_genre, 0, 30), $genres)
+											`gameid`=' . $row['id'] . ', `genreid`=' . array_search(mb_substr($game_genre, 0, 30), $genres)
 					);
 					$db->execute();
 					$genres_alias_list[] = $genres_alias[$game_genre];
@@ -294,7 +294,6 @@ function processXML($file) {
 					$db->execute();
 				}
 			}
-
 
 			//save cached data, not provided in xml
 			foreach ($res_categories as $row) {

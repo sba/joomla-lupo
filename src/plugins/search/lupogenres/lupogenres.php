@@ -60,8 +60,7 @@ class plgSearchLupogenres extends JPlugin {
 		$app    = JFactory::getApplication();
 		$user   = JFactory::getUser();
 		$groups = implode(',', $user->getAuthorisedViewLevels());
-
-		$request_type = JRequest::getVar('type');
+		$request_type = $app->input->get('type');
 
 		if (is_array($areas)) {
 			if (!array_intersect($areas, array_keys($this->onContentSearchAreas()))) {

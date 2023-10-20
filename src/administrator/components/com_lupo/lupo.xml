@@ -11,7 +11,7 @@
 	<version>{{version_pkg_lupo}}</version>
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
-	<!-- Runs on install/uninstall/update; New in 2.5 -->
+	<!-- Runs on install/uninstall/update -->
 	<scriptfile>script.php</scriptfile>
 
 	<install> <!-- Runs on install -->
@@ -24,7 +24,7 @@
 			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
-	<update> <!-- Runs on update; New in 1.6 -->
+	<update> <!-- Runs on update -->
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
@@ -83,7 +83,6 @@
 	</administration>
 
 	<updateservers>
-		<server type="extension" priority="1" name="LUPO">https://raw.githubusercontent.com/sba/com_lupo/master/update_pkg_lupo.xml</server>
 	</updateservers>
 
 </extension>

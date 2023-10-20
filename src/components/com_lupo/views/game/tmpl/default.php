@@ -125,8 +125,8 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                             method: "POST",
                             url: "index.php?option=com_lupo&task=resadd&format=raw",
                             data: {
-                                toynr: '<?php echo $this->game['number']?>',
-                                toyname: '<?php echo $this->game['title']?>'
+                                toynr: "<?php echo $this->game['number']?>",
+                                toyname: "<?php echo htmlspecialchars($this->game['title'])?>"
                             }
                         })
                             .done(function (response) {
@@ -277,7 +277,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                         </ul>
 					<?php } else {
 						$infinite = count($this->game['related']) < 6 ? '{infinite: false}' : ''; ?>
-                        <style type="text/css">
+                        <style>
                             .uk-overlay:hover img {
                                 transform: none;
                             }
