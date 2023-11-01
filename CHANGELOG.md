@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.0.2 (November 1, 2023)
+  - package installer removes old sql migration files
+
 ### 4.0.1 (October 18, 2023)
   - joomla 4.4 compatibility
   - bugfix reservation button: escape toyname properly 

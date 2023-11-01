@@ -2,14 +2,18 @@
 <extension type="package" version="3.1" method="upgrade">
     <name>LUPO</name>
     <packagename>LUPO</packagename>
-    <version>4.0.1</version>
+    <version>4.0.2</version>
     <description>LUPO Spielliste für Joomla</description>
-    <creationDate>October 2023</creationDate>
+    <creationDate>November 2023</creationDate>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<author>Stefan Bauer</author>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
+
+    <blockChildUninstall>false</blockChildUninstall>
+    <scriptfile>script.php</scriptfile>
+
     <files folder="packages">
         <file type="component" id="com_lupo">com_lupo.zip</file>
         <file type="module" id="mod_lupo_categories" client="site">mod_lupo_categories.zip</file>
@@ -23,8 +27,6 @@
         <file type="plugin" id="plg_content_lupotoy" group="content">plg_content_lupotoy.zip</file>
         <file type="plugin" id="plg_content_luporandomquote" group="content">plg_content_luporandomquote.zip</file>
     </files>
-    <scriptfile></scriptfile>
-    <updateservers>
-        
-    </updateservers>
+
+    <updateservers></updateservers>
 </extension>
