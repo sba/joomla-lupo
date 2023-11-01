@@ -10,6 +10,10 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
+use Joomla\CMS\Factory;
+
+$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+$wa->useScript('jquery');
 ?>
 
 <script src="components/com_lupo/assets/plupload/js/plupload.full.min.js"></script>
