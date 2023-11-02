@@ -11,13 +11,6 @@
 defined('_JEXEC') or die('Restricted Access');
 
 ?>
-
-<script>
-    jQuery(document).ready(function () {
-
-    });
-</script>
-
 <style>
     .right {
         text-align: right !important;
