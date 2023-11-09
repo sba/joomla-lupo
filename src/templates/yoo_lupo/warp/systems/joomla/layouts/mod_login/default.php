@@ -29,7 +29,7 @@ JHtml::_('behavior.keepalive');
 		<input class="uk-width-1-1" type="password" name="password" size="18" placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>">
 	</div>
 
-	<?php if (count($twofactormethods) > 1): ?>
+	<?php if (isset($twofactormethods) && count($twofactormethods) > 1): ?>
 	<div class="uk-form-row">
 		<input class="uk-width-1-1" type="text" name="secretkey" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
 	</div>

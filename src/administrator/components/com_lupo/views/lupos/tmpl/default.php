@@ -11,7 +11,6 @@
 defined('_JEXEC') or die('Restricted Access');
 
 use Joomla\CMS\Factory;
-
 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 $wa->useScript('jquery');
 ?>

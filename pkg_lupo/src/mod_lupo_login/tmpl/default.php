@@ -328,7 +328,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
         </script>
 
 
-        <div id="resform" class="uk-modal">
+        <div id="resform" class="uk-modal uk-form">
             <div class="uk-modal-dialog" style="background: #ffffff none repeat scroll 0 0 !important;">
                 <button class="uk-modal-close uk-close" type="button"></button>
                 <div class="uk-modal-header"><h2><?php echo JText::_("COM_LUPO_RES_TOYS"); ?></h2></div>
@@ -373,7 +373,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_RES_CLIENT_NO"); ?>:</td>
                         <td>
-                            <input type="text" maxlength="50" size="40" value="<?= $clientnr ?>" id="clientnr" name="clientnr">
+                            <input class="uk-form-width-medium" type="text" maxlength="50" size="40" value="<?= $clientnr ?>" id="clientnr" name="clientnr">
                             <span class="uk-text-muted"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO_IF_AVAILABLE"); ?></span>
                         </td>
                     </tr>
@@ -394,7 +394,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                         <tr>
                             <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
                             <td>
-                                <div style="margin-bottom: 10px">
+                                <div style="margin-bottom: 10px; max-width: 400px;">
 									<?php if ($componentParams->get('detail_show_res_date_now', '1') == 1) { ?>
                                         <input type="checkbox" value="resnow" id="resnow" name="resnow" checked="checked"> <?php echo JText::_("COM_LUPO_RES_FROM_INSTANTLY"); ?>
 									<?php } ?>
@@ -412,7 +412,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_RES_ADDITIONAL_INFO"); ?>:</td>
                         <td><textarea rows="10" cols="70" id="comment" name="comment"
-                                      style="height: 87px; width: 312px;"></textarea></td>
+                                      style="height: 87px; width: 342px;"></textarea></td>
                     </tr>
 					<?php if ($componentParams->get('detail_toy_res_costs', '') != "") { ?>
                         <tr>

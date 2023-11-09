@@ -11,13 +11,6 @@
 defined('_JEXEC') or die('Restricted Access');
 
 ?>
-
-<script>
-    jQuery(document).ready(function () {
-
-    });
-</script>
-
 <style>
     .right {
         text-align: right !important;
@@ -74,7 +67,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->categories as $category){
         $categories[] = '"'. $category['alias'].'"';
     } ?>
-    <pre><?=implode(", ", $categories)?></pre>
+    <pre><?=implode(", \n", $categories)?></pre>
 
     <p>
         Verfügbare Alterskategorien (alias):
@@ -83,7 +76,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->agecategories as $agecategory){
         $agecategories[] = '"'. $agecategory['alias'].'"';
     } ?>
-    <pre><?=implode(", ", $agecategories)?></pre>
+    <pre><?=implode(", \n", $agecategories)?></pre>
 
     <p>
         Verfügbare Genres (alias):
@@ -92,7 +85,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->genres as $genre){
         $genres[] = '"'. $genre['alias'].'"';
     } ?>
-    <pre><?=implode(", ", $genres)?></pre>
+    <pre><?=implode(", \n", $genres)?></pre>
 
     <p>
         Verfügbare Anzahl Spieler (alias):
@@ -101,7 +94,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->players as $player){
         $players[] = '"'. JApplicationHelper::stringURLSafe($player['players']).'"';
     } ?>
-    <pre><?=implode(", ", $players)?></pre>
+    <pre><?=implode(", \n", $players)?></pre>
 
     <p>
         Alle möglichen Filter einzeln aufgelistet:
