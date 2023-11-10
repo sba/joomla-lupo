@@ -112,12 +112,6 @@ $this['asset']->addFile('js', 'warp:vendor/uikit/js/components/tooltip.js');
 $this['asset']->addFile('js', 'js:social.js');
 $this['asset']->addFile('js', 'js:theme.js');
 
-// internet explorer
-if ($this['useragent']->browser() == 'msie') {
-    $head[] = sprintf('<!--[if IE 8]><link rel="stylesheet" href="%s"><![endif]-->', $this['path']->url('css:ie8.css'));
-    $head[] = sprintf('<!--[if lte IE 8]><script src="%s"></script><![endif]-->', $this['path']->url('js:html5.js'));
-}
-
 if (isset($head)) {
     $this['template']->set('head', implode("\n", $head));
 }

@@ -10909,3 +10909,16 @@ body.header-nobgimg .tm-search {
   margin-top: 45px;
   margin-right: 0;
 }
+/* joomla 4.4 / warp fixes */
+.btn.jmodedit {
+  height: 20px !important;
+  width: 10px !important;
+  float: right;
+  padding: 0;
+}
+.btn.jmodedit + div {
+  display: none;
+}
+.btn.jmodedit .visually-hidden {
+  display: none;
+}
