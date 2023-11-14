@@ -24,7 +24,7 @@ class LupoController extends JControllerLegacy {
 	function display($cachable = false, $urlparams = []) {
 		$document = JFactory::getDocument();
 		$app      = JFactory::getApplication('site');
-        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+		$wa       = Factory::getApplication()->getDocument()->getWebAssetManager();
 
 		//init session anyway, may it helps with reservation problem...
 		$app->getSession();
@@ -32,17 +32,17 @@ class LupoController extends JControllerLegacy {
 		$params = $app->getParams();
 		$uikit  = $params->get('lupo_load_uikit_css', "0");
 		if ($uikit !== "0") {
-            $wa->registerAndUseStyle('uikit', "components/com_lupo/uikit/css/" . $uikit);
-            $wa->registerAndUseStyle('uikit.slider', "components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit));
-            $wa->registerAndUseStyle('com_lupo', "components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.', '', $uikit));
+			$wa->registerAndUseStyle('uikit', "components/com_lupo/uikit/css/" . $uikit);
+			$wa->registerAndUseStyle('uikit.slider', "components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit));
+			$wa->registerAndUseStyle('com_lupo', "components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.', '', $uikit));
 
 			//load uikit
-			$wa->registerAndUseScript('uikit',  'components/com_lupo/uikit/js/uikit.min.js', [], [], ['jquery']);
-			$wa->registerAndUseScript('uikit.modal',  'components/com_lupo/uikit/js/core/modal.min.js', [], [], ['uikit']);
-			$wa->registerAndUseScript('uikit.lightbox',  'components/com_lupo/uikit/js/components/lightbox.min.js', [], [], ['uikit']);
-			$wa->registerAndUseScript('uikit.slider',  'components/com_lupo/uikit/js/components/slider.min.js', [], [], ['uikit']);
+			$wa->registerAndUseScript('uikit', 'components/com_lupo/uikit/js/uikit.min.js', [], [], ['jquery']);
+			$wa->registerAndUseScript('uikit.modal', 'components/com_lupo/uikit/js/core/modal.min.js', [], [], ['uikit']);
+			$wa->registerAndUseScript('uikit.lightbox', 'components/com_lupo/uikit/js/components/lightbox.min.js', [], [], ['uikit']);
+			$wa->registerAndUseScript('uikit.slider', 'components/com_lupo/uikit/js/components/slider.min.js', [], [], ['uikit']);
 		}
-		$wa->registerAndUseScript('com_lupo',  'components/com_lupo/js/lupo.js', [], [], ['uikit']);
+		$wa->registerAndUseScript('com_lupo', 'components/com_lupo/js/lupo.js', [], [], ['uikit']);
 
 		$wa->registerAndUseStyle('com_lupo', 'components/com_lupo/css/com_lupo.css');
 
@@ -105,7 +105,7 @@ class LupoController extends JControllerLegacy {
 				$model = $this->getModel();
 				$game  = $model->getGame($id, true);
 
-				if($game!=='error') {
+				if ($game !== 'error') {
 					$document->setMetaData('og:title', $game['title'], 'property');
 					$description = strlen($game['description_title']) > 0 ? substr($game['description_title'], 0, 297) : substr($game['description'], 0, 297);
 					$document->setMetaData('og:description', $description, 'property');
@@ -116,17 +116,17 @@ class LupoController extends JControllerLegacy {
 				$view->display();
 				break;
 			case 'genre':
-				$model         = $this->getModel();
-				$genre         = $model->getGenre($id);
-				$games         = $model->getGamesByGenre($id, $foto_list_prefix);
-				$subsets       = $model->getSubsets($filter_types, $games);
-				$view          = $this->getView('Genre', 'html');
-				$view->title   = $genre['genre'] ??JText::_('JERROR_PAGE_NOT_FOUND');
+				$model             = $this->getModel();
+				$genre             = $model->getGenre($id);
+				$games             = $model->getGamesByGenre($id, $foto_list_prefix);
+				$subsets           = $model->getSubsets($filter_types, $games);
+				$view              = $this->getView('Genre', 'html');
+				$view->title       = $genre['genre'] ?? JText::_('JERROR_PAGE_NOT_FOUND');
 				$view->description = '';
-				$view->genre   = $genre;
-				$view->subsets = $subsets;
-				$view->games   = $games;
-				$view->foto    = ['show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix];
+				$view->genre       = $genre;
+				$view->subsets     = $subsets;
+				$view->games       = $games;
+				$view->foto        = ['show' => $foto_list_show && $model->hasFoto($games), 'prefix' => $foto_list_prefix];
 				$view->display();
 				break;
 			case 'category':
@@ -412,7 +412,7 @@ class LupoController extends JControllerLegacy {
 					$client->lastname  = $row->nn;
 					$client->email     = $row->em ?? null;
 					$client->phone     = $row->te ?? null;
-					$client->aboenddat = $row->ae;
+					$client->aboenddat = $row->ae == '' ? '0000-00-00' : $row->ae;
 					$client->abotype   = $row->at;
 
 					// wäre schöner so, sollte updaten on duplicate key: GEHT ABER NICHT
@@ -504,7 +504,7 @@ class LupoController extends JControllerLegacy {
 							}
 
 							//delete in online-reservation table if reservation in lupo exists for this toy
-							if($row->rs){
+							if ($row->rs) {
 								$query = $db->getQuery(true);
 								$query->delete($db->quoteName('#__lupo_reservations_web'));
 								$query->where($db->quoteName('game_number') . ' = ' . $db->quote($game_nr));
