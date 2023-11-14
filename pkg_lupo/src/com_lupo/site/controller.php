@@ -410,8 +410,8 @@ class LupoController extends JControllerLegacy {
 					$client->username  = $row->un;
 					$client->firstname = $row->vn;
 					$client->lastname  = $row->nn;
-					$client->email     = $row->em ?? null;
-					$client->phone     = $row->te ?? null;
+					$client->email     = $row->em ?? '';
+					$client->phone     = $row->te ?? '';
 					$client->aboenddat = $row->ae == '' ? '0000-00-00' : $row->ae;
 					$client->abotype   = $row->at;
 
