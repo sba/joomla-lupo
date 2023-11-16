@@ -102,7 +102,9 @@ if ($params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) {
 
 $args['tags'] = $tags;
 
+
 // set edit
+/* *** SBA disabled frontend editing - yoo_lupo and J4.4 incompatible ***
 if (!$this->print) {
 	$attrs = array('class' => 'uk-margin-right');
 	$args['edit']  = $canEdit ? JHtml::_('icon.edit', $this->item, $params, $attrs) : '';
@@ -111,6 +113,7 @@ if (!$this->print) {
 } else {
 	$args['edit'] = JHtml::_('icon.print_screen', $this->item, $params);
 }
+*/
 
 // set previous and next
 if (!empty($this->item->pagination)) {
