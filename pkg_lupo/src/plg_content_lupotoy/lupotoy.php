@@ -20,19 +20,19 @@ class plgContentLupotoy extends JPlugin {
 		preg_match_all($pattern, $article->text, $matches);
 
 		if (count($matches[0]) > 0) {
-			$toy_numbers = $matches[2][0];
-			$toy_numbers = str_replace([',', ' '], [';', ''], $toy_numbers); // support comma as delimiter, ignore space
+			foreach ($matches[0] as $match_key => $match) {
+				$toy_numbers = $matches[2][$match_key];
+				$toy_numbers = str_replace([',', ' '], [';', ''], $toy_numbers); // support comma as delimiter, ignore space
 
-			$model = new LupoModelLupo();
-			$toys  = $model->getGamesByNumber($toy_numbers);
-			if ($toys !== false) {
-				$replacement = '';
-				foreach ($toys as $toy) {
-					$replacement .= '<a href="' . $toy['link'] . '"><img src="' . $toy['image'] . '" title="' . $toy['title'] . '" style="max-width: 280px; margin: 0 20px 20px 0" ></a>';
+				$model = new LupoModelLupo();
+				$toys  = $model->getGamesByNumber($toy_numbers);
+				if ($toys !== false) {
+					$replacement = '';
+					foreach ($toys as $toy) {
+						$replacement .= '<a href="' . $toy['link'] . '"><img src="' . $toy['image'] . '" title="' . $toy['title'] . '" style="max-width: 280px; margin: 0 20px 20px 0" ></a>';
+					}
+					$article->text = str_replace($matches[0][$match_key],$replacement, $article->text);
 				}
-				$pattern       = '/(\[spiel|spiele|jeu|jeux|gioco|giochi)[\s]([0-9;,. ]+)(\])/i';
-				$article->text = preg_replace($pattern, $replacement, $article->text);
-				//$article->text .= '<pre>'. print_r($toy[0],true).'</pre>';
 			}
 		}
 
