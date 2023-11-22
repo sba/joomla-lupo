@@ -42,23 +42,17 @@ defined('_JEXEC') or die('Restricted Access');
     <p>
         Die Filter müssen in gültigem JSON-Format und mit den alias-Namen gespeichert werden.
         <br>
-        Filter-Attribute müssen nicht gesetzt werden, z.B. ist {
-        "filters": {
-        "BUTTONNAME": {
-        "players": ["1-spieler", "1-4-spieler"]
-        }
-        }
-        } zulässig.
+        Filter-Attribute müssen nicht gesetzt werden, z.B. ist <code>{"filters": {"BUTTONNAME": {"players": ["1-spieler", "1-4-spieler"]}}}</code> zulässig.
         Ist "style" nicht gesetzt, so wird automatisch "dropdown" definiert.
         <br>
-        Die einzelnen Filter werden logisch mit ODER verknüpft: {"players": ["1", "2"], "genres": ["lesen"]} Zeigt alle Spiele an, bei welchen eines der Argumente zutrifft.
+        Die einzelnen Filter werden logisch mit ODER verknüpft: <code>{"players": ["1", "2"], "genres": ["lesen"]}</code> Zeigt alle Spiele an, bei welchen eines der Argumente zutrifft.
         <br><br>
         Markup Filter-Button:
     </p>
 
     <?php
     $json_arr = ['filters' => ['BUTTONNAME' => ['categories' => [], 'agecategories' => [], 'genres' => [], 'players' => []]], 'style' => 'dropdown|buttons']; ?>
-    <pre><?= json_encode($json_arr, JSON_PRETTY_PRINT); ?></pre>
+    <code><pre><?= json_encode($json_arr, JSON_PRETTY_PRINT); ?></pre></code>
 
     <p>
         Verfügbare Kategorien (alias):
@@ -67,7 +61,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->categories as $category){
         $categories[] = '"'. $category['alias'].'"';
     } ?>
-    <pre><?=implode(", \n", $categories)?></pre>
+    <code><pre><?=implode(", \n", $categories)?></pre></code>
 
     <p>
         Verfügbare Alterskategorien (alias):
@@ -76,7 +70,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->agecategories as $agecategory){
         $agecategories[] = '"'. $agecategory['alias'].'"';
     } ?>
-    <pre><?=implode(", \n", $agecategories)?></pre>
+    <code><pre><?=implode(", \n", $agecategories)?></pre></code>
 
     <p>
         Verfügbare Genres (alias):
@@ -85,7 +79,7 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->genres as $genre){
         $genres[] = '"'. $genre['alias'].'"';
     } ?>
-    <pre><?=implode(", \n", $genres)?></pre>
+    <code><pre><?=implode(", \n", $genres)?></pre></code>
 
     <p>
         Verfügbare Anzahl Spieler (alias):
@@ -94,26 +88,26 @@ defined('_JEXEC') or die('Restricted Access');
     foreach ($this->players as $player){
         $players[] = '"'. JApplicationHelper::stringURLSafe($player['players']).'"';
     } ?>
-    <pre><?=implode(", \n", $players)?></pre>
+    <code><pre><?=implode(", \n", $players)?></pre></code>
 
     <p>
         Alle möglichen Filter einzeln aufgelistet:
     </p>
 	<?php
 	foreach ($this->categories as $category){
-		$filter_def[][$category['title']] = ["categories" => [$category['alias']]];
+		$filter_def[$category['title']] = ["categories" => [$category['alias']]];
 	}
 	foreach ($this->agecategories as $agecategory){
-		$filter_def[][$agecategory['title']] = ["agecategories" => [$agecategory['alias']]];
+		$filter_def[$agecategory['title']] = ["agecategories" => [$agecategory['alias']]];
 	}
 	foreach ($this->genres as $genre){
-		$filter_def[][$genre['genre']] = ["genres" => [$genre['alias']]];
+		$filter_def[$genre['genre']] = ["genres" => [$genre['alias']]];
 	}
 	foreach ($this->players as $player){
-		$filter_def[][$player['players']] = ["genres" => [$player['players']]] ; //Caution: Different array structure
+		$filter_def[$player['players']] = ["players" => [$player['players']]] ; //Caution: Different array structure
 	}
     ?>
-    <pre><?= json_encode(['filters' => $filter_def], JSON_PRETTY_PRINT); ?></pre>
+    <code><pre><?= json_encode(['filters' => $filter_def], JSON_PRETTY_PRINT); ?></pre></code>
 
 
 </div>

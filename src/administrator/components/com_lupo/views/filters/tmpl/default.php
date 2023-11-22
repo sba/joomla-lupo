@@ -53,10 +53,10 @@ defined('_JEXEC') or die('Restricted Access');
                             foreach ($subsets['filters'] as $caption => $subset) {
                                 ?>
                                 <b><?= $caption ?></b><br>
-                                <em>Kategorien:</em> <?= isset($subset['categories'])?implode(', ', $subset['categories']):''; ?><br>
-                                <em>Alterskategorien:</em> <?= isset($subset['agecategories'])?implode(', ', $subset['agecategories']):''; ?><br>
-                                <em>Genres:</em> <?= isset($subset['genres'])?implode(', ', $subset['genres']):''; ?><br>
-                                <em>Players:</em> <?= isset($subset['players'])?implode(', ', $subset['players']):''; ?><br><br>
+                                <em class="text-muted">Kategorien:</em> <?= isset($subset['categories'])?implode(', ', $subset['categories']):''; ?><br>
+                                <em class="text-muted">Alterskategorien:</em> <?= isset($subset['agecategories'])?implode(', ', $subset['agecategories']):''; ?><br>
+                                <em class="text-muted">Genres:</em> <?= isset($subset['genres'])?implode(', ', $subset['genres']):''; ?><br>
+                                <em class="text-muted">Players:</em> <?= isset($subset['players'])?implode(', ', $subset['players']):''; ?><br><br>
                                 <?php
                             }
                         }

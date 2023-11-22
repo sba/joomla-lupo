@@ -1,5 +1,10 @@
 # Changelog
 
+### 4.0.3 (November 22, 2023)
+  - bugfix content plugin lupotoy
+  - fix filters example, prettier output
+  - joomla 4.4 compatibility fixes
+
 ### 4.0.2 (November 1, 2023)
   - package installer removes old sql migration files
 

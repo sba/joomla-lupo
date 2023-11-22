@@ -457,12 +457,7 @@ class LupoController extends JControllerLegacy {
 				$game_ids = $db->loadAssocList('number', 'id');
 
 				foreach ($rows as $row) {
-					//compile full game-number (web-table contains full number when editions are exported as single game)
-					if (strpos($row->nr, ".") == 0) {
-						$game_nr = $row->nr . '.0';
-					} else {
-						$game_nr = $row->nr;
-					}
+					$game_nr = $this->addZeroToGameNumber($row->nr);
 
 					if (isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
 						$client                       = new stdClass();
@@ -556,12 +551,7 @@ class LupoController extends JControllerLegacy {
 				$game_ids = $db->loadAssocList('number', 'id');
 
 				foreach ($rows as $row) {
-					//compile full game-number (web-table contains full number when editions are exported as single game)
-					if (strpos($row->nr, ".") == 0) {
-						$game_nr = $row->nr . '.0';
-					} else {
-						$game_nr = $row->nr;
-					}
+					$game_nr = $this->addZeroToGameNumber($row->nr);
 
 					if (isset($game_ids[$game_nr])) { //only process if game exists in online-catalogue
 						try {
@@ -615,6 +605,23 @@ class LupoController extends JControllerLegacy {
 		}
 
 		return;
+	}
+
+
+	/**
+	 * compile full game-number (web-table contains full number when editions are exported as single game)
+	 *
+	 * @param $game_nr
+	 *
+	 * @return string game-number with index
+	 */
+
+	function addZeroToGameNumber($game_nr){
+		if (strpos($game_nr, ".") == 0) {
+			return $game_nr . '.0';
+		} else {
+			return $game_nr;
+		}
 	}
 
 	/**
