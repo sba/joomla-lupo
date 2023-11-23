@@ -30,12 +30,12 @@
 					label="JFIELD_PLG_SEARCH_SEARCHLIMIT_LABEL"
 					size="5"
 				/>
-				<field name="Itemid" type="menuitem"
-					default=""
-					description=""
-					label="Itemid"
-					size="5"
-				/>
+				<field name="Itemid"
+					   type="menuitem"
+					   filter="integer"
+					   label="Itemid">
+					<option value="0">PLG_SEARCH_LUPOGENRES_SELECT_MENU_ITEMID</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>

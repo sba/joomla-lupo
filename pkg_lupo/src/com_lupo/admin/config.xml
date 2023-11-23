@@ -716,8 +716,14 @@
             <option value="uikit.gradient.min.css">uikit.gradient.min.css</option>
         </field>
 
-        <field name="lupomenuitem" type="menuitem" label="COM_LUPO_MENUITEM"
-               description="COM_LUPO_MENUITEM_DESCRIPTION"/>
+        <field
+                name="lupomenuitem"
+                type="menuitem"
+                filter="integer"
+                label="COM_LUPO_MENUITEM"
+                description="COM_LUPO_MENUITEM_DESCRIPTION">
+            <option value="0">COM_LUPO_MENUITEM_DESCRIPTION</option>
+        </field>
     </fieldset>
 
     <fieldset
