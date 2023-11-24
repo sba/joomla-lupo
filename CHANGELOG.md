@@ -1,8 +1,13 @@
 # Changelog
 
-### 4.0.3 (November 22, 2023)
+### 4.1.0 (November 24, 2023)
+  - add menu config: sort list with toys by buy-date
+  - improve output of menu itemid setting in search plugins
+  - reorder and improve lupo component config
+  - do not show genres in filter dropdown by default
   - bugfix content plugin lupotoy
   - fix filters example, prettier output
+  - load uikit js anyway
   - joomla 4.4 compatibility fixes
 
 ### 4.0.2 (November 1, 2023)

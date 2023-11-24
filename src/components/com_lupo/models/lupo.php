@@ -9,6 +9,7 @@
 
 // No direct access to this file
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -327,7 +328,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
 			$where = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
 
-			$new_games_sort = (int) $componentParams->get('new_games_sort', '0');
+			$new_games_sort = (int) $componentParams->get('new_games_sort', '1');
 			if ($new_games_sort == '1') {
 				$order_by = 'acquired_date DESC, title, number';
 			}
@@ -335,6 +336,14 @@ class LupoModelLupo extends BaseDatabaseModel {
 		} else {
 			$cat_table = ($field == 'catid') ? '#__lupo_categories' : '#__lupo_agecategories';
 			$where     = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote($id) . " LIMIT 1)";
+
+			$category_list_sort = (int) $componentParams->get('category_list_sort', '0');
+			$app      = JFactory::getApplication('site');
+			$menu_category_list_sort = $app->input->getCmd('category_list_sort', '');
+
+			if ($menu_category_list_sort === '' && $category_list_sort == '1' || $menu_category_list_sort !== '' && $menu_category_list_sort == '1' ) {
+				$order_by = 'acquired_date DESC, title, number';
+			}
 		}
 
 		$sql = "SELECT
@@ -429,7 +438,19 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 * @return array with the games
 	 */
 	public function getGamesByGenre($genre, $foto_prefix = '') {
+		$componentParams = JComponentHelper::getParams('com_lupo');
 		$db = JFactory::getDBO();
+
+		$order_by = 'title, number'; //default order
+
+		$category_list_sort = (int) $componentParams->get('category_list_sort', '0');
+		$app      = JFactory::getApplication('site');
+		$menu_category_list_sort = $app->input->getCmd('category_list_sort', '');
+
+		if ($menu_category_list_sort === '' && $category_list_sort == '1' || $menu_category_list_sort !== '' && $menu_category_list_sort == '1' ) {
+			$order_by = 'acquired_date DESC, title, number';
+		}
+
 		$db->setQuery("SELECT
 							#__lupo_game.id
 							, #__lupo_game.number
@@ -468,7 +489,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 						LEFT JOIN #__lupo_genres ON (#__lupo_game_genre.genreid = #__lupo_genres.id)
 						WHERE #__lupo_genres.alias=" . $db->quote($genre) . "
 						GROUP BY #__lupo_game.id
-						ORDER BY title, number");
+						ORDER BY $order_by");
 		$res = $db->loadAssocList();
 
 		$res = $this->compileGames($res, $foto_prefix);

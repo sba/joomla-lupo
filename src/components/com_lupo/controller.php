@@ -35,68 +35,71 @@ class LupoController extends JControllerLegacy {
 			$wa->registerAndUseStyle('uikit', "components/com_lupo/uikit/css/" . $uikit);
 			$wa->registerAndUseStyle('uikit.slider', "components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit));
 			$wa->registerAndUseStyle('com_lupo', "components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.', '', $uikit));
-
-			//load uikit
-			$wa->registerAndUseScript('uikit', 'components/com_lupo/uikit/js/uikit.min.js', [], [], ['jquery']);
-			$wa->registerAndUseScript('uikit.modal', 'components/com_lupo/uikit/js/core/modal.min.js', [], [], ['uikit']);
-			$wa->registerAndUseScript('uikit.lightbox', 'components/com_lupo/uikit/js/components/lightbox.min.js', [], [], ['uikit']);
-			$wa->registerAndUseScript('uikit.slider', 'components/com_lupo/uikit/js/components/slider.min.js', [], [], ['uikit']);
 		}
+		$wa->registerAndUseStyle('com_lupo', 'components/com_lupo/css/com_lupo.css');
+
+		//load uikit js anyway
+		$wa->registerAndUseScript('uikit', 'components/com_lupo/uikit/js/uikit.min.js', [], [], ['jquery']);
+		$wa->registerAndUseScript('uikit.modal', 'components/com_lupo/uikit/js/core/modal.min.js', [], [], ['uikit']);
+		$wa->registerAndUseScript('uikit.lightbox', 'components/com_lupo/uikit/js/components/lightbox.min.js', [], [], ['uikit']);
+		$wa->registerAndUseScript('uikit.slider', 'components/com_lupo/uikit/js/components/slider.min.js', [], [], ['uikit']);
+
 		$wa->registerAndUseScript('com_lupo', 'components/com_lupo/js/lupo.js', [], [], ['uikit']);
 
-		$wa->registerAndUseStyle('com_lupo', 'components/com_lupo/css/com_lupo.css');
 
 		$view = $app->input->getCmd('view');
 		$id   = $app->input->getCmd('id', 0);
 
-		$com_foto_list_show  = $params->get('foto_list_show', "0");
-		$menu_foto_list_show = $app->input->getCmd('foto_list_show', '');
-		if ($menu_foto_list_show == '') {
-			$foto_list_show = $com_foto_list_show;
-		} else {
-			$foto_list_show = $menu_foto_list_show;
-		}
+		if (in_array($view, ['category', 'agecategory', 'genre'])) {
+			$com_foto_list_show  = $params->get('foto_list_show', "0");
+			$menu_foto_list_show = $app->input->getCmd('foto_list_show', '');
+			if ($menu_foto_list_show == '') {
+				$foto_list_show = $com_foto_list_show;
+			} else {
+				$foto_list_show = $menu_foto_list_show;
+			}
 
-		$com_foto_list_prefix  = $params->get('foto_list_prefix', "mini_");
-		$menu_foto_list_prefix = $app->input->getCmd('foto_list_prefix', 'mini_');
-		if ($menu_foto_list_prefix == '') {
-			$foto_list_prefix = $com_foto_list_prefix;
-		} else {
-			$foto_list_prefix = $menu_foto_list_prefix;
-		}
+			$com_foto_list_prefix  = $params->get('foto_list_prefix', "mini_");
+			$menu_foto_list_prefix = $app->input->getCmd('foto_list_prefix', 'mini_');
+			if ($menu_foto_list_prefix == '') {
+				$foto_list_prefix = $com_foto_list_prefix;
+			} else {
+				$foto_list_prefix = $menu_foto_list_prefix;
+			}
 
-		$filter_types              = [];
-		$com_show_category_filter  = $params->get('category_show_category_filter', '1') == '1';
-		$menu_show_category_filter = $app->input->getCmd('filter_category_list_show', "");
-		if ($menu_show_category_filter == '') {
-			$filter_list_show = $com_show_category_filter;
-		} else {
-			$filter_list_show = $menu_show_category_filter;
-		}
-		if ($filter_list_show == 1 && ($view != 'category' || $id == 'new')) {
-			$filter_types[] = 'category';
-		}
+			$filter_types              = [];
+			$com_show_category_filter  = $params->get('category_show_category_filter', '1') == '1';
+			$menu_show_category_filter = $app->input->getCmd('filter_category_list_show', "");
+			if ($menu_show_category_filter == '') {
+				$filter_list_show = $com_show_category_filter;
+			} else {
+				$filter_list_show = $menu_show_category_filter;
+			}
+			if ($filter_list_show == 1 && ($view != 'category' || $id == 'new')) {
+				$filter_types[] = 'category';
+			}
 
-		$com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1') == '1';
-		$menu_show_agecategory_filter = $app->input->getCmd('filter_agecategory_list_show', "");
-		if ($menu_show_agecategory_filter == '') {
-			$filter_list_show = $com_show_agecategory_filter;
-		} else {
-			$filter_list_show = $menu_show_agecategory_filter;
-		}
-		if ($filter_list_show == 1 && $view != 'agecategory') {
-			$filter_types[] = 'agecategory';
-		}
+			$com_show_agecategory_filter  = $params->get('category_show_agecategory_filter', '1') == '1';
+			$menu_show_agecategory_filter = $app->input->getCmd('filter_agecategory_list_show', "");
+			if ($menu_show_agecategory_filter == '') {
+				$filter_list_show = $com_show_agecategory_filter;
+			} else {
+				$filter_list_show = $menu_show_agecategory_filter;
+			}
+			if ($filter_list_show == 1 && $view != 'agecategory') {
+				$filter_types[] = 'agecategory';
+			}
 
-		$com_show_genre_filter  = $params->get('category_show_genre_filter', '1') == '1';
-		$menu_show_genre_filter = $app->input->getCmd('filter_genre_list_show', "");
-		if ($menu_show_genre_filter == '') {
-			$filter_list_show = $com_show_genre_filter;
-		} else {
-			$filter_list_show = $menu_show_genre_filter;
-		}
-		if ($filter_list_show == 1 && $view != 'genre') {
-			$filter_types[] = 'genre';
+			$com_show_genre_filter  = $params->get('category_show_genre_filter', '1') == '1';
+			$menu_show_genre_filter = $app->input->getCmd('filter_genre_list_show', "");
+			if ($menu_show_genre_filter == '') {
+				$filter_list_show = $com_show_genre_filter;
+			} else {
+				$filter_list_show = $menu_show_genre_filter;
+			}
+			if ($filter_list_show == 1 && $view != 'genre') {
+				$filter_types[] = 'genre';
+			}
 		}
 
 

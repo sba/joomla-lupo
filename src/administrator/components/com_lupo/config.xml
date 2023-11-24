@@ -18,28 +18,6 @@
         </field>
 
         <field
-                name="nbr_new_games"
-                id="lupo_nbr_new_games"
-                type="number"
-                maxLenght="5"
-                size="4"
-                label="COM_LUPO_OPTIONS_CATS_NBR_DAYS"
-                description="COM_LUPO_OPTIONS_CATS_NBR_DAYS_DESC"
-                default="30"
-        >
-        </field>
-
-        <field
-                name="new_games_sort"
-                type="list"
-                label="COM_LUPO_OPTIONS_NEW_GAMES_SORT"
-                default="0"
-        >
-            <option value="0">COM_LUPO_OPTIONS_NEW_GAMES_SORT_ALPHA</option>
-            <option value="1">COM_LUPO_OPTIONS_NEW_GAMES_SORT_BUYDATE</option>
-        </field>
-
-        <field
                 name="cats_nbr_games"
                 id="lupo_cats_nbr_games"
                 type="radio"
@@ -83,6 +61,40 @@
     >
 
         <field
+                name="category_list_sort"
+                type="list"
+                label="COM_LUPO_SORT"
+                default="0"
+        >
+            <option value="0">COM_LUPO_OPTIONS_SORT_ALPHA</option>
+            <option value="1">COM_LUPO_OPTIONS_SORT_BUYDATE</option>
+        </field>
+
+        <field
+                name="new_games_sort"
+                type="list"
+                label="COM_LUPO_OPTIONS_NEW_GAMES_SORT"
+                default="1"
+        >
+            <option value="0">COM_LUPO_OPTIONS_SORT_ALPHA</option>
+            <option value="1">COM_LUPO_OPTIONS_SORT_BUYDATE</option>
+        </field>
+
+        <field
+                name="nbr_new_games"
+                id="lupo_nbr_new_games"
+                type="number"
+                maxLenght="5"
+                size="4"
+                label="COM_LUPO_OPTIONS_CATS_NBR_DAYS"
+                description="COM_LUPO_OPTIONS_CATS_NBR_DAYS_DESC"
+                default="30"
+        >
+        </field>
+
+        <field name="spacer_kat_1" type="spacer" hr="true"/>
+
+        <field
                 type="radio"
                 layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
@@ -107,6 +119,8 @@
             <option value="0">JNO</option>
             <option value="1">JYES</option>
         </field>
+
+        <field name="spacer_kat_2" type="spacer" hr="true"/>
 
         <field
                 name="foto_list_show"
@@ -141,6 +155,8 @@
             <option value="0">JNO</option>
             <option value="1">JYES</option>
         </field>
+
+        <field name="spacer_kat_3" type="spacer" hr="true"/>
 
         <field
                 name="foto_list_show_description"
@@ -206,6 +222,8 @@
             <option value="1">JYES</option>
         </field>
 
+        <field name="spacer_kat_4" type="spacer" hr="true"/>
+
         <field
                 type="radio"
                 layout="joomla.form.field.radio.switcher"
@@ -240,7 +258,7 @@
                 id="category_show_genre_filter"
                 label="COM_LUPO_OPTIONS_CAT_SHOW_GENRE_FILTER"
                 description="COM_LUPO_OPTIONS_CAT_SHOW_GENRE_FILTER_DESC"
-                default="1">
+                default="0">
             <option value="0">JNO</option>
             <option value="1">JYES</option>
         </field>
@@ -253,7 +271,7 @@
             description="COM_LUPO_OPTIONS_TOY_DESC"
     >
 
-        <field type="spacer" name="spacer1" class="text" label="COM_LUPO_OPTIONS_SHOW_FIELDS"/>
+        <field type="spacer" name="spacer_toy_1" class="text" label="COM_LUPO_OPTIONS_SHOW_FIELDS"/>
 
         <field
                 type="radio"
@@ -438,7 +456,7 @@
             <option value="1">JYES</option>
         </field>
 
-        <field type="spacer" name="spacer2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO"/>
+        <field type="spacer" name="spacer_toy_2" class="text" label="COM_LUPO_OPTIONS_TOY_PHOTO"/>
 
         <field
                 type="radio"
@@ -468,7 +486,7 @@
             <option value="1">JYES</option>
         </field>
 
-        <field type="spacer" name="spacer3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED"/>
+        <field type="spacer" name="spacer_toy_3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED"/>
 
         <field
                 type="radio"
@@ -483,7 +501,7 @@
             <option value="1">JYES</option>
         </field>
 
-        <field type="spacer" name="spacer4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE"/>
+        <field type="spacer" name="spacer_toy_4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE"/>
 
         <field
                 type="radio"
