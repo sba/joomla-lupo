@@ -116,12 +116,12 @@ $wa->useScript('jquery');
     <div id="lupo">
         <div id="container">
             <a id="pickfiles" href="javascript:;">
-                <button class="btn btn-outline-primary">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button>
+                <button class="btn btn-outline-primary" id="btn_pickfiles">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button>
             </a> <span id="filelist">Your browser doesn't have HTML5 support.</span>
             <br>
             <br>
             <a id="uploadfiles" href="javascript:;">
-                <button class="btn btn-outline-primary btn-large">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
+                <button class="btn btn-outline-primary btn-large" id="btn_uploadfiles">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
             </a>
             <span id="upload_percent"></span>
         </div>
