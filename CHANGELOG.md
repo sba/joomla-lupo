@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.1.1 (December 1, 2023)
+  - bugfix: get menuitem from active menu if set
+  - joomla 4.4 compatibility updates
+
 ### 4.1.0 (November 24, 2023)
   - add menu config: sort list with toys by buy-date
   - improve output of menu itemid setting in search plugins

@@ -1,6 +1,10 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - bugfix: get menuitem from active menu if set
+  - joomla 4.4 compatibility updates
+
+### 4.1.0 (November 24, 2023)
   - add menu config: sort list with toys by buy-date
   - improve output of menu itemid setting in search plugins
   - reorder and improve lupo component config

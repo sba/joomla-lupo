@@ -33,7 +33,8 @@ class ModLupoLoginHelper {
 		$clientLogin = $model->clientLogin($adrnr, $password);
 
 		$app = JFactory::getApplication();
-		$app->redirect(JURI::current() . ($clientLogin ? '' : '?loginError'));
+		$url = JURI::current() . ($clientLogin ? '' : '?loginError');
+		$app->redirect($url);
 	}
 
 	/**

@@ -7,6 +7,8 @@
  * @license     License GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 
 jimport('joomla.application.categories');
@@ -42,12 +44,16 @@ function LupoBuildRoute(&$query)
  */
 function LupoParseRoute(&$segments)
 {
-    $params = JComponentHelper::getParams('com_lupo');
-    $itemid = $params->get('lupomenuitem', '0');
+	$app = Factory::getApplication();
+	$sitemenu = $app->getMenu();
+	$activeMenuitem = $sitemenu->getActive();
 
-    if ($itemid != '0') {
-        $app = JFactory::getApplication();
+    if ($activeMenuitem===null) {
+	    $params = JComponentHelper::getParams('com_lupo');
+	    $itemid = $params->get('lupomenuitem', '0');
         $app->getMenu()->setActive($itemid);
+    } else {
+	    $itemid = $activeMenuitem->id;
     }
 
     $vars = array();
