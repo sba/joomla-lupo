@@ -29,7 +29,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
             var $button = $(this);
             $.ajax({
                 method: "POST",
-                url: "index.php?option=com_lupo&task=prolong&format=raw",
+                url: "/index.php?option=com_lupo&task=prolong&format=raw",
                 data: {lupo_id: $button.data('lupo_id')}
             })
                 .done(function (msg) {
@@ -264,7 +264,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                     var $button = $(this);
                     $.ajax({
                         method: "POST",
-                        url: "index.php?option=com_lupo&task=resdel&format=raw",
+                        url: "/index.php?option=com_lupo&task=resdel&format=raw",
                         data: {toynr: $button.data('toynr')}
                     })
                         .done(function (response) {
@@ -300,7 +300,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                 $('#submitres').click(function () {
                     $.ajax({
                         method: "POST",
-                        url: "index.php?option=com_lupo&task=sendres&format=raw",
+                        url: "/index.php?option=com_lupo&task=sendres&format=raw",
                         data: {
                             clientname: $('#clientname').val(),
                             clientemail: $('#clientemail').val(),

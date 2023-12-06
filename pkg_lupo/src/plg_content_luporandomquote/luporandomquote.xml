@@ -2,12 +2,12 @@
 <extension type="plugin" version="3.1" group="content" method="upgrade">
 	<name>Inhalt - LUPO Zufälliges Zitat</name>
     <author>Stefan Bauer</author>
-    <creationDate>December 1, 2023</creationDate>
+    <creationDate>December 6, 2023</creationDate>
     <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>stefan@databauer.ch</authorEmail>
     <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
-    <version>4.1.1</version>
+    <version>4.1.2</version>
     <description>LUPO - [zufallszitat] zeigt eine zufälliges Zitat an</description>
 	<files>
 		<filename plugin="luporandomquote">luporandomquote.php</filename>

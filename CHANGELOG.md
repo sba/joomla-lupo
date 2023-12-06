@@ -1,6 +1,6 @@
 # Changelog
 
-### 4.1.1 (December 1, 2023)
+### 4.1.2 (December 6, 2023)
   - bugfix: get menuitem from active menu if set
   - joomla 4.4 compatibility updates
 

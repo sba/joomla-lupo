@@ -123,7 +123,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                     $('#btnresadd').on('click', function () {
                         $.ajax({
                             method: "POST",
-                            url: "index.php?option=com_lupo&task=resadd&format=raw",
+                            url: "/index.php?option=com_lupo&task=resadd&format=raw",
                             data: {
                                 toynr: "<?php echo $this->game['number']?>",
                                 toyname: "<?php echo htmlspecialchars($this->game['title'])?>"
