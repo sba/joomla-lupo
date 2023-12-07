@@ -175,7 +175,7 @@ function processXML($file) {
 			$genres = [];
 			foreach ($xml->games->game as $game) {
 				$title = $output = preg_replace('!\s+!', ' ', $game->title);
-				$db->setQuery('INSERT INTO #__lupo_game SET
+				$db->setQuery('INSERT IGNORE INTO #__lupo_game SET
 										`number`=' . $db->quote($game['number']) . '
 										, `id_databauer`=' . $db->quote($game['id_databauer']) . '
 										, `ean`=' . $db->quote(isset($game['ean']) ? $game['ean'] : '0') . '
@@ -227,7 +227,7 @@ function processXML($file) {
 
 				foreach ($game->editions->edition as $edition) {
 					$n++;
-					$db->setQuery('INSERT INTO #__lupo_game_editions SET
+					$db->setQuery('INSERT IGNORE INTO #__lupo_game_editions SET
 											`gameid`=' . $db->quote($gameid) . '
 											, `index`=' . $db->quote($edition['index']) . '
 											, `edition`=' . $db->quote($edition['edition']) . '
