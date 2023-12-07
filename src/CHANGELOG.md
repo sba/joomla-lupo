@@ -1,7 +1,13 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - insert ignore invalid toy recordsets when uploading
+
+### 4.1.2 (December 6, 2023)
   - bugfix: get menuitem from active menu if set
+  - joomla 4.4 compatibility updates
+
+### 4.1.1 (December 6, 2023)
   - joomla 4.4 compatibility updates
 
 ### 4.1.0 (November 24, 2023)
