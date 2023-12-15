@@ -203,7 +203,7 @@ function processXML($file) {
 
 				if (isset($game->documents->document)) {
 					foreach ($game->documents->document as $document) {
-						$db->setQuery('INSERT INTO #__lupo_game_documents SET
+						$db->setQuery('INSERT IGNORE INTO #__lupo_game_documents SET
 												`gameid`=' . $db->quote($gameid) . '
 												, `code`=' . $db->quote($document['code']) . '
 												, `type`=' . $db->quote($document['type']) . '

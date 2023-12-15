@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - 
+
+### 4.1.3 (December 7, 2023)
   - insert ignore invalid toy recordsets when uploading
 
 ### 4.1.2 (December 6, 2023)
