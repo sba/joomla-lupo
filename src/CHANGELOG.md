@@ -1,7 +1,7 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
-  - 
+  - Option to show or hide return date of borrowed toy
 
 ### 4.1.3 (December 7, 2023)
   - insert ignore invalid toy recordsets when uploading

@@ -337,11 +337,11 @@ class LupoModelLupo extends BaseDatabaseModel {
 			$cat_table = ($field == 'catid') ? '#__lupo_categories' : '#__lupo_agecategories';
 			$where     = "WHERE " . $field . "=" . "(SELECT id FROM $cat_table WHERE alias=" . $db->quote($id) . " LIMIT 1)";
 
-			$category_list_sort = (int) $componentParams->get('category_list_sort', '0');
-			$app      = JFactory::getApplication('site');
+			$category_list_sort      = (int) $componentParams->get('category_list_sort', '0');
+			$app                     = JFactory::getApplication('site');
 			$menu_category_list_sort = $app->input->getCmd('category_list_sort', '');
 
-			if ($menu_category_list_sort === '' && $category_list_sort == '1' || $menu_category_list_sort !== '' && $menu_category_list_sort == '1' ) {
+			if ($menu_category_list_sort === '' && $category_list_sort == '1' || $menu_category_list_sort !== '' && $menu_category_list_sort == '1') {
 				$order_by = 'acquired_date DESC, title, number';
 			}
 		}
@@ -439,15 +439,15 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 */
 	public function getGamesByGenre($genre, $foto_prefix = '') {
 		$componentParams = JComponentHelper::getParams('com_lupo');
-		$db = JFactory::getDBO();
+		$db              = JFactory::getDBO();
 
 		$order_by = 'title, number'; //default order
 
-		$category_list_sort = (int) $componentParams->get('category_list_sort', '0');
-		$app      = JFactory::getApplication('site');
+		$category_list_sort      = (int) $componentParams->get('category_list_sort', '0');
+		$app                     = JFactory::getApplication('site');
 		$menu_category_list_sort = $app->input->getCmd('category_list_sort', '');
 
-		if ($menu_category_list_sort === '' && $category_list_sort == '1' || $menu_category_list_sort !== '' && $menu_category_list_sort == '1' ) {
+		if ($menu_category_list_sort === '' && $category_list_sort == '1' || $menu_category_list_sort !== '' && $menu_category_list_sort == '1') {
 			$order_by = 'acquired_date DESC, title, number';
 		}
 
@@ -794,6 +794,8 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 * @return array loan status
 	 */
 	public function getLoanStatus($row) {
+		$componentParams = JComponentHelper::getParams('com_lupo');
+
 		$days_show_reservation     = '+35 day'; //do not show as reserved if to far in the future
 		$days_show_reservation_web = '-14 day'; //max age to show res from cache table
 
@@ -805,10 +807,10 @@ class LupoModelLupo extends BaseDatabaseModel {
 				$return_date = $row['return_date'];
 			}
 
-			if ($return_date < date("Y-m-d")) {
-				$availability['availability_text'] = JText::_("COM_LUPO_BORROWED");
-			} else {
+			if ($componentParams->get('lupo_show_toystatus_date', '1')) {
 				$availability['availability_text'] = sprintf(JText::_("COM_LUPO_BORROWED_TO"), date("d.m.Y", strtotime($return_date)));
+			} else {
+				$availability['availability_text'] = JText::_("COM_LUPO_BORROWED");
 			}
 
 			if ($row['next_reservation'] != null && $row['next_reservation'] < date("Y-m-d", strtotime($days_show_reservation, time()))) {
@@ -982,7 +984,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 		$agecategories = [];
 		$categories    = [];
 		$genres        = [];
-		$filters = false;
+		$filters       = false;
 		foreach ($types as $type) {
 			switch ($type) {
 				case 'agecategory':
