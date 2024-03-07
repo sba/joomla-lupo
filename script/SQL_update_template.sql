@@ -1,9 +1,15 @@
 USE `__DATABASE__`;
 
-#TRUNCATE #__update_sites;
-#TRUNCATE #__update_sites_extensions;
+TRUNCATE #__update_sites;
+TRUNCATE #__update_sites_extensions;
 
 #UPDATE `#__extensions` SET `params` = '{"updatesource":"default","minimum_stability":"4","customurl":"","versioncheck":"1","backupcheck":"1"} ' WHERE `extension_id` = '28'; 
-UPDATE `#__extensions` SET `enabled` = 0 WHERE `name` = 'plg_quickicon_eos'; 
+
+insert  into `#__guidedtours`(`id`,`title`,`description`,`ordering`,`extensions`,`url`,`created`,`created_by`,`modified`,`modified_by`,`checked_out_time`,`checked_out`,`published`,`language`,`note`,`access`) values (12,'Wie aktualisiere ich die Spielliste?','<p>Diese Tour zeigt, wie die Spielliste durch Hochladen der zuvor im LUPO exportieren zip-Datei aktualisiert wird.</p>',0,'[\"*\"]','administrator/index.php?option=com_lupo','2023-11-24 15:08:25',0,'2023-11-24 14:57:02',957,NULL,NULL,1,'*','',1);
+
+insert  into `#__guidedtour_steps`(`id`,`tour_id`,`title`,`published`,`description`,`ordering`,`position`,`target`,`type`,`interactive_type`,`url`,`created`,`created_by`,`modified`,`modified_by`,`checked_out_time`,`checked_out`,`language`,`note`) values (112,12,'LUPO zip-Datei mit Spielen auswählen',1,'<p>Hier muss die zuvor im LUPO unter \"Joomla\" =&gt; \"Exportdatei erstellen\" generierte zip-Datei ausgewählt werden.</p>',112,'bottom','#btn_pickfiles',2,4,'administrator/index.php?option=com_lupo&view=index.php?option=com_lupo&view=lupos','2023-11-24 15:10:52',0,'2023-11-24 14:32:29',957,NULL,NULL,'*','');
+insert  into `#__guidedtour_steps`(`id`,`tour_id`,`title`,`published`,`description`,`ordering`,`position`,`target`,`type`,`interactive_type`,`url`,`created`,`created_by`,`modified`,`modified_by`,`checked_out_time`,`checked_out`,`language`,`note`) values (113,12,'Datei hochladen',1,'<p>Die zip-Datei wird bei diesem Schritt auf den Server hochgeladen. Dies kann je nach Geschwindigkeit der Internetverbindung und Grösse der Datei einen Moment dauern.</p>',113,'bottom','#btn_uploadfiles',2,4,'administrator/index.php?option=com_lupo&view=index.php?option=com_lupo&view=lupos','2023-11-24 15:15:40',0,'2023-11-24 14:32:41',957,NULL,NULL,'*','');
+insert  into `#__guidedtour_steps`(`id`,`tour_id`,`title`,`published`,`description`,`ordering`,`position`,`target`,`type`,`interactive_type`,`url`,`created`,`created_by`,`modified`,`modified_by`,`checked_out_time`,`checked_out`,`language`,`note`) values (114,12,'Hochgeladene Daten verarbeiten',1,'<p>Der dritte und letzte Schritt liest die Spieldaten und Fotos aus der hochgeladenen Datei und speichert diese.</p>',114,'bottom','#processzip',2,4,'administrator/index.php?option=com_lupo&view=index.php?option=com_lupo&view=lupos','2023-11-24 15:15:40',0,'2023-11-24 14:32:51',957,NULL,NULL,'*','');
+insert  into `#__guidedtour_steps`(`id`,`tour_id`,`title`,`published`,`description`,`ordering`,`position`,`target`,`type`,`interactive_type`,`url`,`created`,`created_by`,`modified`,`modified_by`,`checked_out_time`,`checked_out`,`language`,`note`) values (115,12,'Darstellung und Verhalten der Spielliste ',1,'<p>Hier findest du viele verschiedene Konfigurationsmöglichkeiten, welche die Darstellung und das Verhalten der Spielliste beeinflussen.</p>',115,'bottom','#toolbar-options',2,3,'administrator/index.php?option=com_lupo&view=index.php?option=com_lupo&view=lupos','2023-11-24 15:15:40',0,'2023-11-24 14:33:04',957,NULL,NULL,'*','');
 
 /* ------------------------------------------------------------------------------------------------------- */
