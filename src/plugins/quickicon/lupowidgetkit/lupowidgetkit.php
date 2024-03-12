@@ -11,14 +11,14 @@
 defined('_JEXEC') or die('Restricted access');
 
 
-class plgQuickiconLupo extends JPlugin {
+class plgQuickiconLupowidgetkit extends JPlugin {
 	public function __construct(&$subject, $config) {
 		parent::__construct($subject, $config);
 
 		$app = JFactory::getApplication();
 
 		// only in Admin and only if the component is enabled
-		if ($app->getClientId() !== 1 || JComponentHelper::getComponent('com_lupo', true)->enabled === false) {
+		if ($app->getClientId() !== 1 || JComponentHelper::getComponent('com_widgetkit', true)->enabled === false) {
 			return;
 		}
 
@@ -31,11 +31,11 @@ class plgQuickiconLupo extends JPlugin {
 		}
 
 		return [[
-			'link'   => 'index.php?option=com_lupo',
-			'image'  => 'picture fa fa-dice',
+			'link'   => 'index.php?option=com_widgetkit',
+			'image'  => 'picture fa fa-rocket',
 			'access' => [],
-			'text'   => JText::_('PLG_QUICKICON_LUPO_TITLE'),
-			'id'     => 'plg_quickicon_lupo',
+			'text'   => 'Widgetkit',
+			'id'     => 'plg_quickicon_widgetkit',
 		]];
 	}
 }

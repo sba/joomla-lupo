@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.3.0 (March 11, 2024)
+  - Administrator Quick Icon for Widgetkit plugin added
+
 ### 4.2.0 (February 28, 2024)
   - Option to show or hide return date of borrowed toy
 
