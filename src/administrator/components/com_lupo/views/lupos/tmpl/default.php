@@ -116,12 +116,12 @@ $wa->useScript('jquery');
     <div id="lupo">
         <div id="container">
             <a id="pickfiles" href="javascript:;">
-                <button class="btn btn-outline-primary" id="btn_pickfiles">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button>
+                <button class="btn btn-primary" id="btn_pickfiles">1. <?php echo JText::_("COM_LUPO_ADMIN_SELECT_ZIP") ?></button>
             </a> <span id="filelist">Your browser doesn't have HTML5 support.</span>
             <br>
             <br>
             <a id="uploadfiles" href="javascript:;">
-                <button class="btn btn-outline-primary btn-large" id="btn_uploadfiles">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
+                <button class="btn btn-primary btn-large" id="btn_uploadfiles">2. <?php echo JText::_("COM_LUPO_ADMIN_UPLOAD_FILE") ?></button>
             </a>
             <span id="upload_percent"></span>
         </div>
@@ -130,7 +130,7 @@ $wa->useScript('jquery');
 
         <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processZIPForm">
             <input type="hidden" name="act" value="processzip"/>
-            <input type="submit" name="submit" class="btn btn-outline-primary" id="processzip" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS") ?>"/>
+            <input type="submit" name="submit" class="btn btn-primary" id="processzip" value="3. <?php echo JText::_("COM_LUPO_ADMIN_PROCESS") ?>"/>
         </form>
 
         <br>
@@ -140,7 +140,7 @@ $wa->useScript('jquery');
 
         <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="processXMLForm">
             <input type="hidden" name="act" value="processxml"/>
-            <input type="submit" name="submit" class="btn btn-outline-secondary btn-large" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN") ?>"/>
+            <input type="submit" name="submit" class="btn btn-secondary btn-large" value="<?php echo JText::_("COM_LUPO_ADMIN_PROCESS_AGAIN") ?>"/>
         </form>
 
         <form action="<?php echo JRoute::_('index.php?option=com_lupo'); ?>" method="post" name="deleteImagesForm">

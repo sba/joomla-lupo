@@ -1,6 +1,9 @@
 # Changelog
 
-### {{version_pkg_lupo}} ({{creationDate_changelog}})
+### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - Button style improved for Joomla 5.1 dark mode
+
+### ## 3.1.26 (March 22, 2024)
   - Administrator Quick Icon for Widgetkit plugin added
 
 ### 4.2.0 (February 28, 2024)

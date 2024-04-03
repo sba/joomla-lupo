@@ -1,6 +1,9 @@
 # Changelog
 
-### 4.3.0 (March 11, 2024)
+### 4.3.1 (April 03, 2024
+  - Button style improved for Joomla 5.1 dark mode
+
+### ## 3.1.26 (March 22, 2024)
   - Administrator Quick Icon for Widgetkit plugin added
 
 ### 4.2.0 (February 28, 2024)
