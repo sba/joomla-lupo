@@ -124,6 +124,7 @@ class plgSearchLupogenres extends JPlugin {
 				$db->setQuery($query);
 				$menu   = $db->loadAssoc();
 				$itemid = "";
+				/* 2024-04-04 Menu-Itemid logic removed - toy details should always shown without root toy modules
 				if (isset($menu['id'])) {
 					$itemid = '&Itemid=' . $menu['id'];
 				} else {
@@ -131,6 +132,8 @@ class plgSearchLupogenres extends JPlugin {
 						$itemid = '&Itemid=' . $params_itemid;
 					}
 				}
+				*/
+
 				/*                if ($request_type == 'json'){
 									$rows[$key]->text = $row->cat_agecat;
 								}*/

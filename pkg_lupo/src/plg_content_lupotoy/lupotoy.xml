@@ -2,7 +2,7 @@
 <extension type="plugin" version="3.1" group="content" method="upgrade">
 	<name>Inhalt - LUPO Spiel</name>
     <author>Stefan Bauer</author>
-    <creationDate>April 03, 2024</creationDate>
+    <creationDate>April 05, 2024</creationDate>
     <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>stefan@databauer.ch</authorEmail>

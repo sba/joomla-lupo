@@ -1,7 +1,8 @@
 # Changelog
 
-### 4.3.1 (April 03, 2024
+### 4.3.1 (April 05, 2024
   - Button style improved for Joomla 5.1 dark mode
+  - remove adding item-id to search result link
 
 ### ## 3.1.26 (March 22, 2024)
   - Administrator Quick Icon for Widgetkit plugin added

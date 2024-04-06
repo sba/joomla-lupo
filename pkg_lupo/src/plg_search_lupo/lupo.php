@@ -145,17 +145,19 @@ class plgSearchLupo extends JPlugin {
 				$db->setQuery($query);
 				$menu   = $db->loadAssoc();
 				$itemid = "";
-				if (isset($menu['id'])) {
+				/* 2024-04-04 Menu-Itemid logic removed - toy details should always shown without root toy modules
+				 if (isset($menu['id'])) {
 					$itemid = '&Itemid=' . $menu['id'];
 				} else {
 					if ($params_itemid != '') {
 						$itemid = '&Itemid=' . $params_itemid;
 					}
 				}
+				*/
 				if ($request_type == 'json') {
 					$rows[$key]->text = $row->cat_agecat;
 				}
-				$rows[$key]->href = 'index.php?option=com_lupo&view=game&id=' . $row->number . $itemid;
+				$rows[$key]->href = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row->number . $itemid);
 
 				$rows[$key]->image = false;
 				if ($foto_show) {
