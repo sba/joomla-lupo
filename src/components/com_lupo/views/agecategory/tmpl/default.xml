@@ -42,6 +42,46 @@
                                 default=""
                                 />
                         <field
+                                type="list"
+                                name="foto_list_show_description"
+                                label="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION"
+                                description="COM_LUPO_NOPHOTO_SHOW_DESCRIPTION_DESC"
+                                default="">
+                                <option value="">JGLOBAL_USE_GLOBAL</option>
+                                <option value="1">JSHOW</option>
+                                <option value="0">JHIDE</option>
+                        </field>
+                        <field
+                                type="list"
+                                name="category_show_toy_category"
+                                label="COM_LUPO_OPTIONS_TOY_CATEGORY"
+                                description="COM_LUPO_OPTIONS_TOY_CATEGORY_DESC"
+                                default="">
+                                <option value="">JGLOBAL_USE_GLOBAL</option>
+                                <option value="1">JSHOW</option>
+                                <option value="0">JHIDE</option>
+                        </field>
+                        <field
+                                type="list"
+                                name="category_show_toy_nbrdays"
+                                label="COM_LUPO_OPTIONS_TOY_NBRDAYS"
+                                description="COM_LUPO_OPTIONS_TOY_NBRDAYS_DESC"
+                                default="">
+                                <option value="">JGLOBAL_USE_GLOBAL</option>
+                                <option value="1">JSHOW</option>
+                                <option value="0">JHIDE</option>
+                        </field>
+                        <field
+                                type="list"
+                                name="category_show_tax"
+                                label="COM_LUPO_OPTIONS_CAT_SHOW_TAX"
+                                description="COM_LUPO_OPTIONS_CAT_SHOW_TAX_DESC"
+                                default="">
+                                <option value="">JGLOBAL_USE_GLOBAL</option>
+                                <option value="1">JSHOW</option>
+                                <option value="0">JHIDE</option>
+                        </field>
+                        <field
                                 name="filter_category_list_show"
                                 type="list"
                                 default=""

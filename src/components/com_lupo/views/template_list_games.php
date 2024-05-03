@@ -11,6 +11,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 $componentParams = JComponentHelper::getParams('com_lupo');
+$app      = JFactory::getApplication('site');
 
 if ($this->foto['show'] == '1') { ?>
     <style>
@@ -97,22 +98,22 @@ if ($this->foto['show'] == '1') { ?>
                             <span class="uk-float-right"><?php echo JText::_('COM_LUPO_BORROWING_STATUS'); ?></span>
                         <?php } ?>
                     </th>
-                    <?php if ($componentParams->get('category_show_toy_category', '1') && $catType != 'category') { ?>
+                    <?php if ($app->input->getCmd('category_show_toy_category',$componentParams->get('category_show_toy_category', '1')) && $catType != 'category') { ?>
                         <th nowrap="nowrap" class="uk-hidden-small">
                             <div align="right"><?php echo JText::_('COM_LUPO_CATEGORY'); ?></div>
                         </th>
                     <?php } ?>
-                    <?php if ($componentParams->get('category_show_toy_age_category', '1') && $catType != 'agecategory') { ?>
+                    <?php if ($app->input->getCmd('category_show_toy_age_category',$componentParams->get('category_show_toy_age_category', '1')) && $catType != 'agecategory') { ?>
                         <th nowrap="nowrap" class="uk-hidden-small">
                             <div align="right"><?php echo JText::_('COM_LUPO_AGE_CATEGORY'); ?></div>
                         </th>
                     <?php } ?>
-                    <?php if ($componentParams->get('category_show_tax', '1')) { ?>
+                    <?php if ($app->input->getCmd('category_show_tax',$componentParams->get('category_show_tax', '1'))) { ?>
                         <th nowrap="nowrap" class="uk-hidden-small">
                             <div align="right"><?php echo JText::_('COM_LUPO_TAX'); ?></div>
                         </th>
                     <?php } ?>
-                    <?php if ($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
+                    <?php if ($app->input->getCmd('category_show_toy_nbrdays',$componentParams->get('category_show_toy_nbrdays', '1'))) { ?>
                         <th nowrap="nowrap" class="uk-hidden-small">
                             <div align="right"><?php echo str_replace(" ", "<br>", JText::_('COM_LUPO_DAYS')); ?></div>
                         </th>
@@ -150,22 +151,22 @@ if ($this->foto['show'] == '1') { ?>
                         } else {
                             echo $game['title'];
                         } ?>
-                        <?php if ($componentParams->get('foto_list_show_description', '1')) { ?>
+                        <?php if ($app->input->getCmd('foto_list_show_description', $componentParams->get('foto_list_show_description', '1')) ) { ?>
                             <p><?php
                             $desc = preg_replace("'<(br[^/>]*?/)>'si", ' ', $game['description_full']); //replace <br/> with space
                             echo JHtmlString::truncateComplex($desc, 220, true);
                             ?></p><?php } ?>
                     </td>
-                    <?php if ($componentParams->get('category_show_toy_category', '1') && $catType != 'category') { ?>
+                    <?php if ($app->input->getCmd('category_show_toy_category', $componentParams->get('category_show_toy_category', '1')) && $catType != 'category') { ?>
                         <td align="right" class="uk-hidden-small"><?php echo $game['category'] ?></td>
                     <?php } ?>
-                    <?php if ($componentParams->get('category_show_toy_age_category', '1') && $catType != 'agecategory') { ?>
+                    <?php if ($app->input->getCmd('category_show_toy_age_category', $componentParams->get('category_show_toy_age_category', '1') && $catType != 'agecategory' )) { ?>
                         <td align="right" class="uk-hidden-small"><?php echo $game['age_category'] ?></td>
                     <?php } ?>
-                    <?php if ($componentParams->get('category_show_tax', '1')) { ?>
+                    <?php if ($app->input->getCmd('category_show_tax', $componentParams->get('category_show_tax', '1'))) { ?>
                         <td align="right" class="uk-hidden-small"><?php echo number_format($game['tax'], 2) ?></td>
                     <?php } ?>
-                    <?php if ($componentParams->get('category_show_toy_nbrdays', '1')) { ?>
+                    <?php if ($app->input->getCmd('category_show_toy_nbrdays', $componentParams->get('category_show_toy_nbrdays', '1'))) { ?>
                         <td align="right" class="uk-hidden-small"><?php echo $game['days'] ?></td>
                     <?php } ?>
                 </tr>
