@@ -10,3 +10,4 @@ UPDATE `#__extensions` SET `params` = '{"updatesource":"next","minimum_stability
 UPDATE `#__updates`SET detailsurl = 'https://update.joomla.org/core/j4/next.xml' WHERE extension_id=700;
 
 /* ------------------------------------------------------------------------------------------------------- */
+
