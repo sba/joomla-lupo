@@ -71,7 +71,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                     <div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width ?> uk-margin-bottom">
 						<?php
 						if ($this->game['image'] == null) {
-							?><img class="lupo_image" src="<?php echo $this->game['image_thumb'] ?>"><?php
+							?><img class="lupo_image" src="<?php echo $this->game['image_thumb'] . $this->uploaddate  ?>"><?php
 						} else {
 							?>
 							<?php if ($componentParams->get('detail_photo_lightbox', '1')) { ?>
@@ -79,15 +79,15 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                    title="<?php echo htmlspecialchars($this->game['title'] . ' ' . $this->game['edition']) ?>"><img
                                             class="lupo_image"
                                             alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"
-                                            src="<?php echo $this->game['image_thumb'] ?>"/></a>
+                                            src="<?php echo $this->game['image_thumb'] . $this->uploaddate  ?>"/></a>
 							<?php } else { ?>
                                 <img class="lupo_image"
                                      alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"
-                                     src="<?php echo $this->game['image_thumb'] ?>"/>
+                                     src="<?php echo $this->game['image_thumb'] . $this->uploaddate  ?>"/>
 							<?php } ?>
                             <div id="img-toy" class="uk-modal">
                                 <div>
-                                    <img src="<?php echo $this->game['image'] ?>"
+                                    <img src="<?php echo $this->game['image'] . $this->uploaddate  ?>"
                                          alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"/>
                                 </div>
                             </div>
@@ -295,7 +295,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                         <li>
                                             <a href="<?php echo $related['link'] ?>">
                                                 <figure class="uk-overlay uk-overlay-hover">
-                                                    <img src="<?php echo $image; ?>"/>
+                                                    <img src="<?php echo $image . $this->uploaddate ; ?>"/>
                                                     <figcaption
                                                             class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><?php echo $related['title'] . ' ' . $related['edition'] ?></figcaption>
                                                 </figure>

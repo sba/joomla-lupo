@@ -872,7 +872,25 @@ class LupoModelLupo extends BaseDatabaseModel {
 	}
 
 
+
 	/**
+	 * to avoid showing the image from the browser cache, we can add a version number to the image url
+	 **
+	 * @return string with uploaddate
+	 *
+	 */
+	public function getUploadDateGetVar() {
+		$get_var_upload_date = '';
+		$stats_file = JPATH_ROOT . '/images/upload_stats.json';
+		if (file_exists($stats_file)) {
+			$json = json_decode(file_get_contents($stats_file), true);
+			$get_var_upload_date = strtotime($json['toylist']) > 0 ? '?v='. date('YmdHi', strtotime($json['toylist'])) : ''   ;
+		}
+
+		return $get_var_upload_date;
+	}
+
+/**
 	 * Get static picture of the category / agecategory
 	 *
 	 * @param   category_alias

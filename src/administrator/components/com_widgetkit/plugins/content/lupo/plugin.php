@@ -64,6 +64,10 @@ $config = array(
                 break;
         }
 
+        if(!is_array($games)) {
+            return;
+        }
+
         if (in_array($args['filter'], array('category', 'agecategory', 'genre'))) {
             switch ($args['sort']) {
                 case 'random':

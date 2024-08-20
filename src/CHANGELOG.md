@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - add version to img src to avoid loading cached images
+
+### 4.4.0 (May 03, 2024
   - menu item options to show or hide data in list views
 
 ### 4.3.1 (April 05, 2024

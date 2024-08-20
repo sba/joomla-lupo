@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.4.1 (August 20, 2024
+  - add version to img src to avoid loading cached images
+
 ### 4.4.0 (May 03, 2024
   - menu item options to show or hide data in list views
 

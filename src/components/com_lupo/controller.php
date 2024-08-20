@@ -115,6 +115,7 @@ class LupoController extends JControllerLegacy {
 					$document->setMetaData('og:image', JUri::base() . $game['image'], 'property');
 				}
 				$view       = $this->getView('Game', 'html');
+				$view->uploaddate  = $model->getUploadDateGetVar();
 				$view->game = $game;
 				$view->display();
 				break;
@@ -138,6 +139,7 @@ class LupoController extends JControllerLegacy {
 				$games             = $model->getGames($id, 'catid', $foto_list_prefix);
 				$subsets           = $model->getSubsets($filter_types, $games);
 				$view              = $this->getView('Category', 'html');
+				$view->uploaddate  = $model->getUploadDateGetVar();
 				$view->title       = $category['title'] ?? JText::_('JERROR_PAGE_NOT_FOUND');
 				$view->description = $category['description'] ?? '';
 				$view->category    = $category;
@@ -152,6 +154,7 @@ class LupoController extends JControllerLegacy {
 				$games             = $model->getGames($id, 'age_catid', $foto_list_prefix);
 				$subsets           = $model->getSubsets($filter_types, $games);
 				$view              = $this->getView('Agecategory', 'html');
+				$view->uploaddate  = $model->getUploadDateGetVar();
 				$view->title       = $agecategory['title'] ?? JText::_('JERROR_PAGE_NOT_FOUND');
 				$view->description = $agecategory['description'] ?? '';
 				$view->agecategory = $agecategory;
