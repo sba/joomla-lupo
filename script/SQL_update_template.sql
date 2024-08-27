@@ -8,8 +8,7 @@ USE `__DATABASE__`;
 #WHERE template = 'atum';
 
 #UPDATE #__extensions SET params='{"updatesource":"default","minimum_stability":"4","customurl":"","versioncheck":"1","backupcheck":"1"}' WHERE `name` = 'com_joomlaupdate';
-
-UPDATE #__users SET password = '$2y$10$f/1hU2NoIaaNl1wbzn6UOeB9H.49NdnE11Px8FJrwC.SANXGgsyYG', `name` = 'databauer (sba)' WHERE username = 'sbauer';
+UPDATE `#__extensions` SET `enabled`=0 WHERE `name`='plg_quickicon_phpversioncheck';
 
 /* ------------------------------------------------------------------------------------------------------- */
 
