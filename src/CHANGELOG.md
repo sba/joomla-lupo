@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - new option to disallow prolongation for toys if client has no valid subscription 
+
+### 4.4.1 (August 20, 2024
   - add version to img src to avoid loading cached images
 
 ### 4.4.0 (May 03, 2024

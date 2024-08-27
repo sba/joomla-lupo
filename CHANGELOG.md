@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.4.2 (August 27, 2024
+  - new option to disallow prolongation for toys if client has no valid subscription 
+
 ### 4.4.1 (August 20, 2024
   - add version to img src to avoid loading cached images
 

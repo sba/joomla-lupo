@@ -58,12 +58,15 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
 
 	<?php
 	$show_login = $componentParams->get('detail_show_toy_res_hide_login', '0') == 0;
+	$prolongation_valid_abo = $componentParams->get('lupo_prolongation_valid_abo', '0') == 1;
+
 	if ($show_login) { ?>
 		<?php
 		$session = JFactory::getSession();
 		$client  = $session->get('lupo_client');
 		if (isset($client)) {
 			$hasAbo = $client->aboenddat != "0000-00-00";
+			$hasValidAbo = $hasAbo && $client->aboenddat >= date("Y-m-d");
 		}
 		if ($client) { ?>
             <form method="post" action="<?= JURI::current() ?>" class="uk-form">
@@ -177,7 +180,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
 
 							$extended_date_over = $toy->return_date_extended < date("Y-m-d");
 
-							if ($toy->prolongable == 0 || $has_reservation || $extended_date_over) {
+							if ($toy->prolongable == 0 || $has_reservation || $extended_date_over || (!$hasValidAbo && $prolongation_valid_abo)) {
 								$html_prolongation = '<i class="uk-text-muted">' . JText::_('MOD_LUPO_LOGIN_NOT_PROLONGABLE') . '</i>';
 							} else {
 								$html_prolongation = '<button class="uk-button uk-button-mini btn-prolong" data-lupo_id="' . $toy->lupo_id . '">' . JText::_('MOD_LUPO_LOGIN_PROLONG') . ' ' . date("d.m.Y", strtotime($toy->return_date_extended)) . (($toy->tax_extended > 0) ? ' CHF ' . number_format($toy->tax_extended, 2) : '') . '</button>';

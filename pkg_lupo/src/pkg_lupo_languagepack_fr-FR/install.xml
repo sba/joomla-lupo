@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="file" method="upgrade">
 	<author>Stefan Bauer</author>
-	<creationDate>August 20, 2024</creationDate>
+	<creationDate>August 27, 2024</creationDate>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>http://www.ludothekprogramm.ch</authorUrl>
-	<version>4.4.1</version>
+	<version>4.4.2</version>
 	<description>French (fr_FR) translation for LUPO package</description>
 	
 	<fileset>

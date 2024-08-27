@@ -717,6 +717,20 @@
         </field>
 
         <field
+                type="radio"
+                layout="joomla.form.field.radio.switcher"
+                class="btn-group btn-group-yesno"
+                name="lupo_prolongation_valid_abo"
+                id="lupo_prolongation_valid_abo"
+                label="COM_LUPO_PROLONGATION_VALID_ABO"
+                description="COM_LUPO_PROLONGATION_VALID_ABO_DESC"
+                showon="lupo_prolongation_enabled:1">
+                default="0">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field
                 name="lupo_websynctoken"
                 id="lupo_websynctoken"
                 type="text"

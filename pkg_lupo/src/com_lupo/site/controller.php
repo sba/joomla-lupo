@@ -337,7 +337,17 @@ class LupoController extends JControllerLegacy {
 		$client  = $session->get('lupo_client');
 		if (!$client) {
 			echo 'error';
+			return;
+		}
 
+		$componentParams = JComponentHelper::getParams('com_lupo');
+		$prolongation_enabled = $componentParams->get('lupo_prolongation_enabled', '0') == 1;
+		$prolongation_valid_abo = $componentParams->get('lupo_prolongation_valid_abo', '0') == 1;
+		$hasAbo = $client->aboenddat != "0000-00-00";
+		$hasValidAbo = $hasAbo && $client->aboenddat >= date("Y-m-d");
+
+		if(!$prolongation_enabled || ($prolongation_valid_abo && !$hasValidAbo)){
+			echo 'error';
 			return;
 		}
 
