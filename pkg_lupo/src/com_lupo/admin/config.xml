@@ -585,6 +585,21 @@
                 type="radio"
                 layout="joomla.form.field.radio.switcher"
                 class="btn-group btn-group-yesno"
+                name="detail_show_res_phone"
+                id="detail_show_res_phone"
+                label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_PHONE"
+                description="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_PHONE_DESC"
+                default="1"
+                showon="detail_show_toy_res:1"
+        >
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field
+                type="radio"
+                layout="joomla.form.field.radio.switcher"
+                class="btn-group btn-group-yesno"
                 name="detail_show_res_date"
                 id="detail_show_res_date"
                 label="COM_LUPO_OPTIONS_TOY_RESERVATION_SHOW_RES_DATE"

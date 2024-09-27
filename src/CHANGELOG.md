@@ -1,17 +1,20 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
-  - new option to disallow prolongation for toys if client has no valid subscription 
+  - rerservation form: new option to show/hide phone number field
+
+### 4.4.2 (August 27, 2024
+  - new option to disallow prolongation for toys if a client has no valid subscription 
 
 ### 4.4.1 (August 20, 2024
-  - add version to img src to avoid loading cached images
+  - add a version to img src to avoid loading cached images
 
 ### 4.4.0 (May 03, 2024
   - menu item options to show or hide data in list views
 
 ### 4.3.1 (April 05, 2024
   - button style improved for Joomla 5.1 dark mode
-  - remove adding item-id to search result link
+  - remove adding item-id to a search result link
 
 ### 4.3.0 (March 22, 2024)
   - Administrator Quick Icon for Widgetkit plugin added

@@ -389,10 +389,12 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                         <td><?php echo JText::_("COM_LUPO_RES_EMAIL"); ?>:*<br></td>
                         <td><input type="email" required maxlength="100" size="40" value="<?= $clientemail ?>" id="clientemail" name="clientemail"></td>
                     </tr>
+                    <?php if ($componentParams->get('detail_show_res_phone', '1') == 1) { ?>
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_RES_MOBILE"); ?>:*<br></td>
                         <td><input type="tel" required maxlength="15" size="40" value="<?= $clientphone ?>" id="clientmobile" name="clientmobile"></td>
                     </tr>
+                    <?php } ?>
 					<?php if ($componentParams->get('detail_show_res_date', '1') == 1) { ?>
                         <tr>
                             <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>

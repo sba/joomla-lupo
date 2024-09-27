@@ -245,7 +245,7 @@ class LupoController extends JControllerLegacy {
 		if ($clientname == "") {
 			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_NAME');
 		}
-		if ($clientmobile == "") {
+		if ($params->get('detail_show_res_phone', '1') == 1 && $clientmobile == "") {
 			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_MOBILE');
 		}
 		if ($formerror !== false) {
