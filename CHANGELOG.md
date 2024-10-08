@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.4.3 (Oktober 08, 2024
+  - refactor add a version to img src to avoid loading cached images
+
 ### 4.4.3 (September 27, 2024
   - rerservation form: new option to show/hide phone number field
 

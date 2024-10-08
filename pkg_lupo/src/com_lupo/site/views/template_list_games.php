@@ -137,7 +137,7 @@ if ($this->foto['show'] == '1') { ?>
                             <a class="category" href="<?php echo $game['link'] ?>"><?php
                                 if ($game['image_thumb'] != null) {
                                     ?>
-                                    <img class="uk-align-left" src="<?php echo $game['image_thumb'] . $this->uploaddate ?>">
+                                    <img class="uk-align-left" src="<?php echo $game['image_thumb'] ?>">
                                 <?php } else { ?>
                                     <?php if ($componentParams->get('foto_list_show_placeholder', '1')) { ?>
                                         <img class="uk-align-left" src="images/spiele/<?php echo $this->foto['prefix'] ?>dice-gray.jpg">

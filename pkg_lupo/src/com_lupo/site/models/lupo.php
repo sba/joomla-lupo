@@ -842,6 +842,9 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 * @todo: refactor thumbnail-logic
 	 */
 	public function getGameFoto($number, $game_thumb_prefix = "") {
+
+		$get_var_uploaddate = '?v=' . $this->getUploadDate();
+
 		$game_image = 'images/spiele/' . $number . '.jpg';
 		if (file_exists($game_image)) {
 			$res['image'] = $game_image;
@@ -868,6 +871,14 @@ class LupoModelLupo extends BaseDatabaseModel {
 			}
 		}
 
+		if ($res['image']) {
+			$res['image'] .= $get_var_uploaddate;
+		}
+		
+		if($res['image_thumb']) {
+			$res['image_thumb'] .= $get_var_uploaddate;
+		} 
+
 		return $res;
 	}
 
@@ -879,12 +890,12 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 * @return string with uploaddate
 	 *
 	 */
-	public function getUploadDateGetVar() {
+	public function getUploadDate() {
 		$get_var_upload_date = '';
 		$stats_file = JPATH_ROOT . '/images/upload_stats.json';
 		if (file_exists($stats_file)) {
 			$json = json_decode(file_get_contents($stats_file), true);
-			$get_var_upload_date = strtotime($json['toylist']) > 0 ? '?v='. date('YmdHi', strtotime($json['toylist'])) : ''   ;
+			$get_var_upload_date = strtotime($json['toylist']) > 0 ? date('YmdHi', strtotime($json['toylist'])) : '';
 		}
 
 		return $get_var_upload_date;

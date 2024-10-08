@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - refactor add a version to img src to avoid loading cached images
+
+### 4.4.3 (September 27, 2024
   - rerservation form: new option to show/hide phone number field
 
 ### 4.4.2 (August 27, 2024
