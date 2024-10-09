@@ -25,7 +25,23 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 */
 	protected $item;
 
+	protected $upload_date;
 
+	/**
+	 * Constructor method for the LupoModelLupo class
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		$upload_date = '';
+		$stats_file = JPATH_ROOT . '/images/upload_stats.json';
+		if (file_exists($stats_file)) {
+			$json = json_decode(file_get_contents($stats_file), true);
+			$upload_date = strtotime($json['toylist']) > 0 ? date('YmdHi', strtotime($json['toylist'])) : '';
+		}
+		$this->upload_date = $upload_date;
+	}
+	
 	/**
 	 * Get the Lupo category with new games
 	 *
@@ -834,6 +850,8 @@ class LupoModelLupo extends BaseDatabaseModel {
 	/**
 	 * Get the picture of a game
 	 *
+	 * to avoid showing the image from the browser cache, we can add a version number to the image url
+	 *
 	 * @param   number game-nbr
 	 * @param   prefix of the thumb
 	 *
@@ -843,7 +861,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 */
 	public function getGameFoto($number, $game_thumb_prefix = "") {
 
-		$get_var_uploaddate = '?v=' . $this->getUploadDate();
+		$get_var_uploaddate = '?v=' . $this->upload_date;
 
 		$game_image = 'images/spiele/' . $number . '.jpg';
 		if (file_exists($game_image)) {
@@ -882,24 +900,6 @@ class LupoModelLupo extends BaseDatabaseModel {
 		return $res;
 	}
 
-
-
-	/**
-	 * to avoid showing the image from the browser cache, we can add a version number to the image url
-	 **
-	 * @return string with uploaddate
-	 *
-	 */
-	public function getUploadDate() {
-		$get_var_upload_date = '';
-		$stats_file = JPATH_ROOT . '/images/upload_stats.json';
-		if (file_exists($stats_file)) {
-			$json = json_decode(file_get_contents($stats_file), true);
-			$get_var_upload_date = strtotime($json['toylist']) > 0 ? date('YmdHi', strtotime($json['toylist'])) : '';
-		}
-
-		return $get_var_upload_date;
-	}
 
 /**
 	 * Get static picture of the category / agecategory

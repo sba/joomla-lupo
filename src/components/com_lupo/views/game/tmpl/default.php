@@ -75,7 +75,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 						} else {
 							?>
 							<?php if ($componentParams->get('detail_photo_lightbox', '1')) { ?>
-                                <a href="<?php echo $this->game['image'] ?>" data-uk-lightbox
+                                <a href="<?php echo substr($this->game['image'], 0, strpos($this->game['image'], '?v='));?>" data-uk-lightbox
                                    title="<?php echo htmlspecialchars($this->game['title'] . ' ' . $this->game['edition']) ?>"><img
                                             class="lupo_image"
                                             alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"

@@ -1,21 +1,25 @@
 # Changelog
 
-### 4.4.3 (Oktober 08, 2024
+### 4.4.5 (Oktober 09, 2024
+  - fix lightbox href for images in toy detail view
+  - refactor, load img version in constructor
+
+### 4.4.4 (Oktober 08, 2024)
   - refactor add a version to img src to avoid loading cached images
 
-### 4.4.3 (September 27, 2024
+### 4.4.3 (September 27, 2024)
   - rerservation form: new option to show/hide phone number field
 
-### 4.4.2 (August 27, 2024
+### 4.4.2 (August 27, 2024)
   - new option to disallow prolongation for toys if a client has no valid subscription 
 
-### 4.4.1 (August 20, 2024
+### 4.4.1 (August 20, 2024)
   - add a version to img src to avoid loading cached images
 
-### 4.4.0 (May 03, 2024
+### 4.4.0 (May 03, 2024)
   - menu item options to show or hide data in list views
 
-### 4.3.1 (April 05, 2024
+### 4.3.1 (April 05, 2024)
   - button style improved for Joomla 5.1 dark mode
   - remove adding item-id to a search result link
 
