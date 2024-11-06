@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.5.0 (November 06, 2024
+  - delete all toy images before uploading a complete lupo export
+
 ### 4.4.5 (Oktober 09, 2024
   - fix lightbox href for images in toy detail view
   - refactor, load img version in constructor

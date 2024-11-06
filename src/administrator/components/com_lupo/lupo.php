@@ -49,11 +49,27 @@ if (isset($_POST['act']) && $_POST['act'] == 'processzip') {
 	if (file_exists($xmlpath . $xmlfile)) {
 		unlink($xmlpath . $xmlfile);
 	}
-	if (unzipImages($xmlpath . $zipfile, $xmlpath, $xmlfile, $gamespath)) {
-		processXML($xmlpath . $xmlfile);
 
-		$uri = JUri::getInstance();
-		$app->redirect($uri->toString());
+	unzipXML($xmlpath . $zipfile, $xmlpath, $xmlfile);
+	if (file_exists($xmlpath . $xmlfile)) {
+
+		$xml = simplexml_load_file($xmlpath . $xmlfile);
+		if ($xml == false) {
+			JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_XML_INVALID"), 'error');
+		} else {
+			$photodate = $xml['photodate'];
+			if($photodate==null) {
+				$deleteAllImg = false; //BC, if no date is provided, keep all images
+			} else {
+				$deleteAllImg = ($photodate == "");
+			}
+			if (unzipImages($xmlpath . $zipfile, $gamespath, $deleteAllImg )) {
+				processXML($xmlpath . $xmlfile);
+
+				$uri = JUri::getInstance();
+				$app->redirect($uri->toString());
+			}
+		}
 	}
 }
 
@@ -66,28 +82,46 @@ if (isset($_POST['act']) && $_POST['act'] == 'processxml') {
 }
 
 if (isset($_POST['act']) && $_POST['act'] == 'deleteimages') {
-	$files = glob($gamespath . '*.jpg'); // get all file names
-	$n     = 0;
-	foreach ($files as $file) {
-		if (is_file($file)) {
-			unlink($file);
-			$n++;
-		}
-	}
+	$n = deleteImages($gamespath);
+
 	JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_LUPO_ADMIN_DELETE_IMAGES_MSG', $n));
 
 	$uri = JUri::getInstance();
 	$app->redirect($uri->toString());
 }
 
+function deleteImages($gamespath) {
+	$files = glob($gamespath . "*.jpg");
+	foreach ($files as $file) {
+		unlink($file);
+	}
+	return count($files);
+}
 
-function unzipImages($zipfile, $xmlpath, $xmlfile, $gamespath) {
+
+function unzipXML($zipfile, $xmlpath, $xmlfile) {
 	$zip = new ZipArchive;
 	$res = $zip->open($zipfile);
 	if ($res === true) {
 		$zip->extractTo($xmlpath, [$xmlfile]); //extract xml
+		$zip->close();
 
-		//array_map('unlink', glob($gamespath."*.jpg")); //delete all image files before extracting from uploaded zip
+		return true;
+	} else {
+		JFactory::getApplication()->enqueueMessage(JText::_("COM_LUPO_ADMIN_MSG_ERROR_NO_ZIP_FILE"), 'error');
+	}
+
+	return false;
+}
+
+
+function unzipImages($zipfile, $gamespath, $deleteAllImg = false) {
+	$zip = new ZipArchive;
+	$res = $zip->open($zipfile);
+	if ($res === true) {
+		if ($deleteAllImg) {
+			array_map('unlink', glob($gamespath . "*.jpg")); //delete all image files before extracting from uploaded zip
+		}
 		$jpgs = [];
 		for ($i = 0; $i < $zip->numFiles; $i++) {
 			$filename = $zip->getNameIndex($i);
