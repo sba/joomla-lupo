@@ -2,6 +2,8 @@
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
   - delete all toy images before uploading a complete lupo export
+  - option added to show/hide the group of toys without age category
+  - if category/agecategory is not shown in the category view, do not show it at detail view
 
 ### 4.4.5 (Oktober 09, 2024
   - fix lightbox href for images in toy detail view

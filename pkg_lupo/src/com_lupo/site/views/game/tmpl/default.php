@@ -28,21 +28,21 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 		$description = $description_title . $this->game['description'];
 
 		//for navigation
-		$pos = isset($_GET['pos']) ? $_GET['pos'] : 0;
-		$session = JFactory::getSession();
+		$pos          = isset($_GET['pos']) ? $_GET['pos'] : 0;
+		$session      = JFactory::getSession();
 		$session_lupo = $session->get('lupo');
 
 
 		//navigation
 		if ($componentParams->get('detail_show_toy_nav', '1') && $session_lupo != null && isset($_GET['pos'])){
-		$style = $pos + 1 < count($session_lupo) ? '' : 'visibility: hidden';
+		$style    = $pos + 1 < count($session_lupo) ? '' : 'visibility: hidden';
 		$nav_game = isset($session_lupo[$pos + 1]) ? $session_lupo[$pos + 1] : ['id' => null]; ?>
             <div style="<?= $style ?>; right: 0" class="uk-h3 uk-position-absolute"><a
                         href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id=' . $nav_game['id'] . '&pos=' . ($pos + 1)) ?>"
                         title="<?php echo JText::_('COM_LUPO_NAV_NEXT_GAME'); ?>"
                         class="uk-icon-hover uk-icon-chevron-right"></a></div>
 			<?php
-			$style = $pos >= 1 ? '' : 'visibility: hidden;';
+			$style    = $pos >= 1 ? '' : 'visibility: hidden;';
 			$nav_game = isset($session_lupo[$pos - 1]) ? $session_lupo[$pos - 1] : ['id' => null]; ?>
             <div style="<?= $style ?> right: 15px" class="uk-h3 uk-position-absolute"><a
                         href="<?php echo JRoute::_('index.php?option=com_lupo&view=game&id=' . $nav_game['id'] . '&pos=' . ($pos - 1)) ?>"
@@ -53,6 +53,9 @@ $componentParams = JComponentHelper::getParams('com_lupo');
             <h2 class="contentheading" style="padding-right: 30px;"><?php echo $this->game['title'] . ' ' . $this->game['edition'] ?></h2>
 
 		<?php
+		$show_without_age = (int) $componentParams->get('show_without_age', '1');
+		$show_diverse     = (int) $componentParams->get('show_diverse', '1');
+
 		if ($componentParams->get('detail_show_toy_photo', '1') || $description != ""){
 		if ($componentParams->get('detail_show_toy_photo', '1') && $this->game['image_thumb'] != null && $description != "") {
 			$grid_width = "2";
@@ -71,23 +74,23 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                     <div class="uk-width-1-1 uk-width-small-1-<?php echo $grid_width ?> uk-margin-bottom">
 						<?php
 						if ($this->game['image'] == null) {
-							?><img class="lupo_image" src="<?php echo $this->game['image_thumb']   ?>"><?php
+							?><img class="lupo_image" src="<?php echo $this->game['image_thumb'] ?>"><?php
 						} else {
 							?>
 							<?php if ($componentParams->get('detail_photo_lightbox', '1')) { ?>
-                                <a href="<?php echo substr($this->game['image'], 0, strpos($this->game['image'], '?v='));?>" data-uk-lightbox
+                                <a href="<?php echo substr($this->game['image'], 0, strpos($this->game['image'], '?v=')); ?>" data-uk-lightbox
                                    title="<?php echo htmlspecialchars($this->game['title'] . ' ' . $this->game['edition']) ?>"><img
                                             class="lupo_image"
                                             alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"
-                                            src="<?php echo $this->game['image_thumb']   ?>"/></a>
+                                            src="<?php echo $this->game['image_thumb'] ?>"/></a>
 							<?php } else { ?>
                                 <img class="lupo_image"
                                      alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"
-                                     src="<?php echo $this->game['image_thumb']   ?>"/>
+                                     src="<?php echo $this->game['image_thumb'] ?>"/>
 							<?php } ?>
                             <div id="img-toy" class="uk-modal">
                                 <div>
-                                    <img src="<?php echo $this->game['image']   ?>"
+                                    <img src="<?php echo $this->game['image'] ?>"
                                          alt="<?php echo JText::_("COM_LUPO_TOY") . ' ' . $this->game['number'] ?>"/>
                                 </div>
                             </div>
@@ -103,11 +106,11 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 
 		<?php
 		if ($componentParams->get('detail_show_toy_res', '0')) {
-		$session = JFactory::getSession();
-		$client = $session->get('lupo_client');
-		$show_only_to_logged_in = $componentParams->get('detail_show_toy_res_only_logged_in', '0');
+		$session                      = JFactory::getSession();
+		$client                       = $session->get('lupo_client');
+		$show_only_to_logged_in       = $componentParams->get('detail_show_toy_res_only_logged_in', '0');
 		$detail_res_allow_only_loaned = $componentParams->get('detail_res_allow_only_loaned', '0');
-		$show_res_because_loaned = $this->game['return_date'] !== null || $detail_res_allow_only_loaned == 0;
+		$show_res_because_loaned      = $this->game['return_date'] !== null || $detail_res_allow_only_loaned == 0;
 
 		if ((!$show_only_to_logged_in || ($show_only_to_logged_in && $client)) && $show_res_because_loaned) {
 		?>
@@ -169,17 +172,18 @@ $componentParams = JComponentHelper::getParams('com_lupo');
 				<?php if ($componentParams->get('detail_show_toy_no', '1')) { ?>
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_ART_NR") ?>:</td>
-                        <td><?php echo (substr($this->game['number'], -2, 2) == '.0') ? (int)$this->game['number'] : $this->game['number'] ?></td>
+                        <td><?php echo (substr($this->game['number'], -2, 2) == '.0') ? (int) $this->game['number'] : $this->game['number'] ?></td>
                     </tr>
 				<?php } ?>
-				<?php if ($componentParams->get('detail_show_toy_category', '1')) { ?>
+				<?php if ($componentParams->get('detail_show_toy_category', '1') && $show_diverse) { ?>
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_CATEGORY") ?>:</td>
-                        <td><a href="<?php echo $this->game['link_cat'] ?>"><?php echo $this->game['category'] ?></a>
+                        <td>
+                            <a href="<?php echo $this->game['link_cat'] ?>"><?php echo $this->game['category'] ?></a>
                         </td>
                     </tr>
 				<?php } ?>
-				<?php if ($componentParams->get('detail_show_toy_age_category', '1')) { ?>
+				<?php if ($componentParams->get('detail_show_toy_age_category', '1') && $show_without_age) { ?>
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_AGE_CATEGORY") ?>:</td>
                         <td>
@@ -295,7 +299,7 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                                         <li>
                                             <a href="<?php echo $related['link'] ?>">
                                                 <figure class="uk-overlay uk-overlay-hover">
-                                                    <img src="<?php echo $image  ; ?>"/>
+                                                    <img src="<?php echo $image; ?>"/>
                                                     <figcaption
                                                             class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center"><?php echo $related['title'] . ' ' . $related['edition'] ?></figcaption>
                                                 </figure>

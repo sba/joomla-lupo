@@ -18,6 +18,18 @@
         </field>
 
         <field
+                type="radio"
+                layout="joomla.form.field.radio.switcher"
+                name="show_without_age"
+                id="lupo_show_without_age"
+                label="COM_LUPO_OPTIONS_CATS_SHOW_WITHOUT_AGE"
+                description="COM_LUPO_OPTIONS_CATS_SHOW_WITHOUT_AGE_DESC"
+                default="1">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field
                 name="cats_nbr_games"
                 id="lupo_cats_nbr_games"
                 type="radio"

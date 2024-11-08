@@ -171,10 +171,10 @@ class LupoModelLupo extends BaseDatabaseModel {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 		$db              = JFactory::getDBO();
 
-		$show_diverse = (int) $componentParams->get('show_diverse', '1');
+		$show_without_age = (int) $componentParams->get('show_without_age', '1');
 		$sql_clause   = '';
-		if ($show_diverse == 0) {
-			$sql_clause = ' AND #__lupo_game.catid > 0';
+		if ($show_without_age == 0) {
+			$sql_clause = ' AND #__lupo_game.age_catid > 0';
 		}
 
 		if ($show_new) {
