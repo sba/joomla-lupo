@@ -126,11 +126,13 @@ class LupoModelLupo extends BaseDatabaseModel {
 			$res = $db->loadAssocList();
 		}
 
+		$category_foto_list_prefix = $componentParams->get('category_foto_list_prefix', '');
+
 		foreach ($res as &$row) {
 			$row['link'] = JRoute::_('index.php?option=com_lupo&view=category&id=' . $row['alias']);
 
 			//add photo to game array
-			$category_foto = $this->getCategoryFoto($row['alias']);
+			$category_foto = $this->getCategoryFoto($row['alias'], $category_foto_list_prefix);
 			if ($category_foto['image'] != null) {
 				$row += $category_foto;
 			} else {
@@ -909,8 +911,8 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 * @return array foto
 	 *
 	 */
-	public function getCategoryFoto($category_alias = "") {
-		$image = 'images/spiele/' . $category_alias . '.jpg';
+	public function getCategoryFoto($category_alias = "", $thumb_prefix = "mini_") {
+		$image = 'images/spiele/' . $thumb_prefix . $category_alias . '.jpg';
 		if (file_exists($image)) {
 			$res['image'] = $image;
 		} else {

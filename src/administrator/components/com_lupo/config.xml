@@ -64,6 +64,18 @@
             <option value="0">COM_LUPO_CATEGORIES_SORT_ALPHA</option>
             <option value="1">COM_LUPO_CATEGORIES_SORT_LUPO</option>
         </field>
+
+        <field name="spacer_kat_1" type="spacer" hr="true"/>
+
+        <field
+                name="category_foto_list_prefix"
+                type="text"
+                label="COM_LUPO_CATEGORY_PHOTO_PREFIX"
+                description="COM_LUPO_OPTIONS_CATEGORY_THUMB_PREFIX_DESC"
+                default=""
+        />
+
+
     </fieldset>
 
     <fieldset

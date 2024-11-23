@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.5.1 (November 23, 2024
+  - option to specify category photo file prefix
+  - bugfix: show genre filter sets correct default value if not set
+
 ### 4.5.0 (November 08, 2024
   - delete all toy images before uploading a complete lupo export
   - option added to show/hide the group of toys without age category

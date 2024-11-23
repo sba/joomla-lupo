@@ -90,7 +90,7 @@ class LupoController extends JControllerLegacy {
 				$filter_types[] = 'agecategory';
 			}
 
-			$com_show_genre_filter  = $params->get('category_show_genre_filter', '1') == '1';
+			$com_show_genre_filter  = $params->get('category_show_genre_filter', '0') == '1';
 			$menu_show_genre_filter = $app->input->getCmd('filter_genre_list_show', "");
 			if ($menu_show_genre_filter == '') {
 				$filter_list_show = $com_show_genre_filter;
