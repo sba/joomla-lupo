@@ -1,6 +1,6 @@
 # Changelog
 
-### 4.5.1 (November 23, 2024
+### 4.5.1 (November 26, 2024
   - option to specify category photo file prefix
   - bugfix: show genre filter sets correct default value if not set
 
