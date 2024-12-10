@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.5.2 (December 10, 2024
+  - function to get all games added, used in widgetkit content plugin
+
 ### 4.5.1 (November 26, 2024
   - option to specify category photo file prefix
   - bugfix: show genre filter sets correct default value if not set

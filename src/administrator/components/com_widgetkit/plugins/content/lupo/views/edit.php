@@ -20,6 +20,7 @@ $genres = $model->getGenres();
         <label class="uk-form-label" for="wk-category">{{'Filter games by' | trans}}</label>
         <div class="uk-form-controls">
             <select id="wk-filter" class="uk-select uk-form-width-large" ng-model="content.data['filter']">
+                <option value="all">{{'All toys' | trans}}</option>
                 <option value="category">{{'Category' | trans}}</option>
                 <option value="agecategory">{{'Age-Category' | trans}}</option>
                 <option value="genre">{{'Genre' | trans}}</option>
@@ -69,7 +70,7 @@ $genres = $model->getGenres();
         </div>
     </div>
 
-    <div class="uk-margin" ng-if="content.data.filter === 'category' || content.data.filter === 'agecategory' || content.data.filter === 'genre'">
+    <div class="uk-margin" ng-if="content.data.filter === 'all' || content.data.filter === 'category' || content.data.filter === 'agecategory' || content.data.filter === 'genre'">
         <label class="uk-form-label" for="wk-sort">{{'Sorting' | trans}}</label>
         <div class="uk-form-controls">
             <select id="wk-sort" class="uk-select uk-form-width-large" ng-model="content.data['sort']">
@@ -80,7 +81,7 @@ $genres = $model->getGenres();
         </div>
     </div>
 
-    <div class="uk-margin" ng-if="content.data.filter === 'category' || content.data.filter === 'agecategory' || content.data.filter === 'genre'">
+    <div class="uk-margin" ng-if="content.data.filter === 'all' || content.data.filter === 'category' || content.data.filter === 'agecategory' || content.data.filter === 'genre'">
         <label class="uk-form-label" for="wk-number">{{'Limit' | trans}}</label>
         <div class="uk-form-controls">
             <input id="wk-number" class="uk-select uk-form-width-large" type="number" value="999" min="1" step="1" ng-model="content.data['number']">

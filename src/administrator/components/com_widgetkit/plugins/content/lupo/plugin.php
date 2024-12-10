@@ -50,6 +50,9 @@ $config = array(
 
         //TODO: Implement sort and limit-function to game-getters to optimize performance!!
         switch ($args['filter']) {
+            case 'all':
+                $games = $lupoModel->getGames('all');
+                break;
             case 'category':
                 $games = $lupoModel->getGamesByCategory($args['category']);
                 break;
@@ -68,7 +71,7 @@ $config = array(
             return;
         }
 
-        if (in_array($args['filter'], array('category', 'agecategory', 'genre'))) {
+        if (in_array($args['filter'], array('all', 'category', 'agecategory', 'genre'))) {
             switch ($args['sort']) {
                 case 'random':
                     shuffle($games);

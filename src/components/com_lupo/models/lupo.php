@@ -330,7 +330,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 	 * @foto_prefix name of the prefix for the image
 	 * @return array with the games
 	 */
-	public function getGames($id, $field = 'catid', $foto_prefix = '') {
+	public function getGames($id = 'all', $field = 'catid', $foto_prefix = '') {
 		$componentParams = JComponentHelper::getParams('com_lupo');
 
 		$nbr_new_games = (int) $componentParams->get('nbr_new_games', '30');
@@ -342,7 +342,9 @@ class LupoModelLupo extends BaseDatabaseModel {
 
 		$order_by = 'title, number'; //default order
 
-		if ($id == 'new') {
+		if ($id == 'all') {
+			$where	= '';
+		} elseif ($id == 'new') {
 			// SELECT * FROM (SELECT because MySQL does not support subqueries with LIMIT... but sub-sub query works :o
 			$where = "WHERE #__lupo_game.id IN(SELECT * FROM (SELECT gameid FROM `#__lupo_game_editions` ORDER BY acquired_date DESC LIMIT $nbr_new_games) as temp_table)";
 
