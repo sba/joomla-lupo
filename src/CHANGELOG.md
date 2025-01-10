@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - bugfix php warning
+
+### 4.5.2 (December 10, 2024
   - function to get all games added, used in widgetkit content plugin
 
 ### 4.5.1 (November 26, 2024

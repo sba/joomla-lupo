@@ -648,10 +648,12 @@ class LupoModelLupo extends BaseDatabaseModel {
 					} else {
 						$document['icon'] = 'file-pdf-o';
 					}
-					$desc     = 'Spielanleitung';
+					$desc     = 'Spielanleitung'; //TODO: Sprachabhängig
 					$lightbox = false;
 					break;
 				case 'userdefined':
+					$desc             = $document['value'];
+					$lightbox         = false;
 					break;
 				case 'link_review':
 				case 'website':

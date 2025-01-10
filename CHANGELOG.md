@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.5.3 (January 10, 2025
+  - bugfix php warning
+
 ### 4.5.2 (December 10, 2024
   - function to get all games added, used in widgetkit content plugin
 
