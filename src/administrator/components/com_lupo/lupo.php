@@ -280,9 +280,9 @@ function processXML($file) {
 			foreach ($genres as $genre) {
 				$alias = str_replace("-", "_", JFilterOutput::stringURLSafe($genre));
 				if ($alias != $last_alias) { //because array_unique does not filter out double alias
-					$db->setQuery('INSERT INTO #__lupo_genres SET
-											`genre`=' . $db->quote($genre) . ',
-											`alias`=' . $db->quote($alias)
+					$db->setQuery('INSERT IGNORE INTO #__lupo_genres SET
+											`genre`=' . $db->quote($genre) . '
+											, `alias`=' . $db->quote($alias)
 					);
 				}
 				$db->execute();
@@ -309,19 +309,22 @@ function processXML($file) {
 			$res = $db->loadAssocList();
 			foreach ($res as $row) {
 				unset($genres_alias_list);
-				$game_genres = trim($row['genres'], ', '); //remove erroneously starting comma
+				$game_genres = trim($row['genres'], ', '); //erroneously remove starting comma
 				$game_genres = explode(', ', $game_genres);
 				foreach ($game_genres as $game_genre) {
-					$db->setQuery('INSERT INTO #__lupo_game_genre SET
-											`gameid`=' . $row['id'] . ', `genreid`=' . array_search(mb_substr($game_genre, 0, 30), $genres)
-					);
-					$db->execute();
-					$genres_alias_list[] = $genres_alias[$game_genre];
+					$genreid = array_search(mb_substr($game_genre, 0, 30), $genres);
+					if($genreid !== false) {
+						$db->setQuery('INSERT IGNORE INTO #__lupo_game_genre SET
+											`gameid`=' . $row['id'] . ', `genreid`=' . $genreid
+						);
+						$db->execute();
+						$genres_alias_list[] = $genres_alias[$game_genre];
+					}
 				}
 
 				//update genres in games-table (calculated filed)
 				if (is_array($genres_alias_list)) {
-					$db->setQuery('UPDATE #__lupo_game 
+					$db->setQuery('UPDATE #__lupo_game
                                       SET `genres`=' . $db->quote(implode(',', $genres_alias_list)) . '
                                       WHERE id=' . $row['id']
 					);

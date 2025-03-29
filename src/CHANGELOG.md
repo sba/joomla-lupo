@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - bugfix: sql-error importing genres
+
+### 4.5.3 (January 10, 2025
   - bugfix php warning
 
 ### 4.5.2 (December 10, 2024
