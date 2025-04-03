@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.5.5 (April 03, 2025
+  - change lupo quickicon title
+
 ### 4.5.4 (March 29, 2025
   - bugfix: sql-error importing genres
 
