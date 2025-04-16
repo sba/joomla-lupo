@@ -31,7 +31,7 @@ class plgQuickiconLupo extends JPlugin {
 		}
 
 		return [[
-			'link'   => 'index.php?option=com_lupo',
+			'link'   => 'index.php?option=com_lupo&amp;view=lupos',
 			'image'  => 'picture fa fa-dice',
 			'access' => [],
 			'text'   => JText::_('PLG_QUICKICON_LUPO_TITLE'),

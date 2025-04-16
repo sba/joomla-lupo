@@ -3,12 +3,12 @@
 
 	<name>COM_LUPO</name>
 	<author>Stefan Bauer</author>
-	<creationDate>April 03, 2025</creationDate>
+	<creationDate>April 16, 2025</creationDate>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
-	<version>4.5.5</version>
+	<version>4.6.0</version>
 	<description>COM_LUPO_XML_DESCRIPTION</description>
 
 	<!-- Runs on install/uninstall/update -->
@@ -55,9 +55,9 @@
 		<!-- Administration Menu Section -->
 		<menu img="class:dice">COM_LUPO_MENU</menu>
 		<submenu>
-			<menu view="index.php?option=com_lupo&amp;view=lupos">COM_LUPO_MENU_SUBMENU_UPLOAD</menu>
-			<menu view="index.php?option=com_lupo&amp;view=filters">COM_LUPO_MENU_SUBMENU_FILTER</menu>
-			<menu link="option=com_config&amp;view=component&amp;component=com_lupo">COM_LUPO_MENU_SUBMENU_CONFIGURATION</menu>
+			<menu view="lupos" link="option=com_lupo&amp;view=lupos">COM_LUPO_MENU_SUBMENU_UPLOAD</menu>
+			<menu view="filters" link="option=com_lupo&amp;view=filters">COM_LUPO_MENU_SUBMENU_FILTER</menu>
+			<menu link="option=com_lupo&amp;view=config">COM_LUPO_MENU_SUBMENU_CONFIGURATION</menu>
 		</submenu>
 		<!-- Administration Main File Copy Section -->
 		<files folder="admin">

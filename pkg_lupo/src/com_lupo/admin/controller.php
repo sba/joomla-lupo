@@ -27,6 +27,15 @@ class LupoController extends JControllerLegacy {
 		// set default view if not set
 		$app         = JFactory::getApplication();
 		$defaultview = $app->input->get->get('view', 'Lupos');
+
+		if($defaultview === 'config') {
+			//because <menu link="option=com_config&amp;view=component&amp;component=com_lupo">COM_LUPO_MENU_SUBMENU_CONFIGURATION</menu> in lupo.xml
+			//is not shown to admin users, we need to redirect to the component config
+			$app->redirect(
+				JRoute::_('index.php?option=com_config&view=component&component=com_lupo', false)
+			);
+		}
+
 		$app->input->set('view', $defaultview);
 
 		// call parent behavior

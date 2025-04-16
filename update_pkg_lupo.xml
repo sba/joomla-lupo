@@ -3,13 +3,13 @@
    <update>
       <name>LUPO Updates</name>
       <description>LUPO Package</description>
-	  <creationDate>April 03, 2025</creationDate>
+	  <creationDate>April 16, 2025</creationDate>
 	  <authorEmail>stefan@databauer.ch</authorEmail>
 	  <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
 	  <copyright>Copyright (C) databauer / Stefan Bauer</copyright>	  
       <element>com_lupo</element>
       <type>component</type>
-      <version>4.5.5</version>
+      <version>4.6.0</version>
  
       <infourl title="Ludothekprogramm LUPO">https://github.com/sba/com_lupo/blob/master/CHANGELOG.md</infourl>
       <downloads>

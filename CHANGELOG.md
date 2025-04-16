@@ -1,5 +1,10 @@
 # Changelog
 
+### 4.6.0 (April 16, 2025
+  - update admin menu links
+  - show options menu to all admin users
+  - add core.options to ACL
+
 ### 4.5.5 (April 03, 2025
   - change lupo quickicon title
 

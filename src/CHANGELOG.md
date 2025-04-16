@@ -1,6 +1,11 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}}
+  - update admin menu links
+  - show options menu to all admin users
+  - add core.options to ACL
+
+### 4.5.5 (April 03, 2025
   - change lupo quickicon title
 
 ### 4.5.4 (March 29, 2025
