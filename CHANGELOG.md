@@ -1,32 +1,32 @@
 # Changelog
 
-### 4.6.0 (April 16, 2025
+### 4.6.0 (April 16, 2025)
   - update admin menu links
   - show options menu to all admin users
   - add core.options to ACL
 
-### 4.5.5 (April 03, 2025
+### 4.5.5 (April 03, 2025)
   - change lupo quickicon title
 
-### 4.5.4 (March 29, 2025
+### 4.5.4 (March 29, 2025)
   - bugfix: sql-error importing genres
 
-### 4.5.3 (January 10, 2025
+### 4.5.3 (January 10, 2025)
   - bugfix php warning
 
-### 4.5.2 (December 10, 2024
+### 4.5.2 (December 10, 2024)
   - function to get all games added, used in widgetkit content plugin
 
-### 4.5.1 (November 26, 2024
+### 4.5.1 (November 26, 2024)
   - option to specify category photo file prefix
   - bugfix: show genre filter sets correct default value if not set
 
-### 4.5.0 (November 08, 2024
+### 4.5.0 (November 08, 2024)
   - delete all toy images before uploading a complete lupo export
   - option added to show/hide the group of toys without age category
   - if category/agecategory is not shown in the category view, do not show it at detail view
 
-### 4.4.5 (Oktober 09, 2024
+### 4.4.5 (Oktober 09, 2024)
   - fix lightbox href for images in toy detail view
   - refactor, load img version in constructor
 
