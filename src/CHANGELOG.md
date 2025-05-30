@@ -1,6 +1,14 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - bugfix: reservation date is not required if not shown
+
+### 4.6.1 (May 23, 2025)
+  - reservation date is required
+  - show image in client reservation list
+  - show image in client toy list
+
+### 4.6.0 (April 16, 2025)
   - update admin menu links
   - show options menu to all admin users
   - add core.options to ACL

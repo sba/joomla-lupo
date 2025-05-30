@@ -7,6 +7,8 @@
  * @license     License GNU General Public License version 2 or later
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 defined('_JEXEC') or die;
 
 $componentParams = JComponentHelper::getParams('com_lupo');
@@ -117,17 +119,17 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
 				<?php
 				if ($password_sent == 'mail_sent') {
 					?>
-                    <div class="uk-alert uk-alert-success">Es wurde eine E-Mail mit den Zugangsdaten gesendet.</div>
+                    <div class="uk-alert uk-alert-success">Es wurde eine E-Mail mit den Zugangsdaten gesendet.</div> <?php /* TODO: i18n */ ?>
 					<?php
 				}
 				if ($password_sent == 'mail_error') {
 					?>
-                    <div class="uk-alert uk-alert-success">Fehler: Die E-Mail konnte nicht versendet werden.</div>
+                    <div class="uk-alert uk-alert-success">Fehler: Die E-Mail konnte nicht versendet werden.</div> <?php /* TODO: i18n */ ?>
 					<?php
 				}
 				if ($password_sent == 'not_found') {
 					?>
-                    <div class="uk-alert uk-alert-danger">Fehler: E-Mailadresse unbekannt.</div>
+                    <div class="uk-alert uk-alert-danger">Fehler: E-Mailadresse unbekannt.</div> <?php /* TODO: i18n */ ?>
 					<?php
 				}
 				?>
@@ -156,7 +158,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
             <h3><?php echo JText::_('MOD_LUPO_LOGIN_YOUR_TOYS') ?>:</h3>
             <table class="uk-table uk-table-striped">
                 <tr>
-                    <th class="uk-hidden-small"><?php echo JText::_('MOD_LUPO_LOGIN_ARTNR') ?></th>
+                    <th class="uk-hidden-small">&nbsp;</th>
                     <th><?php echo JText::_('MOD_LUPO_LOGIN_TOY') ?></th>
                     <th><?php echo JText::_('MOD_LUPO_LOGIN_RETOUR_DATE') ?></th>
 					<?php if ($allow_prolongation) { ?>
@@ -183,14 +185,29 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
 							if ($toy->prolongable == 0 || $has_reservation || $extended_date_over || (!$hasValidAbo && $prolongation_valid_abo)) {
 								$html_prolongation = '<i class="uk-text-muted">' . JText::_('MOD_LUPO_LOGIN_NOT_PROLONGABLE') . '</i>';
 							} else {
-								$html_prolongation = '<button class="uk-button uk-button-mini btn-prolong" data-lupo_id="' . $toy->lupo_id . '">' . JText::_('MOD_LUPO_LOGIN_PROLONG') . ' ' . date("d.m.Y", strtotime($toy->return_date_extended)) . (($toy->tax_extended > 0) ? ' CHF ' . number_format($toy->tax_extended, 2) : '') . '</button>';
+								$html_prolongation = '<button class="uk-button uk-button-mini btn-prolong" data-lupo_id="' . $toy->lupo_id . '">' . JText::_('MOD_LUPO_LOGIN_PROLONG') . ' ' . date("d.m.Y", strtotime($toy->return_date_extended)) . (($toy->tax_extended > 0) ? '<br>CHF ' . number_format($toy->tax_extended, 2) : '') . '</button>';
 							}
 						} else {
 							$html_prolongation = '<i>' . JText::_('MOD_LUPO_LOGIN_WAS_PROLONGED') . '</i>';
 						}
 					} ?>
                     <tr>
-                        <td class="uk-hidden-small"><?= str_replace('.0', '', $toy->number) ?></td>
+                        <td class="uk-hidden-small">
+	                        <?php if ($componentParams->get('foto_list_show') != '0') { ?>
+                                <a class="category" href="<?php echo $toy->link ?>"><?php
+			                        if ($toy->gamefoto['image_thumb'] != null) {
+				                        ?>
+                                        <img class="uk-align-left" src="<?php echo $toy->gamefoto['image_thumb'] ?>" title="<?= str_replace('.0', '', $toy->number) ?>" alt="<?=  HTMLHelper::_('string.truncate', $toy->title) ?>">
+			                        <?php } else { ?>
+				                        <?php if ($componentParams->get('foto_list_show_placeholder', '1')) { ?>
+                                            <img class="uk-align-left" src="images/spiele/<?php echo $componentParams->get('foto_list_prefix') ?>dice-gray.jpg">
+				                        <?php } ?>
+			                        <?php } ?>
+                                </a>
+	                        <?php } else { ?>
+		                        <?= str_replace('.0', '', $toy->number) ?>
+	                        <?php } ?>
+                        </td>
                         <td>
                             <a href="<?= $toy->link ?>"><?= $toy->title ?></a>
 							<?php
@@ -230,19 +247,38 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
             <h3><?= JText::_('MOD_LUPO_RESERVATIONS') ?></h3>
             <table class="uk-table uk-table-striped">
                 <tr>
-                    <th class="uk-hidden-small"><?php echo JText::_('MOD_LUPO_LOGIN_ARTNR') ?></th>
+                    <th class="uk-hidden-small"></th>
                     <th><?php echo JText::_('MOD_LUPO_LOGIN_TOY') ?></th>
                     <th></th>
                 </tr>
 				<?php
+				$modelLupo = new LupoModelLupo();
 				$i = 0;
 				foreach ($reservations as $reservation) {
+                    $reservation = $modelLupo->getGame($reservation->toynr);
+					unset($reservation['image_thumb']); //remove image_thumb from array, hacky...
+					$reservation = $modelLupo->compileGame($reservation, $componentParams->get('foto_list_prefix') );
 					?>
                     <tr>
-                        <td class="uk-hidden-small"><?= $reservation->toynr ?></td>
-                        <td><?= $reservation->toyname ?></td>
+                        <td class="uk-hidden-small">
+	                        <?php if ($componentParams->get('foto_list_show') != '0') { ?>
+                                <a class="category" href="<?php echo $reservation['link'] ?>"><?php
+			                        if ($reservation['image_thumb'] != null) {
+				                        ?>
+                                        <img class="uk-align-left" src="<?php echo $reservation['image_thumb'] ?>" title="<?= str_replace('.0', '', $reservation['number']) ?>" alt="<?=  HTMLHelper::_('string.truncate', $reservation['title']) ?>">
+			                        <?php } else { ?>
+				                        <?php if ($componentParams->get('foto_list_show_placeholder', '1')) { ?>
+                                            <img class="uk-align-left" src="images/spiele/<?php echo $componentParams->get('foto_list_prefix') ?>dice-gray.jpg">
+				                        <?php } ?>
+			                        <?php } ?>
+                                </a>
+	                        <?php } else { ?>
+		                        <?= str_replace('.0', '', $reservation['number']) ?>
+	                        <?php } ?>
+                        </td>
+                        <td><?= $reservation['title'] ?></td>
                         <td class="uk-text-right">
-                            <button class="uk-button uk-button-small btn-res-del" data-toyitem="<?= $i++ ?>" data-toynr="<?= $reservation->toynr ?>"><?php echo JText::_('JACTION_DELETE') ?></button>
+                            <button class="uk-button uk-button-small btn-res-del" data-toyitem="<?= $i++ ?>" data-toynr="<?= $reservation['number']?>"><?php echo JText::_('JACTION_DELETE') ?></button>
                         </td>
                     </tr>
 
@@ -397,7 +433,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                     <?php } ?>
 					<?php if ($componentParams->get('detail_show_res_date', '1') == 1) { ?>
                         <tr>
-                            <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>:</td>
+                            <td><?php echo JText::_("COM_LUPO_RES_FROM"); ?>*:</td>
                             <td>
                                 <div style="margin-bottom: 10px; max-width: 400px;">
 									<?php if ($componentParams->get('detail_show_res_date_now', '1') == 1) { ?>
@@ -410,7 +446,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                         <tr id="row_resdate">
                             <td></td>
                             <td>
-                                <input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate" placeholder="<?php echo JText::_("COM_LUPO_RES_FROM_DATE"); ?>">
+                                <input type="text" maxlength="40" size="40" value="" id="resdate" name="resdate" placeholder="<?php echo JText::_("COM_LUPO_RES_FROM_DATE"); ?>*">
                             </td>
                         </tr>
 					<?php } ?>

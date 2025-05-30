@@ -1129,6 +1129,7 @@ class LupoModelLupoClient extends LupoModelLupo {
 		$res = $db->loadObjectList();
 
 		foreach ($res as &$row) {
+			$row->gamefoto = $this->getGameFoto($row->game_number, 'mini_');
 			$row->link = JRoute::_('index.php?option=com_lupo&view=game&id=' . $row->number);
 		}
 

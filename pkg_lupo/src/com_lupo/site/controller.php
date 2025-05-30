@@ -231,22 +231,29 @@ class LupoController extends JControllerLegacy {
 		$clientnr     = $jinput->get('clientnr', '', 'STRING');
 		$clientemail  = $jinput->get('clientemail', '', 'STRING');
 		$clientmobile = $jinput->get('clientmobile', '', 'STRING');
+		$resnow       = $jinput->get('resnow', '', 'STRING');
 		$resdate      = $jinput->get('resdate', '', 'STRING');
 		$comment      = $jinput->get('comment', '', 'STRING');
 
 
-		$formerror = false;
+		$formerror = [];
 		if (!$mailer->ValidateAddress($clientemail)) {
-			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
+			$formerror[] = '• ' . JText::_('COM_LUPO_RES_FORM_INVALIV_EMAIL');
 		}
 		if ($clientname == "") {
-			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_NAME');
+			$formerror[] = '• ' . JText::_('COM_LUPO_RES_FORM_INVALIV_NAME');
 		}
 		if ($params->get('detail_show_res_phone', '1') == 1 && $clientmobile == "") {
-			$formerror = JText::_('COM_LUPO_RES_FORM_INVALIV_MOBILE');
+			$formerror[] = '• ' . JText::_('COM_LUPO_RES_FORM_INVALIV_MOBILE');
 		}
-		if ($formerror !== false) {
-			echo $formerror;
+		if ($params->get('detail_show_res_date', '1') == 1) {
+			if ($resnow == '' && $resdate == '') {
+				$formerror[] = '• ' . JText::_('COM_LUPO_RES_FORM_MISSING_RESDATE');
+			}
+		}
+
+		if (!empty($formerror)) {
+			echo implode('<br>', $formerror);
 
 			return;
 		}
@@ -308,7 +315,7 @@ class LupoController extends JControllerLegacy {
 		$send_ludo = $mailer->Send();
 
 		if (($send_client && $send_ludo) !== true) {
-			echo 'Error sending email: ' . $send_client->__toString() . $send_ludo->__toString();
+			echo '• ' . JText::_('COM_LUPO_RES_ERROR_SENDING_EMAIL') . ': ' . $send_client->__toString() . $send_ludo->__toString();
 		} else {
 			$session->set('lupo_reservations', null);
 			echo 'ok';
@@ -334,17 +341,19 @@ class LupoController extends JControllerLegacy {
 		$client  = $session->get('lupo_client');
 		if (!$client) {
 			echo 'error';
+
 			return;
 		}
 
-		$componentParams = JComponentHelper::getParams('com_lupo');
-		$prolongation_enabled = $componentParams->get('lupo_prolongation_enabled', '0') == 1;
+		$componentParams        = JComponentHelper::getParams('com_lupo');
+		$prolongation_enabled   = $componentParams->get('lupo_prolongation_enabled', '0') == 1;
 		$prolongation_valid_abo = $componentParams->get('lupo_prolongation_valid_abo', '0') == 1;
-		$hasAbo = $client->aboenddat != "0000-00-00";
-		$hasValidAbo = $hasAbo && $client->aboenddat >= date("Y-m-d");
+		$hasAbo                 = $client->aboenddat != "0000-00-00";
+		$hasValidAbo            = $hasAbo && $client->aboenddat >= date("Y-m-d");
 
-		if(!$prolongation_enabled || ($prolongation_valid_abo && !$hasValidAbo)){
+		if (!$prolongation_enabled || ($prolongation_valid_abo && !$hasValidAbo)) {
 			echo 'error';
+
 			return;
 		}
 
@@ -629,7 +638,7 @@ class LupoController extends JControllerLegacy {
 	 * @return string game-number with index
 	 */
 
-	function addZeroToGameNumber($game_nr){
+	function addZeroToGameNumber($game_nr) {
 		if (strpos($game_nr, ".") == 0) {
 			return $game_nr . '.0';
 		} else {
