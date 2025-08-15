@@ -60,6 +60,7 @@ RENAME TABLE mstr_postinstall_messages TO %DBPREFIX%_postinstall_messages;
 RENAME TABLE mstr_privacy_consents TO %DBPREFIX%_privacy_consents;
 RENAME TABLE mstr_privacy_requests TO %DBPREFIX%_privacy_requests;
 RENAME TABLE mstr_redirect_links TO %DBPREFIX%_redirect_links;
+RENAME TABLE mstr_scheduler_logs TO %DBPREFIX%_scheduler_logs;
 RENAME TABLE mstr_scheduler_tasks TO %DBPREFIX%_scheduler_tasks;
 RENAME TABLE mstr_schemaorg TO %DBPREFIX%_schemaorg;
 RENAME TABLE mstr_schemas TO %DBPREFIX%_schemas;
