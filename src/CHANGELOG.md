@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - mysql: change number filed to char(21) 
+
+### 4.6.2 (May 28, 2025)
   - bugfix: reservation date is not required if not shown
 
 ### 4.6.1 (May 23, 2025)

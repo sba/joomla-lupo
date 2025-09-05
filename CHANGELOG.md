@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.7.0 (August 27, 2025)
+  - mysql: change number filed to char(21) 
+
 ### 4.6.2 (May 28, 2025)
   - bugfix: reservation date is not required if not shown
 

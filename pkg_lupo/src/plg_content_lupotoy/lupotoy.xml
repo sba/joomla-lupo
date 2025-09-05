@@ -2,12 +2,12 @@
 <extension type="plugin" version="3.1" group="content" method="upgrade">
 	<name>Inhalt - LUPO Spiel</name>
     <author>Stefan Bauer</author>
-    <creationDate>May 28, 2025</creationDate>
+    <creationDate>August 27, 2025</creationDate>
     <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>stefan@databauer.ch</authorEmail>
     <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
-    <version>4.6.2</version>
+    <version>4.7.0</version>
     <description>LUPO - [spiel 1002.3] zeigt das Spiel mit der Nummer 1002.3 an</description>
 	<files>
 		<filename plugin="lupotoy">lupotoy.php</filename>
