@@ -55,7 +55,7 @@ CREATE TABLE `#__lupo_clients` (
 CREATE TABLE `#__lupo_clients_borrowed` (
   `lupo_id` int(10) unsigned NOT NULL,
   `edition_id` int(11) DEFAULT NULL,
-  `game_number` char(10) DEFAULT NULL,
+  `game_number` char(21) DEFAULT NULL,
   `adrnr` int(10) unsigned DEFAULT NULL,
   `tax_extended` float DEFAULT '0',
   `return_date` date DEFAULT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE `#__lupo_genres` (
 
 CREATE TABLE `#__lupo_reservations_web` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `game_number` char(10) NOT NULL,
+  `game_number` char(21) NOT NULL,
   `adrnr` int(10) unsigned DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)

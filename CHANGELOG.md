@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.8.0 (October, 2025)
+  - mysql: unify lenght of game_number to char(21)
+  - mysql: remove explicit collation table updates
+
 ### 4.7.0 (August 27, 2025)
   - mysql: change number filed to char(21) 
 

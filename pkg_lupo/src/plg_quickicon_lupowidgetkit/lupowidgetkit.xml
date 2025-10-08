@@ -2,12 +2,12 @@
 <extension version="3.8" type="plugin" group="quickicon" method="upgrade">
 	<name>LUPO Quick Icon Widgetkit</name>
 	<author>Stefan Bauer</author>
-	<creationDate>August 27, 2025</creationDate>
+	<creationDate>October, 2025</creationDate>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
-	<version>4.7.0</version>
+	<version>4.8.0</version>
 	<description>Administrator Quick Icon for Widgetkit</description>
 	<files folder="plugins/quickicon/lupowidgetkit">
 		<filename plugin="lupowidgetkit">lupowidgetkit.php</filename>

@@ -5,12 +5,12 @@
 	client="site">
 	<name>mod_lupo_loginlink</name>
 	<author>Stefan Bauer</author>
-	<creationDate>August 27, 2025</creationDate>
+	<creationDate>October, 2025</creationDate>
 	<copyright>Copyright (C) databauer / Stefan Bauer</copyright>
 	<license>License GNU General Public License version 2 or later</license>
 	<authorEmail>stefan@databauer.ch</authorEmail>
 	<authorUrl>https://www.ludothekprogramm.ch</authorUrl>
-	<version>4.7.0</version>
+	<version>4.8.0</version>
 	<description>MOD_LUPO_LOGINLINK_XML_DESCRIPTION</description>
 	<update />
 

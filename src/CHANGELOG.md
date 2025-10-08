@@ -1,6 +1,10 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - mysql: unify lenght of game_number to char(21)
+  - mysql: remove explicit collation table updates
+
+### 4.7.0 (August 27, 2025)
   - mysql: change number filed to char(21) 
 
 ### 4.6.2 (May 28, 2025)
