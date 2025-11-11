@@ -1,6 +1,10 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - add option to show/hide documents in toy detail view
+  - fix collation issues in mysql migration scripts
+
+### 4.8.0 (October, 2025)
   - mysql: unify lenght of game_number to char(21)
   - mysql: remove explicit collation table updates
 

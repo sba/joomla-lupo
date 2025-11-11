@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.9.0 (November 11, 2025)
+  - add option to show/hide documents in toy detail view
+  - fix collation issues in mysql migration scripts
+
 ### 4.8.0 (October, 2025)
   - mysql: unify lenght of game_number to char(21)
   - mysql: remove explicit collation table updates

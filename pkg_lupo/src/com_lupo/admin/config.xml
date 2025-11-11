@@ -510,7 +510,22 @@
             <option value="1">JYES</option>
         </field>
 
-        <field type="spacer" name="spacer_toy_3" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED"/>
+        <field type="spacer" name="spacer_toy_3" class="text" label="COM_LUPO_OPTIONS_TOY_DOCUMENTS"/>
+
+        <field
+                type="radio"
+                layout="joomla.form.field.radio.switcher"
+                class="btn-group btn-group-yesno"
+                name="detail_show_toy_documents"
+                id="detail_show_toy_documents"
+                label="COM_LUPO_OPTIONS_TOY_SHOW_DOCUMENTS"
+                description="COM_LUPO_OPTIONS_TOY_SHOW_DOCUMENTS_DESC"
+                default="1">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+
+        <field type="spacer" name="spacer_toy_4" class="text" label="COM_LUPO_OPTIONS_TOY_RELATED"/>
 
         <field
                 type="radio"
@@ -525,7 +540,7 @@
             <option value="1">JYES</option>
         </field>
 
-        <field type="spacer" name="spacer_toy_4" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE"/>
+        <field type="spacer" name="spacer_toy_5" class="text strong" label="COM_LUPO_OPTIONS_TOY_NAV_TITLE"/>
 
         <field
                 type="radio"
