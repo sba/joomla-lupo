@@ -166,12 +166,12 @@ if (!empty($this->items))
 								<?php echo JText::_('JUNPUBLISHED'); ?>
 							</span>
 						<?php endif; ?>
-						<?php if (strtotime($article->publish_up) > strtotime(JFactory::getDate())) : ?>
+						<?php if (!empty($article->publish_up) && strtotime($article->publish_up) > strtotime(JFactory::getDate())) : ?>
 							<span class="list-published label label-warning">
 								<?php echo JText::_('JNOTPUBLISHEDYET'); ?>
 							</span>
 						<?php endif; ?>
-						<?php if ((strtotime($article->publish_down) < strtotime(JFactory::getDate())) && $article->publish_down != JFactory::getDbo()->getNullDate()) : ?>
+						<?php if (!empty($article->publish_down) && (strtotime($article->publish_down) < strtotime(JFactory::getDate())) && $article->publish_down != JFactory::getDbo()->getNullDate()) : ?>
 							<span class="list-published label label-warning">
 								<?php echo JText::_('JEXPIRED'); ?>
 							</span>

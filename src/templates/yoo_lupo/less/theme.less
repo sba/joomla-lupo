@@ -1075,7 +1075,7 @@ h1.uk-article-title {
 }
 
 /* dasselbe wie uk-article-title */
-.weblink-category h2, h2.contentheading {
+.weblink-category h1, h2.contentheading {
   text-transform: uppercase;
   color: @global-link-color;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -1316,13 +1316,21 @@ body.header-nobgimg {
 }
 
 
-
 /* joomla 4.4 / warp fixes */
+div:has(.jmodedit) {
+    position: relative;
+}
+
 .btn.jmodedit {
   height: 20px !important;
   width: 10px !important;
-  float: right;
-  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  /*border: 1px solid #CCCCCC;
+  border-right: none;
+  border-top: none;*/
+  background-color: rgba(255, 255, 255, 0.66);
 
   + div {
     display: none;
@@ -1330,4 +1338,21 @@ body.header-nobgimg {
   .visually-hidden {
     display: none;
   }
+}
+
+
+
+/* Widgetkit 3 overrides
+ ========================================================================== */
+.wk-scope a {
+  color: @global-link-color;
+}
+
+
+/* Editor Styles
+ ========================================================================== */
+#system-readmore {
+  border: 2px dashed red !important;
+  background: none !important;
+  height: 0 !important;
 }

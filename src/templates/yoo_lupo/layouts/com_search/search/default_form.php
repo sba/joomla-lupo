@@ -8,6 +8,8 @@
 
 defined('_JEXEC') or die;
 
+//JHtml::_('bootstrap.tooltip'); //2026-01-28 sba
+
 $lang = JFactory::getLanguage();
 $upper_limit = $lang->getUpperLimitSearchWord();
 ?>

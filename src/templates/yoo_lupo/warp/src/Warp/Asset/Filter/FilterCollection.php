@@ -77,27 +77,27 @@ class FilterCollection implements FilterInterface, \Iterator
     }
 
     /* Iterator interface implementation */
-
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->filters->current();
     }
-
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->filters->key();
     }
-
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->filters->valid();
     }
-
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->filters->next();
     }
-
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->filters->rewind();

@@ -89,6 +89,8 @@ body.header-wide .tm-search {
                 </div>
                 <?php endif; ?>
 
+                <div class="logo-colors uk-hidden-small"></div>				
+
                 <?php if ($this['widgets']->count('menu') || $this['widgets']->count('toolbar-l ') || $this['widgets']->count('toolbar-r')) : ?>
                 <div class="tm-top-block tm-grid-block">
 

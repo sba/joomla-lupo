@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 require_once(dirname(__FILE__) . '/helper.php');
 new ModLupoLoginHelper();
-$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+$moduleclass_sfx = htmlspecialchars((string) $params->get('moduleclass_sfx'));
 $list            = ModLupoLoginHelper::getToys($params);
 
 $app    = JFactory::getApplication('site');

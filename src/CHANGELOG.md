@@ -1,6 +1,10 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - add support for toy info-table output in [spiel] shortcode
+  - fix php deprecation warnings
+
+### 4.9.0 (November 11, 2025)
   - add option to show/hide documents in toy detail view
   - fix collation issues in mysql migration scripts
 

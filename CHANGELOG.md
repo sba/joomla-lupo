@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.10.0 (January 29, 2026)
+  - add support for toy info-table output in [spiel] shortcode
+  - fix php deprecation warnings
+
 ### 4.9.0 (November 11, 2025)
   - add option to show/hide documents in toy detail view
   - fix collation issues in mysql migration scripts

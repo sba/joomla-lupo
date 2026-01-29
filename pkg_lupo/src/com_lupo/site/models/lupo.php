@@ -529,7 +529,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 	public function getGamesByNumber($number, $foto_prefix = '') {
 		$numbers = explode(";", $number);
 		$db      = JFactory::getDBO();
-		$games   = false;
+		$games   = [];
 
 		foreach ($numbers as $number) {
 			$number = (strpos($number, '.') == 0 ? $number . '.0' : $number);
@@ -1019,7 +1019,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 		$agecategories = [];
 		$categories    = [];
 		$genres        = [];
-		$filters       = false;
+		$filters       = [];
 		foreach ($types as $type) {
 			switch ($type) {
 				case 'agecategory':

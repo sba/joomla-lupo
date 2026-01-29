@@ -22,4 +22,10 @@ jQuery(function ($) {
         }
     }
 
+    //hide News-module if no news are available
+    //its in most ludo sites in addition at the theme setting in 'Additional Scripts'. There its loaded earlier
+    if(jQuery('.frontpage-news .tm-article-date').length==0){
+        jQuery('.frontpage-news').hide();
+    }
+
 });

@@ -6654,12 +6654,14 @@ th .tooltip-inner {
 }
 .icon-delete:before,
 .icon-remove:before,
+.icon-times:before,
 .icon-cancel-2:before {
   content: "\49";
 }
 .icon-publish:before,
 .icon-save:before,
 .icon-ok:before,
+.icon-check:before,
 .icon-checkmark:before {
   content: "\47";
 }
@@ -7036,6 +7038,7 @@ th .tooltip-inner {
 .icon-wand:before {
   content: "\6b";
 }
+.icon-code-branch:before,
 .icon-eye-open:before,
 .icon-eye:before {
   content: "\3c";
@@ -7189,8 +7192,8 @@ th .tooltip-inner {
 }
 @font-face {
   font-family: 'IcoMoon';
-  src: url("../../../media/jui/fonts/IcoMoon.eot");
-  src: url("../../../media/jui/fonts/IcoMoon.eot?#iefix") format('embedded-opentype'), url("../../../media/jui/fonts/IcoMoon.woff") format('woff'), url("../../../media/jui/fonts/IcoMoon.ttf") format('truetype'), url("../../../media/jui/fonts/IcoMoon.svg#IcoMoon") format('svg');
+  src: url("../less/fonts/IcoMoon.eot");
+  src: url("../less/fonts/IcoMoon.eot?#iefix") format('embedded-opentype'), url("../less/fonts/IcoMoon.woff") format('woff'), url("../less/fonts/IcoMoon.ttf") format('truetype'), url("../less/fonts/IcoMoon.svg#IcoMoon") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -7277,7 +7280,7 @@ th .tooltip-inner {
   color: #ffffff;
   background-image: -webkit-linear-gradient(top, #57b5e5, #319ed6);
   background-image: linear-gradient(to bottom, #57b5e5, #319ed6);
-  line-height: 28px;
+  /*line-height: 28px;*/
 }
 .btn-danger:hover,
 .btn-warning:hover {

@@ -11,7 +11,6 @@ $this['asset']->addFile('css', 'css:theme.css');
 
 $app    = JFactory::getApplication();
 $path   = JURI::base(true).'/templates/'.$app->getTemplate().'/';
-
 ?>
 
 <!DOCTYPE HTML>
@@ -19,7 +18,7 @@ $path   = JURI::base(true).'/templates/'.$app->getTemplate().'/';
 
 <head>
 <?php echo $this->render('head', compact('error', 'title')); ?>
-	<style type="text/css">
+	<style>
 		html {
 			background: url(<?=$path?>images/background/404-lego.jpg) no-repeat center center fixed;
 			-webkit-background-size: cover;

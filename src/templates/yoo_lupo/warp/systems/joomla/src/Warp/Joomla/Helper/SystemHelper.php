@@ -195,7 +195,7 @@ class SystemHelper extends AbstractHelper
         }
 
         // force show system output on search results
-        if (strtolower($this->application->input->get('option')) == 'com_search') {
+        if (strtolower((string) $this->application->input->get('option')) == 'com_search') {
             $this['config']['system_output'] = 1;
         }
     }
