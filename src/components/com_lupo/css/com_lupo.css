@@ -1,5 +1,12 @@
 /* lupo styles */
 
+/* lupo toy content plugin */
+.lupo_content_image {
+    display: inline-block;
+    max-width: 280px;
+    margin: 0 20px 20px 0;
+}
+
 /* categories view */
 ul.lupo_categories {
 	list-style-type:none;
@@ -17,7 +24,7 @@ ul.lupo_categories {
 }
 
 /* detail view */
-#lupo_detail_table tr td:last-child {
+.lupo_detail_table tr td:last-child {
     font-weight: bold;
 }
 

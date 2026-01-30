@@ -6,7 +6,7 @@ $componentParams = $displayData['componentParams'];
 $show_diverse = $displayData['show_diverse'];
 $show_without_age = $displayData['show_without_age'];
 ?>
-<table class="uk-table uk-table-striped uk-table-condensed" id="lupo_detail_table">
+<table class="uk-table uk-table-striped uk-table-condensed lupo_detail_table">
     <colgroup>
         <col style="width:150px">
         <col/>

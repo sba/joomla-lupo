@@ -36,7 +36,7 @@ class LupoController extends JControllerLegacy {
 			$wa->registerAndUseStyle('uikit.slider', "components/com_lupo/uikit/css/components/slider." . str_replace('uikit.', '', $uikit));
 			$wa->registerAndUseStyle('com_lupo', "components/com_lupo/uikit/css/components/slidenav." . str_replace('uikit.', '', $uikit));
 		}
-		$wa->registerAndUseStyle('com_lupo', 'components/com_lupo/css/com_lupo.css');
+		$wa->registerAndUseStyle('com_lupo', 'components/com_lupo/css/com_lupo.css?v=2026-01-29');
 
 		//load uikit js anyway
 		$wa->registerAndUseScript('uikit', 'components/com_lupo/uikit/js/uikit.min.js', [], [], ['jquery']);

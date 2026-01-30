@@ -165,7 +165,7 @@ $config = array(
                     }
                 }
                 if (count($infos) > 0) {
-                    $item['content'] .= '<table class="uk-table uk-table-striped uk-table-condensed" id="lupo_detail_table">';
+                    $item['content'] .= '<table class="uk-table uk-table-striped uk-table-condensed lupo_detail_table">';
                     foreach ($infos as $inforow) {
                         $item['content'] .= "<tr>" . ($hascaption ? "<td style='white-space: nowrap; width: 1%'>{$inforow['caption']}</td>" : '') . "<td>{$inforow['value']}</td></tr>";
                     }

@@ -35,11 +35,12 @@
 		<filename>lupo.php</filename>
 		<filename>controller.php</filename>
 		<filename>router.php</filename>
-		<folder>views</folder>
+		<folder>css</folder>
+		<folder>js</folder>
 		<folder>models</folder>
-        <folder>css</folder>
-        <folder>uikit</folder>
-        <folder>js</folder>
+		<folder>tmpl</folder>
+		<folder>uikit</folder>
+		<folder>views</folder>
 	</files>
 
 	<languages folder="site">

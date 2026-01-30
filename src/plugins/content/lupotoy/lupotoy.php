@@ -36,9 +36,6 @@ class plgContentLupotoy extends JPlugin {
 
 					foreach ($toys as $toy) {
 						if ($is_table) {
-							//$game_model = new LupoModelLupo();
-							//$game_data = $game_model->getGame($toy['id'], false);
-							
 							$componentParams = JComponentHelper::getParams('com_lupo');
 							$show_without_age = (int) $componentParams->get('show_without_age', '1');
 							$show_diverse     = (int) $componentParams->get('show_diverse', '1');
@@ -51,7 +48,7 @@ class plgContentLupotoy extends JPlugin {
 								'show_without_age' => $show_without_age
 							], JPATH_BASE . '/components/com_lupo/tmpl');
 						} else {
-							$replacement .= '<a href="' . $toy['link'] . '"><img src="' . $toy['image'] . '" title="' . $toy['title'] . '" style="max-width: 280px; margin: 0 20px 20px 0" ></a>';
+							$replacement .= '<div class="lupo_content_image"><a href="' . $toy['link'] . '"><img src="' . $toy['image'] . '" title="' . $toy['title'] . '"></a></div>';
 						}
 					}
 					$article->text = str_replace($matches[0][$match_key],$replacement, $article->text);
