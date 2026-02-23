@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.11.0 (February 23, 2026)
+  - add new [lupo] shortcode to show toys
+  - add editor extension button for [lupo] shortcode
+
 ### 4.10.0 (January 29, 2026)
   - add support for toy info-table output in [spiel] shortcode
   - fix php deprecation warnings

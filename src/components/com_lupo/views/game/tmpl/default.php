@@ -172,14 +172,14 @@ $componentParams = JComponentHelper::getParams('com_lupo');
                 'componentParams'  => $componentParams,
                 'show_diverse'     => $show_diverse,
                 'show_without_age' => $show_without_age
-        ], JPATH_COMPONENT . '/tmpl');
+        ], JPATH_SITE . '/components/com_lupo/tmpl');
         ?>
 
             <?php
 
             //related games
             if ($componentParams->get('detail_show_toy_related', '1')) {
-                if (count($this->game['related']) > 0) {
+                if (isset($this->game['related']) && count($this->game['related']) > 0) {
                     ?><p class="uk-margin-large-top"><?php echo JText::_("COM_LUPO_RELATED_TOYS"); ?></p><?php
                     if ($componentParams->get('detail_show_toy_photo', '1') == 0) { ?>
                         <ul><?php

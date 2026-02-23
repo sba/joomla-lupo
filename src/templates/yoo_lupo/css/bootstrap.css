@@ -7038,13 +7038,13 @@ th .tooltip-inner {
 .icon-wand:before {
   content: "\6b";
 }
-.icon-code-branch:before,
 .icon-eye-open:before,
 .icon-eye:before {
   content: "\3c";
 }
 .icon-eye-close:before,
 .icon-eye-blocked:before,
+.icon-eye-slash:before,
 .icon-eye-2:before {
   content: "\e269";
 }
@@ -7280,7 +7280,7 @@ th .tooltip-inner {
   color: #ffffff;
   background-image: -webkit-linear-gradient(top, #57b5e5, #319ed6);
   background-image: linear-gradient(to bottom, #57b5e5, #319ed6);
-  /*line-height: 28px;*/
+  line-height: 28px;
 }
 .btn-danger:hover,
 .btn-warning:hover {
