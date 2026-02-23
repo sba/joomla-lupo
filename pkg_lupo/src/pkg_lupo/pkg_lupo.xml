@@ -27,6 +27,7 @@
         <file type="plugin" id="plg_content_lupototaltoys" group="content">plg_content_lupototaltoys.zip</file>
         <file type="plugin" id="plg_content_lupotoy" group="content">plg_content_lupotoy.zip</file>
         <file type="plugin" id="plg_content_luporandomquote" group="content">plg_content_luporandomquote.zip</file>
+        <file type="plugin" id="plg_editors-xtd_lupotoy" group="editors-xtd">plg_editors-xtd_lupotoy.zip</file>
     </files>
 
     <updateservers></updateservers>
