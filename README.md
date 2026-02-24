@@ -12,6 +12,7 @@ Contains:
 - plg_content_luporandomquote
 - plg_content_lupototaltoys
 - plg_content_lupotoy
+- plg_editors-xtd_lupotoy
 - plg_quickicon_lupo
 - plg_search_lupo
 - plg_search_lupogenres
