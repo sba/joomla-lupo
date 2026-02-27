@@ -2,14 +2,20 @@
 <extension type="plugin" group="editors-xtd" method="upgrade">
     <name>Editors-XTD - LUPO Spiel</name>
     <author>Stefan Bauer</author>
-    <creationDate>February 23, 2026</creationDate>
+    <creationDate>February 27, 2026</creationDate>
     <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>stefan@databauer.ch</authorEmail>
     <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
-    <version>4.11.0</version>
+    <version>4.11.1</version>
     <description>LUPO - Editor-Button um ein Spiel mit dem Shorttag [lupo] einzufügen</description>
     <files>
         <filename plugin="lupotoy">lupotoy.php</filename>
     </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_editors-xtd_lupotoy.ini</language>
+        <language tag="en-GB">language/en-GB/plg_editors-xtd_lupotoy.sys.ini</language>
+        <language tag="de-DE">language/de-DE/plg_editors-xtd_lupotoy.ini</language>
+        <language tag="de-DE">language/de-DE/plg_editors-xtd_lupotoy.sys.ini</language>
+    </languages>
 </extension>

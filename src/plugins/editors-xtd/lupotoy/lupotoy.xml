@@ -12,4 +12,10 @@
     <files>
         <filename plugin="lupotoy">lupotoy.php</filename>
     </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_editors-xtd_lupotoy.ini</language>
+        <language tag="en-GB">language/en-GB/plg_editors-xtd_lupotoy.sys.ini</language>
+        <language tag="de-DE">language/de-DE/plg_editors-xtd_lupotoy.ini</language>
+        <language tag="de-DE">language/de-DE/plg_editors-xtd_lupotoy.sys.ini</language>
+    </languages>
 </extension>

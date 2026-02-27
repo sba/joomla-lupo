@@ -268,7 +268,8 @@ class plgButtonLupotoy extends CMSPlugin implements SubscriberInterface
                         table: isTable ? 1 : 0, 
                         layout: layout,
                         nolink: nolink,
-                        columns: columns
+                        columns: columns,
+                        isUpdate: 1
                     };
                     console.log("LUPO: Final parsed object", result);
                     return result;
@@ -295,7 +296,8 @@ class plgButtonLupotoy extends CMSPlugin implements SubscriberInterface
                         + (shortcode.table ? "&table=1" : "")
                         + (shortcode.layout ? "&layout=" + encodeURIComponent(shortcode.layout) : "")
                         + (shortcode.nolink ? "&nolink=" + encodeURIComponent(shortcode.nolink) : "")
-                        + (shortcode.columns ? "&columns=" + encodeURIComponent(shortcode.columns) : "");
+                        + (shortcode.columns ? "&columns=" + encodeURIComponent(shortcode.columns) : "")
+                        + (shortcode.isUpdate ? "&isUpdate=1" : "");
                     console.log("LUPO: Setting iframe src to", url);
                     
                     // Force reload if same URL or just set it

@@ -2,12 +2,12 @@
 <extension type="plugin" version="3.1" group="content" method="upgrade">
 	<name>Inhalt - LUPO Anzahl Spiele</name>
     <author>Stefan Bauer</author>
-    <creationDate>February 23, 2026</creationDate>
+    <creationDate>February 27, 2026</creationDate>
     <copyright>Copyright (C) databauer / Stefan Bauer</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>stefan@databauer.ch</authorEmail>
     <authorUrl>https://www.ludothekprogramm.ch</authorUrl>
-    <version>4.11.0</version>
+    <version>4.11.1</version>
     <description>LUPO - [totalspiele] zeigt die Anzahl Spiele an</description>
 	<files>
 		<filename plugin="lupototaltoys">lupototaltoys.php</filename>

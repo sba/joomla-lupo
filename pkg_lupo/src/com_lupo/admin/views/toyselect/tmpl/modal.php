@@ -19,8 +19,9 @@ $input  = Factory::getApplication()->input;
 $number  = $input->getString('number', '');
 $table   = $input->getInt('table', 0);
 $layout  = $input->getString('layout', '');
-$nolink  = $input->getInt('nolink', 0);
-$columns = $input->getInt('columns', 2);
+$nolink   = $input->getInt('nolink', 0);
+$columns  = $input->getInt('columns', 2);
+$isUpdate = $input->getInt('isUpdate', 0);
 
 // Handle table parameter for backward compatibility if layout is not set
 if (empty($layout) && !empty($table)) {
@@ -142,7 +143,7 @@ if (empty($layout)) {
 
     <div class="d-flex gap-2">
         <button type="button" class="btn btn-primary" onclick="insertFromForm()">
-            <?php echo Text::_('COM_LUPO_INSERT_SHORTTAG'); ?>
+            <?php echo Text::_($isUpdate ? 'COM_LUPO_UPDATE_SHORTTAG' : 'COM_LUPO_INSERT_SHORTTAG'); ?>
         </button>
         <button type="button" class="btn btn-secondary" onclick="closeModal()">
             <?php echo Text::_('JLIB_HTML_BEHAVIOR_CLOSE'); ?>

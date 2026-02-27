@@ -1,6 +1,7 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - plg_editors-xtd_lupotoy improvements
   - add missing translations for plg_editors-xtd_lupotoy
 
 ### 4.11.0 (February 23, 2026)

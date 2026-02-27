@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.11.1 (February 27, 2026)
+  - plg_editors-xtd_lupotoy improvements
+  - add missing translations for plg_editors-xtd_lupotoy
+
 ### 4.11.0 (February 23, 2026)
   - add new [lupo] shortcode to show toys
   - add editor extension button for [lupo] shortcode
