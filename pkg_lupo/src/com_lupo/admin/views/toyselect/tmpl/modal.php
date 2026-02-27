@@ -102,11 +102,11 @@ if (empty($layout)) {
     });
 </script>
 
-<div class="container-popup p-3" style="min-width: 260px; max-width: 320px;">
+<div class="container-popup p-3" style="max-width: 450px;">
     <div class="control-group mb-3">
-        <label class="control-label" for="lupo-toy-number"><?php echo Text::_('COM_LUPO_TOY_NUMBER'); ?></label>
+        <label class="control-label" for="lupo-toy-number" style="width: 100%;"><?php echo Text::_('COM_LUPO_TOY_NUMBER'); ?> <span class="text-muted small"><?php echo Text::_('COM_LUPO_TOY_NUMBER_HINT'); ?></span></label>
         <div class="controls">
-            <input type="text" id="lupo-toy-number" class="form-control" placeholder="1234 oder 1234.1" value="<?php echo htmlspecialchars($number ?? '', ENT_QUOTES, 'UTF-8'); ?>" />
+            <input type="text" id="lupo-toy-number" class="form-control" placeholder="1234, 1234.1" value="<?php echo htmlspecialchars($number ?? '', ENT_QUOTES, 'UTF-8'); ?>" />
         </div>
     </div>
 
@@ -123,11 +123,11 @@ if (empty($layout)) {
 
     <div id="lupo-toy-nolink-group" class="control-group form-check mb-2">
         <input type="checkbox" id="lupo-toy-nolink" class="form-check-input" <?php echo !empty($nolink) ? 'checked' : ''; ?> />&nbsp;
-        <label class="form-check-label" for="lupo-toy-nolink">Bild nicht verlinken</label>
+        <label class="form-check-label" for="lupo-toy-nolink"><?php echo Text::_('COM_LUPO_NOLINK'); ?></label>
     </div>
 
     <div id="lupo-toy-columns-group" class="control-group mb-4">
-        <label class="control-label" for="lupo-toy-columns">Anzeige in Spalten</label>
+        <label class="control-label" for="lupo-toy-columns"><?php echo Text::_('COM_LUPO_COLUMNS_LABEL'); ?></label>
         <div class="controls">
             <select id="lupo-toy-columns" class="form-select">
                 <option value="1" <?php echo $columns == 1 ? 'selected' : ''; ?>>1</option>

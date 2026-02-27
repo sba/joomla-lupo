@@ -59,21 +59,23 @@ class plgButtonLupotoy extends CMSPlugin implements SubscriberInterface
             return;
         }
 
+        // Ensure language is loaded in the administrator context.
+	    // Dies ist irgendwie notwendig hier...sonst wird der Button nicht übersetzt
+        $lang = Factory::getLanguage();
+        $lang->load('plg_editors-xtd_lupotoy', JPATH_ADMINISTRATOR, null, false, true);
+
         $link = 'index.php?option=com_lupo&view=toyselect&tmpl=component&layout=modal';
 
         $button = new Button($this->_name);
         $button->set('modal', true)
             ->set('link', $link)
-            ->set('text', 'LUPO Spiel')
+            ->set('text', Text::_('PLG_EDITORS_LUPOTOY_BUTTON_TEXT'))
             ->set('name', $this->_name)
             ->set('class', 'btn')
             ->set('icon', 'puzzle')
             ->set('options', [
                 'onSelect' => 'jSelectToy',
-                'title' => 'LUPO Spiel einfügen',
                 'footer' => '<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">' . Text::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</button>',
-                'width' => 320,
-                'height' => 240,
             ]);
 
         // Add the selection script

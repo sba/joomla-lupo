@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - add missing translations for plg_editors-xtd_lupotoy
+
+### 4.11.0 (February 23, 2026)
   - add new [lupo] shortcode to show toys
   - add editor extension button for [lupo] shortcode
   - better php 8.4 support: fix php deprecation warnings
