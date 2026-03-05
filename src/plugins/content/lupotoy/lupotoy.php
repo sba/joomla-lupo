@@ -132,7 +132,16 @@ class plgContentLupotoy extends JPlugin {
 								$replacement .= '<br><br>';
 							}
 						} else {
-							$width_class = 'uk-width-medium-1-' . $columns;
+							$width_class = match($columns) {
+								1 => 'uk-width-1-1',
+								2 => 'uk-width-1-1 uk-width-small-1-2',
+								3 => 'uk-width-1-3',
+								4 => 'uk-width-1-2 uk-width-small-1-4',
+								5 => 'uk-width-1-3 uk-width-small-1-4 uk-width-large-1-5',
+								6 => 'uk-width-1-3 uk-width-small-1-4 uk-width-large-1-6',
+								default => 'uk-width-1-2'
+							};
+
 							$replacement .= '<div class="' . $width_class . '">';
 							if ($nolink) {
 								$replacement .= '<div><img src="' . $toy['image'] . '" title="' . $toy['title'] . '"></div>';

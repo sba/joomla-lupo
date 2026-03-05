@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.11.2 (March 05, 2026)
+  - add responsive columns to [lupo] shortcode view
+
 ### 4.11.1 (February 27, 2026)
   - plg_editors-xtd_lupotoy improvements
   - add missing translations for plg_editors-xtd_lupotoy
