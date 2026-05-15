@@ -37,7 +37,8 @@ if ($this->foto['show'] == '1') { ?>
         //get subsets from category or take generic subsets
         //TODO: Move to Controller/Model
         $subsets = json_decode($this->{$catType}['subsets'] ?? '', true);
-        if (!is_array($subsets)) {
+        // If category has no custom filters (or an empty filters array), fall back to generic auto-filters
+        if (!is_array($subsets) || empty($subsets['filters'])) {
             if (is_array($this->subsets['filters']) && count($this->subsets['filters']) > 1) {
                 $subsets = $this->subsets;
             }

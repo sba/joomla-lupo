@@ -12,6 +12,12 @@ defined('_JEXEC') or die('Restricted access');
 
 class LupoControllerFilter extends JControllerForm
 {
+    public function __construct($config = array())
+    {
+        parent::__construct($config);
+        // Override default mapping where 'apply' is routed to 'save'
+        $this->registerTask('apply', 'apply');
+    }
 
     public function edit($key = null, $urlVar = null)
     {
@@ -38,14 +44,31 @@ class LupoControllerFilter extends JControllerForm
 
     public function save($key = null, $urlVar = null)
     {
-        $model = $this->getModel('Filter');
+        $this->doSave();
+
         $app = JFactory::getApplication();
+        $app->redirect('index.php?option=com_lupo&view=filters');
+    }
 
-        $input = JFactory::getApplication()->input;
-        $data['subsets'] = $input->get('subsets','','RAW');
-	    $data['id'] = $input->get('id');
+    public function apply($key = null, $urlVar = null)
+    {
+        $this->doSave();
 
-        if($data['subsets']!="") {
+        $app = JFactory::getApplication();
+        $id  = JFactory::getApplication()->input->get('id');
+        $app->redirect('index.php?option=com_lupo&view=filter&layout=edit&id=' . $id);
+    }
+
+    protected function doSave()
+    {
+        $model = $this->getModel('Filter');
+        $app   = JFactory::getApplication();
+
+        $input           = $app->input;
+        $data['subsets'] = $input->get('subsets', '', 'RAW');
+        $data['id']      = $input->get('id');
+
+        if ($data['subsets'] != "") {
             $json = json_decode($data['subsets']);
             if ($json !== null) {
                 $model->save($data);
@@ -54,10 +77,8 @@ class LupoControllerFilter extends JControllerForm
                 $app->enqueueMessage(JText::_('Ungültiges JSON, nicht gespeichert'), 'error');
             }
         } else {
-	        $model->save($data);
-	        $app->enqueueMessage(JText::_('JSON gelöscht'), 'message');
+            $model->save($data);
+            $app->enqueueMessage(JText::_('JSON gelöscht'), 'message');
         }
-
-        $app->redirect('index.php?option=com_lupo&view=filters');
     }
 }

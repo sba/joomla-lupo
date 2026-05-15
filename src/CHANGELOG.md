@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - GUI for filter definition added to game list
+
+### 4.11.2 (March 05, 2026)
   - add responsive columns to [lupo] shortcode view
 
 ### 4.11.1 (February 27, 2026)

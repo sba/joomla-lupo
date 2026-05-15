@@ -43,7 +43,7 @@ defined('_JEXEC') or die('Restricted Access');
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
                 $link = JRoute::_('index.php?option=com_lupo&view=filter&task=filter.edit&id=' . $row['id']);
-                $subsets = json_decode($row['subsets'], true);
+                $subsets = json_decode($row['subsets'] ?? '', true);
                 ?>
                 <tr>
                     <td><?= $row['title'] ?></td>

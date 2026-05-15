@@ -50,10 +50,12 @@ class LupoViewFilter extends JViewLegacy {
 	 */
 	protected function addToolBar() {
 		JToolBarHelper::title(JText::_('LUPO'));
-		JToolBarHelper::preferences('com_lupo');
 
+		JToolBarHelper::apply('filter.apply');
 		JToolBarHelper::save('filter.save');
 		JToolbarHelper::cancel('filter.cancel');
+
+		JToolBarHelper::preferences('com_lupo');
 	}
 
 
