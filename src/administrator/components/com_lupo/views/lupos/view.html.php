@@ -22,12 +22,7 @@ class LupoViewLupos extends JViewLegacy {
 	 * @return void
 	 */
 	function display($tpl = null) {
-		// Check for errors.
-		if (is_array($errors = $this->get('Errors'))) {
-			throw new Exception(implode("\n", $errors), 500);
-		}
-
-        // Set the submenu
+		// Set the submenu
         LupoHelper::addSubmenu('lupos');
 
 		// Set the toolbar

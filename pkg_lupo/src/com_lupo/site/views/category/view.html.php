@@ -21,8 +21,17 @@ class LupoViewCategory extends JViewLegacy {
 	function display($tpl = null) {
 		$app = JFactory::getApplication();
 
-		// Check for errors.
-        $errors = $this->get('Errors');
+		// Check model errors – only if the model is actually registered (legacy controller sets data directly).
+		$errors = [];
+
+		if (isset($this->_models['category'])) {
+			$model = $this->getModel('Category');
+
+			if ($model && method_exists($model, 'getErrors')) {
+				$errors = $model->getErrors();
+			}
+		}
+
 		if ($errors) {
 			JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
 			return false;

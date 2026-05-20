@@ -2,6 +2,8 @@
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
   - GUI for filter definition added to game list
+  - support for filtersets in agecategory view
+  - fix php 8.5 deprecation warnings
 
 ### 4.11.2 (March 05, 2026)
   - add responsive columns to [lupo] shortcode view

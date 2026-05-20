@@ -23,12 +23,7 @@ class LupoViewFilters extends JViewLegacy {
 	 */
 	function display($tpl = null) {
 		// Get data from the model
-		$this->items = $this->get('Categories');
-
-		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
-			throw new Exception(implode("\n", $errors), 500);
-		}
+		$this->items = $this->get('Items');
 
 		// Set the submenu
 		LupoHelper::addSubmenu('filter');

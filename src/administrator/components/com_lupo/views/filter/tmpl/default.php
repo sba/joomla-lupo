@@ -24,6 +24,8 @@ $subsets = json_decode($this->item['subsets'] ?? '', true);
 if (!is_array($subsets)) {
     $subsets = [];
 }
+$filterType = Factory::getApplication()->input->getCmd('filter_type', 'category');
+$filterTypeLabel = $filterType === 'agecategory' ? 'Alterskategorie' : 'Kategorie';
 $existingFilters = isset($subsets['filters']) && is_array($subsets['filters']) ? $subsets['filters'] : [];
 $existingStyle   = isset($subsets['style']) ? $subsets['style'] : 'dropdown';
 $rawJson         = !empty($subsets) ? json_encode($subsets, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : '';
@@ -64,6 +66,15 @@ $jsOptions = [
     .lupo-filter-grid select { width: 100%; }
     #lupo-advanced { margin-top: 1.5rem; }
     #lupo-advanced summary { cursor: pointer; font-weight: bold; padding: .5rem 0; }
+    
+    /* Joomla Dark Admin Theme (Bootstrap 5) */
+    html[data-bs-theme="dark"] .lupo-filter-card {
+        background: #20262d;
+        border: 1px solid #333;
+    }
+    html[data-bs-theme="dark"] .lupo-filter-grid label {
+        color: #fff;
+    }
 </style>
 
 <div id="j-sidebar-container" class="j-sidebar-container j-sidebar-visible">
@@ -71,7 +82,7 @@ $jsOptions = [
 </div>
 <div id="j-main-container" class="span10 j-toggle-main">
 
-    <h1><?= $this->item['title'] ?></h1>
+    <h1><?= $this->item['title'] ?> <small style="font-size:.65em; color:#777;">(<?= $filterTypeLabel ?>)</small></h1>
 
     <form action="<?= JRoute::_('index.php?option=com_lupo&view=filter') ?>" method="post" id="adminForm" name="adminForm">
 
@@ -86,18 +97,16 @@ $jsOptions = [
         <div class="alert alert-info" style="margin-bottom: 1rem;">
             <strong>Was kann hier konfiguriert werden?</strong>
             <p style="margin: .5rem 0 0;">
-                Auf dieser Seite definierst du, welche Filter den Besuchern im Spielekatalog angezeigt werden.
-                Jede <em>Filter-Definition</em> entspricht einer Auswahlmöglichkeit (z.B. „Für Kinder“ oder „Strategiespiele“)
-                und kombiniert beliebige Kriterien aus <em>Kategorien</em>, <em>Alterskategorien</em>, <em>Genres</em>
-                und <em>Spieleranzahl</em>.
+                Auf dieser Seite können spezielle Filter definiert werden. Jede <em>Filter-Definition</em> entspricht einer Auswahlmöglichkeit. So könnte ein Filter "bis 7 Jahre" und einer "ab 8 Jahren" erstellt werden. Dann werden bei "bis 7 Jahre" alle Alterskategorien bis 7 Jahre ausgewählt, bei "ab 8 Jahre" die anderen. Damit kann der Besucher der Webseite schnell die passenden Spiele für mehrere Altersgruppen auswählen, ohne jedes Mal alle Alterskategorien einzeln anklicken zu müssen. Es können aber auch Filter für Kategorien, Genres oder Spieleranzahl erstellt werden – oder beliebige Kombinationen daraus.
             </p>
             <ul style="margin: .5rem 0 0 1.25rem;">
-                <li>Über <strong>„Filter-Definition hinzufügen“</strong> legst du beliebig viele Filter an; nicht benötigte können entfernt werden.</li>
-                <li>Pro Filter wählst du in den vier Feldern die gewünschten Werte aus – leere Felder werden ignoriert.</li>
-                <li>Werte innerhalb eines Feldes werden mit <strong>ODER</strong> verknüpft (z.B. „1 Spieler“ ODER „2 Spieler“).</li>
-                <li>Mit <strong>Filter-Style</strong> legst du fest, ob die Filter im Frontend als Dropdown oder als Buttons erscheinen.</li>
-                <li>Ist hier für die Kategorie ein Filter definiert, wird dieser genommen und ansonsten wird der Standardfilter genutzt wenn dieser global aktiviert ist.</li>
-                <li>Erfahrene Nutzer können das resultierende JSON unter <em>„Erweitert“</em> direkt einsehen oder bearbeiten.</li>
+                <li>Über <strong>„Filter-Definition hinzufügen"</strong> können beliebig viele Filter angelegt werden; nicht benötigte können entfernt werden.</li>
+                <li>Es können beliebige Kriterien aus <em>Kategorien</em>, <em>Alterskategorien</em>, <em>Genres</em> und <em>Spieleranzahl</em> pro Definition kombiniert werden.</li>
+                <li>Pro Filter können in den vier Feldern die gewünschten Werte ausgewählt werden – leere Felder werden ignoriert.</li>
+                <li>Werte innerhalb eines Feldes werden mit <strong>ODER</strong> verknüpft (z.B. "ab 3 Jahren" ODER "ab 4 Jahren" ODER "ab 5 Jahren" ...).</li>
+                <li>Mit <strong>Filter-Style</strong> kann festgelegt werden, ob die Filter im Frontend als Dropdown oder als Buttons erscheinen.</li>
+                <li>Wenn für die Kategorie ein Filter definiert ist, wird dieser verwendet. Andernfalls wird der Standardfilter genutzt, sofern dieser global aktiviert ist.</li>
+                <li>Erfahrene Nutzer können das resultierende JSON unter <em>„Erweitert"</em> direkt einsehen oder bearbeiten.</li>
             </ul>
         </div>
 
@@ -126,6 +135,7 @@ $jsOptions = [
         </details>
 
         <input type="hidden" name="id" value="<?= $this->item['id'] ?>"/>
+        <input type="hidden" name="filter_type" value="<?= $filterType ?>"/>
         <input type="hidden" name="task" value=""/>
         <?php echo JHtml::_('form.token'); ?>
     </form>

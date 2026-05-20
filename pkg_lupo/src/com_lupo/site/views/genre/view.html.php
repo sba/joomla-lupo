@@ -21,8 +21,11 @@ class LupoViewGenre extends JViewLegacy {
 	function display($tpl = null) {
 		$app = JFactory::getApplication();
 
-        // Check for errors.
-        $errors = $this->get('Errors');
+        // Check for errors – avoid deprecated AbstractView::get() with unregistered model.
+        $errors = [];
+        if (isset($this->_models['lupo']) && method_exists($this->_models['lupo'], 'getErrors')) {
+            $errors = $this->_models['lupo']->getErrors();
+        }
         if ($errors) {
             JFactory::getApplication()->enqueueMessage(implode('<br />', $errors), 'error');
             return false;

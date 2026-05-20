@@ -56,7 +56,8 @@ class LupoControllerFilter extends JControllerForm
 
         $app = JFactory::getApplication();
         $id  = JFactory::getApplication()->input->get('id');
-        $app->redirect('index.php?option=com_lupo&view=filter&layout=edit&id=' . $id);
+        $filterType = JFactory::getApplication()->input->getCmd('filter_type', 'category');
+        $app->redirect('index.php?option=com_lupo&view=filter&layout=edit&id=' . $id . '&filter_type=' . $filterType);
     }
 
     protected function doSave()
@@ -67,6 +68,7 @@ class LupoControllerFilter extends JControllerForm
         $input           = $app->input;
         $data['subsets'] = $input->get('subsets', '', 'RAW');
         $data['id']      = $input->get('id');
+        $data['filter_type'] = $input->getCmd('filter_type', 'category');
 
         if ($data['subsets'] != "") {
             $json = json_decode($data['subsets']);

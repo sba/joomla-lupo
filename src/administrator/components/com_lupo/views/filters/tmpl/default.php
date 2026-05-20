@@ -28,6 +28,9 @@ defined('_JEXEC') or die('Restricted Access');
             <th width="25%">
                 Kategorie
             </th>
+            <th width="15%">
+                Typ
+            </th>
             <th>
                 Suchfilter
             </th>
@@ -42,21 +45,31 @@ defined('_JEXEC') or die('Restricted Access');
         <tbody>
         <?php if (!empty($this->items)) : ?>
             <?php foreach ($this->items as $i => $row) :
-                $link = JRoute::_('index.php?option=com_lupo&view=filter&task=filter.edit&id=' . $row['id']);
+                $link = JRoute::_('index.php?option=com_lupo&view=filter&task=filter.edit&id=' . $row['id'] . '&filter_type=' . $row['filter_type']);
                 $subsets = json_decode($row['subsets'] ?? '', true);
                 ?>
                 <tr>
                     <td><?= $row['title'] ?></td>
+                    <td><?= $row['filter_type'] === 'agecategory' ? 'Alterskategorie' : 'Kategorie' ?></td>
                     <td><?php
 
                         if (is_array($subsets)) {
                             foreach ($subsets['filters'] as $caption => $subset) {
                                 ?>
                                 <b><?= $caption ?></b><br>
-                                <em class="text-muted">Kategorien:</em> <?= isset($subset['categories'])?implode(', ', $subset['categories']):''; ?><br>
-                                <em class="text-muted">Alterskategorien:</em> <?= isset($subset['agecategories'])?implode(', ', $subset['agecategories']):''; ?><br>
-                                <em class="text-muted">Genres:</em> <?= isset($subset['genres'])?implode(', ', $subset['genres']):''; ?><br>
-                                <em class="text-muted">Players:</em> <?= isset($subset['players'])?implode(', ', $subset['players']):''; ?><br><br>
+                                <?php if (!empty($subset['categories'])): ?>
+                                    <em class="text-muted">Kategorien:</em> <?= implode(', ', $subset['categories']) ?><br>
+                                <?php endif; ?>
+                                <?php if (!empty($subset['agecategories'])): ?>
+                                    <em class="text-muted">Alterskategorien:</em> <?= implode(', ', $subset['agecategories']) ?><br>
+                                <?php endif; ?>
+                                <?php if (!empty($subset['genres'])): ?>
+                                    <em class="text-muted">Genres:</em> <?= implode(', ', $subset['genres']) ?><br>
+                                <?php endif; ?>
+                                <?php if (!empty($subset['players'])): ?>
+                                    <em class="text-muted">Players:</em> <?= implode(', ', $subset['players']) ?><br>
+                                <?php endif; ?>
+                                <br>
                                 <?php
                             }
                         }

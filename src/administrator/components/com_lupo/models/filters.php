@@ -21,18 +21,41 @@ defined('_JEXEC') or die('Restricted access');
 class LupoModelFilters extends BaseDatabaseModel
 {
     /**
-     * Get the categories
+   * Get categories and agecategories for filter configuration.
      *
-     * @return  array  The toy categories
+   * @return  array
      */
-    public function getCategories()
+  public function getItems()
     {
-        $db = JFactory::getDBO();
-        $db->setQuery("SELECT
-					    *
-					FROM
-					    #__lupo_categories"
-					);
-        return $db->loadAssocList();
+    $db = JFactory::getDBO();
+    $query = "
+      SELECT
+        c.id,
+        c.title,
+        c.alias,
+        c.subsets,
+        'category' AS filter_type,
+        0 AS sort_group,
+        c.sort AS sort_value
+      FROM #__lupo_categories AS c
+
+      UNION ALL
+
+      SELECT
+        ac.id,
+        ac.title,
+        ac.alias,
+        ac.subsets,
+        'agecategory' AS filter_type,
+        1 AS sort_group,
+        ac.sort AS sort_value
+      FROM #__lupo_agecategories AS ac
+
+      ORDER BY sort_group, sort_value, title
+    ";
+
+    $db->setQuery($query);
+
+    return $db->loadAssocList();
     }
 }

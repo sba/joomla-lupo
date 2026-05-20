@@ -13,8 +13,8 @@ defined('_JEXEC') or die('Restricted access');
 use Joomla\CMS\Factory;
 
 $app = Factory::getApplication();
-$menu   = $app->getMenu()->getActive();
-$menuparams = $menu->getParams();
+$menu       = $app->getMenu()->getActive();
+$menuparams = $menu ? $menu->getParams() : new \Joomla\Registry\Registry();
 
 $componentParams = JComponentHelper::getParams('com_lupo');
 

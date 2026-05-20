@@ -21,6 +21,22 @@ use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 class LupoModelFilter extends BaseDatabaseModel
 {
+  /**
+   * Resolve table name by filter type.
+   *
+   * @param string $filterType
+   *
+   * @return string
+   */
+  private function getFilterTableByType($filterType)
+  {
+    if ($filterType === 'agecategory') {
+      return '#__lupo_agecategories';
+    }
+
+    return '#__lupo_categories';
+  }
+
     /**
      * Get the categories
      *
@@ -106,11 +122,13 @@ class LupoModelFilter extends BaseDatabaseModel
     {
         $input = Factory::getApplication()->input;
         $id    = $input->get('id');
+        $filterType = $input->getCmd('filter_type', 'category');
+        $table = $this->getFilterTableByType($filterType);
         $db    = JFactory::getDBO();
         $db->setQuery("SELECT
 					    *
 					FROM
-					    #__lupo_categories
+                  {$table}
 					WHERE id = " . $db->quote($id));
         return $db->loadAssoc();
     }
@@ -128,9 +146,12 @@ class LupoModelFilter extends BaseDatabaseModel
     public function save($data)
     {
         $db    = JFactory::getDBO();
+        $table = $this->getFilterTableByType($data['filter_type'] ?? 'category');
         $db->setQuery("UPDATE		
-                        #__lupo_categories			    
+                {$table}			    
 					SET subsets = " .$db->quote($data['subsets']) ."					    
 					WHERE id = " . $db->quote($data['id']))->execute();
+
+		return true;
     }
 }

@@ -621,7 +621,7 @@ class LupoController extends JControllerLegacy {
 				$json = json_encode($res);
 				echo $json;
 				break;
-			default;
+			default:
 				echo 'nothing to do';
 				break;
 		}

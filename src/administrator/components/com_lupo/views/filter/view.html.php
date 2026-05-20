@@ -30,10 +30,6 @@ class LupoViewFilter extends JViewLegacy {
 		$this->genres        = $this->get('Genres');
 		$this->players       = $this->get('Players');
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
-			throw new Exception(implode("\n", $errors), 500);
-		}
 
 		// Set the submenu
 		LupoHelper::addSubmenu('filter');

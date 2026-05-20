@@ -120,7 +120,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY $sql_sort");
 
-		if (isset($res) && $res[0]['number'] > 0) {
+		if (isset($res) && !empty($res) && ($res[0]['number'] ?? 0) > 0) {
 			$res = array_merge($res, $db->loadAssocList());
 		} else {
 			$res = $db->loadAssocList();
@@ -145,15 +145,15 @@ class LupoModelLupo extends BaseDatabaseModel {
 
 			if ($load_samples) {
 				$samples      = explode(",", $row['samples']);
-				$sample_games = false;
+				$sample_games = [];
 				if (is_array($samples)) {
 					foreach ($samples as $sample_nr) {
 						$sample_game = $this->getGamesByNumber($sample_nr);
-						if (is_array($sample_game)) {
+						if (is_array($sample_game) && !empty($sample_game)) {
 							$sample_games[] = $sample_game[0];
 						}
 					}
-					$row['sample_games'] = $sample_games;
+					$row['sample_games'] = !empty($sample_games) ? $sample_games : false;
 				}
 			}
 		}
@@ -199,7 +199,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 				HAVING COUNT(#__lupo_game.id) > 0
 				ORDER BY #__lupo_agecategories.sort, #__lupo_agecategories.title");
 
-		if (isset($res) && $res[0]['number'] > 0) {
+		if (isset($res) && !empty($res) && ($res[0]['number'] ?? 0) > 0) {
 			$res = array_merge($res, $db->loadAssocList());
 		} else {
 			$res = $db->loadAssocList();
@@ -222,15 +222,15 @@ class LupoModelLupo extends BaseDatabaseModel {
 
 			if ($load_samples) {
 				$samples      = explode(",", $row['samples']);
-				$sample_games = false;
+				$sample_games = [];
 				if (is_array($samples)) {
 					foreach ($samples as $sample_nr) {
 						$sample_game = $this->getGamesByNumber($sample_nr);
-						if (is_array($sample_game)) {
+						if (is_array($sample_game) && !empty($sample_game)) {
 							$sample_games[] = $sample_game[0];
 						}
 					}
-					$row['sample_games'] = $sample_games;
+					$row['sample_games'] = !empty($sample_games) ? $sample_games : false;
 				}
 			}
 		}
