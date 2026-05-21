@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.12.1 (May 21, 2026)
+  - fix more php 8.5 deprecation warnings
+
 ### 4.12.0 (May 20, 2026)
   - GUI for filter definition added to game list
   - support for filtersets in agecategory view

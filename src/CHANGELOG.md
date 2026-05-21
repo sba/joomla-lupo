@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - fix more php 8.5 deprecation warnings
+
+### 4.12.0 (May 20, 2026)
   - GUI for filter definition added to game list
   - support for filtersets in agecategory view
   - fix php 8.5 deprecation warnings

@@ -181,7 +181,8 @@ class AssetCollection extends AssetOptions implements AssetInterface, \IteratorA
      *
      * @return Iterator
      */
-    public function getIterator(): \Traversable {
+    #[\ReturnTypeWillChange]
+    public function getIterator() {
         return new \ArrayIterator($this->assets);
     }
 }
