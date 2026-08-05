@@ -1,0 +1,1 @@
+ALTER TABLE `#__lupo_game_editions` ADD COLUMN `public_memo` TEXT NULL AFTER `content`;

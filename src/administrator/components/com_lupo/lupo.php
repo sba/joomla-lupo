@@ -267,7 +267,8 @@ function processXML($file) {
 											, `edition`=' . $db->quote($edition['edition']) . '
 											, `acquired_date`=' . (empty($edition['acquired_date']) ? 'NULL' : $db->quote($edition['acquired_date'])) . '
 											, `tax`=' . $db->quote(str_replace(',', '.', $edition['tax'])) . ' 
-											, `content`=' . $db->quote($edition['content'])
+											, `content`=' . $db->quote($edition['content']) . '
+											, `public_memo`=' . $db->quote(str_replace('|', '<br>', $edition['public_memo']))
 					);
 					$db->execute();
 				}

@@ -210,6 +210,9 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                         </td>
                         <td>
                             <a href="<?= $toy->link ?>"><?= $toy->title ?></a>
+                            <?php if (!empty($toy->public_memo)) { ?>
+                                <div class="uk-text-muted uk-text-small"><?= $toy->public_memo ?></div>
+                            <?php } ?>
 							<?php
 							if ($allow_prolongation) { ?>
                                 <div class="uk-visible-small"><?php echo $html_prolongation ?></div>

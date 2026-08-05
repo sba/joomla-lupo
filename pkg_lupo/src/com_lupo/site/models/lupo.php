@@ -384,6 +384,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 					, #__lupo_game.days
 					, #__lupo_game_editions.tax
 					, #__lupo_game_editions.acquired_date
+					, #__lupo_game_editions.public_memo
 					, #__lupo_game_editions.next_reservation
      				, #__lupo_game_editions.next_reservation
 					, #__lupo_categories.alias AS category_alias 
@@ -487,6 +488,7 @@ class LupoModelLupo extends BaseDatabaseModel {
 							, #__lupo_game.days
 							, #__lupo_game_editions.tax
 							, #__lupo_game_editions.acquired_date
+							, #__lupo_game_editions.public_memo
 							, #__lupo_game_editions.next_reservation
 							, #__lupo_categories.alias AS category_alias 
 							, #__lupo_categories.title AS category
@@ -1119,9 +1121,10 @@ class LupoModelLupoClient extends LupoModelLupo {
 	public function getClientToys($adrnr) {
 		$db    = JFactory::getDBO();
 		$query = $db->getQuery(true);
-		$query->select('*')
+		$query->select('#__lupo_clients_borrowed.*, #__lupo_game.*, #__lupo_game_editions.public_memo')
 			->from('#__lupo_clients_borrowed')
 			->join('LEFT', '#__lupo_game ON #__lupo_clients_borrowed.game_number = #__lupo_game.number')
+			->join('LEFT', '#__lupo_game_editions ON #__lupo_clients_borrowed.edition_id = #__lupo_game_editions.id')
 			->where('#__lupo_clients_borrowed.adrnr = ' . $db->quote($adrnr))
 			->where('#__lupo_clients_borrowed.quarantine = 0')
 			->order('return_date, title');

@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.13.0 (August 4, 2026)
+  - add field public memo to the toy table
+
 ### 4.12.1 (May 21, 2026)
   - fix more php 8.5 deprecation warnings
 

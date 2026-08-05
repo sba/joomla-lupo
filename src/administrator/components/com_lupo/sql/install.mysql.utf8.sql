@@ -115,6 +115,7 @@ CREATE TABLE `#__lupo_game_editions` (
   `tax` double DEFAULT NULL,
   `next_reservation` date DEFAULT NULL,
   `content` text DEFAULT NULL,
+  `public_memo` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `editions_gameid` (`gameid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
