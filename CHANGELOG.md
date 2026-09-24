@@ -1,5 +1,8 @@
 # Changelog
 
+### 4.14.0 (September 22, 2026)
+  - multiselect-ui for genres in mod_lupo_categories module options added
+
 ### 4.13.0 (August 4, 2026)
   - add field public memo to the toy table
 

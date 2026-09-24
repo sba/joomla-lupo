@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form addfieldpath="modules/mod_lupo_categories/fields">
+    <fields>
+        <fieldset name="filter_genre_item">
+            <field
+                name="genre_token"
+                type="genres"
+                label="MOD_LUPO_CATEGORIES_FILTER_GENRES_ITEM"
+                description="MOD_LUPO_CATEGORIES_FILTER_GENRES_ITEM_DESC"
+                class="advancedSelect"
+                required="true"
+            />
+        </fieldset>
+    </fields>
+</form>
+
+

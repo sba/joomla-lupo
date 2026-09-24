@@ -37,23 +37,120 @@ class ModLupoCategoriesHelper
         $agecategories = $model->getAgecategories(false, false);
         $genres        = $model->getGenres();
 
-        //filter genres
-        $filter_param = $params->get('filter_genres', "");
-        if ($filter_param != "") {
-            $filter_genres = explode("\r\n", $filter_param);
+        // Filter genres by configured order with backward compatibility to older formats.
+        $filter_param = $params->get('filter_genres', array());
 
-            $genres_new   = array();
-            $genres_title = array_column($genres, "title");
-            foreach ($filter_genres as $filter_genre) {
-                if (in_array($filter_genre, $genres_title)) {
-                    foreach ($genres as $genre) {
-                        if ($filter_genre == $genre['title']) {
-                            $genres_new[] = $genre;
-                        }
+        // Legacy values may be stored as JSON-encoded strings (e.g. "Spiel...\r\n-").
+        if (is_string($filter_param)) {
+            $decoded = json_decode($filter_param, true);
+
+            if (json_last_error() === JSON_ERROR_NONE && (is_array($decoded) || is_string($decoded))) {
+                $filter_param = $decoded;
+            }
+        }
+
+        if (is_object($filter_param)) {
+            $filter_param = (array) $filter_param;
+        }
+
+        if (is_string($filter_param)) {
+            // Legacy textarea format.
+            $filter_param = trim((string) $filter_param) !== '' ? preg_split('/\R+/', trim((string) $filter_param)) : array();
+        }
+
+        if (is_array($filter_param) && !empty($filter_param)) {
+            $first = reset($filter_param);
+
+            // New subform format: list of rows, each row containing genre_token.
+            if (is_array($first) || is_object($first)) {
+                $normalized = array();
+
+                foreach ($filter_param as $row) {
+                    $token = null;
+
+                    if (is_array($row) && isset($row['genre_token'])) {
+                        $token = $row['genre_token'];
+                    } elseif (is_array($row) && isset($row['item']) && is_array($row['item']) && isset($row['item']['genre_token'])) {
+                        $token = $row['item']['genre_token'];
+                    } elseif (is_object($row) && isset($row->genre_token)) {
+                        $token = $row->genre_token;
+                    } elseif (is_object($row) && isset($row->item) && is_object($row->item) && isset($row->item->genre_token)) {
+                        $token = $row->item->genre_token;
+                    }
+
+                    if (is_scalar($token)) {
+                        $normalized[] = $token;
                     }
                 }
-                if ($filter_genre == '-') {
-                    $genres_new[] = '-';
+
+                $filter_param = $normalized;
+            } else {
+                // Legacy textarea content can arrive wrapped in scalar arrays after field type changes.
+                $normalized = array();
+
+                foreach ($filter_param as $entry) {
+                    if (!is_scalar($entry)) {
+                        continue;
+                    }
+
+                    $entry = trim((string) $entry);
+
+                    if ($entry === '') {
+                        continue;
+                    }
+
+                    if (preg_match('/\R/', $entry)) {
+                        $parts = preg_split('/\R+/', $entry);
+
+                        foreach ($parts as $part) {
+                            $part = trim((string) $part);
+
+                            if ($part !== '') {
+                                $normalized[] = $part;
+                            }
+                        }
+
+                        continue;
+                    }
+
+                    $normalized[] = $entry;
+                }
+
+                $filter_param = $normalized;
+            }
+        } else {
+            $filter_param = array();
+        }
+
+        if (!empty($filter_param)) {
+            $genres_new      = array();
+            $genres_by_alias = array();
+            $genres_by_key   = array();
+
+            foreach ($genres as $genre) {
+                $genres_by_alias[(string) $genre['alias']] = $genre;
+                $genres_by_key[$genre['title']]            = $genre;
+            }
+
+            foreach ($filter_param as $filter_genre) {
+                if (!is_scalar($filter_genre)) {
+                    continue;
+                }
+
+                $filter_genre = trim((string) $filter_genre);
+
+                if (preg_match('/^-+$/', $filter_genre)) {
+                    $genres_new[] = $filter_genre;
+                    continue;
+                }
+
+                if (isset($genres_by_alias[$filter_genre])) {
+                    $genres_new[] = $genres_by_alias[$filter_genre];
+                    continue;
+                }
+
+                if (isset($genres_by_key[$filter_genre])) {
+                    $genres_new[] = $genres_by_key[$filter_genre];
                 }
             }
 

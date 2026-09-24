@@ -38,7 +38,7 @@ defined('_JEXEC') or die;
                 }
                 $seperator = true;
                 foreach ($items as $item) {
-                    if ($item == '-') { ?>
+                    if (is_string($item) && preg_match('/^-+$/', $item)) { ?>
                         <hr/>
                     <?php } else { ?>
                         <li><a href="<?php echo $item['link'] ?>"><?php echo $item['title'] ?></a>
