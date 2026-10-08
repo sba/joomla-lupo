@@ -1,6 +1,9 @@
 # Changelog
 
 ### {{version_pkg_lupo}} ({{creationDate_changelog}})
+  - bugfix client-nr in reservation form
+
+### 4.14.0 (September 22, 2026)
   - multiselect-ui for genres in mod_lupo_categories module options added
 
 ### 4.13.0 (August 4, 2026)

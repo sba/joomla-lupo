@@ -415,7 +415,7 @@ $lang->load('com_lupo', JPATH_SITE, $lang->getTag(), true);
                     <tr>
                         <td><?php echo JText::_("COM_LUPO_RES_CLIENT_NO"); ?>:</td>
                         <td>
-                            <input class="uk-form-width-medium" type="text" maxlength="50" size="40" value="<?= $clientnr ?>" id="clientnr" name="clientnr">
+                            <input class="uk-form-width-medium" type="number" min="0" step="1" inputmode="numeric" size="40" value="<?= $clientnr ?>" id="clientnr" name="clientnr">
                             <span class="uk-text-muted"><?php echo JText::_("COM_LUPO_RES_CLIENT_NO_IF_AVAILABLE"); ?></span>
                         </td>
                     </tr>

@@ -228,7 +228,8 @@ class LupoController extends JControllerLegacy {
 		$jinput = JFactory::getApplication()->input;
 		//$recaptcha_response = $jinput->get('g-recaptcha-response', '', 'STRING');
 		$clientname   = $jinput->get('clientname', '', 'STRING');
-		$clientnr     = $jinput->get('clientnr', '', 'STRING');
+		$clientnrRaw  = trim($jinput->get('clientnr', '', 'STRING'));
+		$clientnr     = $clientnrRaw === '' ? null : (int) $clientnrRaw;
 		$clientemail  = $jinput->get('clientemail', '', 'STRING');
 		$clientmobile = $jinput->get('clientmobile', '', 'STRING');
 		$resnow       = $jinput->get('resnow', '', 'STRING');
@@ -245,6 +246,9 @@ class LupoController extends JControllerLegacy {
 		}
 		if ($params->get('detail_show_res_phone', '1') == 1 && $clientmobile == "") {
 			$formerror[] = '• ' . JText::_('COM_LUPO_RES_FORM_INVALIV_MOBILE');
+		}
+		if ($clientnrRaw !== '' && !ctype_digit($clientnrRaw)) {
+			$formerror[] = '• ' . JText::_('COM_LUPO_RES_FORM_INVALIV_CLIENTNR');
 		}
 		if ($params->get('detail_show_res_date', '1') == 1) {
 			if ($resnow == '' && $resdate == '') {
@@ -279,7 +283,7 @@ class LupoController extends JControllerLegacy {
 			$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_RES_FROM'), 15) . "$resdate\n\n";
 		}
 		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NAME'), 15) . "$clientname\n";
-		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . "$clientnr\n";
+		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_NUMBER'), 15) . ($clientnrRaw !== '' ? $clientnrRaw : '') . "\n";
 		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_EMAIL'), 15) . "$clientemail\n\n";
 		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_CLIENT_MOBILE'), 15) . "$clientmobile\n\n";
 		$body .= str_pad(JText::_('COM_LUPO_RES_EMAIL_BODY_COMMENTS'), 15) . "\n$comment\n\n";
